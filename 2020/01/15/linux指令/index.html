@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux指令 | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​    Kali常用的指令在比赛中还是会经常用到的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux指令">
+<meta property="og:url" content="http://yoursite.com/2020/01/15/linux%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​    Kali常用的指令在比赛中还是会经常用到的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-15T10:21:47.000Z">
+<meta property="article:modified_time" content="2020-01-15T11:49:39.176Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="linux常用命令">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Peguin</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Peguin</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/2.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Peguin</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-linux指令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/15/linux%E6%8C%87%E4%BB%A4/" class="article-date">
+  	<time datetime="2020-01-15T10:21:47.000Z" itemprop="datePublished">2020-01-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux指令
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="tag">linux常用命令</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    Kali常用的指令在比赛中还是会经常用到的</p>
+<a id="more"></a>个人比较weak，做的整理就只能借鉴其他博主的：
+
+<h4 id="1-目录和文件命令"><a href="#1-目录和文件命令" class="headerlink" title="1.目录和文件命令"></a>1.目录和文件命令</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>cd/home</strong></td>
+<td align="center"><strong>进入/home目录</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>cd ../</strong></td>
+<td align="center"><strong>返回上一级目录</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>cd ../../</strong></td>
+<td align="center"><strong>返回上两级目录</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>cd</strong></td>
+<td align="center"><strong>进入个人主目录</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>cd ~user1</strong></td>
+<td align="center"><strong>进入个人的主目录</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>cd -</strong></td>
+<td align="center"><strong>返回上次所在的目录</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>pwd</strong></td>
+<td align="center"><strong>显示工作路径</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>ls</strong></td>
+<td align="center"><strong>查看目录中的文件</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>ls -F</strong></td>
+<td align="center"><strong>查看目录中的文件</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>ls -l</strong></td>
+<td align="center"><strong>显示文件和目录的详细资料</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>ls -a</strong></td>
+<td align="center"><strong>显示隐藏文件</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>ls [0-9]</strong></td>
+<td align="center"><strong>显示包含数字的文件名和目录名</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>tree</strong></td>
+<td align="center"><strong>显示文件和目录由根目录开始的树形结构</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>lstree</strong></td>
+<td align="center"><strong>显示文件和目录有根目录开散的树形结构</strong></td>
+</tr>
+</tbody></table>
+<h4 id="mkdir创建目录"><a href="#mkdir创建目录" class="headerlink" title="mkdir创建目录"></a>mkdir创建目录</h4><table>
+<thead>
+<tr>
+<th><strong>mkdir -p /tmp/dir1/dir2</strong></th>
+<th><strong>创建一个目录树</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>rm -f</strong></td>
+<td><strong>删除一个文件</strong></td>
+</tr>
+<tr>
+<td><strong>rmdir</strong></td>
+<td><strong>删除一个目录</strong></td>
+</tr>
+<tr>
+<td><strong>rm -rf</strong></td>
+<td><strong>删除一个目录并同时删除其文件</strong></td>
+</tr>
+<tr>
+<td><strong>mv</strong></td>
+<td><strong>重命名或者移动一个目录</strong></td>
+</tr>
+<tr>
+<td><strong>cp file1 file2</strong></td>
+<td><strong>复制一个文件</strong></td>
+</tr>
+<tr>
+<td><strong>cp dir/*</strong></td>
+<td><strong>复制一个目录到当前工作目录</strong></td>
+</tr>
+<tr>
+<td><strong>cp -a/tmp/dir*</strong></td>
+<td><strong>复制一个目录到当前工作目录</strong></td>
+</tr>
+<tr>
+<td><strong>cp -a dir1 dir2</strong></td>
+<td><strong>复制一个目录</strong></td>
+</tr>
+<tr>
+<td><strong>cp -f</strong></td>
+<td><strong>强行复制文件或目录</strong></td>
+</tr>
+</tbody></table>
+<h4 id="touch创建一个文件"><a href="#touch创建一个文件" class="headerlink" title="touch创建一个文件"></a>touch创建一个文件</h4><table>
+<thead>
+<tr>
+<th align="center"><strong>-a</strong></th>
+<th align="center"><strong>只更改存储时间</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>-c</strong></td>
+<td align="center"><strong>不建立任何档案</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-d</strong></td>
+<td align="center"><strong>使用制定的日期，而非现在的时间</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-f</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>-m</strong></td>
+<td align="center"><strong>之更改变动时间</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-r</strong></td>
+<td align="center"><strong>把制定文档或目录的日期时间统设成和参考文档或目录日期时间相同</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-t</strong></td>
+<td align="center"><strong>使用指定日期时间，而非现在的时间</strong></td>
+</tr>
+</tbody></table>
+<h4 id="cat查看目标文件的内容"><a href="#cat查看目标文件的内容" class="headerlink" title="cat查看目标文件的内容"></a>cat查看目标文件的内容</h4><table>
+<thead>
+<tr>
+<th align="center"><strong>-b</strong></th>
+<th align="center"><strong>对非空输出的所有行编号</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>-n</strong></td>
+<td align="center"><strong>对输出所有行编号</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-s</strong></td>
+<td align="center"><strong>不输出多行空行</strong></td>
+</tr>
+</tbody></table>
+<h4 id="less查看文件"><a href="#less查看文件" class="headerlink" title="less查看文件"></a>less查看文件</h4><table>
+<thead>
+<tr>
+<th align="center"><strong>N</strong></th>
+<th align="center"><strong>反向重复前一个搜索</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>-i</strong></td>
+<td align="center"><strong>忽略搜索时的大小写</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-N</strong></td>
+<td align="center"><strong>显示行号</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>/</strong></td>
+<td align="center"><strong>向下搜索字符串</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>？</strong></td>
+<td align="center"><strong>向上搜索字符串</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>n</strong></td>
+<td align="center"><strong>重复前一个搜素</strong></td>
+</tr>
+</tbody></table>
+<h4 id="匹配查找命令"><a href="#匹配查找命令" class="headerlink" title="匹配查找命令"></a>匹配查找命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep</span><br><span class="line">grep命令是一种强大的文本搜索工具，他能使用正则表达式搜索文本，把匹配的行打印出来</span><br></pre></td></tr></table></figure>
+
+<h4 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h4><p>find -name</p>
+<h4 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h4><table>
+<thead>
+<tr>
+<th align="center"><strong>-c</strong></th>
+<th align="center"><strong>建立一个压缩文件的参数指令</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>-x</strong></td>
+<td align="center"><strong>解开一个压缩文件的参数指令</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-t</strong></td>
+<td align="center"><strong>查看tarfile里面的文件</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-z</strong></td>
+<td align="center"><strong>是否同时具有gzip的属性，是否需要gzip压缩</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-j</strong></td>
+<td align="center"><strong>是否同时具有bzip2的属性，是否需要bzip2压缩</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-v</strong></td>
+<td align="center"><strong>压缩的过程中显示文件</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-f</strong></td>
+<td align="center"><strong>使用档名</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>-c</strong></td>
+<td align="center"><strong>解压到指定目录</strong></td>
+</tr>
+</tbody></table>
+<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><p>chmod 设置文件的访问权限<br>+:向权限范围增加权限代号所表示的权限<br>-:向权限范围取消权限代号所表示的权限<br>=:向权限范围赋予权限代号所表示的权限<br>用户符号：<br>u：拥有者<br>g：拥有者同组用<br>o：其它用户<br>a：所有用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例子</span><br><span class="line">chmod u+w &#x2F;home&#x2F;abc.txt</span><br><span class="line">chmod o-x &#x2F;home&#x2F;abc.txt</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">逻辑漏洞</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="linux指令" data-title="linux指令" data-url="http://yoursite.com/2020/01/15/linux%E6%8C%87%E4%BB%A4/"  data-images="/img/2.jpg" data-content="linux指令">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 Peguin
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

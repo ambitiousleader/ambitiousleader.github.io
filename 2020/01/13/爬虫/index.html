@@ -17,7 +17,7 @@
 <meta property="og:description" content="re模块import re">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-13T05:55:58.000Z">
-<meta property="article:modified_time" content="2020-01-13T10:12:09.575Z">
+<meta property="article:modified_time" content="2020-01-15T02:42:29.675Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="climb">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a>
+						<a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a>
 					</div>
 				</section>
 				
@@ -211,12 +211,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h3><p>import re<a id="more"></a><br>. 匹配任意字符除了换行符<br>[…] 匹配字符集<br>\d/\D 匹配数字/非数字<br>\s/\S 匹配空白/非空白字符<br>\w/\W匹配单词字符[a-zA-Z0-9]/非单词字符</p>
+        <h3 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h3><p>import re<a id="more"></a></p>
+<h4 id="匹配任意字符除了换行符"><a href="#匹配任意字符除了换行符" class="headerlink" title=". 匹配任意字符除了换行符"></a>. 匹配任意字符除了换行符</h4><p>[…] 匹配字符集<br>\d/\D 匹配数字/非数字<br>\s/\S 匹配空白/非空白字符<br>\w/\W匹配单词字符[a-zA-Z0-9]/非单词字符</p>
 <p>*匹配前一个字符0次或者无限次</p>
 <p>+匹配前一个字符1次或者无限次<br>？ 匹配前一个字符0次或者1次<br>{m}/{m,n}匹配前一个字符m次或者n次<br>*? /+? /??匹配模式变为非贪婪<br>^匹配字符串开头<br>$匹配字符串结尾<br>\A/\Z指定的字符串匹配必须出现在开头/结尾</p>
-<p>匹配方式:<br>match方法从开头开始匹配内容，失败返回None<br>search扫描整个匹配内容返回第一个成功的匹配<br>compile编译一个正则表达式<br>findall找到所有匹配的子串，并返回一个列表，未找到则返回空列表<br>sub(正则表达式，替换内容，替换目标)<br>spilt(res，a)分割</p>
-<p>lxml库</p>
-<p>xpath<br>1.安装 pip install lxml<br>2.语法<br>(1)选取节点：<br>nodename  选取此节点的所有子节点<br>/         从根节点选取<br>//          从匹配选择的当前节点选择文档中的节点，不考虑位置‘<br>.          选取当前节点<br>..          选取当前节点的父节点<br>@          选取属性<br>(2)谓语<br>//title[@lang]    选取所有拥有名为 lang 的属性的 title 元素<br>//title[@lang=’eng’]    选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性<br>(3)选取未知节点</p>
+<h4 id="匹配方式"><a href="#匹配方式" class="headerlink" title="匹配方式:"></a>匹配方式:</h4><p>match方法从开头开始匹配内容，失败返回None<br>search扫描整个匹配内容返回第一个成功的匹配<br>compile编译一个正则表达式<br>findall找到所有匹配的子串，并返回一个列表，未找到则返回空列表<br>sub(正则表达式，替换内容，替换目标)<br>spilt(res，a)分割</p>
+<h3 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h3><h4 id="xpath"><a href="#xpath" class="headerlink" title="xpath"></a>xpath</h4><p>1.安装 pip install lxml<br>2.语法<br>(1)选取节点：<br>nodename  选取此节点的所有子节点<br>/         从根节点选取<br>//          从匹配选择的当前节点选择文档中的节点，不考虑位置‘<br>.          选取当前节点<br>..          选取当前节点的父节点<br>@          选取属性<br>(2)谓语<br>//title[@lang]    选取所有拥有名为 lang 的属性的 title 元素<br>//title[@lang=’eng’]    选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性<br>(3)选取未知节点</p>
 <p>‘*’匹配任何元素节点<br>@”星号”    匹配任何属性节点<br>node()    匹配任何类型的节点</p>
 <p>lxml主要是为了用来解析html，作用和正则匹配差不多，但是使用起来会更加方便</p>
 

