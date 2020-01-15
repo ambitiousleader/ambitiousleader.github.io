@@ -9,16 +9,17 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+  <meta name="description" content="1.原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="逻辑漏洞">
 <meta property="og:url" content="http://yoursite.com/2020/01/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="敢于去想，才会有MEteor的光芒闪耀。">
+<meta property="og:description" content="1.原理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-15T08:33:25.000Z">
-<meta property="article:modified_time" content="2020-01-15T08:33:25.368Z">
+<meta property="article:modified_time" content="2020-01-15T12:45:52.510Z">
 <meta property="article:author" content="Peguin">
+<meta property="article:tag" content="逻辑漏洞">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -117,7 +118,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a>
+						<a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
 					</div>
 				</section>
 				
@@ -197,6 +198,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" rel="tag">逻辑漏洞</a></li></ul>
+	</div>
+
         
 
         
@@ -206,7 +211,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="1-原理"><a href="#1-原理" class="headerlink" title="1.原理"></a>1.原理<a id="more"></a></h3><p>命令执行漏洞是指应用有时需要调用一些执行系统命令的函数，如：<code>system()、exec()、shell_exec()、eval()、passthru()</code>，代码未对用户可控参数做过滤，当用户能控制这些函数中的参数时，就可以将恶意系统命令拼接到正常命令中，从而造成命令执行攻击。</p>
+<h3 id="常见连接符"><a href="#常见连接符" class="headerlink" title="*常见连接符"></a>*常见连接符</h3><table>
+<thead>
+<tr>
+<th>A;B</th>
+<th>先执行A，再执行B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A&amp;B</td>
+<td>AB两个无制约关系，都可以执行</td>
+</tr>
+<tr>
+<td>A|B</td>
+<td>A不执行，B执行，只显示B的执行结果</td>
+</tr>
+<tr>
+<td>A&amp;&amp;B</td>
+<td>A执行成功才会执行B</td>
+</tr>
+<tr>
+<td>A||B</td>
+<td>A执行失败，然后才会执行B</td>
+</tr>
+</tbody></table>
+<h3 id="2-分类"><a href="#2-分类" class="headerlink" title="2.分类"></a>2.分类</h3><h4 id="1‘-代码层过滤不严"><a href="#1‘-代码层过滤不严" class="headerlink" title="1‘.代码层过滤不严"></a>1‘.代码层过滤不严</h4><p>商业应用的一些核心代码封装在二进制文件中，在WEB应用中通过system函数来调用: <code>system(&quot;bin/program/--arg $arg&quot;);</code></p>
+<h4 id="2’-系统的漏洞造成命令注入"><a href="#2’-系统的漏洞造成命令注入" class="headerlink" title="2’.系统的漏洞造成命令注入"></a>2’.系统的漏洞造成命令注入</h4><p>bash破壳漏洞(CVE-2013-6271)</p>
+<h4 id="3’-调用的第三方组件存在代码执行漏洞"><a href="#3’-调用的第三方组件存在代码执行漏洞" class="headerlink" title="3’.调用的第三方组件存在代码执行漏洞"></a>3’.调用的第三方组件存在代码执行漏洞</h4><p>wordpress中用来处理图片的ImageMagick组件</p>
+<p>JAVA中的命令执行漏洞（struts2/ElasticsearchGroovy等）</p>
+<p>ThinkPHP命令执行漏洞</p>
+<h3 id="3-防御"><a href="#3-防御" class="headerlink" title="3.防御"></a>3.防御</h3><p>1.尽量少用执行命令的函数或者直接禁用<br>2.参数值尽量使用引号包括，在拼接之前调用addslashes函数进行转义<br>3.在使用动态函数之前，确保使用的函数是指定的函数之一<br>4.在进入执行命令的函数方法之前，对参数进行过滤，对敏感字符进行转义<br>5.对于可控点是程序参数的情况下，使用escapeshellcmd函数进行过滤，对于可控点是程序参数值的情况下，使用escapeshellarg函数进行过滤</p>
+<h4 id="下面是涉及到的知识点（个人认为）"><a href="#下面是涉及到的知识点（个人认为）" class="headerlink" title="下面是涉及到的知识点（个人认为）"></a>下面是涉及到的知识点（个人认为）</h4><h3 id="1-利用系统函数实现远程命令执行"><a href="#1-利用系统函数实现远程命令执行" class="headerlink" title="1.利用系统函数实现远程命令执行"></a>1.利用系统函数实现远程命令执行</h3><p>在PHP下，允许命令执行的函数有：</p>
+<p><code>eval()</code></p>
+<p><code>assert()</code></p>
+<p><code>preg_replace()</code></p>
+<p><code>call_user_func()</code></p>
+<p><code>ob_start()、unserialize()、creat_function()</code><br><code>usort()、uasort()、uksort()</code><br><code>array_filter()</code><br><code>array_reduce()</code><br><code>array_map()</code><br><code>...</code></p>
+<h4 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval()函数"></a>eval()函数</h4><p>定义和用法</p>
+<p>eval()函数把字符串按照PHP代码来计算，该字符串必须合法且以分号结尾</p>
+<p>若未在字符串中调用return语句，返回NULL,存在解析错误，返回false</p>
+<p>语法<br>eval(phpcode)，phpcode 必需，规定要计算的 PHP 代码。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = $_GET[<span class="string">'a'</span>];</span><br><span class="line"><span class="keyword">eval</span>($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/oscommand/1.php?a=phpinfo();</span><br></pre></td></tr></table></figure>
+
+<h4 id="assert-函数"><a href="#assert-函数" class="headerlink" title="assert()函数"></a>assert()函数</h4><p>定义和用法<br>检查一个断言是否为 FALSE</p>
+<p>语法</p>
+<p>PHP 5<br>bool assert ( mixed description ] )<br>PHP 7<br>bool assert ( mixed exception ] )<br>assert() 会检查指定的 assertion 并在结果为 FALSE 时采取适当的行动</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = $_GET[<span class="string">'a'</span>];</span><br><span class="line">assert($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/oscommand/1.php?a=phpinfo();</span><br><span class="line">http://127.0.0.1/oscommand/1.php?a=phpinfo()</span><br></pre></td></tr></table></figure>
+
+<h4 id="preg-replace-函数"><a href="#preg-replace-函数" class="headerlink" title="preg_replace()函数"></a>preg_replace()函数</h4><p>定义<br>preg_replace 函数执行一个正则表达式的搜索和替换。</p>
+<p>语法<br>mixed preg_replace ( mixed replacement , mixed limit = -1 [, int &amp;$count ]] )<br>搜索 subject 中匹配 pattern 的部分， 以 replacement 进行替换。<br>参数说明：</p>
+<p>pattern处存在一个”/e”修饰符时，$replacement的值会被当成php代码来执行。<br>$replacement: 用于替换的字符串或字符串数组。<br>$subject: 要搜索替换的目标字符串或字符串数组。<br>$limit: 可选，对于每个模式用于每个 subject 字符串的最大可替换次数。 默认是-1（无限制）。<br>$count: 可选，为替换执行的次数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = $_GET[<span class="string">'a'</span>];</span><br><span class="line"><span class="keyword">echo</span> preg_replace(<span class="string">"/test/e"</span>, $a, <span class="string">"just test!"</span>)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;oscommand&#x2F;1.php?a&#x3D;phpinfo()</span><br></pre></td></tr></table></figure>
+
+<h4 id="call-user-func-函数"><a href="#call-user-func-函数" class="headerlink" title="call_user_func()函数"></a>call_user_func()函数</h4><p>定义和用法<br>call_user_func — 把第一个参数作为回调函数调用</p>
+<p>语法<br>mixed call_user_func ( callable parameter [, mixed $… ]] )<br>第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">call_user_func($_GET[<span class="string">'a'</span>],$_GET[<span class="string">'b'</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;oscommand&#x2F;1.php?a&#x3D;assert&amp;b&#x3D;phpinfo()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-系统命令执行漏洞"><a href="#2-系统命令执行漏洞" class="headerlink" title="2.系统命令执行漏洞"></a>2.系统命令执行漏洞</h3><p>系统命令执行的函数<br>system()<br>exec()<br>shell_exec()<br>passthru()<br>pcntl_exec()<br>popen()<br>proc_open()<br>反引号<br>…</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>]))&#123;</span><br><span class="line">    $target = $_REQUEST[<span class="string">'ip'</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(php_uname(<span class="string">'s'</span>), <span class="string">'Windows NT'</span>)) &#123;</span><br><span class="line">        $cmd = shell_exec(<span class="string">'ping '</span> . $taeget);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $cmd = shell_exec(<span class="string">'ping -c 3 '</span> . $target);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>.$cmd.<span class="string">'&lt;/pre&gt;'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>页面通过request获取传入的ip参数，并获取当前系统类型之后拼接相应命令”ping + target IP”并执行，在此过程中IP参数可控，所以在IP可拼接命令。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1&amp;&amp;whoami</span><br><span class="line">127.0.0.1;whoami</span><br><span class="line">127.0.0.1||whoami</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
