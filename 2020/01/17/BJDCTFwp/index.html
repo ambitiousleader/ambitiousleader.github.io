@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BJDCTFwp | Hexo</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Misc  签个到？  文件下载下来是个压缩包，解压缩发现里面还有一个压缩包，直接解压提示文件损坏解压失败   不假思索，直接丢到kali里面，foremost一下，分离出了一张图片，打开是二维码，扫一扫，拿到Flag    你猜我是个啥？  下载过来是一个压缩包，发现打不开，想到可能是文件后缀的问题，丢到winhex里面发现了是png图片，正想要改后缀的时候，把winhex直接拉到底发现了Fla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BJDCTFwp">
+<meta property="og:url" content="http://yoursite.com/2020/01/17/BJDCTFwp/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Misc  签个到？  文件下载下来是个压缩包，解压缩发现里面还有一个压缩包，直接解压提示文件损坏解压失败   不假思索，直接丢到kali里面，foremost一下，分离出了一张图片，打开是二维码，扫一扫，拿到Flag    你猜我是个啥？  下载过来是一个压缩包，发现打不开，想到可能是文件后缀的问题，丢到winhex里面发现了是png图片，正想要改后缀的时候，把winhex直接拉到底发现了Fla">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/签个到.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/签个到1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/你猜我是啥.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/鸡太美.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/rar.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Crar1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/signin1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/signin.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/编制.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Cpolybius.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/棋盘.jpg">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/RSA1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/rsa.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Chello4.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Chello1.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Chello2.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Cupload2.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/upload.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/hidden.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/hidden1.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5CMD51.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/MD52.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/MD53.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/md54.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/mark.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/mark2.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/序列化1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/序列化.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Czjctf1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/zjctf.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/ip1.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/hello2.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CBJDCTFwp%5Cip3.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/easy_search.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/easysearch2.png">
+<meta property="og:image" content="d:/blog/source/_posts/BJDCTFwp/search3.png">
+<meta property="article:published_time" content="2020-01-17T08:15:06.000Z">
+<meta property="article:modified_time" content="2020-01-19T06:17:56.477Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/blog/source/_posts/BJDCTFwp/签个到.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Peguin</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Peguin</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/2.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Peguin</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-BJDCTFwp" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/17/BJDCTFwp/" class="article-date">
+  	<time datetime="2020-01-17T08:15:06.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BJDCTFwp
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Misc</p>
+<ol>
+<li>签个到？</li>
+</ol>
+<p>文件下载下来是个压缩包，解压缩发现里面还有一个压缩包，直接解压提示文件损坏解压失败</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\签个到.png" alt="签个到" style="zoom:50%;" />
+
+<p>不假思索，直接丢到kali里面，foremost一下，分离出了一张图片，打开是二维码，扫一扫，拿到Flag</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\签个到1.png" alt="签个到1" style="zoom:50%;" />
+
+<ol start="2">
+<li>你猜我是个啥？</li>
+</ol>
+<p>下载过来是一个压缩包，发现打不开，想到可能是文件后缀的问题，丢到winhex里面发现了是png图片，正想要改后缀的时候，把winhex直接拉到底发现了Flag</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\你猜我是啥.png" alt="你猜我是啥" style="zoom:50%;" />
+
+<ol start="3">
+<li>鸡你太美</li>
+</ol>
+<p>压缩包解压，一个是gif，一个是它的副本，把gif文件丢到winhex里面，没有发现什么有用的东西。本着试试的想法，把副本丢到winhex里面，发现最开头有9a，再想到前面的是gif文件，gif文件头刚好是GIF89a，把文件头补全重新保存为GIF文件，Flag出来了。</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\鸡太美.png" alt="鸡太美" style="zoom:50%;" />
+
+<ol start="4">
+<li>just a rar</li>
+</ol>
+<p>下载下来是一个压缩包，里面有一个四位数.rar的文件，直接上工具进行爆破.</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\rar.png" alt="rar" style="zoom:50%;" />
+
+<p>密码是2016，打开解压缩得到一张图片，放到winhex里面什么东西都没有，放到kali里，binwalk，foremost都没有什么东西</p>
+<p>突然想到以前做过的一道题，打开属性，在备注里找到了flag</p>
+<p><a href=""><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Crar1.png" alt="rar1"></a></p>
+<p>Crypto</p>
+<ol>
+<li>sign in</li>
+</ol>
+<p>打开是这样的<img src="D:\blog\source\_posts\BJDCTFwp\signin1.png" alt="signin1" style="zoom:50%;" /></p>
+<p>把base16，64，32挨个试一下，是base16加密</p>
+<p>找一个线解密网站</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\signin.png" alt="signin" style="zoom: 50%;" />
+
+<ol start="2">
+<li>编制与调制</li>
+</ol>
+<p>打开下载文件得到一个txt文件和一个带hint的图片，根据hint的图片猜测是曼彻斯特加密</p>
+<p>网上搜到了一个脚本，拿过来跑一下就出来了</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\编制.png" alt="编制" style="zoom:50%;" />
+
+<ol start="3">
+<li>Polybius</li>
+</ol>
+<p>打开文件</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Cpolybius.png" alt="polybius"></p>
+<p>Hintbase64解密得到提示明文是16位数字</p>
+<p>百度了一下找到了对应的棋盘加密，不过棋盘有改动，想到flag大多是一句话，那就一个个试</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\棋盘.jpg" alt="棋盘" style="zoom:50%;" />
+
+<p>手动对应解密，得到flag：BJD{flagispolybius}</p>
+<p>4.EASYRSA</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\RSA1.png" alt="RSA1" style="zoom: 25%;" />
+
+<p>打开拿到的一段代码，上网搜了一下有关RSA加密的知识，再找了一个可攻击的脚本来进行反解先得到p和q，再来解m的值，最后long_to_bytes(m)就可以得到flag了</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\rsa.png" alt="rsa" style="zoom:25%;" />
+
+<p>Web</p>
+<p>1.Hello World</p>
+<p>打开题目地址，点击sketch included，就是界面开始的那个，出现文字注意你的id，用burp suite抓包，根据放出来的hint是id与admin有关</p>
+<p>同时在burp中看到id的格式，在请求头中添加id:admin+base64(admin),send一下，返回如下</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Chello4.png" alt="hello4"></p>
+<p>X-Forwarded-For:127.0.0.1</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Chello1.png" alt="hello1"></p>
+<p>Referer:<a href="https://google.com" target="_blank" rel="noopener">https://google.com</a></p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Chello2.png" alt="hello2"></p>
+<p>2.easy_upload</p>
+<p>上传一句话木马，以jpg格式上传，访问提示给的地址</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Cupload2.png" alt="upload2"></p>
+<p>参考了一篇博客，学到了直接读取文件中的内容</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\upload.png" alt="upload" style="zoom: 33%;" />
+
+<p>3.Hidden serects</p>
+<p>抓一下包，可以发现有一段password</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\hidden.png" alt="hidden" style="zoom:33%;" />
+
+<p>通过尝试发现是md5加密</p>
+<p>解密登录网站</p>
+<p>打开发现还是没什么东西，F12和ctrl键都不能用</p>
+<p>这里我用了一个插件叫restclient,找到flag</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\hidden1.png" alt="hidden1" style="zoom:33%;" />
+
+<p>4.easy md5</p>
+<p>抓一下包，在反应头里有一个hint</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5CMD51.png" alt="MD51"></p>
+<p>根据树哥的一篇md5博客照着写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[https:&#x2F;&#x2F;largepoplar.xyz&#x2F;2019&#x2F;12&#x2F;27&#x2F;MD5%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98&#x2F;](https:&#x2F;&#x2F;largepoplar.xyz&#x2F;2019&#x2F;12&#x2F;27&#x2F;MD5的一系列问题&#x2F;)</span><br></pre></td></tr></table></figure>
+
+<p>先提交ffifdyop，查看页面源码</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\MD52.png" alt="MD52" style="zoom:50%;" />
+
+<p>发现是md5弱比较</p>
+<p>构造payload?a=QNKCDZO&amp;b=aabg7XSs，得到</p>
+<p><img src="D:\blog\source\_posts\BJDCTFwp\MD53.png" alt="MD53" style="zoom:50%;" />强比较，没有规定字符串如果这个时候传入的是数组不是字符串，md5（）函数无法解出其数值并且不会报错，就会得到数值相等</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\md54.png" alt="md54" style="zoom: 25%;" />
+
+<p>5.Mark loves cat</p>
+<p>打开题目地址，没发现什么</p>
+<p>用敏感目录扫描工具 syc-scan</p>
+<p>python3 syc.py <a href="http://222.186.56.247:8105/" target="_blank" rel="noopener">http://222.186.56.247:8105/</a></p>
+<p>发现存在git泄露</p>
+<p>用git_extract 工具进行恢复</p>
+<p>python git_extract.py <a href="http://222.186.56.247:8105/.git/" target="_blank" rel="noopener">http://222.186.56.247:8105/.git/</a></p>
+<p>在目录下生成了一个新的文件，打开是</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\mark.png" alt="mark" style="zoom:25%;" />
+
+<p>要绕过这三个条件才能得到flag</p>
+<p>构造payload：?arc=flag&amp;flag=arc&amp;_GET=ntr post请求:_POST[flag]=fuck</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\mark2.png" alt="mark2" style="zoom: 33%;" />
+
+<ol start="6">
+<li>这序列化也太简单了吧</li>
+</ol>
+<p>是一道反序列化题</p>
+<p>在网上找了好多博客研究了半天，搞懂了一点一点</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\序列化1.png" alt="序列化1" style="zoom:25%;" />
+
+<p>把传入的序列化字符串的属性个数更改成大于 1 的任何数来绕过_wakeup()</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\序列化.png" alt="序列化" style="zoom:33%;" />
+
+<p>7.zjctf</p>
+<p>通过text=data://text/plain;base64,SSBoYXZlIGEgZHJlYW0=写入那句话,再用file=php://filter/read=convert.base64-encode/resource=next.php以base64的方式读取文件，base64解密得到next.php文件</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Czjctf1.png" alt="zjctf1"></p>
+<p>通过测试/next.php?\S*=${getFlag()}&amp;cmd=system(“cd ../../../;ls”)发现根目录下有flag</p>
+<p>构造payload：/next.php?\S*=${getFlag()}&amp;cmd=system(“cat /flag”)</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\zjctf.png" alt="zjctf" style="zoom:50%;" />
+
+<p>8.The_mystery_of_ip</p>
+<p>点击flag出现了ip，抓包</p>
+<p>猜测可能是smarty模板注入，改一下x-forwarded-for:{if phpindfo()}{/if}</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\ip1.png" alt="ip1" style="zoom: 25%;" />
+
+<p>底下成功显示了phpinfo的页面</p>
+<p>修改x-forwarded-for的值查询列表：X-Forwarded-For: {if system(‘ls’)}{/if}</p>
+<p>可以发现出现了当前目录下的文件</p>
+<p>X-Forwarded-For: {if system(“cd ../../../;ls”)}{/if}向上层文件遍历目录</p>
+<img src="D:\blog\source\_posts\BJDCTFwp\hello2.png" alt="hello2" style="zoom: 50%;" />
+
+<p>发现了flag文件，接下来就是读取X-Forwarded-For: {if system(“cat /flag”)}{/if}</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CBJDCTFwp%5Cip3.png" alt="ip3"></p>
+<p>9.easy_search</p>
+<p>根据hint是vim泄漏，<a href="http://222.186.56.247:8107/index.php.swp可以看到源码，根据源码得出登录密码为2020666" target="_blank" rel="noopener">http://222.186.56.247:8107/index.php.swp可以看到源码，根据源码得出登录密码为2020666</a></p>
+<p>账号随便输一个，写上密码，burp抓包</p>
+<p>看到有一个url_is_here</p>
+<p>猜测是ssi注入</p>
+<p><code>username=&lt;!--#exec cmd=&quot;ls&quot; --&gt;&amp;password=2020666</code></p>
+<img src="D:\blog\source\_posts\BJDCTFwp\easy_search.png" alt="easy_search" style="zoom:25%;" />
+
+<p><code>username=&lt;!--#exec cmd=&quot;ls ../&quot; --&gt;&amp;password=2020666</code></p>
+<img src="D:\blog\source\_posts\BJDCTFwp\easysearch2.png" alt="easysearch2" style="zoom:33%;" />
+
+<p><code>username=&lt;!--#execcmd=&quot;cat../flag_990c66bf85a09c664f0b6741840499b2&quot; --&gt;&amp;password=2020666</code></p>
+<img src="D:\blog\source\_posts\BJDCTFwp\search3.png" alt="search3" style="zoom:25%;" />
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/16/XXE%E6%BC%8F%E6%B4%9E/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">XXE漏洞</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="BJDCTFwp" data-title="BJDCTFwp" data-url="http://yoursite.com/2020/01/17/BJDCTFwp/"  data-images="/img/2.jpg" data-content="BJDCTFwp">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 Peguin
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
