@@ -3,24 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>爬虫 | Hexo</title>
+  <title>RoarCTF | Hexo</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="re模块import re">
+  <meta name="description" content="1.Easy Java打开题目出现的是一个登录界面  点击help出现了提示: 1java.io.FileNotFoundException:&amp;#123;help.docx&amp;#125;  用burp抓包,但是怎么改都无法下载或者打开help.docx，后面尝试把GET改成了POST，成功打开了这个文件 由于题目是跟java有关系，就去百度了，找到了一篇很详细的文章，这里是重点 1234567WEB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="爬虫">
-<meta property="og:url" content="http://yoursite.com/2020/01/13/%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:title" content="RoarCTF">
+<meta property="og:url" content="http://yoursite.com/2020/02/19/RoarCTF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="re模块import re">
+<meta property="og:description" content="1.Easy Java打开题目出现的是一个登录界面  点击help出现了提示: 1java.io.FileNotFoundException:&amp;#123;help.docx&amp;#125;  用burp抓包,但是怎么改都无法下载或者打开help.docx，后面尝试把GET改成了POST，成功打开了这个文件 由于题目是跟java有关系，就去百度了，找到了一篇很详细的文章，这里是重点 1234567WEB">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-01-13T05:55:58.000Z">
-<meta property="article:modified_time" content="2020-01-15T02:42:29.675Z">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava1.png">
+<meta property="og:image" content="d:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava2.png">
+<meta property="article:published_time" content="2020-02-19T10:10:44.000Z">
+<meta property="article:modified_time" content="2020-02-19T10:31:30.088Z">
 <meta property="article:author" content="Peguin">
-<meta property="article:tag" content="climb">
+<meta property="article:tag" content="something import">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -172,11 +176,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-RoarCTF" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/01/13/%E7%88%AC%E8%99%AB/" class="article-date">
-  	<time datetime="2020-01-13T05:55:58.000Z" itemprop="datePublished">2020-01-13</time>
+      <a href="/2020/02/19/RoarCTF/" class="article-date">
+  	<time datetime="2020-02-19T10:10:44.000Z" itemprop="datePublished">2020-02-19</time>
 </a>
     </div>
   
@@ -189,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      爬虫
+      RoarCTF
       
     </h1>
   
@@ -199,7 +203,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/climb/" rel="tag">climb</a></li></ul>
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/something-import/" rel="tag">something import</a></li></ul>
 	</div>
 
         
@@ -211,14 +215,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h3><p>import re<a id="more"></a></p>
-<h4 id="匹配任意字符除了换行符"><a href="#匹配任意字符除了换行符" class="headerlink" title=". 匹配任意字符除了换行符"></a>. 匹配任意字符除了换行符</h4><p>[…] 匹配字符集<br>\d/\D 匹配数字/非数字<br>\s/\S 匹配空白/非空白字符<br>\w/\W匹配单词字符[a-zA-Z0-9]/非单词字符</p>
-<p>*匹配前一个字符0次或者无限次</p>
-<p>+匹配前一个字符1次或者无限次<br>？ 匹配前一个字符0次或者1次<br>{m}/{m,n}匹配前一个字符m次或者n次<br>*? /+? /??匹配模式变为非贪婪<br>^匹配字符串开头<br>$匹配字符串结尾<br>\A/\Z指定的字符串匹配必须出现在开头/结尾</p>
-<h4 id="匹配方式"><a href="#匹配方式" class="headerlink" title="匹配方式:"></a>匹配方式:</h4><p>match方法从开头开始匹配内容，失败返回None<br>search扫描整个匹配内容返回第一个成功的匹配<br>compile编译一个正则表达式<br>findall找到所有匹配的子串，并返回一个列表，未找到则返回空列表<br>sub(正则表达式，替换内容，替换目标)<br>spilt(res，a)分割</p>
-<h3 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h3><h4 id="xpath"><a href="#xpath" class="headerlink" title="xpath"></a>xpath</h4><p>1.安装 pip install lxml<br>2.语法<br>(1)选取节点：<br>nodename  选取此节点的所有子节点<br>/         从根节点选取<br>//          从匹配选择的当前节点选择文档中的节点，不考虑位置‘<br>.          选取当前节点<br>..          选取当前节点的父节点<br>@          选取属性<br>(2)谓语<br>//title[@lang]    选取所有拥有名为 lang 的属性的 title 元素<br>//title[@lang=’eng’]    选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性<br>(3)选取未知节点</p>
-<p>‘*’匹配任何元素节点<br>@”星号”    匹配任何属性节点<br>node()    匹配任何类型的节点</p>
-<p>lxml主要是为了用来解析html，作用和正则匹配差不多，但是使用起来会更加方便</p>
+        <h4 id="1-Easy-Java"><a href="#1-Easy-Java" class="headerlink" title="1.Easy Java"></a>1.Easy Java</h4><p>打开题目出现的是一个登录界面</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava.png" alt=""></p>
+<p>点击help出现了提示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.io.FileNotFoundException:&#123;help.docx&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用burp抓包,但是怎么改都无法下载或者打开help.docx，后面尝试把GET改成了POST，成功打开了这个文件</p>
+<p>由于题目是跟java有关系，就去百度了，找到了一篇很详细的文章，这里是重点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WEB-INF&#x2F;web.xml泄露</span><br><span class="line">WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</span><br><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中 </span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
+
+<p>尝试WEB-INF/web.xml找到了疑似flag文件的东西…</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava1.png" alt=""></p>
+<p>可以看到有一个com.wm.ctf.FlagController</p>
+<p>构造payload:<code>WEB-INF/classes/com/wm.ctf.FlagController.class</code></p>
+<p><img src="D:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava2.png" alt=""></p>
+<p>可以看到一串base64编码的字符,解码即可得到flag.</p>
 
       
     </div>
@@ -228,18 +239,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/13/sqli/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          sqli
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/12/sql1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">sql1</div>
+    <a href="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">服务端模板注入</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -249,7 +251,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="爬虫" data-title="爬虫" data-url="http://yoursite.com/2020/01/13/%E7%88%AC%E8%99%AB/"  data-images="/img/2.jpg" data-content="爬虫">
+<div class="ds-share share" data-thread-key="RoarCTF" data-title="RoarCTF" data-url="http://yoursite.com/2020/02/19/RoarCTF/"  data-images="/img/2.jpg" data-content="RoarCTF">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

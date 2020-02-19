@@ -115,7 +115,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
+						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/something-import/" style="font-size: 10px;">something import</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">模板注入</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,203 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-RoarCTF" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/19/RoarCTF/" class="article-date">
+  	<time datetime="2020-02-19T10:10:44.000Z" itemprop="datePublished">2020-02-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/19/RoarCTF/">
+        RoarCTF
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-Easy-Java"><a href="#1-Easy-Java" class="headerlink" title="1.Easy Java"></a>1.Easy Java</h4><p>打开题目出现的是一个登录界面</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava.png" alt=""></p>
+<p>点击help出现了提示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.io.FileNotFoundException:&#123;help.docx&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用burp抓包,但是怎么改都无法下载或者打开help.docx，后面尝试把GET改成了POST，成功打开了这个文件</p>
+<p>由于题目是跟java有关系，就去百度了，找到了一篇很详细的文章，这里是重点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WEB-INF&#x2F;web.xml泄露</span><br><span class="line">WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</span><br><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中 </span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
+
+<p>尝试WEB-INF/web.xml找到了疑似flag文件的东西…</p>
+<p><img src="D:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava1.png" alt=""></p>
+<p>可以看到有一个com.wm.ctf.FlagController</p>
+<p>构造payload:<code>WEB-INF/classes/com/wm.ctf.FlagController.class</code></p>
+<p><img src="D:%5Cblog%5Csource_posts%5CRoarCTF%5Cjava2.png" alt=""></p>
+<p>可以看到一串base64编码的字符,解码即可得到flag.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/something-import/" rel="tag">something import</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-服务端模板注入" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" class="article-date">
+  	<time datetime="2020-02-12T08:28:20.000Z" itemprop="datePublished">2020-02-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">
+        服务端模板注入
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="0x01-简介"><a href="#0x01-简介" class="headerlink" title="0x01:简介"></a>0x01:简介
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" rel="tag">模板注入</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+        <p class="article-more-link">
+          <a  href="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/#more">more >></a>
+        </p>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-phpmyadmin4-8-1任意文件包含" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/07/phpmyadmin4-8-1%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" class="article-date">
+  	<time datetime="2020-02-07T10:36:39.000Z" itemprop="datePublished">2020-02-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/07/phpmyadmin4-8-1%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">
+        phpmyadmin4.8.1任意文件包含
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>phpmyadmin简述：
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+        <p class="article-more-link">
+          <a  href="/2020/02/07/phpmyadmin4-8-1%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/#more">more >></a>
+        </p>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-BJDCTFwp" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -593,192 +790,6 @@
       
         <p class="article-more-link">
           <a  href="/2020/01/15/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/#more">more >></a>
-        </p>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Xss" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/01/14/Xss/" class="article-date">
-  	<time datetime="2020-01-14T01:52:36.000Z" itemprop="datePublished">2020-01-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/14/Xss/">
-        Xss
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-Xss漏洞简介"><a href="#1-Xss漏洞简介" class="headerlink" title="1.Xss漏洞简介"></a>1.Xss漏洞简介</h4>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xss%E6%80%BB%E7%BB%93/" rel="tag">Xss总结</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-        <p class="article-more-link">
-          <a  href="/2020/01/14/Xss/#more">more >></a>
-        </p>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-sqli" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/01/13/sqli/" class="article-date">
-  	<time datetime="2020-01-13T10:19:16.000Z" itemprop="datePublished">2020-01-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/13/sqli/">
-        sqli
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>根据sqli-labs上的教学做了一个sql用法的总结</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%80%BB%E7%BB%93/" rel="tag">sql总结</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-        <p class="article-more-link">
-          <a  href="/2020/01/13/sqli/#more">more >></a>
-        </p>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-爬虫" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/01/13/%E7%88%AC%E8%99%AB/" class="article-date">
-  	<time datetime="2020-01-13T05:55:58.000Z" itemprop="datePublished">2020-01-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/13/%E7%88%AC%E8%99%AB/">
-        爬虫
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h3><p>import re
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/climb/" rel="tag">climb</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-        <p class="article-more-link">
-          <a  href="/2020/01/13/%E7%88%AC%E8%99%AB/#more">more >></a>
         </p>
       
     
