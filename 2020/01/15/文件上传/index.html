@@ -17,7 +17,7 @@
 <meta property="og:description" content="一句话木马">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-15T02:28:05.000Z">
-<meta property="article:modified_time" content="2020-01-16T11:50:27.462Z">
+<meta property="article:modified_time" content="2020-03-11T08:50:57.400Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="文件上传">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/something-import/" style="font-size: 10px;">something import</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">模板注入</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
+						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/something-import/" style="font-size: 10px;">something import</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/train/" style="font-size: 10px;">train</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%8D%81%E4%B8%89%E7%82%B9/" style="font-size: 10px;">十三点</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">模板注入</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
 					</div>
 				</section>
 				
@@ -392,6 +392,11 @@
 <p>这句话的意思是我们用base64编码的方式来读文件index.php；</p>
 <p>若后台代码过滤了&lt;?和php关键字可以用大小写绕过php关键字，用HTML绕过&lt;?</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">"pHp"</span>&gt;</span><span class="javascript">@<span class="built_in">eval</span>($_POST[<span class="string">'sb'</span>])</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>重新根据upload-labs-master做的整理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.允许.jpg|.png|.gif</span><br><span class="line">绕过方法：禁用js，或者添加|.php允许马上传，或者上传jpg文件再抓包修改后缀为.php</span><br><span class="line">2.只对content-type进行处理，可以修改为图片的格式image&#x2F;jpeg、image&#x2F;png、image&#x2F;gif</span><br><span class="line">3.用黑名单不允许上传.asp,.aspx,.php,.jsp后缀的文件</span><br><span class="line">但可以上传.phtml .phps .php5 .pht</span><br><span class="line">4.黑名单过滤除了.htaccess所有的后缀名，先上传.htaccess，再上传jpg马</span><br><span class="line">5.大小写未过滤，可以用大小写绕过WAF</span><br><span class="line">6.未对后缀名进行去空，可以加空格绕过</span><br><span class="line">7.未对点绕过，可以用1.php.来绕过，利用windows特性，会自动去掉后缀名中最后的”.”</span><br><span class="line">8.没有对后缀名中的’::$DATA’进行过滤，可以在后缀名加::$DATA绕过文件名+&quot;::$DATA&quot;会把::$DATA之后的数据当成文件流处理,不会检测后缀名</span><br><span class="line">9.利用1.php. .（点+空格+点）来绕过</span><br><span class="line">10. $file_name &#x3D; str_ireplace($deny_ext,&quot;&quot;, $file_name);黑名单过滤将后缀名替换为空，双写可以绕过</span><br><span class="line">11.白名单判断$img_path &#x3D; $_GET[&#39;save_path&#39;].&quot;&#x2F;&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;直接拼接，可以用%00绕过</span><br><span class="line">12.save_path参数通过POST方式传递，还是利用00截断，因为POST不会像GET对%00进行自动解码，所以需要在二进制中进行修改</span><br><span class="line">13.getimagesize函数判断文件类型，php_exif模块来判断文件类型，通过读文件的前2个字节判断文件类型，都可以用图片马的方式绕过</span><br><span class="line">14.二次渲染绕过</span><br><span class="line">15.条件竞争，先将文件上传到服务器，然后判断文件后缀是否在白名单里，如果在则重命名，否则删除，因此我们可以上传1.php只需要在它删除之前访问即可，可以利用burp的intruder模块不断上传，然后我们不断的访问刷新该地址即可，有move和renameFile函数的可以通过不断上传图片马，由于条件竞争可能来不及重命名，从而上传成功。</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     

