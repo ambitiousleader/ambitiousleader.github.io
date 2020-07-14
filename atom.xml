@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-14T04:31:53.346Z</updated>
+  <updated>2020-07-14T04:49:23.777Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,13 +21,19 @@
     <link href="http://yoursite.com/2020/07/14/[BlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98]Web2/"/>
     <id>http://yoursite.com/2020/07/14/[BlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98]Web2/</id>
     <published>2020-07-14T04:31:53.000Z</published>
-    <updated>2020-07-14T04:31:53.346Z</updated>
+    <updated>2020-07-14T04:49:23.777Z</updated>
+    
+    <content type="html"><![CDATA[<p>开题是这样的一个登录界面<a id="more"></a></p><img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/1.png" class="">]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;开题是这样的一个登录界面
     
     </summary>
     
     
+    
+      <category term="blackwatch" scheme="http://yoursite.com/tags/blackwatch/"/>
     
   </entry>
   
