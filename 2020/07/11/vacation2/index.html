@@ -34,8 +34,9 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/11/vacation2/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/11/vacation2/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/11/vacation2/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/11/vacation2/5.png">
 <meta property="article:published_time" content="2020-07-11T06:07:12.000Z">
-<meta property="article:modified_time" content="2020-07-14T05:10:27.674Z">
+<meta property="article:modified_time" content="2020-07-21T10:48:49.714Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="buu">
 <meta name="twitter:card" content="summary">
@@ -224,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-14 13:10:27" itemprop="dateModified" datetime="2020-07-14T13:10:27+08:00">2020-07-14</time>
+                <time title="Modified: 2020-07-21 18:48:49" itemprop="dateModified" datetime="2020-07-21T18:48:49+08:00">2020-07-21</time>
               </span>
 
           
@@ -268,6 +269,18 @@
 
 <p>直接把对应的ascii值转换成字符拼接就是了</p>
 <img src="/2020/07/11/vacation2/4.png" class="">
+
+<h3 id="b01lers2020-Space-Noodles"><a href="#b01lers2020-Space-Noodles" class="headerlink" title="[b01lers2020]Space Noodles"></a>[b01lers2020]Space Noodles</h3><p>这道题挺没意思的，就是考http不同的传输方法，直接附上一篇wp：<a href="https://ctftime.org/writeup/19141" target="_blank" rel="noopener">https://ctftime.org/writeup/19141</a></p>
+<hr>
+<p>中间停了好多天没做题了，去准备一个上课的东西去了，那边要求，改来改去的，搞了好多天，总算准备完了，后天轮到上课，这两天得继续自己的事了</p>
+<h3 id="BSidesCF-2020-Cards"><a href="#BSidesCF-2020-Cards" class="headerlink" title="[BSidesCF 2020]Cards"></a>[BSidesCF 2020]Cards</h3><p>这道题不知道咋回事，打开啥都没有，玩不了这个21点，只能是借鉴一下wp写一下了</p>
+<p>每个请求都有SecretState参数，保存游戏当前状态，每次请求之后会生成新的SecretState</p>
+<p>游戏赢了更新SecretState，否则不更新</p>
+<p>这里要注意的是下注之后开牌要用新的SecretState，下注时分数已经扣除了</p>
+<p>利用21点规则，两张牌已经是21点，直接就赢了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">start &#x3D; &quot;http:&#x2F;&#x2F;0c168e61-9d77-44d8-8a66-56e77d85d52a.node3.buuoj.cn&#x2F;api&quot;</span><br><span class="line">deal &#x3D; start + &quot;&#x2F;deal&quot;</span><br><span class="line">proxy &#x3D; &#123;&quot;https&quot;: &quot;http:&#x2F;&#x2F;127.0.0.1:1087&#x2F;&quot;&#125;#设置本地为代理</span><br><span class="line"># 开局</span><br><span class="line">state &#x3D; requests.post(start, proxies&#x3D;proxy).json()[&quot;SecretState&quot;]</span><br><span class="line">while True:</span><br><span class="line">    # 下注</span><br><span class="line">    try:</span><br><span class="line">        resp &#x3D; requests.post(deal, json&#x3D;&#123;&quot;Bet&quot;: 500, &quot;SecretState&quot;: state&#125;, proxies&#x3D;proxy).json()</span><br><span class="line">    except:</span><br><span class="line">        continue</span><br><span class="line">    if resp[&#39;GameState&#39;] &#x3D;&#x3D; &#39;Blackjack&#39;:</span><br><span class="line">        state &#x3D; resp[&#39;SecretState&#39;]</span><br><span class="line">    # print(resp[&#39;Balance&#39;])</span><br><span class="line">    if resp[&#39;Balance&#39;] &gt; 100000:</span><br><span class="line">        print(resp)</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/07/11/vacation2/5.png" class="">
     </div>
 
     
@@ -425,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSAWQual-2016-i-got-id"><span class="nav-number">1.</span> <span class="nav-text">[CSAWQual 2016]i_got_id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BSidesCF-2019-Sequel"><span class="nav-number">2.</span> <span class="nav-text">[BSidesCF 2019]Sequel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NPUCTF2020-web🐕"><span class="nav-number">3.</span> <span class="nav-text">[NPUCTF2020]web🐕</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSAWQual-2016-i-got-id"><span class="nav-number">1.</span> <span class="nav-text">[CSAWQual 2016]i_got_id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BSidesCF-2019-Sequel"><span class="nav-number">2.</span> <span class="nav-text">[BSidesCF 2019]Sequel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NPUCTF2020-web🐕"><span class="nav-number">3.</span> <span class="nav-text">[NPUCTF2020]web🐕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b01lers2020-Space-Noodles"><span class="nav-number">4.</span> <span class="nav-text">[b01lers2020]Space Noodles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BSidesCF-2020-Cards"><span class="nav-number">5.</span> <span class="nav-text">[BSidesCF 2020]Cards</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -441,14 +454,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

