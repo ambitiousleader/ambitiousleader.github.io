@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ssrf知识回顾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssrfreview">
+<meta property="og:url" content="http://yoursite.com/2021/01/28/ssrfreview/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="ssrf知识回顾">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-28T07:14:04.000Z">
+<meta property="article:modified_time" content="2021-01-28T16:27:23.220Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="review">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/28/ssrfreview/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ssrfreview | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/28/ssrfreview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ssrfreview
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-28 15:14:04" itemprop="dateCreated datePublished" datetime="2021-01-28T15:14:04+08:00">2021-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-29 00:27:23" itemprop="dateModified" datetime="2021-01-29T00:27:23+08:00">2021-01-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="ssrf知识回顾"><a href="#ssrf知识回顾" class="headerlink" title="ssrf知识回顾"></a>ssrf知识回顾<a id="more"></a></h2><h3 id="ssrf的定义"><a href="#ssrf的定义" class="headerlink" title="ssrf的定义"></a>ssrf的定义</h3><p>SSRF漏洞（服务器端请求伪造）：是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）。</p>
+<h3 id="ssrf的成因"><a href="#ssrf的成因" class="headerlink" title="ssrf的成因"></a>ssrf的成因</h3><p>SSRF漏洞形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。</p>
+<p>例如,黑客操作服务端从指定URL地址获取网页文本内容,加载指定地址的图片等,利用的是服务端的请求伪造,SSRF利用存在缺陷的WEB应用作为代理攻击远程和本地的服务器。</p>
+<p>除了<code>http/https</code>等方式可以造成ssrf，类似<code>tcp connect</code>方式也可以探测内网一些<code>ip</code>的端口是否开发服务。</p>
+<h3 id="ssrf可能出现的场景"><a href="#ssrf可能出现的场景" class="headerlink" title="ssrf可能出现的场景"></a>ssrf可能出现的场景</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 能够对外发起网络请求的地方，就可能存在 SSRF 漏洞</span><br><span class="line">- 从远程服务器请求资源（Upload from URL，Import &amp; Export RSS Feed）</span><br><span class="line">- 数据库内置功能（Oracle、MongoDB、MSSQL、Postgres、CouchDB）</span><br><span class="line">- Webmail 收取其他邮箱邮件（POP3、IMAP、SMTP）</span><br><span class="line">- 文件处理、编码处理、属性信息处理（ffmpeg、ImageMagic、DOCX、PDF、XML）</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssrf利用方式"><a href="#ssrf利用方式" class="headerlink" title="ssrf利用方式"></a>ssrf利用方式</h3><ul>
+<li><pre><code>1.可以外网、内网、本地进行端口扫描，某些情况下端口的Banner会回显出来（比如3306的）；
+
+2.攻击运行在内网或本地的有漏洞程序（比如溢出）；
+3.可以对内网Web应用进行指纹识别，原理是通过请求默认的文件得到特定的指纹；
+4.攻击内网或外网有漏洞的Web应用；
+5.使用file：///协议读取本地文件(或其他协议
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 访问正常文件，提交参数&#96;[?url&#x3D;http:&#96;&#96;&#x2F;&#x2F;www.xxx.com&#x2F;robots.txt]&#96;</span><br><span class="line"></span><br><span class="line">- 端口扫描：当访问未开放端口，脚本会显示空白或者报错。提交参数&#96;[?url&#x3D;dict:&#x2F;&#x2F;127.0.0.1:2333]&#96;</span><br><span class="line">   当访问开放端口时，脚本会显示banner 信息。</span><br><span class="line"></span><br><span class="line">- 读取系统文件&#96;?url&#x3D;file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd&#96;</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;php</span><br><span class="line">  识别内网应用使用的框架，平台，模块以及cms可以为后续的渗透测试提供很多帮助。</span><br><span class="line">  大多数web应用框架都有一些独特的文件和目录。</span><br><span class="line">  通过这些文件可以识别出应用的类型，甚至详细的版本。</span><br><span class="line">  根据这些信息就可以针对性的搜集漏洞进行攻击。</span><br><span class="line">  比如可以通过访问下列文件来判断phpMyAdmin是否安装以及详细版本。</span><br><span class="line">  [?url&#x3D;http:&#x2F;&#x2F;localhost&#x2F;phpmyadmin&#x2F;README]</span><br></pre></td></tr></table></figure></code></pre></li>
+<li><p>攻击内网应用</p>
+</li>
+</ul>
+<h3 id="gopher、dict协议以及redis服务、Curl命令"><a href="#gopher、dict协议以及redis服务、Curl命令" class="headerlink" title="gopher、dict协议以及redis服务、Curl命令"></a>gopher、dict协议以及redis服务、Curl命令</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Gopher 协议可以攻击内网的 FTP、Telnet、Redis、Memcache，也可以进行 GET、POST 请求。</span><br><span class="line">DICT协议,一个字典服务器协议,A Dictionary Server Protocol，允许客户端在使用过程中访问更多字典并且该协议约定服务器端侦听端口号:2628。</span><br><span class="line">redis服务是在6379端口开启的</span><br></pre></td></tr></table></figure>
+
+<p>curl命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用file协议curl -v file:///etc/passwd</span><br><span class="line">使用ftp协议 curl -v "ftp://127.0.0.1:端口/info"</span><br><span class="line">使用dict协议 curl -v "dict://127.0.0.1:端口/info"</span><br><span class="line">使用gopher协议 curl -v "gopher://127.0.0.1:端口/_info"</span><br></pre></td></tr></table></figure>
+
+<p>工具：<code>https://github.com/tarunkant/Gopherus</code>(生成对应payload)</p>
+<p>做题可以从url入手</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url关键字</span><br><span class="line">share、wap、url、link、src、source、target、u、3g、display</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssrf漏洞验证"><a href="#ssrf漏洞验证" class="headerlink" title="ssrf漏洞验证"></a>ssrf漏洞验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.排除法：浏览器f12查看源代码看是否是在本地进行了请求</span><br><span class="line">比如:资源地址类型为 http:&#x2F;&#x2F;www.xxx.com&#x2F;a.php?image&#x3D;（地址） 的就可能存在SSRF漏洞</span><br><span class="line">2.dnslog等工具进行测试，看是否被访问：可以在盲打后台用例中将当前准备请求的uri 和参数编码成base64，这样盲打后台解码后就知道是哪台机器哪个cgi触发的请求。</span><br><span class="line">3.抓包分析发送的请求是不是由服务器的发送的，如果不是客户端发出的请求，则有可能是，接着找存在HTTP服务的内网地址。</span><br><span class="line">—从漏洞平台中的历史漏洞寻找泄漏的存在web应用内网地址</span><br><span class="line">—通过二级域名暴力猜解工具模糊猜测内网地址</span><br><span class="line">4.直接返回的Banner、title、content等信息</span><br><span class="line">5.留意bool型SSRF</span><br><span class="line">一般的SSRF在应用识别阶段返回的信息相对较多,比如Banner信息,HTTP Title信息,更有甚的会将整个HTTP的Reponse完全返回. 而Bool型SSRF的却永远只有True或者False。因为没有任何Response信息,所以对于攻击Payload的选择也是有很多限制的, 不能选择需要和Response信息交互的Payload。</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssrf一些绕过手段"><a href="#ssrf一些绕过手段" class="headerlink" title="ssrf一些绕过手段"></a>ssrf一些绕过手段</h3><ul>
+<li><p>更改ip地址(惯用手段为ip地址进制转换绕过)</p>
+</li>
+<li><p><code>0</code>在<code>linux</code>下为<code>127.0.0.1</code></p>
+</li>
+<li><p>使用解析到内网的域名(<code>xio.name</code>)</p>
+</li>
+<li><p>302跳转(写一个跳转到想访问的路径来避开过滤)</p>
+</li>
+<li><p>通过非HTTP协议（gopher打<code>redis</code>，file协议等）</p>
+</li>
+<li><p>利用<code>dns</code>解析</p>
+</li>
+<li><p>利用<code>IDN</code>(国际化域名)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">部分字符会在访问时做一个等价转换，例如 ⓔⓧⓐⓜⓟⓛⓔ.ⓒⓞⓜ 和 example.com 等同。利用这种方式，可以用 ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ 等字符绕过内网限制。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>伪协议</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">php ssrf中的伪协议：</span><br><span class="line">file;dict;sftp;ldap;tftp;gopher;http</span><br><span class="line"></span><br><span class="line">Java ssrf 中的伪协议：</span><br><span class="line">file;ftp;mailto;http;https;jar;netdoc;gopher</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="ssrf防御策略"><a href="#ssrf防御策略" class="headerlink" title="ssrf防御策略"></a>ssrf防御策略</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.禁止跳转。</span><br><span class="line">2.过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准。</span><br><span class="line">3.限制请求的端口只能为Web端口，不需要的协议，仅仅允许http和https请求。可以防止类似于file:&#x2F;&#x2F;, gopher:&#x2F;&#x2F;, ftp:&#x2F;&#x2F; 等引起的问题。</span><br><span class="line">4.设置URL白名单或者限制内网IP（使用gethostbyname()判断是否为内网IP）,以防止对内网进行攻击。</span><br><span class="line">5.限制请求的端口为http常用的端口，比如 80、443、8080、8090。</span><br><span class="line">6.统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。</span><br><span class="line">7.对DNS Rebinding，考虑使用DNS缓存或者Host白名单。</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/01/28/ssrfreview/" title="ssrfreview">http://yoursite.com/2021/01/28/ssrfreview/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/review/" rel="tag"># review</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/26/MetInfo6-1-x-xss%E6%BC%8F%E6%B4%9ECVE-2018-18374/" rel="prev" title="MetInfo6.1.x[xss漏洞CVE-2018-18374]">
+      <i class="fa fa-chevron-left"></i> MetInfo6.1.x[xss漏洞CVE-2018-18374]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/29/Weblogic-SSRF-CVE-2014-4210/" rel="next" title="Weblogic-SSRF-CVE-2014-4210">
+      Weblogic-SSRF-CVE-2014-4210 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssrf知识回顾"><span class="nav-number">1.</span> <span class="nav-text">ssrf知识回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf的定义"><span class="nav-number">1.1.</span> <span class="nav-text">ssrf的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf的成因"><span class="nav-number">1.2.</span> <span class="nav-text">ssrf的成因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf可能出现的场景"><span class="nav-number">1.3.</span> <span class="nav-text">ssrf可能出现的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf利用方式"><span class="nav-number">1.4.</span> <span class="nav-text">ssrf利用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gopher、dict协议以及redis服务、Curl命令"><span class="nav-number">1.5.</span> <span class="nav-text">gopher、dict协议以及redis服务、Curl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf漏洞验证"><span class="nav-number">1.6.</span> <span class="nav-text">ssrf漏洞验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf一些绕过手段"><span class="nav-number">1.7.</span> <span class="nav-text">ssrf一些绕过手段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssrf防御策略"><span class="nav-number">1.8.</span> <span class="nav-text">ssrf防御策略</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>

